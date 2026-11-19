@@ -14,10 +14,18 @@
         <StackPanel Grid.Column="0" Background="#0E0F11">
             <TextBlock Text="网易UU远程" Foreground="White" FontSize="16" FontWeight="SemiBold"
                        Margin="20,22,20,26"/>
-            <TextBlock Text="设备" Foreground="{StaticResource Accent}" Margin="20,6"/>
-            <TextBlock Text="文件传输" Foreground="{StaticResource Muted}" Margin="20,6"/>
-            <TextBlock Text="终端" Foreground="{StaticResource Muted}" Margin="20,6"/>
-            <TextBlock Text="设置" Foreground="{StaticResource Muted}" Margin="20,6"/>
+            <Button x:Name="NavDevices" Content="设备" Foreground="{StaticResource Accent}"
+                    Background="Transparent" BorderThickness="0" Padding="20,6" HorizontalContentAlignment="Left"
+                    Click="Nav_Click" Tag="devices"/>
+            <Button x:Name="NavFiles" Content="文件传输" Foreground="{StaticResource Muted}"
+                    Background="Transparent" BorderThickness="0" Padding="20,6" HorizontalContentAlignment="Left"
+                    Click="Nav_Click" Tag="files"/>
+            <Button x:Name="NavTerminal" Content="终端" Foreground="{StaticResource Muted}"
+                    Background="Transparent" BorderThickness="0" Padding="20,6" HorizontalContentAlignment="Left"
+                    Click="Nav_Click" Tag="terminal"/>
+            <Button x:Name="NavSettings" Content="设置" Foreground="{StaticResource Muted}"
+                    Background="Transparent" BorderThickness="0" Padding="20,6" HorizontalContentAlignment="Left"
+                    Click="Nav_Click" Tag="settings"/>
         </StackPanel>
 
         <!-- 设备视图 -->
@@ -27,6 +35,8 @@
                 <TextBlock Text="   （协议由官方 FileDescriptorProto 还原，云设备已剔除）"
                            Foreground="{StaticResource Muted}" VerticalAlignment="Bottom"/>
             </StackPanel>
+            <TextBlock x:Name="PagePlaceholder" Visibility="Collapsed" Foreground="{StaticResource Muted}"
+                       FontSize="14" TextWrapping="Wrap" Margin="0,20,0,0"/>
             <ListBox x:Name="DeviceList" Background="Transparent" BorderThickness="0">
                 <ListBox.ItemTemplate>
                     <DataTemplate>

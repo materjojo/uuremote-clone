@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using Google.Protobuf;
 using SIPSorcery.Net;
 using GvPb;
@@ -60,6 +61,36 @@ public partial class MainWindow : Window, StreamerSession.IListener
         VideoCanvas.Clear();
         RemoteView.Visibility = Visibility.Collapsed;
         DeviceView.Visibility = Visibility.Visible;
+    }
+
+    private void Nav_Click(object sender, RoutedEventArgs e)
+    {
+        var tag = (sender as Button)?.Tag as string ?? "devices";
+        foreach (var b in new[] { NavDevices, NavFiles, NavTerminal, NavSettings })
+            b.Foreground = b.Tag as string == tag
+                ? (Brush)FindResource("Accent") : (Brush)FindResource("Muted");
+
+        DeviceList.Visibility = tag == "devices" ? Visibility.Visible : Visibility.Collapsed;
+        PagePlaceholder.Visibility = tag == "devices" ? Visibility.Collapsed : Visibility.Visible;
+        switch (tag)
+        {
+            case "files":
+                PagePlaceholder.Text = "文件传输\n\n连接后可在远控窗口中拖拽文件，使用官方 FileTransfer 协议。";
+                break;
+            case "terminal":
+                PagePlaceholder.Text = "终端\n\n通过 tmux 会话管理被控端终端（uuyc-cli）。";
+                break;
+            case "settings":
+                var dll = System.IO.File.Exists("gvpb.dll");
+                PagePlaceholder.Text =
+                    $"设置\n\n协议消息：{Gvpb.SchemaMessageCount()} 条（官方 FileDescriptorProto）\n" +
+                    $"共享核心 gvpb.dll：{(dll ? "已加载" : "未找到")}\n" +
+                    "H.265 编码：已启用\n弱网增强（KCP+RS-FEC）：已启用\n云设备：已剔除";
+                break;
+            default:
+                PagePlaceholder.Text = "";
+                break;
+        }
     }
 
     private void FullScreen_Click(object sender, RoutedEventArgs e)
