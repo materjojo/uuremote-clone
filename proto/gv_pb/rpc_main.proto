@@ -2,6 +2,10 @@ syntax = "proto3";
 
 package gv_pb;
 
+option java_package = "gv_pb";
+option java_outer_classname = "RpcMainProto";
+option java_multiple_files = true;
+
 import "rpc_message.proto";
 import "rpc_file_transfer.proto";
 import "clipboard.proto";

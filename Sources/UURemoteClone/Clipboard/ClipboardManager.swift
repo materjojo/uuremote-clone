@@ -7,7 +7,7 @@ final class ClipboardManager {
     /// 编码一条 ClipboardChange 消息（完整 gv_pb.Message 信封）
     static func encodeChange(contentId: UInt32, text: String, seq: inout Int64) -> Data {
         var w = ProtoWriter()
-        w.varint(1, field: 1)                      // Type = TEXT
+        w.int32(1, field: 1)                      // Type = TEXT
         w.string(text, field: 2)                   // content
         // to_be_continued = false（proto3 默认，省略）
         let payload = w.data

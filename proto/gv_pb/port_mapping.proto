@@ -2,6 +2,10 @@ syntax = "proto3";
 
 package gv_pb;
 
+option java_package = "gv_pb";
+option java_outer_classname = "PortMappingProto";
+option java_multiple_files = true;
+
 message PortMappingFrame {
   enum FrameType {
     SYN = 0;

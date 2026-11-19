@@ -1,4 +1,5 @@
 using System;
+using Google.Protobuf;
 using System.Windows;
 using System.Windows.Threading;
 using GvPb;
@@ -55,12 +56,12 @@ public sealed class ClipboardSync : IDisposable
 
             var message = new Message
             {
-                Seq = _seq++,
+                Seq = (long)_seq++,
                 Timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
                 ClipboardChange = new ClipboardChange
                 {
                     Type = ClipboardChange.Types.Type.Text,
-                    ContentId = _seq,
+                    ContentId = (uint)_seq,
                     Content = text,
                     ToBeContinued = false
                 }

@@ -4,7 +4,8 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 
-import gv_pb.General;
+import gv_pb.ClipboardChange;
+import gv_pb.Message;
 
 /**
  * 剪贴板同步（官方协议 ClipboardChange，信封 field 17）。
@@ -44,13 +45,13 @@ public final class ClipboardSync {
             if (t.equals(lastSent) || t.equals(lastReceived)) return;
             lastSent = t;
 
-            General.ClipboardChange change = General.ClipboardChange.newBuilder()
-                    .setType(General.ClipboardChange.Type.TEXT)
+            ClipboardChange change = ClipboardChange.newBuilder()
+                    .setType(ClipboardChange.Type.TEXT)
                     .setContentId(seq)
                     .setContent(t)
                     .setToBeContinued(false)
                     .build();
-            gv_pb.Main.Message message = gv_pb.Main.Message.newBuilder()
+            Message message = Message.newBuilder()
                     .setSeq(seq)
                     .setTimestamp(System.currentTimeMillis())
                     .setClipboardChange(change)
@@ -64,7 +65,7 @@ public final class ClipboardSync {
     /** 收到对端 ClipboardChange：解析并写回系统剪贴板 */
     public void apply(byte[] data) {
         try {
-            gv_pb.Main.Message message = gv_pb.Main.Message.parseFrom(data);
+            Message message = Message.parseFrom(data);
             if (!message.hasClipboardChange()) return;
             General.ClipboardChange change = message.getClipboardChange();
             String text = change.getContent();

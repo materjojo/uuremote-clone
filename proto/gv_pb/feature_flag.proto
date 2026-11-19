@@ -2,6 +2,10 @@ syntax = "proto3";
 
 package gv_pb;
 
+option java_package = "gv_pb";
+option java_outer_classname = "FeatureFlagProto";
+option java_multiple_files = true;
+
 enum FF_CaptureSetting {
   FF_CAPTURE_SETTING_UNKNOWN = 0;
   FF_CAPTURE_SETTING_INIT_VERION = 1;

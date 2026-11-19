@@ -2,6 +2,10 @@ syntax = "proto3";
 
 package gv_pb;
 
+option java_package = "gv_pb";
+option java_outer_classname = "MumuProto";
+option java_multiple_files = true;
+
 enum enumMumuNotifyType {
   kMumuNotifyLaunch = 0;
   kMumuNotifyShutdown = 1;

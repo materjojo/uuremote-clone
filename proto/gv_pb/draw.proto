@@ -2,6 +2,10 @@ syntax = "proto3";
 
 package gv_pb;
 
+option java_package = "gv_pb";
+option java_outer_classname = "DrawProto";
+option java_multiple_files = true;
+
 message DrawPoint {
   float x = 1;
   float y = 2;
