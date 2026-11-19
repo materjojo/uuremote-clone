@@ -1,6 +1,5 @@
 plugins {
     id 'com.android.application'
-    id 'com.google.protobuf' version '0.9.4'
 }
 
 android {
@@ -33,13 +32,6 @@ android {
         }
     }
 
-    sourceSets {
-        main {
-            proto {
-                srcDirs '../../proto/gv_pb'
-            }
-        }
-    }
 }
 
 dependencies {
@@ -47,17 +39,21 @@ dependencies {
     implementation 'io.github.webrtc-sdk:android:125.6422.07'
 }
 
-protobuf {
-    protoc {
-        artifact = 'com.google.protobuf:protoc:3.25.3'
+
+// 用官方 proto 直接生成 lite Java 绑定（绕开插件在 AGP8 下的源集问题）
+tasks.register('genProtos', Exec) {
+    def exe = configurations.protocArtifact.singleFile
+    inputs.dir '../../../proto/gv_pb'
+    outputs.dir 'src/main/java/gv_pb'
+    doFirst {
+        exe.setExecutable(true)
+        delete fileTree('src/main/java/gv_pb')
     }
-    generateProtoTasks {
-        all().each { task ->
-            task.builtins {
-                java {
-                    option 'lite'
-                }
-            }
-        }
-    }
+    commandLine exe.absolutePath,
+        '--java_out=lite:src/main/java',
+        '-I', '../../../proto/gv_pb'
+    // protoc 要求显式列出 .proto 文件
+    def protos = fileTree('../../../proto/gv_pb').matching { include '*.proto' }.files
+    args(protos.collect { it.absolutePath })
 }
+preBuild.dependsOn 'genProtos'
