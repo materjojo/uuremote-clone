@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using Google.Protobuf;
 using SIPSorcery.Net;
 using GvPb;
 
@@ -81,7 +83,7 @@ public partial class MainWindow : Window, StreamerSession.IListener
         try
         {
             var m = Message.Parser.ParseFrom(data);
-            if (m.WhichPayload == Message.PayloadOneofCase.Screens)
+            if (m.Screens != null && m.Screens.Screens.Count > 0)
                 Dispatcher.Invoke(() => StatusText.Text = $"屏幕列表：{m.Screens.Screens.Count} 个");
         }
         catch
@@ -101,9 +103,9 @@ public partial class MainWindow : Window, StreamerSession.IListener
         if (_session == null) return;
         var pos = e.GetPosition(VideoCanvas);
         var point = new TouchEventPoint { Id = 0, X = NormX(pos.X), Y = NormY(pos.Y) };
-        var touch = new TouchEvent { EventType = eventType };
+        var touch = new TouchEvent { EventType = (TouchEvent.Types.TouchEventType)eventType };
         touch.TouchPoints.Add(point);
-        var input = new InputEvent { TouchEvent_ = touch };
+        var input = new InputEvent { TouchEvent = touch };
         var message = new Message
         {
             Seq = ++_seq,
