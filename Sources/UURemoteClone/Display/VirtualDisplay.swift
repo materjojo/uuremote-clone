@@ -86,12 +86,13 @@ final class CGDisplayStreamCapturer {
 
     func start(displayID: CGDirectDisplayID, width: Int, height: Int, fps: Int,
                onBuffer: @escaping (CVPixelBuffer) -> Void) -> Bool {
+        // 常量在部分 SDK 中不再导出，直接使用其字符串值
         var config: [String: Any] = [
-            kCGDisplayStreamFrameRateKey as String: fps,
-            kCGDisplayStreamPreserveAspectRatioKey as String: true,
-            kCGDisplayStreamShowCursorKey as String: true
+            "FrameRate": fps,
+            "PreserveAspectRatio": true,
+            "ShowCursor": true
         ]
-        config[kCGDisplayStreamMinimumFrameTimeKey as String] = Double(fps)
+        config["MinimumFrameTime"] = Double(fps)
         guard let stream = CGDisplayStream(dispatchQueueDisplay: displayID,
                                            outputWidth: width, outputHeight: height,
                                            pixelFormat: Int32(kCVPixelFormatType_32BGRA),
