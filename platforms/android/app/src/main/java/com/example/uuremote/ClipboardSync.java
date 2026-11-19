@@ -47,7 +47,7 @@ public final class ClipboardSync {
 
             ClipboardChange change = ClipboardChange.newBuilder()
                     .setType(ClipboardChange.Type.TEXT)
-                    .setContentId(seq)
+                    .setContentId((int) seq)
                     .setContent(t)
                     .setToBeContinued(false)
                     .build();
@@ -67,7 +67,7 @@ public final class ClipboardSync {
         try {
             Message message = Message.parseFrom(data);
             if (!message.hasClipboardChange()) return;
-            General.ClipboardChange change = message.getClipboardChange();
+            ClipboardChange change = message.getClipboardChange();
             String text = change.getContent();
             if (text == null || text.isEmpty()) return;
             if (text.equals(lastSent) || text.equals(lastReceived)) return;

@@ -72,11 +72,5 @@ jobs:
       - uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: '8.7'
-      - name: Generate proto bindings (diagnostic)
-        run: |
-          gradle -p platforms/android generateDebugProto --no-daemon || true
-          echo '--- generated proto java ---'
-          find platforms/android/app/build/generated -name '*.java' 2>/dev/null | head -10
-          find platforms/android/app/generated -name '*.java' 2>/dev/null | head -10
       - name: Build APK
         run: gradle -p platforms/android assembleDebug --no-daemon
