@@ -108,8 +108,13 @@ final class H265Encoder {
             let isKey = nals.contains { [19, 20, 21].contains(H265NAL.nalType($0)) }
             if isKey, let params = Self.parameterSets(sampleBuffer: sb) {
                 self.onParameterSets?(params)
+                // 关键帧必须携带 VPS/SPS/PPS，解码端才能建立 format description
+                var withParams = params
+                withParams.append(annex)
+                self.onFrame?(withParams, true)
+            } else {
+                self.onFrame?(annex, isKey)
             }
-            self.onFrame?(annex, isKey)
         }
     }
 
