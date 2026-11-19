@@ -5,8 +5,16 @@ APP="$ROOT/build/UURemoteClone.app"
 BIN="$ROOT/.build/release/UURemoteClone"
 
 rm -rf "$APP"
-mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
+mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources" "$APP/Contents/Frameworks"
 cp "$BIN" "$APP/Contents/MacOS/UURemoteClone"
+
+# SwiftPM 二进制依赖需要随包嵌入
+FRAMEWORK="$(find "$ROOT/.build" -maxdepth 5 -name "WebRTC.framework" -type d 2>/dev/null | head -1)"
+if [ -n "${FRAMEWORK}" ]; then
+  cp -R "$FRAMEWORK" "$APP/Contents/Frameworks/"
+  install_name_tool -add_rpath "@executable_path/../Frameworks" "$APP/Contents/MacOS/UURemoteClone" 2>/dev/null || true
+  codesign --force --sign - "$APP/Contents/Frameworks/WebRTC.framework" || true
+fi
 
 cat > "$APP/Contents/Info.plist" <<'PLIST'
 <?xml version="1.0" encoding="UTF-8"?>
@@ -30,3 +38,4 @@ PLIST
 
 codesign --force --deep --sign - "$APP" || true
 echo "built: $APP"
+du -sh "$APP"

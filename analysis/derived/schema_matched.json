@@ -1,0 +1,5886 @@
+{
+ "GvPb_ActionKeyToggle": {
+  "fields": [
+   {
+    "name": "keyType",
+    "mangled": null
+   },
+   {
+    "name": "toggle",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "key_type",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "toggle",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_ActiveWindowChange": {
+  "fields": [
+   {
+    "name": "winInfo",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "win_info",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_CaptureChange": {
+  "fields": [
+   {
+    "name": "captureType",
+    "mangled": null
+   },
+   {
+    "name": "typeValue",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "desc",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "capture_type",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "type_value",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "desc",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_CaptureConfig": {
+  "fields": [
+   {
+    "name": "client",
+    "mangled": null
+   },
+   {
+    "name": "fps",
+    "mangled": null
+   },
+   {
+    "name": "frameQuality",
+    "mangled": null
+   },
+   {
+    "name": "cursorCapture",
+    "mangled": "Sb"
+   },
+   {
+    "name": "screenID",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "resolutionWidth",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "resolutionHeight",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "configFlag",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "client",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "fps",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "frame_quality",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "cursor_capture",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 5,
+    "name": "screen_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 6,
+    "name": "resolution_width",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 7,
+    "name": "resolution_height",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 8,
+    "name": "config_flag",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_CaptureConfigResponse": {
+  "fields": [
+   {
+    "name": "requestSeq",
+    "mangled": null
+   },
+   {
+    "name": "configFlag",
+    "mangled": null
+   },
+   {
+    "name": "errCode",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "errorMessage",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "request_seq",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "config_flag",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "err_code",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "error_message",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_CaptureParams": {
+  "fields": [
+   {
+    "name": "fps",
+    "mangled": "\u0002M9#"
+   },
+   {
+    "name": "videoQuality",
+    "mangled": "\u0002w6#"
+   },
+   {
+    "name": "cursorCapture",
+    "mangled": "Sb"
+   },
+   {
+    "name": "chooseResolutionType",
+    "mangled": "\u0002u7#"
+   },
+   {
+    "name": "chromaFormat",
+    "mangled": "\u0002O6#"
+   },
+   {
+    "name": "maxCustomBitrate",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "enableHdr",
+    "mangled": "Sb"
+   },
+   {
+    "name": "autoFrameQuality",
+    "mangled": "\u0002w6#"
+   },
+   {
+    "name": "fpsCount",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "_localResolution",
+    "mangled": null
+   },
+   {
+    "name": "_chooseResolution",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "fps",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "video_quality",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "cursor_capture",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "choose_resolution_type",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 5,
+    "name": "local_resolution",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 6,
+    "name": "choose_resolution",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 7,
+    "name": "chroma_format",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 8,
+    "name": "max_custom_bitrate",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 9,
+    "name": "enable_hdr",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 10,
+    "name": "auto_frame_quality",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 11,
+    "name": "fpsCount",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_CaptureSettingRequest": {
+  "fields": [
+   {
+    "name": "_fps",
+    "mangled": "\u0002M9#"
+   },
+   {
+    "name": "_frameQuality",
+    "mangled": "\u0002w6#"
+   },
+   {
+    "name": "_cursorCapture",
+    "mangled": "Sb"
+   },
+   {
+    "name": "_screenID",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "_resolutionWidth",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "_resolutionHeight",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "_chormaFormat",
+    "mangled": "\u0002O6#"
+   },
+   {
+    "name": "_maxCustomBitrate",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "_dpiScale",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "_resolutionType",
+    "mangled": "\u0002u7#"
+   },
+   {
+    "name": "_enableHdr",
+    "mangled": "Sb"
+   },
+   {
+    "name": "_autoFrameQuality",
+    "mangled": "\u0002w6#"
+   },
+   {
+    "name": "_codecType",
+    "mangled": null
+   },
+   {
+    "name": "_maxScaleWidth",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "_maxScaleHeight",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "_resolutionPixelWidth",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "_resolutionPixelHeight",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "_fpsCount",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "fps",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "frame_quality",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "cursor_capture",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "screen_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 5,
+    "name": "resolution_width",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 6,
+    "name": "resolution_height",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 7,
+    "name": "chorma_format",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 8,
+    "name": "max_custom_bitrate",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 9,
+    "name": "dpi_scale",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 10,
+    "name": "resolution_type",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 11,
+    "name": "enable_hdr",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 12,
+    "name": "auto_frame_quality",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 13,
+    "name": "codec_type",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 14,
+    "name": "max_scale_width",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 15,
+    "name": "max_scale_height",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 16,
+    "name": "resolution_pixel_width",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 17,
+    "name": "resolution_pixel_height",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 18,
+    "name": "fpsCount",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_CaptureSettingResponse": {
+  "fields": [
+   {
+    "name": "errors",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "errors",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_CaptureSettingSync": {
+  "fields": [
+   {
+    "name": "fps",
+    "mangled": "\u0002M9#"
+   },
+   {
+    "name": "frameQuality",
+    "mangled": "\u0002w6#"
+   },
+   {
+    "name": "chromaFormat",
+    "mangled": "\u0002O6#"
+   },
+   {
+    "name": "maxCustomBitrate",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "resolutionWidth",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "resolutionHeight",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "resolutionType",
+    "mangled": "\u0002u7#"
+   },
+   {
+    "name": "dpiScale",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "resolutionPixelWidth",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "resolutionPixelHeight",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "screenOrientation",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "fps",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "frame_quality",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "chroma_format",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "max_custom_bitrate",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 5,
+    "name": "resolution_width",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 6,
+    "name": "resolution_height",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 7,
+    "name": "resolution_type",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 8,
+    "name": "dpi_scale",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 9,
+    "name": "resolution_pixel_width",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 10,
+    "name": "resolution_pixel_height",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 11,
+    "name": "screen_orientation",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_CheckEnvResp": {
+  "fields": [
+   {
+    "name": "code",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "message",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "code",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "message",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_ClearSendTemp": {
+  "fields": [
+   {
+    "name": "taskUniqueID",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "task_unique_id",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_ClientUiReadyState": {
+  "fields": [
+   {
+    "name": "isReady",
+    "mangled": "Sb"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "is_ready",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_ClipboardChange": {
+  "fields": [
+   {
+    "name": "contentID",
+    "mangled": "\u0002\u0005u#"
+   },
+   {
+    "name": "content",
+    "mangled": "SS"
+   },
+   {
+    "name": "toBeContinued",
+    "mangled": "Sb"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "content_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "content",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "to_be_continued",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_ClipboardDataBlock": {
+  "fields": [
+   {
+    "name": "blockKey",
+    "mangled": "SS"
+   },
+   {
+    "name": "blockID",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "data",
+    "mangled": "\u0002?z#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "block_key",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "block_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "data",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_ClipboardDataBlockConfirm": {
+  "fields": [
+   {
+    "name": "blockKey",
+    "mangled": "SS"
+   },
+   {
+    "name": "blockID",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "err",
+    "mangled": "\u0002\u000b9#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "block_key",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "block_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "err",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_ClipboardFileCancelRequest": {
+  "fields": [
+   {
+    "name": "taskID",
+    "mangled": "\u0002\u0005u#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "task_id",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_ClipboardFileCancelResponse": {
+  "fields": [
+   {
+    "name": "taskID",
+    "mangled": "\u0002\u0005u#"
+   },
+   {
+    "name": "err",
+    "mangled": "\u0002\u000b9#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "task_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "err",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_ClipboardFileContentsRequest": {
+  "fields": [
+   {
+    "name": "taskID",
+    "mangled": "\u0002\u0005u#"
+   },
+   {
+    "name": "listIndex",
+    "mangled": "\u0002\u0005u#"
+   },
+   {
+    "name": "flags",
+    "mangled": "\u0002\u0005u#"
+   },
+   {
+    "name": "posOffset",
+    "mangled": null
+   },
+   {
+    "name": "requestedLen",
+    "mangled": "\u0002\u0005u#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "task_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "list_index",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "flags",
+    "kind": 2
+   },
+   {
+    "no": 4,
+    "name": "pos_offset",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 5,
+    "name": "requested_len",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_ClipboardFileContentsResponse": {
+  "fields": [
+   {
+    "name": "taskID",
+    "mangled": "\u0002\u0005u#"
+   },
+   {
+    "name": "data",
+    "mangled": "\u0002?z#"
+   },
+   {
+    "name": "err",
+    "mangled": "\u0002\u000b9#"
+   },
+   {
+    "name": "posOffset",
+    "mangled": null
+   },
+   {
+    "name": "listIndex",
+    "mangled": "\u0002\u0005u#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "task_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "data",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "err",
+    "kind": 2
+   },
+   {
+    "no": 4,
+    "name": "pos_offset",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 5,
+    "name": "list_index",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_ClipboardFileDescriptor": {
+  "fields": [
+   {
+    "name": "fileName",
+    "mangled": "SS"
+   },
+   {
+    "name": "fileAttributes",
+    "mangled": "\u0002\u0005u#"
+   },
+   {
+    "name": "lastWriteTime",
+    "mangled": null
+   },
+   {
+    "name": "fileSize",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "file_name",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "file_attributes",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "last_write_time",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "file_size",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_ClipboardFileDescriptorListRequest": {
+  "fields": [
+   {
+    "name": "taskID",
+    "mangled": "\u0002\u0005u#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "task_id",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_ClipboardFileDescriptorListResponse": {
+  "fields": [
+   {
+    "name": "taskID",
+    "mangled": "\u0002\u0005u#"
+   },
+   {
+    "name": "segmentCount",
+    "mangled": "\u0002\u0005u#"
+   },
+   {
+    "name": "err",
+    "mangled": "\u0002\u000b9#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "task_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "segment_count",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "err",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_ClipboardFileDescriptorSegment": {
+  "fields": [
+   {
+    "name": "taskID",
+    "mangled": "\u0002\u0005u#"
+   },
+   {
+    "name": "segmentID",
+    "mangled": "\u0002\u0005u#"
+   },
+   {
+    "name": "fileDescs",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "task_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "segment_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "file_descs",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_ClipboardFileDescriptorSegmentConfirm": {
+  "fields": [
+   {
+    "name": "taskID",
+    "mangled": "\u0002\u0005u#"
+   },
+   {
+    "name": "segmentID",
+    "mangled": "\u0002\u0005u#"
+   },
+   {
+    "name": "err",
+    "mangled": "\u0002\u000b9#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "task_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "segment_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "err",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_ClipboardFormat": {
+  "fields": [
+   {
+    "name": "id",
+    "mangled": "\u0002\u0005u#"
+   },
+   {
+    "name": "name",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "id",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "name",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_ClipboardFormatDataAsk": {
+  "fields": [
+   {
+    "name": "formatID",
+    "mangled": "\u0002\u0005u#"
+   },
+   {
+    "name": "blockKey",
+    "mangled": "SS"
+   },
+   {
+    "name": "formatName",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "format_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "block_key",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "format_name",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_ClipboardFormatDataConfirm": {
+  "fields": [
+   {
+    "name": "err",
+    "mangled": "\u0002\u000b9#"
+   },
+   {
+    "name": "blockKey",
+    "mangled": "SS"
+   },
+   {
+    "name": "blockCount",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "err",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "block_key",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "block_count",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_ClipboardTextChangeRequest": {
+  "fields": [
+   {
+    "name": "formatID",
+    "mangled": "\u0002\u0005u#"
+   },
+   {
+    "name": "data",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "format_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "data",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_ClipboardTextChangeResponse": {
+  "fields": [
+   {
+    "name": "err",
+    "mangled": "\u0002\u000b9#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "err",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_CodecNegotiation": {
+  "fields": [
+   {
+    "name": "encoderCapList",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "encoder_cap_list",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_ConnectOptions": {
+  "fields": [
+   {
+    "name": "_captureType",
+    "mangled": null
+   },
+   {
+    "name": "_typeValue",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "_captureParams",
+    "mangled": null
+   },
+   {
+    "name": "_decoderCapList",
+    "mangled": null
+   },
+   {
+    "name": "_forceVirtualDisplay",
+    "mangled": "Sb"
+   },
+   {
+    "name": "_virtualDisplayModes",
+    "mangled": null
+   },
+   {
+    "name": "_virtualDisplayInitResolution",
+    "mangled": null
+   },
+   {
+    "name": "_clientType",
+    "mangled": "\u0002m5#"
+   },
+   {
+    "name": "_deviceID",
+    "mangled": "SS"
+   },
+   {
+    "name": "_controlConnectType",
+    "mangled": null
+   },
+   {
+    "name": "_featureFlag",
+    "mangled": null
+   },
+   {
+    "name": "_clientVersion",
+    "mangled": "SS"
+   },
+   {
+    "name": "_entitlementData",
+    "mangled": "SS"
+   },
+   {
+    "name": "_currentServerTime",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "capture_type",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "type_value",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "capture_params",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "decoder_cap_list",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 5,
+    "name": "force_virtual_display",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 6,
+    "name": "virtual_display_modes",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 7,
+    "name": "virtual_display_init_resolution",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 8,
+    "name": "client_type",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 9,
+    "name": "device_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 10,
+    "name": "control_connect_type",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 11,
+    "name": "feature_flag",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 12,
+    "name": "client_version",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 13,
+    "name": "entitlement_data",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 14,
+    "name": "current_server_time",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_CreateVirtualDisplayRequest": {
+  "fields": [
+   {
+    "name": "localResolution",
+    "mangled": null
+   },
+   {
+    "name": "virtualDisplayCount",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "local_resolution",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "virtual_display_count",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_CreateVirtualDisplayResponse": {
+  "fields": [
+   {
+    "name": "errorCode",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "error_code",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_CursorSettingReqeust": {
+  "fields": [
+   {
+    "name": "cursorCapture",
+    "mangled": "Sb"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "cursor_capture",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_CursorShape": {
+  "fields": [
+   {
+    "name": "posX",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "posY",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "width",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "height",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "byteValue",
+    "mangled": "\u0002?z#"
+   },
+   {
+    "name": "cursorType",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "coordinateXScale",
+    "mangled": "Sd"
+   },
+   {
+    "name": "coordinateYScale",
+    "mangled": "Sd"
+   },
+   {
+    "name": "screenID",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "pos_x",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "pos_y",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "width",
+    "kind": 2
+   },
+   {
+    "no": 4,
+    "name": "height",
+    "kind": 2
+   },
+   {
+    "no": 5,
+    "name": "byte_value",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 6,
+    "name": "cursor_type",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 7,
+    "name": "coordinate_x_scale",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 8,
+    "name": "coordinate_y_scale",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 9,
+    "name": "screen_id",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_DecoderCap": {
+  "fields": [
+   {
+    "name": "fps",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "codecType",
+    "mangled": null
+   },
+   {
+    "name": "resolutionWidth",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "resolutionHeight",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "chromaFormat",
+    "mangled": "\u0002O6#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "fps",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "codec_type",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "resolution_width",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "resolution_height",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 5,
+    "name": "chroma_format",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_DirectoryData": {
+  "fields": [
+   {
+    "name": "entries",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "entries",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_DirectorySizeRead": {
+  "fields": [
+   {
+    "name": "size",
+    "mangled": null
+   },
+   {
+    "name": "_id",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "id",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "size",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_DpiScale": {
+  "fields": [
+   {
+    "name": "currentDpi",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "recommendedDpi",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "dpis",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "current_dpi",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "recommended_dpi",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "dpis",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_DragDropAutoSave": {
+  "fields": [
+   {
+    "name": "destPath",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "dest_path",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_DragDropAutoSaveComplete": {
+  "fields": [
+   {
+    "name": "totalCount",
+    "mangled": "\u0002\u0005u#"
+   },
+   {
+    "name": "successCount",
+    "mangled": "\u0002\u0005u#"
+   },
+   {
+    "name": "firstFileName",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "total_count",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "success_count",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "first_file_name",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_DragDropAutoSaveCompleteResponse": {
+  "fields": [
+   {
+    "name": "err",
+    "mangled": "\u0002\u000b9#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "err",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_DragDropOleDrop": {
+  "fields": [
+   {
+    "name": "targetX",
+    "mangled": "Sd"
+   },
+   {
+    "name": "targetY",
+    "mangled": "Sd"
+   },
+   {
+    "name": "screenID",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "target_x",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "target_y",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "screen_id",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_DrawClearRequest": {
+  "fields": [
+   {
+    "name": "clearType_p",
+    "mangled": null
+   },
+   {
+    "name": "strokeID",
+    "mangled": "\u0002\u0005u#"
+   },
+   {
+    "name": "_screenID",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "clear_type",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "stroke_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "screen_id",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_DrawClearResponse": {
+  "fields": [
+   {
+    "name": "errorCode",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "error_code",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_DrawPoint": {
+  "fields": [
+   {
+    "name": "x",
+    "mangled": "Sf"
+   },
+   {
+    "name": "y",
+    "mangled": "Sf"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "x",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "y",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_DrawStrokeRequest": {
+  "fields": [
+   {
+    "name": "strokeID",
+    "mangled": "\u0002\u0005u#"
+   },
+   {
+    "name": "points",
+    "mangled": null
+   },
+   {
+    "name": "_screenID",
+    "mangled": null
+   },
+   {
+    "name": "_lineWidth",
+    "mangled": "SfSg"
+   },
+   {
+    "name": "_color",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "stroke_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "points",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "screen_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "line_width",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 5,
+    "name": "color",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_DrawStrokeResponse": {
+  "fields": [
+   {
+    "name": "errorCode",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "error_code",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_DrawToggleRequest": {
+  "fields": [
+   {
+    "name": "enable",
+    "mangled": "Sb"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "enable",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_DrawToggleResponse": {
+  "fields": [
+   {
+    "name": "errorCode",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "error_code",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_EncoderCap": {
+  "fields": [
+   {
+    "name": "captureMode",
+    "mangled": null
+   },
+   {
+    "name": "fps",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "corecType",
+    "mangled": null
+   },
+   {
+    "name": "resolutionWidth",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "resolutionHeight",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "capture_mode",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "fps",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "corec_type",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "resolution_width",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 5,
+    "name": "resolution_height",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_EnterSuperScreenFpsNotSupport": {
+  "fields": [
+   {
+    "name": "fpsCount",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "fps_count",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_EnterSuperScreenRequest": {
+  "fields": [
+   {
+    "name": "reason",
+    "mangled": null
+   },
+   {
+    "name": "dpiScale",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "params",
+    "mangled": null
+   },
+   {
+    "name": "_resolution",
+    "mangled": null
+   }
+  ],
+  "oneof": [
+   "enter_fps"
+  ],
+  "entries": [
+   {
+    "no": 1,
+    "name": "reason",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "resolution",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "dpi_scale",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "enter_fps",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_EnterSuperScreenResponse": {
+  "fields": [
+   {
+    "name": "errorCode",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "error_code",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_Error": {
+  "fields": [
+   {
+    "name": "errorCode",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "errorMessage",
+    "mangled": "SS"
+   },
+   {
+    "name": "errorDetail",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "error_code",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "error_message",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "error_detail",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_FeatureFlag": {
+  "fields": [
+   {
+    "name": "ffCaptureSetting",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "ffSimpleAction",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "ffSystemMetrics",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "ffPrivateScreen",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "ffUpdateAcquire",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "ffFileTransferFtp",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "ffFileTransferFtp2",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "ffClipboard",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "ffQosStat",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "ffMumuControl",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "ffVirtualMouseDevice",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "ff_capture_setting",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "ff_simple_action",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "ff_system_metrics",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "ff_private_screen",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 5,
+    "name": "ff_update_acquire",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 6,
+    "name": "ff_file_transfer_ftp",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 7,
+    "name": "ff_file_transfer_ftp2",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 8,
+    "name": "ff_clipboard",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 9,
+    "name": "ff_qos_stat",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 10,
+    "name": "ff_mumu_control",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 11,
+    "name": "ff_virtual_mouse_device",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_FileDirCreate": {
+  "fields": [
+   {
+    "name": "path",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "path",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_FileDirectory": {
+  "fields": [
+   {
+    "name": "path",
+    "mangled": "SS"
+   },
+   {
+    "name": "entries",
+    "mangled": null
+   },
+   {
+    "name": "fileError",
+    "mangled": null
+   },
+   {
+    "name": "dirData",
+    "mangled": "\u0002?z#"
+   },
+   {
+    "name": "_id",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "id",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "path",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "entries",
+    "kind": 2
+   },
+   {
+    "no": 4,
+    "name": "file_error",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 5,
+    "name": "dir_data",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_FileEntry": {
+  "fields": [
+   {
+    "name": "entryType",
+    "mangled": null
+   },
+   {
+    "name": "name",
+    "mangled": "SS"
+   },
+   {
+    "name": "size",
+    "mangled": null
+   },
+   {
+    "name": "modifiedTime",
+    "mangled": null
+   },
+   {
+    "name": "fullPath",
+    "mangled": "SS"
+   },
+   {
+    "name": "iconType",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "entry_type",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "name",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "size",
+    "kind": 2
+   },
+   {
+    "no": 4,
+    "name": "modified_time",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 5,
+    "name": "full_path",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 6,
+    "name": "icon_type",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_FileExist": {
+  "fields": [
+   {
+    "name": "path",
+    "mangled": "SS"
+   },
+   {
+    "name": "names",
+    "mangled": "SaySSG"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "path",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "names",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_FileExistResponse": {
+  "fields": [
+   {
+    "name": "path",
+    "mangled": "SS"
+   },
+   {
+    "name": "results",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "path",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "results",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_FileExistResult": {
+  "fields": [
+   {
+    "name": "name",
+    "mangled": "SS"
+   },
+   {
+    "name": "hasSame_p",
+    "mangled": "Sb"
+   },
+   {
+    "name": "hasTransfering_p",
+    "mangled": "Sb"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "name",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "has_same",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "has_transfering",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_FileInfo": {
+  "fields": [
+   {
+    "name": "relPath",
+    "mangled": "SS"
+   },
+   {
+    "name": "size",
+    "mangled": null
+   },
+   {
+    "name": "modifiedTime",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "rel_path",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "size",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "modified_time",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_FileList": {
+  "fields": [
+   {
+    "name": "files",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "files",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_FileOperationResult": {
+  "fields": [
+   {
+    "name": "fileError",
+    "mangled": null
+   },
+   {
+    "name": "errMsg",
+    "mangled": "SS"
+   },
+   {
+    "name": "path",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "file_error",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "err_msg",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "path",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_FileRemoveDir": {
+  "fields": [
+   {
+    "name": "path",
+    "mangled": "SS"
+   },
+   {
+    "name": "recursive",
+    "mangled": "Sb"
+   },
+   {
+    "name": "_id",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "id",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "path",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "recursive",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_FileRemoveFile": {
+  "fields": [
+   {
+    "name": "path",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "path",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_FileRename": {
+  "fields": [
+   {
+    "name": "path",
+    "mangled": "SS"
+   },
+   {
+    "name": "newName",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "path",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "new_name",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_FileTransferAsk": {
+  "fields": [
+   {
+    "name": "lastModified",
+    "mangled": null
+   },
+   {
+    "name": "fileSize",
+    "mangled": null
+   },
+   {
+    "name": "_id",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "id",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "last_modified",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "file_size",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_FileTransferBlock": {
+  "fields": [
+   {
+    "name": "blockID",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "data",
+    "mangled": "\u0002?z#"
+   },
+   {
+    "name": "_id",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "id",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "block_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "data",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_FileTransferBlockConfirm": {
+  "fields": [
+   {
+    "name": "blockID",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "err",
+    "mangled": null
+   },
+   {
+    "name": "blockLen",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "_id",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "id",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "block_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "err",
+    "kind": 2
+   },
+   {
+    "no": 4,
+    "name": "block_len",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_FileTransferComplete": {
+  "fields": [
+   {
+    "name": "error",
+    "mangled": null
+   },
+   {
+    "name": "_id",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "id",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "error",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_FileTransferConfirm": {
+  "fields": [
+   {
+    "name": "skip",
+    "mangled": "Sb"
+   },
+   {
+    "name": "err",
+    "mangled": null
+   },
+   {
+    "name": "resumePoint",
+    "mangled": null
+   },
+   {
+    "name": "_id",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "id",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "skip",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "err",
+    "kind": 2
+   },
+   {
+    "no": 4,
+    "name": "resume_point",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_FileTransferReceiveRequest": {
+  "fields": [
+   {
+    "name": "path",
+    "mangled": "SS"
+   },
+   {
+    "name": "files",
+    "mangled": null
+   },
+   {
+    "name": "fileOpStrategy",
+    "mangled": null
+   },
+   {
+    "name": "folderName",
+    "mangled": "SS"
+   },
+   {
+    "name": "listData",
+    "mangled": "\u0002?z#"
+   },
+   {
+    "name": "taskUniqueID",
+    "mangled": "SS"
+   },
+   {
+    "name": "_id",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "id",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "path",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "files",
+    "kind": 2
+   },
+   {
+    "no": 4,
+    "name": "file_op_strategy",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 5,
+    "name": "folder_name",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 6,
+    "name": "list_data",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 7,
+    "name": "task_unique_id",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_FileTransferReceiveResponse": {
+  "fields": [
+   {
+    "name": "files",
+    "mangled": null
+   },
+   {
+    "name": "err",
+    "mangled": null
+   },
+   {
+    "name": "_id",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "id",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "files",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "err",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_FileTransferResult": {
+  "fields": [
+   {
+    "name": "fileError",
+    "mangled": null
+   },
+   {
+    "name": "errMsg",
+    "mangled": "SS"
+   },
+   {
+    "name": "_id",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "id",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "file_error",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "err_msg",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_FileTransferSendRequest": {
+  "fields": [
+   {
+    "name": "path",
+    "mangled": "SS"
+   },
+   {
+    "name": "listData",
+    "mangled": "\u0002?z#"
+   },
+   {
+    "name": "_id",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "id",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "path",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "list_data",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_FileTransferSendResponse": {
+  "fields": [
+   {
+    "name": "err",
+    "mangled": null
+   },
+   {
+    "name": "files",
+    "mangled": null
+   },
+   {
+    "name": "folderName",
+    "mangled": "SS"
+   },
+   {
+    "name": "listData",
+    "mangled": "\u0002?z#"
+   },
+   {
+    "name": "_id",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "id",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "err",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "files",
+    "kind": 2
+   },
+   {
+    "no": 4,
+    "name": "folder_name",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 5,
+    "name": "list_data",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_FpsSettingRequest": {
+  "fields": [
+   {
+    "name": "fps",
+    "mangled": "\u0002M9#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "fps",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_GeneralMetric": {
+  "fields": [
+   {
+    "name": "supportTouch",
+    "mangled": "Sb"
+   },
+   {
+    "name": "systemSoundSupport",
+    "mangled": null
+   },
+   {
+    "name": "winOsVer",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "support_touch",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "system_sound_support",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "win_os_ver",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_InputEvent": {
+  "fields": [
+   {
+    "name": "which",
+    "mangled": null
+   }
+  ],
+  "oneof": [
+   "touch_event"
+  ],
+  "entries": [
+   {
+    "no": 1,
+    "name": "touch_event",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_KeyValue": {
+  "fields": [
+   {
+    "name": "key",
+    "mangled": "SS"
+   },
+   {
+    "name": "value",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "key",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "value",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_LanguageKeyValue": {
+  "fields": [
+   {
+    "name": "key",
+    "mangled": "SS"
+   },
+   {
+    "name": "_value",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "key",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "value",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_LanguageValue": {
+  "fields": [
+   {
+    "name": "value",
+    "mangled": "SS"
+   },
+   {
+    "name": "languageValue",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "value",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "language_value",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_LaunchApp": {
+  "fields": [
+   {
+    "name": "dappID",
+    "mangled": "SS"
+   },
+   {
+    "name": "name",
+    "mangled": "SS"
+   },
+   {
+    "name": "targetPath",
+    "mangled": "SS"
+   },
+   {
+    "name": "args",
+    "mangled": "SS"
+   },
+   {
+    "name": "appKey",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "dapp_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "name",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "target_path",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "args",
+    "kind": 2
+   },
+   {
+    "no": 5,
+    "name": "app_key",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_LaunchCloudPcApp": {
+  "fields": [
+   {
+    "name": "dappID",
+    "mangled": "SS"
+   },
+   {
+    "name": "cpcAppID",
+    "mangled": "SS"
+   },
+   {
+    "name": "name",
+    "mangled": "SS"
+   },
+   {
+    "name": "targetPath",
+    "mangled": "SS"
+   },
+   {
+    "name": "args",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "dapp_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "cpc_app_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "name",
+    "kind": 2
+   },
+   {
+    "no": 4,
+    "name": "target_path",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 5,
+    "name": "args",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_Message": {
+  "fields": [
+   {
+    "name": "_seq",
+    "mangled": null
+   },
+   {
+    "name": "_timestamp",
+    "mangled": null
+   },
+   {
+    "name": "_which",
+    "mangled": null
+   }
+  ],
+  "oneof": [
+   "simple_action",
+   "launch_app",
+   "show_app",
+   "mumu_operate",
+   "screens",
+   "capture_change",
+   "capture_config",
+   "rom_message",
+   "send_to_rom",
+   "report_error",
+   "system_metrics",
+   "report_qos_stats",
+   "system_state_change",
+   "query_system_state",
+   "clipboard_change",
+   "codec_negotiation",
+   "capture_config_response",
+   "input_event",
+   "rpc_request",
+   "rpc_response",
+   "active_window_change",
+   "launch_cloud_pc_app",
+   "capture_setting_sync",
+   "remote_download_path",
+   "port_mapping_frame",
+   "terminal_session_changed"
+  ],
+  "entries": [
+   {
+    "no": 1,
+    "name": "seq",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "timestamp",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "simple_action",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "launch_app",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 5,
+    "name": "show_app",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 6,
+    "name": "mumu_operate",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 7,
+    "name": "screens",
+    "kind": 2
+   },
+   {
+    "no": 8,
+    "name": "capture_change",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 9,
+    "name": "capture_config",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 10,
+    "name": "rom_message",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 11,
+    "name": "send_to_rom",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 12,
+    "name": "report_error",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 13,
+    "name": "system_metrics",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 14,
+    "name": "report_qos_stats",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 15,
+    "name": "system_state_change",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 16,
+    "name": "query_system_state",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 17,
+    "name": "clipboard_change",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 18,
+    "name": "codec_negotiation",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 19,
+    "name": "capture_config_response",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 20,
+    "name": "input_event",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 21,
+    "name": "rpc_request",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 22,
+    "name": "rpc_response",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 23,
+    "name": "active_window_change",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 24,
+    "name": "launch_cloud_pc_app",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 25,
+    "name": "capture_setting_sync",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 26,
+    "name": "remote_download_path",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 27,
+    "name": "port_mapping_frame",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 28,
+    "name": "terminal_session_changed",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_MinMax": {
+  "fields": [
+   {
+    "name": "min",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "max",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "min",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "max",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_MumuControl": {
+  "fields": [
+   {
+    "name": "listVmIndex",
+    "mangled": null
+   },
+   {
+    "name": "type",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "list_vm_index",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "type",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_MumuInfo": {
+  "fields": [
+   {
+    "name": "vmIndex",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "name",
+    "mangled": "SS"
+   },
+   {
+    "name": "runStatus",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "vm_index",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "name",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "run_status",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_MumuNotifyProcess": {
+  "fields": [
+   {
+    "name": "vmIndex",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "type",
+    "mangled": null
+   },
+   {
+    "name": "progress",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "vm_index",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "type",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "progress",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_MumuNotifySimple": {
+  "fields": [
+   {
+    "name": "vmIndex",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "type",
+    "mangled": null
+   },
+   {
+    "name": "errorCode",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "vm_index",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "type",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "error_code",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_MumuPlayerList": {
+  "fields": [
+   {
+    "name": "getAll",
+    "mangled": "Sb"
+   },
+   {
+    "name": "listInfo",
+    "mangled": null
+   },
+   {
+    "name": "listVmIndex",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "get_all",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "list_info",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "list_vm_index",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_MumuSetting": {
+  "fields": [
+   {
+    "name": "listVmIndex",
+    "mangled": null
+   },
+   {
+    "name": "type",
+    "mangled": null
+   },
+   {
+    "name": "setOrGet",
+    "mangled": "Sb"
+   },
+   {
+    "name": "mapKeyValue",
+    "mangled": "SDyS2SG"
+   },
+   {
+    "name": "getSettingRange",
+    "mangled": "Sb"
+   },
+   {
+    "name": "_settingRange",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "list_vm_index",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "type",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "set_or_get",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "map_key_value",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 5,
+    "name": "get_setting_range",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 6,
+    "name": "setting_range",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_MumuSettingRange": {
+  "fields": [
+   {
+    "name": "_vmIndex",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "_language",
+    "mangled": "SS"
+   },
+   {
+    "name": "_renderList",
+    "mangled": null
+   },
+   {
+    "name": "_performanceList",
+    "mangled": null
+   },
+   {
+    "name": "_resolutionList",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "vm_index",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "language",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "render_list",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "performance_list",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 5,
+    "name": "resolution_list",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_OneKeyMultiValue": {
+  "fields": [
+   {
+    "name": "key",
+    "mangled": "SS"
+   },
+   {
+    "name": "currentValue",
+    "mangled": "SS"
+   },
+   {
+    "name": "listValue",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "key",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "current_value",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "list_value",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_Performance": {
+  "fields": [
+   {
+    "name": "value",
+    "mangled": "SS"
+   },
+   {
+    "name": "languageValue",
+    "mangled": "SS"
+   },
+   {
+    "name": "cpuCoreNum",
+    "mangled": "SS"
+   },
+   {
+    "name": "memValue",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "value",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "language_value",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "cpu_core_num",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "mem_value",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_PermissionState": {
+  "fields": [
+   {
+    "name": "assistant",
+    "mangled": "Sb"
+   },
+   {
+    "name": "videoCaptureAllowed",
+    "mangled": "Sb"
+   },
+   {
+    "name": "captureContentVisible",
+    "mangled": "Sb"
+   },
+   {
+    "name": "audioCaptureAllowed",
+    "mangled": "Sb"
+   },
+   {
+    "name": "floatingBall",
+    "mangled": "Sb"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "assistant",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "video_capture_allowed",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "capture_content_visible",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "audio_capture_allowed",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 5,
+    "name": "floating_ball",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_PluginEnableNotificationRequest": {
+  "fields": [
+   {
+    "name": "pluginID",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "plugin_id",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_PluginEnableNotificationResponse": {
+  "fields": [
+   {
+    "name": "errorCode",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "pluginID",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "error_code",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "plugin_id",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_PluginNotificationRequest": {
+  "fields": [
+   {
+    "name": "pluginID",
+    "mangled": "SS"
+   },
+   {
+    "name": "notificationType",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "plugin_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "notification_type",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_PluginNotificationResponse": {
+  "fields": [
+   {
+    "name": "errorCode",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "pluginID",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "error_code",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "plugin_id",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_PortMappingFrame": {
+  "fields": [
+   {
+    "name": "sessionID",
+    "mangled": null
+   },
+   {
+    "name": "ruleID",
+    "mangled": null
+   },
+   {
+    "name": "streamID",
+    "mangled": null
+   },
+   {
+    "name": "type",
+    "mangled": null
+   },
+   {
+    "name": "payload",
+    "mangled": "\u0002?z#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "session_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "rule_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "stream_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "type",
+    "kind": 2
+   },
+   {
+    "no": 5,
+    "name": "payload",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_PrivateScreenSettingRequest": {
+  "fields": [
+   {
+    "name": "enable",
+    "mangled": "Sb"
+   },
+   {
+    "name": "privacyType",
+    "mangled": null
+   },
+   {
+    "name": "settingSource",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "enable",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "privacy_type",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "setting_source",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_PrivateScreenSettingResponse": {
+  "fields": [
+   {
+    "name": "errorCode",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "reqPrivacyType",
+    "mangled": null
+   },
+   {
+    "name": "curPrivacyType",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "error_code",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "req_privacy_type",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "cur_privacy_type",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_PrivateScreenState": {
+  "fields": [
+   {
+    "name": "errorCode",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "reqPrivacyType",
+    "mangled": null
+   },
+   {
+    "name": "curPrivacyType",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "error_code",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "req_privacy_type",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "cur_privacy_type",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_QueryPluginSettingRequest": {
+  "fields": [
+   {
+    "name": "pluginID",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "plugin_id",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_QueryPluginSettingResponse": {
+  "fields": [
+   {
+    "name": "errorCode",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "enable",
+    "mangled": "Sb"
+   },
+   {
+    "name": "pluginID",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "error_code",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "enable",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "plugin_id",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_QuerySystemState": {
+  "fields": [
+   {
+    "name": "id",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "id",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_QuickLaunchAppIconRequest": {
+  "fields": [
+   {
+    "name": "appKey",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "app_key",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_QuickLaunchAppIconResponse": {
+  "fields": [
+   {
+    "name": "errorCode",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "errorMessage",
+    "mangled": "SS"
+   },
+   {
+    "name": "appKey",
+    "mangled": "SS"
+   },
+   {
+    "name": "byteValue",
+    "mangled": "\u0002?z#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "error_code",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "error_message",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "app_key",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "byte_value",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_QuickLaunchAppItem": {
+  "fields": [
+   {
+    "name": "appKey",
+    "mangled": "SS"
+   },
+   {
+    "name": "name",
+    "mangled": "SS"
+   },
+   {
+    "name": "iconURL",
+    "mangled": "SS"
+   },
+   {
+    "name": "targetPath",
+    "mangled": "SS"
+   },
+   {
+    "name": "appID",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "app_key",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "name",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "icon_url",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "target_path",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 5,
+    "name": "app_id",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_QuickLaunchScanResponse": {
+  "fields": [
+   {
+    "name": "errorCode",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "errorMessage",
+    "mangled": "SS"
+   },
+   {
+    "name": "apps",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "error_code",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "error_message",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "apps",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_QuitSuperScreenResponse": {
+  "fields": [
+   {
+    "name": "errorCode",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "error_code",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_ReadDir": {
+  "fields": [
+   {
+    "name": "path",
+    "mangled": "SS"
+   },
+   {
+    "name": "_id",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "id",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "path",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_RemoteAssistFileTransferState": {
+  "fields": [
+   {
+    "name": "enabled",
+    "mangled": "Sb"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "enabled",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_RemoteDownloadPath": {
+  "fields": [
+   {
+    "name": "downloadPath",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "download_path",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_RemoveVirtualDisplayRequest": {
+  "fields": [
+   {
+    "name": "screenID",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "screen_id",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_RemoveVirtualDisplayResponse": {
+  "fields": [
+   {
+    "name": "errorCode",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "error_code",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_RenameSessionReq": {
+  "fields": [
+   {
+    "name": "sessionID",
+    "mangled": "\u0002\u0005u#"
+   },
+   {
+    "name": "name",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "session_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "name",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_RenameSessionResp": {
+  "fields": [
+   {
+    "name": "sessionID",
+    "mangled": "\u0002\u0005u#"
+   },
+   {
+    "name": "code",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "message",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "session_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "code",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "message",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_ReportError": {
+  "fields": [
+   {
+    "name": "action",
+    "mangled": null
+   },
+   {
+    "name": "errorCode",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "errorMsg",
+    "mangled": "SS"
+   },
+   {
+    "name": "typeValue",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "action",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "error_code",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "error_msg",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "type_value",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_ReportQosStats": {
+  "fields": [
+   {
+    "name": "encoderType",
+    "mangled": "SS"
+   },
+   {
+    "name": "captureType",
+    "mangled": "SS"
+   },
+   {
+    "name": "probeBps",
+    "mangled": null
+   },
+   {
+    "name": "videoQuality",
+    "mangled": "\u0002w6#"
+   },
+   {
+    "name": "fastBitrate",
+    "mangled": null
+   },
+   {
+    "name": "generalBitrate",
+    "mangled": null
+   },
+   {
+    "name": "hdBitrate",
+    "mangled": null
+   },
+   {
+    "name": "blurayBitrate",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "encoder_type",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "capture_type",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "probe_bps",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "video_quality",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 5,
+    "name": "fast_bitrate",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 6,
+    "name": "general_bitrate",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 7,
+    "name": "hd_bitrate",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 8,
+    "name": "bluray_bitrate",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_RequestHeader": {
+  "fields": [
+   {
+    "name": "requestID",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "request_id",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_Resolution": {
+  "fields": [
+   {
+    "name": "value",
+    "mangled": "SS"
+   },
+   {
+    "name": "width",
+    "mangled": "SS"
+   },
+   {
+    "name": "height",
+    "mangled": "SS"
+   },
+   {
+    "name": "dpi",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "value",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "width",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "height",
+    "kind": 2
+   },
+   {
+    "no": 4,
+    "name": "dpi",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_ResolutionSettingRequest": {
+  "fields": [
+   {
+    "name": "resolutionWidth",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "resolutionHeight",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "resolution_width",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "resolution_height",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_ResponseHeader": {
+  "fields": [
+   {
+    "name": "requestID",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "request_id",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_RomMessage": {
+  "fields": [
+   {
+    "name": "name",
+    "mangled": "SS"
+   },
+   {
+    "name": "value",
+    "mangled": "SS"
+   },
+   {
+    "name": "index",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "byteValue",
+    "mangled": "\u0002?z#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "name",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "value",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "index",
+    "kind": 2
+   },
+   {
+    "no": 4,
+    "name": "byte_value",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_Screen": {
+  "fields": [
+   {
+    "name": "_id",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "_fps",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "_resolutions",
+    "mangled": null
+   },
+   {
+    "name": "_currentResolution",
+    "mangled": null
+   },
+   {
+    "name": "_screenType",
+    "mangled": null
+   },
+   {
+    "name": "_initResolution",
+    "mangled": null
+   },
+   {
+    "name": "_isPrimaryScreen",
+    "mangled": "Sb"
+   },
+   {
+    "name": "_dpr",
+    "mangled": "Sd"
+   },
+   {
+    "name": "_dpiScale",
+    "mangled": null
+   },
+   {
+    "name": "_displayName",
+    "mangled": "SS"
+   },
+   {
+    "name": "_resolutionType",
+    "mangled": "\u0002u7#"
+   },
+   {
+    "name": "_videoTrackIndex",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "_builtinScreenType",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "id",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "fps",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "resolutions",
+    "kind": 2
+   },
+   {
+    "no": 4,
+    "name": "current_resolution",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 5,
+    "name": "screen_type",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 6,
+    "name": "init_resolution",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 7,
+    "name": "is_primary_screen",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 8,
+    "name": "dpr",
+    "kind": 2
+   },
+   {
+    "no": 9,
+    "name": "dpi_scale",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 10,
+    "name": "display_name",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 11,
+    "name": "resolution_type",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 12,
+    "name": "video_track_index",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 13,
+    "name": "builtin_screen_type",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_ScreenResolution": {
+  "fields": [
+   {
+    "name": "width",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "height",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "width",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "height",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_ScreenSources": {
+  "fields": [
+   {
+    "name": "screens",
+    "mangled": null
+   },
+   {
+    "name": "currentScreenID",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "screens",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "current_screen_id",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_SecureDesktopState": {
+  "fields": [
+   {
+    "name": "isLocked",
+    "mangled": "Sb"
+   },
+   {
+    "name": "isSasShown",
+    "mangled": "Sb"
+   },
+   {
+    "name": "posX",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "posY",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "isSupportAutoLogon",
+    "mangled": "Sb"
+   },
+   {
+    "name": "_isClientUiReady",
+    "mangled": "SbSg"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "is_locked",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "is_sas_shown",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "pos_x",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "pos_y",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 5,
+    "name": "is_support_auto_logon",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 6,
+    "name": "is_client_ui_ready",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_SendFlipScreenRequest": {
+  "fields": [
+   {
+    "name": "screenOrientation",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "screen_orientation",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_SendFlipScreenResponse": {
+  "fields": [
+   {
+    "name": "errorCode",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "error_code",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_SendToRom": {
+  "fields": [
+   {
+    "name": "inputType",
+    "mangled": null
+   },
+   {
+    "name": "inputMsg",
+    "mangled": "SS"
+   },
+   {
+    "name": "index",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "input_type",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "input_msg",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "index",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_SendVideoTrackRequest": {
+  "fields": [
+   {
+    "name": "videoTrackIndex",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "video_track_index",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_SendVideoTrackResponse": {
+  "fields": [
+   {
+    "name": "errorCode",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "error_code",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_SettingMetric": {
+  "fields": [
+   {
+    "name": "keepMute",
+    "mangled": "Sb"
+   },
+   {
+    "name": "mutePermanent",
+    "mangled": "Sb"
+   },
+   {
+    "name": "autoLock",
+    "mangled": "Sb"
+   },
+   {
+    "name": "privateScreen",
+    "mangled": "Sb"
+   },
+   {
+    "name": "fileTransferSaveLocation",
+    "mangled": "SS"
+   },
+   {
+    "name": "virtualMouseSwitch",
+    "mangled": "Sb"
+   },
+   {
+    "name": "privateScreenType",
+    "mangled": null
+   },
+   {
+    "name": "capturePermissionState",
+    "mangled": null
+   },
+   {
+    "name": "operationPermissionState",
+    "mangled": null
+   },
+   {
+    "name": "controlAllowedState",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "keep_mute",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "mute_permanent",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "auto_lock",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "private_screen",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 5,
+    "name": "file_transfer_save_location",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 6,
+    "name": "virtual_mouse_switch",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 7,
+    "name": "private_screen_type",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 8,
+    "name": "capture_permission_state",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 9,
+    "name": "operation_permission_state",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 10,
+    "name": "control_allowed_state",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_SettingRangePerformance": {
+  "fields": [
+   {
+    "name": "key",
+    "mangled": "SS"
+   },
+   {
+    "name": "keyCustomCpu",
+    "mangled": "SS"
+   },
+   {
+    "name": "keyCustomMem",
+    "mangled": "SS"
+   },
+   {
+    "name": "currentValue",
+    "mangled": "SS"
+   },
+   {
+    "name": "currentCustomCpu",
+    "mangled": "SS"
+   },
+   {
+    "name": "currentCustomMem",
+    "mangled": "SS"
+   },
+   {
+    "name": "listRangeCustomCpu",
+    "mangled": "SaySSG"
+   },
+   {
+    "name": "listRangeCustomMem",
+    "mangled": "SaySSG"
+   },
+   {
+    "name": "listPerformance",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "key",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "key_custom_cpu",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "key_custom_mem",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "current_value",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 5,
+    "name": "current_custom_cpu",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 6,
+    "name": "current_custom_mem",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 7,
+    "name": "list_range_custom_cpu",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 8,
+    "name": "list_range_custom_mem",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 9,
+    "name": "list_performance",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_SettingRangeResolution": {
+  "fields": [
+   {
+    "name": "key",
+    "mangled": "SS"
+   },
+   {
+    "name": "keyCustomResolutionWidth",
+    "mangled": "SS"
+   },
+   {
+    "name": "keyCustomResolutionHeight",
+    "mangled": "SS"
+   },
+   {
+    "name": "keyCustomResolutionDpi",
+    "mangled": "SS"
+   },
+   {
+    "name": "currentValue",
+    "mangled": "SS"
+   },
+   {
+    "name": "currentCustomWidth",
+    "mangled": "SS"
+   },
+   {
+    "name": "currentCustomHeight",
+    "mangled": "SS"
+   },
+   {
+    "name": "currentCustomDpi",
+    "mangled": "SS"
+   },
+   {
+    "name": "listResolution",
+    "mangled": null
+   },
+   {
+    "name": "_rangeResolutionWidth",
+    "mangled": null
+   },
+   {
+    "name": "_rangeResolutionHeight",
+    "mangled": null
+   },
+   {
+    "name": "_rangeResolutionDpi",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "key",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "key_custom_resolution_width",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "key_custom_resolution_height",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "key_custom_resolution_dpi",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 5,
+    "name": "current_value",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 6,
+    "name": "current_custom_width",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 7,
+    "name": "current_custom_height",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 8,
+    "name": "current_custom_dpi",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 9,
+    "name": "range_resolution_width",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 10,
+    "name": "range_resolution_height",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 11,
+    "name": "range_resolution_dpi",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 12,
+    "name": "list_resolution",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_ShowApp": {
+  "fields": [
+   {
+    "name": "dappID",
+    "mangled": "SS"
+   },
+   {
+    "name": "name",
+    "mangled": "SS"
+   },
+   {
+    "name": "targetPath",
+    "mangled": "SS"
+   },
+   {
+    "name": "args",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "dapp_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "name",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "target_path",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "args",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_StartDownloadAndInstallPluginRequest": {
+  "fields": [
+   {
+    "name": "pluginID",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "plugin_id",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_StartDownloadAndInstallPluginResponse": {
+  "fields": [
+   {
+    "name": "errorCode",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "pluginID",
+    "mangled": "SS"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "error_code",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "plugin_id",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_SystemMetrics": {
+  "fields": [
+   {
+    "name": "metrics",
+    "mangled": null
+   },
+   {
+    "name": "response",
+    "mangled": "SS"
+   },
+   {
+    "name": "_general",
+    "mangled": null
+   },
+   {
+    "name": "_setting",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "metrics",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "response",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "general",
+    "kind": 2
+   },
+   {
+    "no": 4,
+    "name": "setting",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_TaskId": {
+  "fields": [
+   {
+    "name": "taskID",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "fileIndex",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "task_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "file_index",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_TouchEvent": {
+  "fields": [
+   {
+    "name": "eventType",
+    "mangled": null
+   },
+   {
+    "name": "touchPoints",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "event_type",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "touch_points",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_TouchEventPoint": {
+  "fields": [
+   {
+    "name": "id",
+    "mangled": "\u0002\u0005u#"
+   },
+   {
+    "name": "x",
+    "mangled": "Sf"
+   },
+   {
+    "name": "y",
+    "mangled": "Sf"
+   },
+   {
+    "name": "radiusX",
+    "mangled": "Sf"
+   },
+   {
+    "name": "radiusY",
+    "mangled": "Sf"
+   },
+   {
+    "name": "angle",
+    "mangled": "Sf"
+   },
+   {
+    "name": "pressure",
+    "mangled": "Sf"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "id",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "x",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "y",
+    "kind": 2
+   },
+   {
+    "no": 4,
+    "name": "radius_x",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 5,
+    "name": "radius_y",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 6,
+    "name": "angle",
+    "kind": 2
+   },
+   {
+    "no": 7,
+    "name": "pressure",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_UpdatePluginSettingRequest": {
+  "fields": [
+   {
+    "name": "pluginID",
+    "mangled": "SS"
+   },
+   {
+    "name": "enable",
+    "mangled": "Sb"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "plugin_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "enable",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_UpdatePluginSettingResponse": {
+  "fields": [
+   {
+    "name": "errorCode",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "pluginPackageSize",
+    "mangled": null
+   },
+   {
+    "name": "pluginID",
+    "mangled": "SS"
+   },
+   {
+    "name": "enable",
+    "mangled": "Sb"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "error_code",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "plugin_package_size",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 3,
+    "name": "plugin_id",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 4,
+    "name": "enable",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_UpdateScreenSaverResponse": {
+  "fields": [
+   {
+    "name": "errorCode",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "error_code",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_UserEntitlementSyncRequest": {
+  "fields": [
+   {
+    "name": "entitlementData",
+    "mangled": "SS"
+   },
+   {
+    "name": "currentServerTime",
+    "mangled": null
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "entitlement_data",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 2,
+    "name": "current_server_time",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_UserEntitlementSyncResponse": {
+  "fields": [
+   {
+    "name": "errorCode",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "error_code",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_VideoQualitySettingReqeust": {
+  "fields": [
+   {
+    "name": "frameQuality",
+    "mangled": "\u0002w6#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "frame_quality",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_VirtualAudioDriverPolicyRequest": {
+  "fields": [
+   {
+    "name": "policy",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "policy",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_VirtualAudioDriverPolicyResponse": {
+  "fields": [
+   {
+    "name": "errorCode",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "error_code",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_VirtualDisplayInitResolution": {
+  "fields": [
+   {
+    "name": "width",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "height",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "width",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "height",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_VirtualDisplayMode": {
+  "fields": [
+   {
+    "name": "width",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "height",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "vsync",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "width",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "height",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "VSync",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_VirtualMouseSwitchRequest": {
+  "fields": [
+   {
+    "name": "enable",
+    "mangled": "Sb"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "enable",
+    "kind": 2
+   }
+  ]
+ },
+ "GvPb_VirtualMouseSwitchResponse": {
+  "fields": [
+   {
+    "name": "errorCode",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "error_code",
+    "kind": 4611686018427387906
+   }
+  ]
+ },
+ "GvPb_WinRect": {
+  "fields": [
+   {
+    "name": "left",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "top",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "width",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "height",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "pixelWidth",
+    "mangled": "\u0002ss#"
+   },
+   {
+    "name": "pixelHeight",
+    "mangled": "\u0002ss#"
+   }
+  ],
+  "oneof": [],
+  "entries": [
+   {
+    "no": 1,
+    "name": "left",
+    "kind": 2
+   },
+   {
+    "no": 2,
+    "name": "top",
+    "kind": 2
+   },
+   {
+    "no": 3,
+    "name": "width",
+    "kind": 2
+   },
+   {
+    "no": 4,
+    "name": "height",
+    "kind": 2
+   },
+   {
+    "no": 5,
+    "name": "pixel_width",
+    "kind": 4611686018427387906
+   },
+   {
+    "no": 6,
+    "name": "pixel_height",
+    "kind": 4611686018427387906
+   }
+  ]
+ }
+}
