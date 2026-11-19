@@ -16,7 +16,7 @@
 Windows 的 GameViewerServer.exe 内嵌了 **完整的 FileDescriptorProto**，已解析出：
 
 - 14 个 proto 文件：defines / main / connect / general / clipboard / draw / feature_flag / input_event / mumu / notification / port_mapping / rpc_main / rpc_message / rpc_file_transfer
-- 178 条消息 + 31 个枚举，包含**精确字段编号、类型、label、oneof、嵌套类型与枚举**
+- 178 条消息（含嵌套共 179）+ 51 个枚举，覆盖官方全部消息定义；此前"223"是 Swift 类型名统计（含 StorageClass 与 oneof 枚举），非消息数
 - 输出：proto/gv_pb/*.proto（可直接 protoc 生成任意语言绑定）
 
 这取代了此前从 Swift 元数据推断的 160 条（且类型靠猜）。此前推断的差异已确认：
