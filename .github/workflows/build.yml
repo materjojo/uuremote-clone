@@ -5,24 +5,34 @@ on:
   workflow_dispatch:
 
 jobs:
-  macos:
+  core:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure
+        run: cmake -S core -B core/build -DCMAKE_BUILD_TYPE=Release
+      - name: Build
+        run: cmake --build core/build --config Release
+      - name: Test
+        run: ctest --test-dir core/build --output-on-failure -C Release
+
+  macos-app:
     runs-on: macos-latest
     timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
-
       - name: Swift version
         run: swift --version
-
       - name: Resolve
         run: swift package resolve
-
       - name: Build
         run: swift build -c release
-
       - name: Package .app
         run: bash scripts/make_app.sh
-
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
