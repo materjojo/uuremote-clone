@@ -55,7 +55,14 @@ public sealed class StreamerSession : IDisposable
         pc.onicecandidate += candidate =>
         {
             if (candidate != null)
-                _listener.OnCandidate(candidate);
+            {
+                _listener.OnCandidate(new RTCIceCandidateInit
+                {
+                    candidate = candidate.candidate,
+                    sdpMid = candidate.sdpMid,
+                    sdpMLineIndex = candidate.sdpMLineIndex
+                });
+            }
         };
 
         pc.onconnectionstatechange += state => _listener.OnState(state);
@@ -101,7 +108,7 @@ public sealed class StreamerSession : IDisposable
         pc.ondatachannel += Bind;
 
         if (RTCSessionDescriptionInit.TryParse(sdp, out var offer))
-            await pc.setRemoteDescription(offer);
+            pc.setRemoteDescription(offer);
 
         var answer = pc.createAnswer();
         await pc.setLocalDescription(answer);
@@ -112,7 +119,7 @@ public sealed class StreamerSession : IDisposable
     {
         if (_peer == null) return;
         if (RTCSessionDescriptionInit.TryParse(sdp, out var answer))
-            _ = _peer.setRemoteDescription(answer);
+            _peer.setRemoteDescription(answer);
     }
 
     public void AddCandidate(string candidate, string sdpMid, int sdpMLineIndex)
@@ -124,7 +131,7 @@ public sealed class StreamerSession : IDisposable
             sdpMid = sdpMid,
             sdpMLineIndex = (ushort)Math.Max(0, sdpMLineIndex)
         };
-        _ = _peer.addIceCandidate(init);
+        _peer.addIceCandidate(init);
     }
 
     public void SendControl(byte[] data)
