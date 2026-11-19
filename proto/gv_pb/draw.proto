@@ -10,15 +10,9 @@ message DrawPoint {
 message DrawStrokeRequest {
   uint32 stroke_id = 1;
   repeated DrawPoint points = 2;
-  oneof _screen_id {
-    optional int32 screen_id = 3;
-  }
-  oneof _line_width {
-    optional float line_width = 4;
-  }
-  oneof _color {
-    optional uint32 color = 5;
-  }
+  optional int32 screen_id = 3;
+  optional float line_width = 4;
+  optional uint32 color = 5;
 }
 
 message DrawStrokeResponse {
@@ -34,9 +28,7 @@ message DrawClearRequest {
 
   DrawClearRequest.ClearType clear_type = 1;
   uint32 stroke_id = 2;
-  oneof _screen_id {
-    optional int32 screen_id = 3;
-  }
+  optional int32 screen_id = 3;
 }
 
 message DrawClearResponse {

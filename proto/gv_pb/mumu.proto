@@ -125,9 +125,7 @@ message MumuSetting {
   bool set_or_get = 3;
   repeated MumuSetting.MapKeyValueEntry map_key_value = 4;
   bool get_setting_range = 5;
-  oneof _setting_range {
-    optional MumuSettingRange setting_range = 6;
-  }
+  optional MumuSettingRange setting_range = 6;
 
   message MapKeyValueEntry {
     string key = 1;
