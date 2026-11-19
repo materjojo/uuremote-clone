@@ -1,0 +1,11 @@
+<Application x:Class="UURemoteClone.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <SolidColorBrush x:Key="Bg" Color="#121316"/>
+        <SolidColorBrush x:Key="Card" Color="#1C1E22"/>
+        <SolidColorBrush x:Key="Accent" Color="#5CD96B"/>
+        <SolidColorBrush x:Key="Muted" Color="#9AA0A6"/>
+    </Application.Resources>
+</Application>
