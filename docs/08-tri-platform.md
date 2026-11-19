@@ -15,8 +15,8 @@
 
 Windows 的 GameViewerServer.exe 内嵌了 **完整的 FileDescriptorProto**，已解析出：
 
-- 13 个 proto 文件：main / connect / general / clipboard / draw / feature_flag / input_event / mumu / notification / port_mapping / rpc_main / rpc_message / rpc_file_transfer
-- 177 条消息，包含**精确字段编号、类型、label、oneof、嵌套类型与枚举**
+- 14 个 proto 文件：defines / main / connect / general / clipboard / draw / feature_flag / input_event / mumu / notification / port_mapping / rpc_main / rpc_message / rpc_file_transfer
+- 178 条消息 + 31 个枚举，包含**精确字段编号、类型、label、oneof、嵌套类型与枚举**
 - 输出：proto/gv_pb/*.proto（可直接 protoc 生成任意语言绑定）
 
 这取代了此前从 Swift 元数据推断的 160 条（且类型靠猜）。此前推断的差异已确认：
@@ -52,10 +52,11 @@ Windows 的 GameViewerServer.exe 内嵌了 **完整的 FileDescriptorProto**，�
 
 | 能力 | macOS | Android | Windows |
 |---|---|---|---|
-| 协议（177 消息） | 已接（Swift 手写核心 + GvSchema） | JNI 待接 | P/Invoke 已接 |
+| 协议（178 消息） | Swift 手写核心 + GvSchema | protobuf-javalite 生成并编译进 APK | Google.Protobuf 生成并编译 |
 | KCP + FEC | Swift 实现 | 待接 core | 待接 core |
-| 采集 | SCK 已实现 | 未实现 | 未实现 |
-| 硬编 | VT 已实现 | 未实现 | 未实现 |
+| WebRTC | 已实现 | PeerConnection + 三个同名 DataChannel 已实现 | 未接 |
+| 采集 | SCK 已实现 | 未实现（MediaProjection 待接） | 未实现 |
+| 硬编 | VT 已实现 | 未实现（MediaCodec 待接） | 未实现 |
 | 渲染 | Metal 已实现 | 未实现 | 未实现 |
 | 输入 | CGEvent 已实现 | 未实现 | 未实现 |
 | UI | 主流程 | 设备列表骨架 | 设备列表骨架 |

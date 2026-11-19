@@ -7,7 +7,7 @@
 | 项 | 原版 | 复刻 | 结论 |
 |---|---|---|---|
 | 信封结构 | Message: seq=1, timestamp=2, oneof 3..28 | 同 | 一致（字段编号来自元数据） |
-| 消息数量 | 223 条 gv_pb 消息 | 160 条已还原字段编号，可动态读写任意字段 | 部分一致：63 条未还原 |
+| 消息数量 | 223 条 gv_pb 消息 | 178 条（官方 FileDescriptorProto 全量还原，含类型/oneof/枚举） | 已对齐（Java/C# 由同一 proto 生成） |
 | 控制通道 framing | 一个 SCTP 消息 = 一个 protobuf | 同 | 一致 |
 | DataChannel label | CONTROL / BINARY / FILE / internal | CONTROL / BINARY / FILE / VIDEO(新增) | 前三者一致 |
 | 信令事件 | send_offer / send_candidates / bmsg_push / room_info / qos_stats_upload 等 | 同名事件 | 事件名一致，JSON 内层字段为推断 |
