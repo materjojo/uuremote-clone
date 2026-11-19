@@ -1,9 +1,10 @@
 package com.remote.streamer.controller;
 
-/**
- * 官方控制端入口（直调官方 libstreamer-jni.so）。
- * JNI 符号：Java_com_remote_streamer_controller_AndroidStreamerController_*
- */
+import android.view.SurfaceView;
+import com.remote.streamer.model.AudioCaptureConfig;
+import com.remote.streamer.model.VideoRendererConfig;
+
+/** 官方控制端入口：JNI 按符号名 Java_com_remote_streamer_controller_* 绑定 */
 public final class AndroidStreamerController {
     static {
         System.loadLibrary("c++_shared");
@@ -13,22 +14,22 @@ public final class AndroidStreamerController {
 
     private AndroidStreamerController() {}
 
-    public static native void Initialize(Object context);
-    public static native void Finalize();
-    public static native int LoginRoom(Object roomInfo);
-    public static native int Connect(int handle);
-    public static native void Disconnect(int handle);
-    public static native void ExitRoom(int handle);
-    public static native int StartVideoRender(int handle, Object renderConfig);
-    public static native int StartAudioRender(int handle);
-    public static native int StopVideoRender(int handle);
-    public static native int StopAudioRender(int handle);
-    public static native int SendControlData(int handle, byte[] data);
-    public static native int SendTextData(int handle, String data);
-    public static native int SendBinaryData(int handle, byte[] data);
-    public static native int SendFileData(int handle, byte[] data);
-    public static native String GetConnectionStats(int handle);
+    public static native int Initialize(String str, String str2);
+    public static native int Finalize();
+    public static native long LoginRoom(Object roomConfig);
+    public static native int Connect(long j);
+    public static native int Disconnect(long j);
+    public static native int ExitRoom(long j);
+    public static native int StartVideoRender(long j, VideoRendererConfig config);
+    public static native int StartAudioRender(long j, SurfaceView surface);
+    public static native int StopVideoRender(long j, int i);
+    public static native int StopAudioRender(long j, int i);
+    public static native int SendControlData(long j, byte[] data);
+    public static native int SendTextData(long j, byte[] data);
+    public static native int SendBinaryData(long j, byte[] data);
+    public static native int SendFileData(long j, byte[] data);
+    public static native String GetConnectionStats(long j);
     public static native String GetDecodeCapability();
     public static native String GetStreamerVersion();
-    public static native int SwitchIceNetwork(int handle);
+    public static native int SwitchIceNetwork(long j);
 }

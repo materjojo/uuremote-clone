@@ -1,11 +1,9 @@
 package com.remote.streamer.controlled;
 
-/**
- * 官方被控端入口（直调官方 libstreamer-jni.so）。
- * JNI 符号：Java_com_remote_streamer_controlled_AndroidStreamerControlled_*
- * 方法名来自官方 .so 导出符号表；参数签名需按 libstreamer-jni.so 内的
- * JNI 签名字符串逐一核对后才可运行时调用。
- */
+import com.remote.streamer.model.AudioCaptureConfig;
+import com.remote.streamer.model.VideoCaptureConfig;
+
+/** 官方被控端入口：JNI 按符号名 Java_com_remote_streamer_controlled_* 绑定（签名来自官方 Java 层还原） */
 public final class AndroidStreamerControlled {
     static {
         System.loadLibrary("c++_shared");
@@ -15,22 +13,22 @@ public final class AndroidStreamerControlled {
 
     private AndroidStreamerControlled() {}
 
-    public static native void Initialize(Object context);
-    public static native void Finalize();
-    public static native int CreateRoom(Object config);
-    public static native void DestroyRoom(int handle);
-    public static native int StartVideoCapture(int handle, Object videoCaptureConfig);
-    public static native int StartAudioCapture(int handle);
-    public static native int StopVideoCapture(int handle);
-    public static native int StopAudioCapture(int handle);
-    public static native int SendControlData(int handle, byte[] data);
-    public static native int SendTextData(int handle, String data);
-    public static native int SendBinaryData(int handle, byte[] data);
-    public static native int SendFileData(int handle, byte[] data);
-    public static native int SendSignalData(int handle, byte[] data);
-    public static native void ClearRoom(int handle);
-    public static native String GetConnectionStats(int handle);
+    public static native int Initialize(String str, String str2);
+    public static native int Finalize();
+    public static native long CreateRoom(StreamerRoomConfigHolder config);
+    public static native int DestroyRoom(long j);
+    public static native int StartVideoCapture(long j, VideoCaptureConfig config);
+    public static native int StartAudioCapture(long j, AudioCaptureConfig config);
+    public static native int StopVideoCapture(long j, int i);
+    public static native int StopAudioCapture(long j, int i);
+    public static native int SendControlData(long j, byte[] data);
+    public static native int SendTextData(long j, byte[] data);
+    public static native int SendBinaryData(long j, byte[] data);
+    public static native int SendFileData(long j, byte[] data);
+    public static native int SendSignalData(long j, byte[] data);
+    public static native int ClearRoom(long j);
+    public static native int GetConnectionStats(long j, byte[] out);
     public static native String GetEncodeCapability();
-    public static native boolean CheckAlive(int handle);
+    public static native boolean CheckAlive(long j);
     public static native String GetStreamerVersion();
 }
