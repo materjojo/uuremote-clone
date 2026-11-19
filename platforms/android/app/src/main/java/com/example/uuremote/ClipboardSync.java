@@ -46,7 +46,6 @@ public final class ClipboardSync {
             lastSent = t;
 
             ClipboardChange change = ClipboardChange.newBuilder()
-                    .setType(ClipboardChange.Type.TEXT)
                     .setContentId((int) seq)
                     .setContent(t)
                     .setToBeContinued(false)
