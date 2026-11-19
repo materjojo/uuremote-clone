@@ -59,6 +59,6 @@ tasks.register('genProtos', Exec) {
         '-I', '../../../proto/gv_pb'
     // protoc 要求显式列出 .proto 文件
     def protos = fileTree('../../../proto/gv_pb').matching { include '*.proto' }.files
-    args(protos.collect { it.absolutePath })
+    args(protos.collect { '../../../proto/gv_pb/' + it.name })
 }
 preBuild.dependsOn 'genProtos'
