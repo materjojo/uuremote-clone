@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import CoreMedia
 import WebRTC
 
 /// 一次远控会话：房间 → 信令 → WebRTC → 控制通道
@@ -29,6 +30,12 @@ final class RemoteSession: NSObject, ObservableObject {
     private var seq: Int64 = 0
     private var controlReady = false
     private var queued: [Data] = []
+    private var reliable: ReliableChannel?
+    private var reliableTimer: Timer?
+    private let decoder = H265Decoder()
+
+    /// 弱网增强（KCP + RS-FEC）；对端不支持时自动降级为裸 protobuf
+    var useReliableTransport = true
 
     func connect(device: DeviceInfo) {
         self.device = device
@@ -114,10 +121,18 @@ final class RemoteSession: NSObject, ObservableObject {
 
     // MARK: - 控制消息
 
+    override init() {
+        super.init()
+        useReliableTransport = UserDefaults.standard.object(forKey: "useReliableTransport") as? Bool ?? true
+        decoder.onImage = { buffer, pts in
+            VideoFrameBus.shared.push(buffer, pts: pts)
+        }
+    }
+
     func send(_ message: GvMessage) {
         let data = message.encode()
         guard controlReady, let rtc else { queued.append(data); return }
-        rtc.sendControl(data)
+        if let reliable { reliable.send(data) } else { rtc.sendControl(data) }
     }
 
     func sendConnectOptions(capture: GvCaptureParams) {
@@ -130,12 +145,18 @@ final class RemoteSession: NSObject, ObservableObject {
             GvDecoderCap(fps: 60, codecType: .h264, width: 2560, height: 1600, chroma: .f444)
         ]
         let data = options.encode()
-        if controlReady { rtc?.sendControl(data) } else { queued.append(data) }
+        if controlReady {
+            if let reliable { reliable.send(data) } else { rtc?.sendControl(data) }
+        } else {
+            queued.append(data)
+        }
     }
 
     private func flushQueue() {
         guard let rtc else { return }
-        queued.forEach { rtc.sendControl($0) }
+        queued.forEach { data in
+            if let reliable { reliable.send(data) } else { rtc.sendControl(data) }
+        }
         queued.removeAll()
     }
 
@@ -187,8 +208,30 @@ extension RemoteSession: WebRTCSessionDelegate {
     }
 
     func webRTC(_ session: WebRTCSession, didReceiveControl data: Data) {
+        if let reliable {
+            if data.first == 0xF2 {
+                reliable.receive(data)
+                return
+            }
+            // 对端未启用 FEC，降级
+            self.reliable = nil
+            reliableTimer?.invalidate()
+            reliableTimer = nil
+        }
         guard let message = GvMessage.decode(data) else { return }
         DispatchQueue.main.async { self.handleControl(message) }
+    }
+
+    func webRTC(_ session: WebRTCSession, didReceiveVideoFrame frame: Data, key: Bool) {
+        let pts = CMTime(value: Int64(Date().timeIntervalSince1970 * 1000), timescale: 1000)
+        decoder.decode(annex: frame, pts: pts)
+    }
+
+    func webRTC(_ session: WebRTCSession, didOpenVideo channel: H265Channel) {
+        var request = GvCaptureSettingRequest()
+        request.codec = .h265
+        request.frameQuality = .hd
+        sendCaptureSetting(request)
     }
 
     func webRTC(_ session: WebRTCSession, didReceive videoTrack: RTCVideoTrack) {
@@ -197,6 +240,17 @@ extension RemoteSession: WebRTCSessionDelegate {
 
     func webRTC(_ session: WebRTCSession, didOpenControl channel: RTCDataChannel) {
         DispatchQueue.main.async {
+            if self.useReliableTransport {
+                let reliable = ReliableChannel(channel: channel)
+                reliable.onMessage = { [weak self] data in
+                    guard let self, let message = GvMessage.decode(data) else { return }
+                    DispatchQueue.main.async { self.handleControl(message) }
+                }
+                self.reliable = reliable
+                self.reliableTimer = Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true) { _ in
+                    reliable.tick()
+                }
+            }
             self.controlReady = true
             self.flushQueue()
         }

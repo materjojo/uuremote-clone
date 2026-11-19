@@ -24,4 +24,7 @@ CI：GitHub Actions `macos-14`，产物 `UURemoteClone.app`。
 | WebRTC 媒体 + DataChannel | ✅ |
 | 被控端采集 / 注入 | ✅ ScreenCaptureKit + CGEvent |
 | UI（设备/远控/设置） | ✅ 结构还原，图标占位 |
-| H.265 / KCP / 私有屏 | ❌ 见文档 |
+| H.265（自建分片通道） | ✅ |
+| KCP + RS-FEC（弱网层） | ✅ 可开关 |
+| 虚拟屏 / 私有屏 | ✅ 私有 CGVirtualDisplay |
+| 无人值守 LaunchAgent | ✅ |

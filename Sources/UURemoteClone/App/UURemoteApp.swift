@@ -1,6 +1,5 @@
 import SwiftUI
 
-@main
 struct UURemoteCloneApp: App {
     @StateObject private var app = AppState()
 
@@ -17,5 +16,16 @@ struct UURemoteCloneApp: App {
                 .environmentObject(app)
         }
         .defaultSize(width: 1280, height: 800)
+    }
+}
+
+@main
+enum EntryPoint {
+    static func main() {
+        if CommandLine.arguments.contains("--agent") {
+            AgentRuntime.run()
+        } else {
+            UURemoteCloneApp.main()
+        }
     }
 }

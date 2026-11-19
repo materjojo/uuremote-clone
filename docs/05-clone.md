@@ -35,12 +35,12 @@ repo/
 
 ## 未实现 / 差异
 
-| 项 | 原因 |
+| 项 | 状态 |
 |---|---|
-| H.265 编码 | 开源 WebRTC 构建不含 H.265；协议字段保留 |
-| KCP + RS-FEC 弱网层 | 原版自研，公开资料不足；改用 WebRTC NACK/FEC |
-| 私有屏 / 虚拟屏 | 依赖 Apple 私有 API 与签名权限 |
-| 无人值守 / 开机自启 | 需要 LaunchDaemon + SMJobBless，工程内提供模板未启用 |
+| H.265 | 已实现：自建 VIDEO_DATA_CHANNEL 分片 + VideoToolbox 编解码（开源 WebRTC 不含 H265 RTP，故绕开 RTP） |
+| KCP + RS-FEC | 已实现：Transport/ 下标准 KCP 头 + (8,2) 系统化 Reed-Solomon，可在设置中开关 |
+| 虚拟屏 / 私有屏 | 已实现：私有 CGVirtualDisplay 创建 + SCK/CGDisplayStream 采集；增强防窥依赖私有 CGS，失败自动降级 |
+| 无人值守 | 已实现：LaunchAgent 安装/卸载 + --agent 无界面常驻 + 被控采集 |
 | 云设备 | 按要求移除 |
 | 精确像素级 UI | 无 Assets.car 解码工具，图标以 SF Symbols 占位，布局按文案与类名还原 |
 

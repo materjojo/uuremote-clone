@@ -38,8 +38,8 @@ struct RemoteSessionView: View {
         ZStack(alignment: .top) {
             Color.black.ignoresSafeArea()
 
-            if let track = session.videoTrack {
-                VideoCanvas(track: track)
+            if session.videoTrack != nil || session.phase == .connected {
+                VideoCanvas(track: session.videoTrack)
                     .ignoresSafeArea()
                 RemoteInputView(
                     onTouch: { touch in session.send(touch: touch) },
@@ -217,6 +217,18 @@ struct VideoCanvas: NSViewRepresentable {
     }
 }
 
+/// 解码帧分发（H.265 路径不经过 RTCVideoTrack）
+final class VideoFrameBus {
+    static let shared = VideoFrameBus()
+    weak var sink: VideoRenderView?
+
+    func push(_ buffer: CVPixelBuffer, pts: CMTime) {
+        DispatchQueue.main.async {
+            self.sink?.display(buffer, pts: pts)
+        }
+    }
+}
+
 /// 自绘渲染视图：RTCCVPixelBuffer -> CMSampleBuffer -> AVSampleBufferDisplayLayer
 /// （stasel/WebRTC 的 macOS 构建不含 RTCMTLNSVideoView）
 final class VideoRenderView: NSView, RTCVideoRenderer {
@@ -230,6 +242,11 @@ final class VideoRenderView: NSView, RTCVideoRenderer {
         layer?.backgroundColor = NSColor.black.cgColor
         displayLayer.videoGravity = .resizeAspect
         layer?.addSublayer(displayLayer)
+        VideoFrameBus.shared.sink = self
+    }
+
+    deinit {
+        if VideoFrameBus.shared.sink === self { VideoFrameBus.shared.sink = nil }
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -246,9 +263,11 @@ final class VideoRenderView: NSView, RTCVideoRenderer {
 
     func renderFrame(_ frame: RTCVideoFrame?) {
         guard let frame, let buffer = frame.buffer as? RTCCVPixelBuffer else { return }
-        let pixelBuffer = buffer.pixelBuffer
-        let size = CVImageBufferGetEncodedSize(pixelBuffer)
+        display(buffer.pixelBuffer, pts: CMTime(value: frame.timeStampNs, timescale: 1_000_000_000))
+    }
 
+    func display(_ pixelBuffer: CVPixelBuffer, pts: CMTime) {
+        let size = CVImageBufferGetEncodedSize(pixelBuffer)
         if formatDescription == nil || size != currentSize {
             var fd: CMVideoFormatDescription?
             let status = CMVideoFormatDescriptionCreateForImageBuffer(
@@ -263,7 +282,7 @@ final class VideoRenderView: NSView, RTCVideoRenderer {
 
         var timing = CMSampleTimingInfo(
             duration: .invalid,
-            presentationTimeStamp: CMTime(value: frame.timeStampNs, timescale: 1_000_000_000),
+            presentationTimeStamp: pts,
             decodeTimeStamp: .invalid)
         var sample: CMSampleBuffer?
         let status = CMSampleBufferCreateReadyWithImageBuffer(

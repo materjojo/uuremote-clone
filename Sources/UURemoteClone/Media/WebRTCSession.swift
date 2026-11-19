@@ -9,10 +9,14 @@ protocol WebRTCSessionDelegate: AnyObject {
     func webRTC(_ session: WebRTCSession, didReceiveControl data: Data)
     func webRTC(_ session: WebRTCSession, didReceive videoTrack: RTCVideoTrack)
     func webRTC(_ session: WebRTCSession, didOpenControl channel: RTCDataChannel)
+    func webRTC(_ session: WebRTCSession, didOpenVideo channel: H265Channel)
+    func webRTC(_ session: WebRTCSession, didReceiveVideoFrame frame: Data, key: Bool)
 }
 
 extension WebRTCSessionDelegate {
     func webRTC(_ session: WebRTCSession, didOpenControl channel: RTCDataChannel) {}
+    func webRTC(_ session: WebRTCSession, didOpenVideo channel: H265Channel) {}
+    func webRTC(_ session: WebRTCSession, didReceiveVideoFrame frame: Data, key: Bool) {}
 }
 
 /// WebRTC 会话封装。DataChannel label 与官方一致：
@@ -30,6 +34,7 @@ final class WebRTCSession: NSObject {
     private(set) var fileChannel: RTCDataChannel?
     private(set) var videoSource: RTCVideoSource?
     private(set) var videoTrack: RTCVideoTrack?
+    private(set) var h265: H265Channel?
     private var capturer: PixelBufferCapturer?
 
     private let constraints = RTCMediaConstraints(
@@ -73,6 +78,14 @@ final class WebRTCSession: NSObject {
         cfg.isOrdered = true
         controlChannel = pc.dataChannel(forLabel: "CONTROL_DATA_CHANNEL", configuration: cfg)
         controlChannel?.delegate = self
+
+        let videoCfg = RTCDataChannelConfiguration()
+        videoCfg.isOrdered = false
+        videoCfg.maxRetransmits = 0
+        if let videoChannel = pc.dataChannel(forLabel: "VIDEO_DATA_CHANNEL", configuration: videoCfg) {
+            videoChannel.delegate = self
+            attachVideo(channel: videoChannel)
+        }
 
         pc.offer(for: constraints) { [weak self] sdp, error in
             guard let self, let sdp else { return }
@@ -126,6 +139,20 @@ final class WebRTCSession: NSObject {
 
     // MARK: - 数据
 
+    private func attachVideo(channel: RTCDataChannel) {
+        let h265 = H265Channel(channel: channel)
+        h265.onFrame = { [weak self] frame, key in
+            guard let self else { return }
+            self.delegate?.webRTC(self, didReceiveVideoFrame: frame, key: key)
+        }
+        self.h265 = h265
+        delegate?.webRTC(self, didOpenVideo: h265)
+    }
+
+    func sendVideo(_ annex: Data, key: Bool) {
+        h265?.send(annex: annex, key: key)
+    }
+
     func sendControl(_ data: Data) {
         let buffer = RTCDataBuffer(data: data, isBinary: true)
         _ = controlChannel?.sendData(buffer)
@@ -167,6 +194,7 @@ extension WebRTCSession: RTCPeerConnectionDelegate {
         case "CONTROL_DATA_CHANNEL": controlChannel = dataChannel
         case "BINARY_DATA_CHANNEL": binaryChannel = dataChannel
         case "FILE_DATA_CHANNEL": fileChannel = dataChannel
+        case H265Channel.label: attachVideo(channel: dataChannel)
         default: break
         }
     }
@@ -188,6 +216,8 @@ extension WebRTCSession: RTCDataChannelDelegate {
     func dataChannel(_ dataChannel: RTCDataChannel, didReceiveMessageWith buffer: RTCDataBuffer) {
         if dataChannel.label == "CONTROL_DATA_CHANNEL" {
             delegate?.webRTC(self, didReceiveControl: buffer.data)
+        } else if dataChannel.label == H265Channel.label {
+            h265?.receive(buffer.data)
         }
     }
 }
