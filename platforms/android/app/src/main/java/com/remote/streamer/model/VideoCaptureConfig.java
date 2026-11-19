@@ -17,15 +17,19 @@ public final class VideoCaptureConfig {
     private final int resolutionHeight;
     private final int resolutionWidth;
     private final int screenId;
+    private final int screenSourceType;
+    private final int videoTrackIndex;
 
     public VideoCaptureConfig(int captureTarget, int chromaSampling, int codecType, boolean cursorCapture,
                               int fps, int frameQuality, boolean hdr, int maxScaleHeight, int maxScaleWidth,
-                              MediaProjection mediaProjection, int resolutionHeight, int resolutionWidth, int screenId) {
+                              MediaProjection mediaProjection, int resolutionHeight, int resolutionWidth,
+                              int screenId, int screenSourceType, int videoTrackIndex) {
         this.captureTarget = captureTarget; this.chromaSampling = chromaSampling; this.codecType = codecType;
         this.cursorCapture = cursorCapture; this.fps = fps; this.frameQuality = frameQuality; this.hdr = hdr;
         this.maxScaleHeight = maxScaleHeight; this.maxScaleWidth = maxScaleWidth;
         this.mediaProjection = mediaProjection; this.resolutionHeight = resolutionHeight;
         this.resolutionWidth = resolutionWidth; this.screenId = screenId;
+        this.screenSourceType = screenSourceType; this.videoTrackIndex = videoTrackIndex;
     }
     public int getCaptureTarget() { return captureTarget; }
     public int getChromaSampling() { return chromaSampling; }
@@ -40,4 +44,6 @@ public final class VideoCaptureConfig {
     public int getResolutionHeight() { return resolutionHeight; }
     public int getResolutionWidth() { return resolutionWidth; }
     public int getScreenId() { return screenId; }
+    public int getScreenSourceType() { return screenSourceType; }
+    public int getVideoTrackIndex() { return videoTrackIndex; }
 }
