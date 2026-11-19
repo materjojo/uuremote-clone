@@ -55,8 +55,8 @@ Windows 的 GameViewerServer.exe 内嵌了 **完整的 FileDescriptorProto**，�
 | 协议（178 消息） | Swift 手写核心 + GvSchema | protobuf-javalite 生成并编译进 APK | Google.Protobuf 生成并编译 |
 | KCP + FEC | Swift 实现 | 待接 core | 待接 core |
 | WebRTC | 已实现 | PeerConnection + 三个同名 DataChannel 已实现 | 未接 |
-| 采集 | SCK 已实现 | 未实现（MediaProjection 待接） | 未实现 |
-| 硬编 | VT 已实现 | 未实现（MediaCodec 待接） | 未实现 |
+| 采集 | SCK 已实现 | MediaProjection 已实现 | 未实现 |
+| 硬编 | VT 已实现 | MediaCodec H.264 surface 输入已实现 | 未实现 |
 | 渲染 | Metal 已实现 | 未实现 | 未实现 |
 | 输入 | CGEvent 已实现 | 未实现 | 未实现 |
 | UI | 主流程 | 设备列表骨架 | 设备列表骨架 |
