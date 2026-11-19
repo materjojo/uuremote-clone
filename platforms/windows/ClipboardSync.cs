@@ -60,7 +60,6 @@ public sealed class ClipboardSync : IDisposable
                 Timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
                 ClipboardChange = new ClipboardChange
                 {
-                    Type = ClipboardChange.Types.Type.Text,
                     ContentId = (uint)_seq,
                     Content = text,
                     ToBeContinued = false
