@@ -5,12 +5,12 @@
 extern "C" {
 
 JNIEXPORT jint JNICALL
-Java_com_example_uuremote_Gvpb nativeMessageCount(JNIEnv*, jclass) {
+Java_com_example_uuremote_Gvpb_nativeMessageCount(JNIEnv*, jclass) {
     return gvpb_schema_message_count();
 }
 
 JNIEXPORT jstring JNICALL
-Java_com_example_uuremote_Gvpb nativeSchemaName(JNIEnv* env, jclass, jstring jmsg, jint field) {
+Java_com_example_uuremote_Gvpb_nativeSchemaName(JNIEnv* env, jclass, jstring jmsg, jint field) {
     const char* msg = env->GetStringUTFChars(jmsg, nullptr);
     const char* name = gvpb_schema_name(msg, field);
     jstring result = name ? env->NewStringUTF(name) : nullptr;
@@ -19,7 +19,7 @@ Java_com_example_uuremote_Gvpb nativeSchemaName(JNIEnv* env, jclass, jstring jms
 }
 
 JNIEXPORT jint JNICALL
-Java_com_example_uuremote_Gvpb nativeFieldNumber(JNIEnv* env, jclass, jstring jmsg, jstring jname) {
+Java_com_example_uuremote_Gvpb_nativeFieldNumber(JNIEnv* env, jclass, jstring jmsg, jstring jname) {
     const char* msg = env->GetStringUTFChars(jmsg, nullptr);
     const char* name = env->GetStringUTFChars(jname, nullptr);
     int n = gvpb_schema_number(msg, name);
@@ -30,7 +30,7 @@ Java_com_example_uuremote_Gvpb nativeFieldNumber(JNIEnv* env, jclass, jstring jm
 
 // 用 core 的 protobuf 编码器把 (field,value) 编成一段消息（用于 InputEvent 构造）
 JNIEXPORT jbyteArray JNICALL
-Java_com_example_uuremote_Gvpb nativeEncodeVarint(JNIEnv* env, jclass, jint field, jlong value) {
+Java_com_example_uuremote_Gvpb_nativeEncodeVarint(JNIEnv* env, jclass, jint field, jlong value) {
     gvpb_msg* m = gvpb_new();
     gvpb_set_varint(m, field, (uint64_t)value);
     uint8_t buf[64];
@@ -42,7 +42,7 @@ Java_com_example_uuremote_Gvpb nativeEncodeVarint(JNIEnv* env, jclass, jint fiel
 }
 
 JNIEXPORT jbyteArray JNICALL
-Java_com_example_uuremote_Gvpb nativeEncodeString(JNIEnv* env, jclass, jint field, jstring jvalue) {
+Java_com_example_uuremote_Gvpb_nativeEncodeString(JNIEnv* env, jclass, jint field, jstring jvalue) {
     const char* value = env->GetStringUTFChars(jvalue, nullptr);
     gvpb_msg* m = gvpb_new();
     gvpb_set_string(m, field, value);

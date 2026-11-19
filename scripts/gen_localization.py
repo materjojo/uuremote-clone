@@ -52,7 +52,8 @@ def main():
                 if n in seen:
                     continue
                 seen.add(n)
-                f.write(f'    <string name="{n}">{xml_escape(v)}</string>\n')
+                attr = ' formatted="false"' if '%' in v else ''
+                f.write(f'    <string name="{n}"{attr}>{xml_escape(v)}</string>\n')
             f.write('</resources>\n')
 
     # Windows resx（键保留原文，值中文）

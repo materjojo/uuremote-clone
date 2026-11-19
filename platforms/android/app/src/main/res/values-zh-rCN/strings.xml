@@ -39,12 +39,12 @@
     <string name="home_secondscreen_error_title">连接失败</string>
     <string name="home_secondscreen_error_currentlycontrolled">被控状态无法使用无线副屏功能，请断开后再使用。</string>
     <string name="home_secondscreen_error_offline">该设备为离线状态，请先启动设备上的网易UU远程客户端。</string>
-    <string name="home_secondscreen_error_controlling">“%@”正在远控其他设备，请先退出远控后重试。</string>
+    <string name="home_secondscreen_error_controlling" formatted="false">“%@”正在远控其他设备，请先退出远控后重试。</string>
     <string name="home_secondscreen_error_controllingmessage">该设备正在远程控制或文件传输中，请先断开连接后重试。</string>
     <string name="home_secondscreen_error_secondscreenmessage">该设备已被其他设备连接为副屏，请先断开连接后重试。</string>
-    <string name="home_secondscreen_error_cannotconnect">当前无法连接“%@”，请重试。</string>
-    <string name="home_secondscreen_error_disconnected">“%@”已断开副屏连接，请重新发起。</string>
-    <string name="home_secondscreen_error_timeout">连接超时，请确保“%@”设备上的网易UU远程客户端正常运行。</string>
+    <string name="home_secondscreen_error_cannotconnect" formatted="false">当前无法连接“%@”，请重试。</string>
+    <string name="home_secondscreen_error_disconnected" formatted="false">“%@”已断开副屏连接，请重新发起。</string>
+    <string name="home_secondscreen_error_timeout" formatted="false">连接超时，请确保“%@”设备上的网易UU远程客户端正常运行。</string>
     <string name="home_secondscreen_error_switchfailed">副屏切换失败，请重试。</string>
     <string name="home_secondscreen_error_driver">当前设备虚拟屏驱动异常，请检查驱动状态。</string>
     <string name="home_secondscreen_error_generic">连接失败，请重试。</string>
@@ -144,7 +144,7 @@
     <string name="homeview_connect_nonetstartconnect">网络异常，暂时无法发起远控</string>
     <string name="homeview_remotehelp_macnosupportassistance">Mac版本暂不支持接受他人远程协助</string>
     <string name="homeview_connect_alert_nonetstartconnect_title">无法发起远控</string>
-    <string name="home_computer_editnametips">最多可输入%@个字符</string>
+    <string name="home_computer_editnametips" formatted="false">最多可输入%@个字符</string>
     <string name="home_computer_saveedit">保存更改</string>
     <string name="home_computer_editdevicename">修改设备名称</string>
     <string name="home_computer_name">名称</string>
@@ -152,8 +152,8 @@
     <string name="home_log_uploadtips">已上传日志文件，仅用于问题定位，并不收集你的个人隐私</string>
     <string name="home_device_enterthedesktop">进入桌面</string>
     <string name="home_device_connectwith">与连接中</string>
-    <string name="home_device_belocalcontrolle">正在被【本机】%@ 控制中</string>
-    <string name="home_device_beremotecontrolle">正在被 %@ 远程控制中</string>
+    <string name="home_device_belocalcontrolle" formatted="false">正在被【本机】%@ 控制中</string>
+    <string name="home_device_beremotecontrolle" formatted="false">正在被 %@ 远程控制中</string>
     <string name="home_device_local">【本机】</string>
     <string name="home_device_takeoverremotecontroller">接管远控</string>
     <string name="home_device_runing">运行中</string>
@@ -207,7 +207,7 @@
     <string name="setting_menu_common_settings">常用设置</string>
     <string name="setting_menu_add_devcie">如何添加设备</string>
     <string name="setting_menu_checkupdate">检查更新</string>
-    <string name="setting_menu_newversion">发现新版本 %@</string>
+    <string name="setting_menu_newversion" formatted="false">发现新版本 %@</string>
     <string name="setting_autostart_title">自动启动</string>
     <string name="setting_autostart_subtitle">开机自启动</string>
     <string name="setting_remote_title">远控设置</string>
@@ -263,7 +263,7 @@
     <string name="computerdetails_title">设备详情</string>
     <string name="computerdetails_copy">复制全部</string>
     <string name="control_menu_switchscreen">显示屏</string>
-    <string name="control_menu_switchscreen_shortcut">可使用 %@ 快速切换屏幕</string>
+    <string name="control_menu_switchscreen_shortcut" formatted="false">可使用 %@ 快速切换屏幕</string>
     <string name="control_menu_switchnextscreen">切换下一个屏幕</string>
     <string name="control_menu_switchnextscreen_singlescreentoast">当前远程窗口仅有 1 个屏幕，无需切换</string>
     <string name="control_menu_apple_screen_tip">因系统限制，非\U2006Mac\U2006内建屏部分分辨率无法设置。</string>
@@ -295,8 +295,8 @@
     <string name="control_menu_mouse_controlmouse_title">使用主控端鼠标</string>
     <string name="control_menu_mouse_controlmouse_desc">有更好的跟手性，部分软件或游戏不兼容。</string>
     <string name="control_menu_mouse_firstshow_title">已启用「使用被控端鼠标」模式</string>
-    <string name="control_menu_mouse_firstshow_desc">后续将默认使用被控端鼠标，可在【外设】-【鼠标】-【鼠标模式】中更改模式。按下 %@ 可解锁鼠标。</string>
-    <string name="control_menu_mouse_firstshow_descwin">点击 \"%@\" 可解锁鼠标。注意该模式下开启隐私屏保，被控端无法完全隐藏鼠标。</string>
+    <string name="control_menu_mouse_firstshow_desc" formatted="false">后续将默认使用被控端鼠标，可在【外设】-【鼠标】-【鼠标模式】中更改模式。按下 %@ 可解锁鼠标。</string>
+    <string name="control_menu_mouse_firstshow_descwin" formatted="false">点击 \"%@\" 可解锁鼠标。注意该模式下开启隐私屏保，被控端无法完全隐藏鼠标。</string>
     <string name="control_menu_mouse_firstshow_check">不再提示</string>
     <string name="control_menu_other_resolution">其他分辨率</string>
     <string name="control_menu_other_screenscale">其他缩放</string>
@@ -308,7 +308,7 @@
     <string name="control_smallwindow_topmost">置顶</string>
     <string name="control_smallwindow_exit">退出小窗模式</string>
     <string name="control_smallwindow_opacity">不透明度</string>
-    <string name="control_smallwindow_exitremote_firstline">确定要退出与%@</string>
+    <string name="control_smallwindow_exitremote_firstline" formatted="false">确定要退出与%@</string>
     <string name="control_smallwindow_exitremote_secondline">的远程连接吗？</string>
     <string name="control_smallwindow_preview_title">小窗效果预览</string>
     <string name="control_smallwindow_switchdevice_alert_title">确定要将小窗切换为当前设备吗？</string>
@@ -360,19 +360,19 @@
     <string name="control_volume_subtitlemuted">被控端已静音。关闭后恢复被控端声音设置。</string>
     <string name="control_volume_thirdtitle">远程结束后，恢复被控端声音设置</string>
     <string name="control_unlock_title">自动解锁被控端</string>
-    <string name="control_unlock_subtitle">记住被控 %@，连接后自动登录系统。</string>
+    <string name="control_unlock_subtitle" formatted="false">记住被控 %@，连接后自动登录系统。</string>
     <string name="control_unlock_menu_double_authentication_title">双重验证</string>
     <string name="control_unlock_menu_double_authentication_desc">可通过本机 macOS 登录密码、触控ID 及 Apple Watch 确认身份，解锁更安全。</string>
     <string name="unlock_password_phrase_windows">Windows 开机密码</string>
     <string name="unlock_password_phrase_macos">macOS 登录密码</string>
     <string name="unlock_alert_message1">网易UU远程 正在尝试自动解锁被控端屏幕</string>
     <string name="unlock_alert_informative1">输入被控端开机密码</string>
-    <string name="unlock_alert_message2">录入被控端 %@</string>
-    <string name="unlock_alert_informative2">开启功能需先录入 %@。网易UU远程 仅在本地加密存储密码，不会上传密码信息。</string>
+    <string name="unlock_alert_message2" formatted="false">录入被控端 %@</string>
+    <string name="unlock_alert_informative2" formatted="false">开启功能需先录入 %@。网易UU远程 仅在本地加密存储密码，不会上传密码信息。</string>
     <string name="unlock_alert_message3">启用触控ID保护密码信息</string>
     <string name="unlock_alert_informative3">在解锁被控端时校验触控ID以确认身份</string>
     <string name="unlock_alert_message4">无法解锁电脑</string>
-    <string name="unlock_alert_informative4">请更新 %@。</string>
+    <string name="unlock_alert_informative4" formatted="false">请更新 %@。</string>
     <string name="unlock_alert_title">无法解锁</string>
     <string name="unlock_alert_open">启用</string>
     <string name="unlock_alert_close">不用了</string>
@@ -471,7 +471,7 @@
     <string name="control_wowplugin_toast_startmonitor">检测到魔兽排队进程，开始监测</string>
     <string name="control_wowplugin_toast_opennotification">开启消息权限</string>
     <string name="control_wowplugin_toast_lowversion">被控端 Windows 版本过低，请升级系统版本后重试。</string>
-    <string name="control_wowplugin_alert_toolopen_download_desc">首次使用此工具需要在被控端下载插件，大小约 %dMB。</string>
+    <string name="control_wowplugin_alert_toolopen_download_desc" formatted="false">首次使用此工具需要在被控端下载插件，大小约 %dMB。</string>
     <string name="control_wowplugin_alert_toolopen_download_sure">开始下载</string>
     <string name="control_wowplugin_alert_toolopen_failed_title">提示</string>
     <string name="control_wowplugin_alert_toolopen_failed_desc">魔兽世界排队提醒工具开启（关闭）失败，请重试。</string>
@@ -520,7 +520,7 @@
     <string name="control_menu_negotiateinfo_hdr_close">\U2006HDR\U2006已关闭</string>
     <string name="control_menu_resolution_auto">跟随当前显示屏</string>
     <string name="control_menu_resolution_controled">跟随被控端</string>
-    <string name="control_menu_ongamemode_toast">正在使用被控端鼠标，快捷键“%@”可解锁鼠标</string>
+    <string name="control_menu_ongamemode_toast" formatted="false">正在使用被控端鼠标，快捷键“%@”可解锁鼠标</string>
     <string name="control_menu_ungamemode_toast">已关闭游戏鼠标模式</string>
     <string name="control_menu_gamemode_title">开启游戏鼠标模式</string>
     <string name="control_menu_gamemode_speed">游戏鼠标速度</string>
@@ -531,8 +531,8 @@
     <string name="control_menu_custombitratesetting_startcustombitrate_description_title">码率</string>
     <string name="control_menu_custombitratesetting_startcustombitrate_description_detail1">高码率画质更优，推荐稳定高速网络下使用。</string>
     <string name="control_menu_custombitratesetting_startcustombitrate_description_detail2">码率过高可能因网络/设备限制导致卡顿。</string>
-    <string name="control_menu_custombitratesetting_memberguide_free">开通会员，最高支持 %dMbps</string>
-    <string name="control_menu_custombitratesetting_memberguide_limitedfree">%dMbps 限免中，开通会员最高 %dMbps</string>
+    <string name="control_menu_custombitratesetting_memberguide_free" formatted="false">开通会员，最高支持 %dMbps</string>
+    <string name="control_menu_custombitratesetting_memberguide_limitedfree" formatted="false">%dMbps 限免中，开通会员最高 %dMbps</string>
     <string name="control_menu_infullscreen">进入全屏幕</string>
     <string name="control_menu_outfullscreen">退出全屏幕</string>
     <string name="control_menu_manualtransfer_title">使用安全中转连接</string>
@@ -542,20 +542,20 @@
     <string name="control_menu_wowtool_off">关闭</string>
     <string name="control_menu_viewmode_enable">启用观看模式</string>
     <string name="control_menu_viewmode_toolbar">显示工具栏</string>
-    <string name="control_toast_viewmode_inputblocked">当前为观看模式，按 %@ 切换</string>
+    <string name="control_toast_viewmode_inputblocked" formatted="false">当前为观看模式，按 %@ 切换</string>
     <string name="control_toast_viewmode_inputblockednoshortcut">当前为观看模式</string>
     <string name="control_viewmode_toolbar_tooltip_hand">拖拽浏览</string>
     <string name="control_viewmode_toolbar_tooltip_pen">批注</string>
-    <string name="control_viewmode_toolbar_tooltip_penwithshortcut">批注（%@）</string>
+    <string name="control_viewmode_toolbar_tooltip_penwithshortcut" formatted="false">批注（%@）</string>
     <string name="control_viewmode_toolbar_tooltip_zoomout">缩小（⌘-）</string>
     <string name="control_viewmode_toolbar_tooltip_windowmode">窗口模式</string>
     <string name="control_viewmode_toolbar_tooltip_zoomin">放大（⌘=）</string>
     <string name="control_viewmode_toolbar_tooltip_close">隐藏工具栏</string>
-    <string name="control_viewmode_toolbar_tooltip_closewithshortcut">隐藏工具栏（%@）</string>
-    <string name="control_toast_viewmode_toolbarhidden">已隐藏工具栏，可通过控制中心或快捷键 %@ 恢复显示</string>
+    <string name="control_viewmode_toolbar_tooltip_closewithshortcut" formatted="false">隐藏工具栏（%@）</string>
+    <string name="control_toast_viewmode_toolbarhidden" formatted="false">已隐藏工具栏，可通过控制中心或快捷键 %@ 恢复显示</string>
     <string name="control_toast_viewmode_toolbarhiddennoshortcut">已隐藏工具栏，可通过控制中心恢复显示</string>
-    <string name="control_toast_viewmode_annotation_togglefailed">批注开启失败，错误码 %d</string>
-    <string name="control_toast_viewmode_annotation_strokefailed">批注失败，错误码 %d</string>
+    <string name="control_toast_viewmode_annotation_togglefailed" formatted="false">批注开启失败，错误码 %d</string>
+    <string name="control_toast_viewmode_annotation_strokefailed" formatted="false">批注失败，错误码 %d</string>
     <string name="control_toast_viewmode_annotation_screenlocked">请先解锁被控端。</string>
     <string name="control_alert_viewmode_annotation_title">无法使用批注</string>
     <string name="control_alert_viewmode_annotation_usernotlogin">被控端尚未登录系统账户，当前无法使用批注。请先在被控端完成系统登录。</string>
@@ -563,7 +563,7 @@
     <string name="control_connecterror_reason">可能由以下因素导致：\n• 被控/主控设备无网络或意外断线\n• 被控/主控设备已关机、重启\n请检查设备环境后再尝试重新连接</string>
     <string name="control_connecterror_reconnect">重新连接</string>
     <string name="control_state_disconnection">当前连接已断开</string>
-    <string name="control_state_connectionerror">连接出错，错误码%@。</string>
+    <string name="control_state_connectionerror" formatted="false">连接出错，错误码%@。</string>
     <string name="control_state_disconnection_kickout">(被控端断开)</string>
     <string name="control_state_disconnection_timeout">(超时)</string>
     <string name="control_remoteinfo_copy">复制全部信息</string>
@@ -607,27 +607,27 @@
     <string name="control_virtualdisplay_notsupport">被控端操作系统版本过低，强制虚拟屏功能未生效</string>
     <string name="control_recordtipview_notremind">本次远程不再提醒</string>
     <string name="control_error_rdp">被控端系统会话发生变化，画面会有短暂卡顿，请稍候</string>
-    <string name="control_negotiateinfo_connect_notice1">设备性能受限，已关闭真彩与\U2006HDR\U2006并降低到%@画质</string>
+    <string name="control_negotiateinfo_connect_notice1" formatted="false">设备性能受限，已关闭真彩与\U2006HDR\U2006并降低到%@画质</string>
     <string name="control_negotiateinfo_connect_notice2">设备性能受限，已关闭真彩与\U2006HDR</string>
-    <string name="control_negotiateinfo_connect_notice3">设备性能受限，已关闭\U2006HDR\U2006并降低到%@画质</string>
+    <string name="control_negotiateinfo_connect_notice3" formatted="false">设备性能受限，已关闭\U2006HDR\U2006并降低到%@画质</string>
     <string name="control_negotiateinfo_connect_notice4">设备性能受限，已关闭\U2006HDR</string>
-    <string name="control_negotiateinfo_connect_notice5">设备性能受限，已关闭真彩并降低到%@画质</string>
+    <string name="control_negotiateinfo_connect_notice5" formatted="false">设备性能受限，已关闭真彩并降低到%@画质</string>
     <string name="control_negotiateinfo_connect_notice6">设备性能受限，已关闭真彩</string>
-    <string name="control_negotiateinfo_connect_notice7">设备性能受限，已自动降低到%@画质</string>
+    <string name="control_negotiateinfo_connect_notice7" formatted="false">设备性能受限，已自动降低到%@画质</string>
     <string name="control_negotiateinfo_choose_notice1">当前被控端不支持\U2006HDR。</string>
     <string name="control_negotiateinfo_choose_notice2">当前主控端不支持\U2006HDR。</string>
     <string name="control_negotiateinfo_choose_notice3">当前被控端不支持真彩。</string>
     <string name="control_negotiateinfo_choose_notice4">当前主控端不支持真彩。</string>
-    <string name="control_negotiateinfo_choose_notice5">设备性能受限，最高支持%@画质。</string>
+    <string name="control_negotiateinfo_choose_notice5" formatted="false">设备性能受限，最高支持%@画质。</string>
     <string name="control_negotiateinfo_choose_notice6">设备性能受限，可尝试关闭\U2006HDR\U2006能力后重试。</string>
     <string name="control_negotiateinfo_choose_notice7">设备性能受限，可尝试关闭真彩能力后重试。</string>
     <string name="control_negotiateinfo_choose_notice8">设备性能受限，可尝试关闭\U2006HDR\U2006和真彩后重试。</string>
     <string name="control_negotiateinfo_choose_notice9">设备性能受限，可尝试关闭\U2006HDR\U2006能力后重试。</string>
-    <string name="control_negotiateinfo_choose_notice10">设备性能受限，可降低画质到%@后重试。</string>
-    <string name="control_negotiateinfo_choose_notice11">设备性能受限，可尝试关闭\U2006HDR\U2006能力 并降低画质到%@后重试。</string>
+    <string name="control_negotiateinfo_choose_notice10" formatted="false">设备性能受限，可降低画质到%@后重试。</string>
+    <string name="control_negotiateinfo_choose_notice11" formatted="false">设备性能受限，可尝试关闭\U2006HDR\U2006能力 并降低画质到%@后重试。</string>
     <string name="control_negotiateinfo_choose_notice12">设备性能受限，可尝试关闭真彩能力后重试。</string>
-    <string name="control_negotiateinfo_choose_notice13">设备性能受限，可降低画质到%@后重试。</string>
-    <string name="control_negotiateinfo_choose_notice14">设备性能受限，可尝试关闭真彩能力 并降低画质到%@后重试。</string>
+    <string name="control_negotiateinfo_choose_notice13" formatted="false">设备性能受限，可降低画质到%@后重试。</string>
+    <string name="control_negotiateinfo_choose_notice14" formatted="false">设备性能受限，可尝试关闭真彩能力 并降低画质到%@后重试。</string>
     <string name="choose_device_toptitle">切换设备</string>
     <string name="choose_device_steerabledevice">可控设备</string>
     <string name="choose_device_offline">离线</string>
@@ -678,7 +678,7 @@
     <string name="application_enterremotedesktop">进入远程桌面</string>
     <string name="application_cancelpinned">取消置顶</string>
     <string name="application_settingpinned">设为置顶</string>
-    <string name="application_selectreplacepinned">选择一个现有的置顶应用，将其替换为%@。</string>
+    <string name="application_selectreplacepinned" formatted="false">选择一个现有的置顶应用，将其替换为%@。</string>
     <string name="application_replacepinnedtips">替换后，快速启动项也会更新。</string>
     <string name="application_confirmreplace">确认替换</string>
     <string name="application_pinnedfull">置顶已满</string>
@@ -687,7 +687,7 @@
     <string name="application_deviceofflinenotoperation">设备已离线，无法操作</string>
     <string name="application_search_nofindgameorapp">找不到符合的游戏或应用？</string>
     <string name="application_search_gameorapplication">搜索游戏或应用</string>
-    <string name="application_search_findresultcount">共有%@个符合的结果</string>
+    <string name="application_search_findresultcount" formatted="false">共有%@个符合的结果</string>
     <string name="gamepad_menue">菜单</string>
     <string name="gamepad_options">选项</string>
     <string name="gamepad_homepage">主页</string>
@@ -727,16 +727,16 @@
     <string name="control_virtual_display_alert_confirm_button">知道了</string>
     <string name="control_virtual_display_alert_tip">不再提醒</string>
     <string name="control_virtual_display_toast_message">已创建“虚拟屏”来显示桌面所有内容</string>
-    <string name="control_virtual_display_error_toast_message">虚拟屏创建失败，错误码：%@</string>
-    <string name="control_super_display_error_toast_message">超级屏创建失败，错误码：%@</string>
+    <string name="control_virtual_display_error_toast_message" formatted="false">虚拟屏创建失败，错误码：%@</string>
+    <string name="control_super_display_error_toast_message" formatted="false">超级屏创建失败，错误码：%@</string>
     <string name="filetrans_windowstitle">文件传输</string>
     <string name="filetrans_location">位置</string>
     <string name="filetrans_sent">发送</string>
     <string name="filetrans_delete">删除</string>
     <string name="filetrans_rename">重命名</string>
     <string name="filetrans_selall">全选</string>
-    <string name="filetrans_selnumber">选中 %@ 文件</string>
-    <string name="filetrans_sendnumber">已传输 %@ 个文件</string>
+    <string name="filetrans_selnumber" formatted="false">选中 %@ 文件</string>
+    <string name="filetrans_sendnumber" formatted="false">已传输 %@ 个文件</string>
     <string name="filetrans_listtitle">传输列表</string>
     <string name="filetrans_memberguide">开通会员，升级中转传输通道</string>
     <string name="filetrans_remote">远端</string>
@@ -752,16 +752,16 @@
     <string name="filetrans_transfail_send">文件发送失败，请重试</string>
     <string name="filetrans_transfail_receive">文件接收失败，请重试</string>
     <string name="filetrans_notification_action_openfolder">打开所在文件夹</string>
-    <string name="filetrans_notification_body_receive">文件来源：%@\n存放路径：%@</string>
-    <string name="filetrans_notification_body_send">接收设备：%@\n发送文件：%@</string>
-    <string name="filetrans_notification_receive_successtitle">已接收 %@ 个文件</string>
-    <string name="filetrans_notification_receive_partialfailuretitle">接收完成 %@ 个文件，失败 %@ 个</string>
+    <string name="filetrans_notification_body_receive" formatted="false">文件来源：%@\n存放路径：%@</string>
+    <string name="filetrans_notification_body_send" formatted="false">接收设备：%@\n发送文件：%@</string>
+    <string name="filetrans_notification_receive_successtitle" formatted="false">已接收 %@ 个文件</string>
+    <string name="filetrans_notification_receive_partialfailuretitle" formatted="false">接收完成 %@ 个文件，失败 %@ 个</string>
     <string name="filetrans_notification_receive_failuretitle">文件接收失败</string>
-    <string name="filetrans_notification_send_successtitle">已发送 %@ 个文件</string>
-    <string name="filetrans_notification_send_partialfailuretitle">发送完成 %@ 个文件，失败 %@ 个</string>
+    <string name="filetrans_notification_send_successtitle" formatted="false">已发送 %@ 个文件</string>
+    <string name="filetrans_notification_send_partialfailuretitle" formatted="false">发送完成 %@ 个文件，失败 %@ 个</string>
     <string name="filetrans_notification_send_failuretitle">文件发送失败</string>
     <string name="filetrans_notification_unknowndevice">未知设备</string>
-    <string name="filetrans_notification_multipletaskname">%@等%@个文件</string>
+    <string name="filetrans_notification_multipletaskname" formatted="false">%@等%@个文件</string>
     <string name="filetrans_transfail_preparefailed">文件信息变更，无法断点续传</string>
     <string name="filetrans_transfail_fulldisk">磁盘空间不足，请清理后重试</string>
     <string name="filetrans_hadcancel">已取消</string>
@@ -788,7 +788,7 @@
     <string name="filetrans_music">音乐</string>
     <string name="filetrans_movie">视频</string>
     <string name="filetrans_selalloption">应用到全部文件</string>
-    <string name="filetrans_deletetoast">删除“%@”？删除该文件将无法恢复。</string>
+    <string name="filetrans_deletetoast" formatted="false">删除“%@”？删除该文件将无法恢复。</string>
     <string name="filetrans_deletefilefail">删除文件失败</string>
     <string name="filetrans_openfilefail">mac无法找到该路径</string>
     <string name="filetrans_permission_alert_title">无法访问此文件路径</string>
@@ -816,7 +816,7 @@
     <string name="filetrans_conflict_override">覆盖</string>
     <string name="filetrans_conflict_reserve">保留两者</string>
     <string name="filetrans_conflict_skip">跳过</string>
-    <string name="filetrans_conflict_title">%@ 文件已存在</string>
+    <string name="filetrans_conflict_title" formatted="false">%@ 文件已存在</string>
     <string name="filetrans_tips">提示</string>
     <string name="filetrans_clearall">确认清除全部已完结任务？</string>
     <string name="filetrans_confirm">确认</string>
@@ -833,7 +833,7 @@
     <string name="control_trigger_upgrade_alert_cancel">稍后再说</string>
     <string name="control_trigger_upgrade_alert_confirm">立即更新</string>
     <string name="control_trigger_upgrade_alert_gotoupdate">前去更新</string>
-    <string name="control_trigger_upgrade_top_toast_title">被控端将在%@秒后重启软件完成更新</string>
+    <string name="control_trigger_upgrade_top_toast_title" formatted="false">被控端将在%@秒后重启软件完成更新</string>
     <string name="control_trigger_upgrade_top_toast_later">暂不更新</string>
     <string name="control_trigger_filetransfer_resume_update_alert_title">被控端版本较低</string>
     <string name="control_trigger_filetransfer_resume_update_alert_message">升级被控端后，可支持暂停传输任务，传输文件更便捷</string>
@@ -867,7 +867,7 @@
     <string name="assist_favorite_codeplaceholder">请输入设备验证码</string>
     <string name="assist_favorite_remark">备注名称（可选）</string>
     <string name="assist_favorite_remarkplaceholder">请输入名称</string>
-    <string name="assist_favorite_remarkcounter">%d/40</string>
+    <string name="assist_favorite_remarkcounter" formatted="false">%d/40</string>
     <string name="assist_favorite_save">保存修改</string>
     <string name="assist_favorite_confirmadd">添加</string>
     <string name="assist_favorite_edit">编辑</string>
@@ -890,11 +890,11 @@
     <string name="assistance_connect_error_title">远控失败</string>
     <string name="assistance_connect_error">设备ID 错误或不存在，请重试并确保被控端已开启「允许他人远程协助」功能。</string>
     <string name="assistance_inputcode_title">输入设备验证码</string>
-    <string name="assistance_inputcode_desc">正在对 %@ 发起远程协助</string>
+    <string name="assistance_inputcode_desc" formatted="false">正在对 %@ 发起远程协助</string>
     <string name="assistance_inputcode_connect">连接</string>
-    <string name="assistance_waitconfirm_title">正在等待被控端（%@）同意被控。</string>
+    <string name="assistance_waitconfirm_title" formatted="false">正在等待被控端（%@）同意被控。</string>
     <string name="assistance_waitconfirm_cancel">取消远程协助</string>
-    <string name="assistance_waitconfirm_reject_message">被控端（%@）拒绝被控。</string>
+    <string name="assistance_waitconfirm_reject_message" formatted="false">被控端（%@）拒绝被控。</string>
     <string name="recipient_device_title">本设备</string>
     <string name="recipient_deviceid_title">本设备ID</string>
     <string name="recipient_verification_title">验证方式：</string>
@@ -909,13 +909,13 @@
     <string name="recipient_refresh_tooltip">刷新设置</string>
     <string name="recipient_refresh_auto">自动刷新</string>
     <string name="recipient_refresh_close">关闭</string>
-    <string name="recipient_refresh_hour">每%@小时</string>
+    <string name="recipient_refresh_hour" formatted="false">每%@小时</string>
     <string name="recipient_refresh_title">刷新</string>
     <string name="recipient_refresh_endconnet">每次远控结束</string>
     <string name="recipient_share_title">复制并分享</string>
     <string name="recipient_share_copy">已复制</string>
-    <string name="recipient_share_pasteboard_normal">使用 网易UU远程 即可对我发起远程协助\n设备ID：%@\n设备验证码：%@\n网易UU远程 下载地址：https://uuyc.163.com/</string>
-    <string name="recipient_share_pasteboard_custom">使用 网易UU远程 即可对我发起远程协助\n设备ID：%@\n设备验证码：已设置自定义验证码，请联系我获取\n网易UU远程 下载地址：https://uuyc.163.com/</string>
+    <string name="recipient_share_pasteboard_normal" formatted="false">使用 网易UU远程 即可对我发起远程协助\n设备ID：%@\n设备验证码：%@\n网易UU远程 下载地址：https://uuyc.163.com/</string>
+    <string name="recipient_share_pasteboard_custom" formatted="false">使用 网易UU远程 即可对我发起远程协助\n设备ID：%@\n设备验证码：已设置自定义验证码，请联系我获取\n网易UU远程 下载地址：https://uuyc.163.com/</string>
     <string name="recipient_switch_title">允许他人远程协助</string>
     <string name="recipient_custom_title">设置自定义验证码</string>
     <string name="recipient_custom_title_change">修改自定义验证码</string>
@@ -936,11 +936,11 @@
     <string name="screen_superscreen_exit">退出超级屏</string>
     <string name="screen_control_quit">退出远控</string>
     <string name="screen_window_quit_title">退出远程连接</string>
-    <string name="screen_window_quit_tips">确定要退出与【%@】的远程连接吗？</string>
+    <string name="screen_window_quit_tips" formatted="false">确定要退出与【%@】的远程连接吗？</string>
     <string name="screen_window_close_title">确定要关闭该远程窗口吗？</string>
     <string name="screen_window_close_tips">关闭后，该窗口内的屏幕将断开连接，如需重新连接，可在其他窗口顶部栏【+】的菜单选项重新打开。</string>
     <string name="screen_super_messagetext">无法切换到指定分辨率，建议使用「超级屏」实现效果</string>
-    <string name="screen_super_informativetext">%@的分辨率与控制端不兼容，若\n使用「超级屏」，所有内容将适配显示至\n「超级屏」，被控端显示屏将被关闭。</string>
+    <string name="screen_super_informativetext" formatted="false">%@的分辨率与控制端不兼容，若\n使用「超级屏」，所有内容将适配显示至\n「超级屏」，被控端显示屏将被关闭。</string>
     <string name="screen_super_informativetext_highlight">被控端显示屏将被关闭</string>
     <string name="screen_super_confirm">确定使用</string>
     <string name="screen_super_quit">确定要退出「超级屏」吗？</string>
@@ -954,17 +954,17 @@
     <string name="screen_super_enter_fps_message">被控端性能受限无法支持该帧率，若使用「超级屏」，\n所有内容将适配显示至「超级屏」，\n同时关闭被控端显示屏。</string>
     <string name="screen_super_enter_fps_confirm">确定使用</string>
     <string name="screen_super_enter_success">超级屏创建成功，同时关闭被控端显示屏</string>
-    <string name="screen_super_enter_fail">超级屏创建失败，错误码 %@</string>
+    <string name="screen_super_enter_fail" formatted="false">超级屏创建失败，错误码 %@</string>
     <string name="screen_virtual_create">创建虚拟屏</string>
     <string name="screen_virtual_success">超级屏创建成功，同时关闭被控端显示屏</string>
     <string name="screen_virtual_remove">删除虚拟屏</string>
-    <string name="screen_virtual_remove_title">确定要删除%@吗？</string>
+    <string name="screen_virtual_remove_title" formatted="false">确定要删除%@吗？</string>
     <string name="screen_virtual_remove_fail">当前远程连接仅有该虚拟屏，无法删除。</string>
     <string name="screen_display_name">显示屏</string>
     <string name="screen_virtual_name">虚拟屏</string>
     <string name="screen_virtual_maxtips1">当前屏幕数量已达上限</string>
     <string name="screen_virtual_maxtips2">当前虚拟屏已达上限</string>
-    <string name="screen_tab_close_title">确定要断开与%@的连接吗？</string>
+    <string name="screen_tab_close_title" formatted="false">确定要断开与%@的连接吗？</string>
     <string name="screen_tab_close_tips">如需重新连接，可在窗口顶部栏【+】的菜单选项重新打开。</string>
     <string name="paste_file_process_waitng">正在等待</string>
     <string name="paste_file_process_start">正在将</string>
@@ -1004,15 +1004,15 @@
     <string name="device_app_management_append_cancel">取消</string>
     <string name="device_app_management_append_controlledtoast">该设备被控中，无法添加应用。</string>
     <string name="device_app_management_append_finish">完成</string>
-    <string name="device_app_management_append_available">共有 %@ 个应用可添加</string>
+    <string name="device_app_management_append_available" formatted="false">共有 %@ 个应用可添加</string>
     <string name="nowdevice_controlled_top">被控中</string>
     <string name="nowdevice_controlled_assistant">副屏连接中</string>
-    <string name="nowdevice_controlled_desc">当前有 %@ 台设备正在控制此电脑</string>
-    <string name="nowdevice_controlled_indesc">当前有 %@ 台本账号设备正在控制此电脑</string>
-    <string name="nowdevice_controlled_outdesc">当前有 %@ 台外部设备正在控制此电脑</string>
-    <string name="nowdevice_controlled_sidedesc">当前有 %@ 台设备正在连接此电脑</string>
+    <string name="nowdevice_controlled_desc" formatted="false">当前有 %@ 台设备正在控制此电脑</string>
+    <string name="nowdevice_controlled_indesc" formatted="false">当前有 %@ 台本账号设备正在控制此电脑</string>
+    <string name="nowdevice_controlled_outdesc" formatted="false">当前有 %@ 台外部设备正在控制此电脑</string>
+    <string name="nowdevice_controlled_sidedesc" formatted="false">当前有 %@ 台设备正在连接此电脑</string>
     <string name="nowdevice_controlled_selfdesc">本机正在控制此电脑</string>
-    <string name="nowdevice_controlled_descmore">（%@ 台外部设备）</string>
+    <string name="nowdevice_controlled_descmore" formatted="false">（%@ 台外部设备）</string>
     <string name="nowdevice_controlled_disconnectall">断开所有远控</string>
     <string name="nowdevice_controlled_us">本账号设备</string>
     <string name="nowdevice_controlled_other">外部设备</string>
@@ -1039,11 +1039,11 @@
     <string name="terminal_stage_resume">恢复</string>
     <string name="terminal_connect_enter">进入远程CLI功能...</string>
     <string name="terminal_connect_bound">绑定完成。你输入的命令将实时映射到被控端。</string>
-    <string name="terminal_connect_listretry">获取终端列表超时，正在第 %d 次重试</string>
+    <string name="terminal_connect_listretry" formatted="false">获取终端列表超时，正在第 %d 次重试</string>
     <string name="terminal_connect_listexhausted">获取终端列表超时，请检查被控端连接状态。</string>
-    <string name="terminal_connect_openretry">打开终端超时，正在第 %d 次重试</string>
+    <string name="terminal_connect_openretry" formatted="false">打开终端超时，正在第 %d 次重试</string>
     <string name="terminal_connect_openexhausted">打开终端超时，请检查被控端连接状态。</string>
-    <string name="terminal_connect_waitready">等待被控端就绪... (%d/%d)</string>
+    <string name="terminal_connect_waitready" formatted="false">等待被控端就绪... (%d/%d)</string>
     <string name="terminal_connect_waitreadyexhausted">等待被控端就绪超时，请检查被控端状态后重试。</string>
     <string name="terminal_connect_reconnecting">连接中断，正在重新连接...</string>
     <string name="terminal_unlock_locked">检测被控Windows未登录，无法启动命令行。</string>
@@ -1060,8 +1060,8 @@
     <string name="terminal_unlock_timeouthint">验证失败，请在被控设备上手动登录后重试</string>
     <string name="terminal_unlock_success">密码正确，验证成功</string>
     <string name="terminal_unlock_successreopen">验证成功，正在启动被控命令行...</string>
-    <string name="terminal_unlock_wrongpassword">密码错误（第%d次/共%d次），请重新输入</string>
-    <string name="terminal_unlock_exhausted">密码错误次数超限（第%d次/共%d次），验证失败</string>
+    <string name="terminal_unlock_wrongpassword" formatted="false">密码错误（第%d次/共%d次），请重新输入</string>
+    <string name="terminal_unlock_exhausted" formatted="false">密码错误次数超限（第%d次/共%d次），验证失败</string>
     <string name="terminal_unlock_exhaustederror">验证失败，密码错误次数超限</string>
     <string name="terminal_unlock_encodefail">密码编码失败</string>
     <string name="terminal_unlock_sendfail">发送验证请求失败</string>
@@ -1070,14 +1070,14 @@
     <string name="terminal_error_confirm">知道了</string>
     <string name="terminal_error_mac402">检测到被控Mac未登录系统账户，无法启动终端</string>
     <string name="terminal_error_mac402hint">请先在被控设备上手动登录后重试。</string>
-    <string name="terminal_error_servererror">被控端创建终端失败：%@</string>
+    <string name="terminal_error_servererror" formatted="false">被控端创建终端失败：%@</string>
     <string name="terminal_error_servererrorstate">被控端内部错误</string>
-    <string name="terminal_error_connectionerror">连接错误: %@</string>
-    <string name="terminal_error_unlockfailed">解锁失败：%@</string>
+    <string name="terminal_error_connectionerror" formatted="false">连接错误: %@</string>
+    <string name="terminal_error_unlockfailed" formatted="false">解锁失败：%@</string>
     <string name="terminal_error_unlockfailedstate">解锁失败</string>
     <string name="terminal_error_osnotsupported">当前被控设备系统版本不支持远程终端</string>
     <string name="terminal_session_closed">终端会话已关闭</string>
-    <string name="terminal_session_exited">被控端终端已关闭 (exit code: %d)</string>
+    <string name="terminal_session_exited" formatted="false">被控端终端已关闭 (exit code: %d)</string>
     <string name="terminal_session_exitedlabel">已退出</string>
     <string name="terminal_windowtitle">终端远控</string>
     <string name="terminal_list_createsession">创建会话</string>
@@ -1138,7 +1138,7 @@
     <string name="terminal_closelist_message">退出后将会断开已连接的终端会话。</string>
     <string name="terminal_closelist_confirm">确定</string>
     <string name="terminal_closelist_cancel">取消</string>
-    <string name="nowdevice_controlled_time">连接时长 %@</string>
+    <string name="nowdevice_controlled_time" formatted="false">连接时长 %@</string>
     <string name="nowdevice_quick_start">快速启动</string>
     <string name="nowdevice_quick_manager">应用管理</string>
     <string name="nowdevice_quick_add">添加</string>
@@ -1196,8 +1196,8 @@
     <string name="common_error_alert_retry">重试</string>
     <string name="common_error_connection_server">无法连接至服务器</string>
     <string name="common_error_connection_check">请检查网络状态或配置</string>
-    <string name="common_error_connection_timecount">重新连接 (%@s）</string>
-    <string name="common_error_connection_error_check">错误码：%@，请检查网络配置</string>
+    <string name="common_error_connection_timecount" formatted="false">重新连接 (%@s）</string>
+    <string name="common_error_connection_error_check" formatted="false">错误码：%@，请检查网络配置</string>
     <string name="common_error_connection_error_backgroundactivitydisabled">错误码：1001，请前往[设置]-[通用]-[登录项与扩展]，允许UU远程在后台运行。</string>
     <string name="common_error_connection_error_legacybackgroundactivitydisabled">错误码：1001，请前往[设置]-[通用]-[登录项]，允许UU远程在后台运行。</string>
     <string name="common_error_connection_connecting">正在连接</string>
@@ -1215,7 +1215,7 @@
     <string name="cloudpc_main_desktop_more">更多</string>
     <string name="cloudpc_main_desktop_rename">重命名</string>
     <string name="cloudpc_main_desktop_remove">删除设备</string>
-    <string name="cloudpc_main_desktop_control_desc">当前有 %@ 台设备正在控制此电脑</string>
+    <string name="cloudpc_main_desktop_control_desc" formatted="false">当前有 %@ 台设备正在控制此电脑</string>
     <string name="cloudpc_main_desktop_control_us">本账号设备</string>
     <string name="cloudpc_main_desktop_state_button_canceluse">取消使用</string>
     <string name="cloudpc_main_desktop_state_button_enterdesktop">进入桌面</string>
@@ -1223,7 +1223,7 @@
     <string name="cloudpc_main_desktop_state_button_reinqueue">重新排队</string>
     <string name="cloudpc_main_desktop_state_button_surestart">确认开机</string>
     <string name="cloudpc_main_desktop_state_button_shutdown">关机</string>
-    <string name="cloudpc_main_desktop_state_inqueue_waitdesc">预计等待 %d 分钟...</string>
+    <string name="cloudpc_main_desktop_state_inqueue_waitdesc" formatted="false">预计等待 %d 分钟...</string>
     <string name="cloudpc_main_desktop_state_inqueue_nocostdesc">排队过程中不会消耗 U币</string>
     <string name="cloudpc_main_desktop_state_inqueue_nosuredesc">到号时无需确认，立即开机</string>
     <string name="cloudpc_main_desktop_state_starting">正在启动中</string>
@@ -1258,7 +1258,7 @@
     <string name="cloudpc_main_alert_nomoney_title">余额不足，请先充值</string>
     <string name="cloudpc_main_alert_nomoney_desc">当前余额不足，请先充值 U币，再开机使用。</string>
     <string name="cloudpc_main_alert_shutdown_title">退出云电脑？</string>
-    <string name="cloudpc_main_alert_notime_title">是否开机使用 %@ 云电脑？</string>
+    <string name="cloudpc_main_alert_notime_title" formatted="false">是否开机使用 %@ 云电脑？</string>
     <string name="cloudpc_main_alert_notime_desc">当前余额不足运行 5 分钟，可能会影响您的体验，建议先充值。</string>
     <string name="cloudpc_main_alert_bootnotice_title">感谢对「云设备」的一路相伴</string>
     <string name="cloudpc_main_alert_bootnotice_desc">因业务调整，我们已停止售卖 U币与云硬盘，远程业务不受影响。您账户里的余额和云硬盘可照常使用，如需退款，可联系[在线客服]。</string>
@@ -1271,24 +1271,24 @@
     <string name="cloudpc_main_alert_deletedevice_title">是否继续删除设备？</string>
     <string name="cloudpc_main_alert_deletedevice_desc">删除云设备后，需要重新添加才可继续使用。</string>
     <string name="cloudpc_main_alert_openpcandapp_title">提示</string>
-    <string name="cloudpc_main_alert_openpcandapp_desc">是否开机并启动 %@ ？</string>
-    <string name="cloudpc_main_alert_openpcandapp_queueoverdesc">是否要重新排队，并在开机后启动 %@ ？</string>
+    <string name="cloudpc_main_alert_openpcandapp_desc" formatted="false">是否开机并启动 %@ ？</string>
+    <string name="cloudpc_main_alert_openpcandapp_queueoverdesc" formatted="false">是否要重新排队，并在开机后启动 %@ ？</string>
     <string name="cloudpc_main_alert_takecloudpcandapp_title">提示</string>
     <string name="cloudpc_main_alert_takecloudpcandapp_desc">当前设备正在被控中，接管设备后可进行远控。</string>
     <string name="cloudpc_main_alert_requeueinqueueover_title">提示</string>
-    <string name="cloudpc_main_alert_requeueinqueueover_desc">是否要重新排队，并在开机后启动 %@？</string>
+    <string name="cloudpc_main_alert_requeueinqueueover_desc" formatted="false">是否要重新排队，并在开机后启动 %@？</string>
     <string name="cloudpc_main_alert_lostconnection_title">连接异常中断</string>
     <string name="cloudpc_main_alert_lostconnection_desc">为避免超额计费，云电脑将在 5 分钟后自动关机。请及时处理重连，或使用其他设备连接使用。</string>
     <string name="cloudpc_main_alert_lostconnection_persistencedesc">云电脑在后台仍保持运行状态，请尝试重新进入桌面。</string>
     <string name="cloudpc_main_linecrowded_title">线路拥挤，需排队连接云电脑</string>
-    <string name="cloudpc_main_linecrowded_desc">当前使用人数较多，预计需要排队等待 %d 分钟。</string>
+    <string name="cloudpc_main_linecrowded_desc" formatted="false">当前使用人数较多，预计需要排队等待 %d 分钟。</string>
     <string name="cloudpc_main_maintain_title">云电脑当前不可用</string>
     <string name="cloudpc_main_maintain_desc">服务器正在维护中，请稍后再使用</string>
     <string name="cloudpc_purchase_history_title">消费记录</string>
     <string name="cloudpc_control_exit_warning_title">是否关机结束计费？</string>
     <string name="cloudpc_control_exit_warning_message">关机将会重置电脑，关机前请确认文件是否保存、Steam等平台存档是否同步完成，避免数据丢失。</string>
     <string name="cloudpc_control_exit_warning_confirm">确认关机</string>
-    <string name="cloudpc_control_coin_notsufficient">剩余U币不足 %@，消耗完将自动关机</string>
+    <string name="cloudpc_control_coin_notsufficient" formatted="false">剩余U币不足 %@，消耗完将自动关机</string>
     <string name="cloudpc_control_coin_purchasenow">立即充值</string>
     <string name="cloudpc_control_coin_surplus">U币余额</string>
     <string name="cloudpc_control_schedule_toastcontent">已设置定时关机，将在不久后关机。若想取消关机，请点击「继续使用」。</string>
@@ -1296,16 +1296,16 @@
     <string name="cloudpc_control_details_purchase">充值</string>
     <string name="cloudpc_control_details_runningtime">运行时间</string>
     <string name="cloudpc_system_noti_queueremind_title">排队提醒</string>
-    <string name="cloudpc_system_noti_queueremind_desc">%@ 预计 2 分钟后到号，到号后需要确认开机，请关注排队情况。</string>
+    <string name="cloudpc_system_noti_queueremind_desc" formatted="false">%@ 预计 2 分钟后到号，到号后需要确认开机，请关注排队情况。</string>
     <string name="cloudpc_system_noti_queueready_title">排队已到号，请立即确认开机</string>
-    <string name="cloudpc_system_noti_queueready_desc">%@ 准备好啦，请在倒计时结束前开机使用，避免过号。</string>
+    <string name="cloudpc_system_noti_queueready_desc" formatted="false">%@ 准备好啦，请在倒计时结束前开机使用，避免过号。</string>
     <string name="cloudpc_system_noti_queueover_title">排队已过号</string>
-    <string name="cloudpc_system_noti_queueover_desc">%@ 由于排队到号后未及时开机，请重新排队。</string>
+    <string name="cloudpc_system_noti_queueover_desc" formatted="false">%@ 由于排队到号后未及时开机，请重新排队。</string>
     <string name="cloudpc_system_noti_notenoughmoney_title">余额不足提醒</string>
-    <string name="cloudpc_system_noti_notenoughmoney_desc">剩余 U币不足 %d，消耗完将自动关机。</string>
-    <string name="cloudpc_system_noti_minortimeover_title">%@ 已自动关机</string>
+    <string name="cloudpc_system_noti_notenoughmoney_desc" formatted="false">剩余 U币不足 %d，消耗完将自动关机。</string>
+    <string name="cloudpc_system_noti_minortimeover_title" formatted="false">%@ 已自动关机</string>
     <string name="cloudpc_system_noti_minortimeover_desc">未成年用户可游戏时间已结束，已自动关机。</string>
-    <string name="cloudpc_system_noti_nomoney_title">%@ 已自动关机</string>
+    <string name="cloudpc_system_noti_nomoney_title" formatted="false">%@ 已自动关机</string>
     <string name="cloudpc_system_noti_nomoney_desc">U币不足，云电脑已自动关机。</string>
     <string name="cloudpc_system_noti_button_sure">好的</string>
     <string name="cloudpc_system_noti_button_sureboot">确认开机</string>
@@ -1329,15 +1329,15 @@
     <string name="app_permission_contolled_assistantoperation_subtitle">授权后，在远程时方可支持使用键鼠控制本设备。</string>
     <string name="app_permission_toopen">去开启</string>
     <string name="app_permission_authed">已授权</string>
-    <string name="app_permission_floatingguide_instruction">将“%@”拖到上面的列表中以完成授权</string>
+    <string name="app_permission_floatingguide_instruction" formatted="false">将“%@”拖到上面的列表中以完成授权</string>
     <string name="app_permission_contolled_filefolder_title">文件与文件夹</string>
-    <string name="app_permission_contolled_filefolder_subtitle">授权后才可获取「%@」的读写权限，用于文件传输功能。</string>
+    <string name="app_permission_contolled_filefolder_subtitle" formatted="false">授权后才可获取「%@」的读写权限，用于文件传输功能。</string>
     <string name="app_permission_contolled_filefolder_defaultname">当前文件夹</string>
     <string name="app_permission_contolled_fulldiskaccess_title">完全磁盘访问权限</string>
     <string name="app_permission_contolled_fulldiskaccess_subtitle">开启后，文件传输功能无需每次手动授权，提高传输效率。</string>
     <string name="app_permission_notice_restart">重启生效</string>
     <string name="controlled_device_detail_head_title">本机被控中</string>
-    <string name="controlled_device_detail_head_desc">当前有 %d 台设备正在控制此电脑</string>
+    <string name="controlled_device_detail_head_desc" formatted="false">当前有 %d 台设备正在控制此电脑</string>
     <string name="controlled_device_detail_list_title">本账号设备</string>
     <string name="controlled_device_detail_list_assistance">外部设备</string>
     <string name="newuser_guide_title">添加你的设备</string>
@@ -1375,14 +1375,14 @@
     <string name="cloudpc_schedule_setup_edittime">修改时间</string>
     <string name="cloudpc_schedule_setup_errorautoon">自动开始定时关机开启（关闭）失败，请重试。</string>
     <string name="cloudpc_schedule_setup_autosavefailure">开机自动定时关机时间保存失败</string>
-    <string name="cloudpc_schedule_setup_autosavesuccess">开机自动定时关机时间已修改为%@</string>
-    <string name="cloudpc_schedule_setup_schedulestarted">定时关机已启动，将在%@后自动关机</string>
+    <string name="cloudpc_schedule_setup_autosavesuccess" formatted="false">开机自动定时关机时间已修改为%@</string>
+    <string name="cloudpc_schedule_setup_schedulestarted" formatted="false">定时关机已启动，将在%@后自动关机</string>
     <string name="cloudpc_schedule_setup_modifyerror">修改定时关机失败，请重试。</string>
     <string name="cloudpc_schedule_setup_cancelerror">取消定时关机失败，请重试。</string>
-    <string name="cloudpc_schedule_setup_mintimewarning">定时关机最小时间为 %d 分钟，请重新输入。</string>
+    <string name="cloudpc_schedule_setup_mintimewarning" formatted="false">定时关机最小时间为 %d 分钟，请重新输入。</string>
     <string name="cloudpc_shutdown_alert_title">退出云电脑？</string>
     <string name="cloudpc_shutdown_alert_message">你可以选择退出云电脑，或让它继续在后台运行。</string>
-    <string name="cloudpc_shutdown_alert_messagewithdisk">本云设备已绑定云硬盘，关机会保留%@盘数据</string>
+    <string name="cloudpc_shutdown_alert_messagewithdisk" formatted="false">本云设备已绑定云硬盘，关机会保留%@盘数据</string>
     <string name="cloudpc_shutdown_alert_confirm">关机并结束计费</string>
     <string name="cloudpc_shutdown_alert_background">后台挂机</string>
     <string name="cloudpc_shutdown_alert_cancel">取消</string>
@@ -1390,7 +1390,7 @@
     <string name="cloudpc_schedule_detail_tip">倒计时结束后将自动关机</string>
     <string name="cloudpc_schedule_detail_hours">小时</string>
     <string name="cloudpc_schedule_detail_minutes">分钟</string>
-    <string name="cloudpc_schedule_detail_hoursminutes">%d小时%d分钟</string>
+    <string name="cloudpc_schedule_detail_hoursminutes" formatted="false">%d小时%d分钟</string>
     <string name="cloudpc_schedule_cancel_alert_title">是否取消定时关机？</string>
     <string name="cloudpc_schedule_cancel_alert_messagewithpersistence">取消后，将按照正常计费方式结算，您还可以继续使用您的云电脑。</string>
     <string name="cloudpc_schedule_cancel_alert_messagenopersistence">取消后，云电脑将会持续运行并按照正常计费方式结算。</string>
@@ -1421,25 +1421,25 @@
     <string name="clouddisk_purchase_button">购买云硬盘</string>
     <string name="clouddisk_purchase_newbutton">购买云硬盘</string>
     <string name="clouddisk_done_button">完成</string>
-    <string name="clouddisk_mount_currentdevice">当前设备：%@</string>
+    <string name="clouddisk_mount_currentdevice" formatted="false">当前设备：%@</string>
     <string name="clouddisk_mount_emptyrunning">云硬盘可在关机后保留存储，云硬盘（D盘）内的数据关机后不丢失。在本次云电脑关机前购买，可保存当前云电脑 D 盘数据。</string>
     <string name="clouddisk_mount_emptystopped">云硬盘可在关机后保留存储，云硬盘（D盘）内的数据关机后不丢失。</string>
     <string name="clouddisk_mount_automount">启动云设备时优先挂载</string>
     <string name="clouddisk_mount_nextbooteffect">下次启动生效</string>
-    <string name="clouddisk_mount_driveletter">%@盘</string>
+    <string name="clouddisk_mount_driveletter" formatted="false">%@盘</string>
     <string name="clouddisk_mount_runninghint">云设备运行期间暂不支持挂载云硬盘。</string>
     <string name="clouddisk_renew_button">续费</string>
     <string name="clouddisk_renew_gorenew">去续费</string>
     <string name="clouddisk_renew_now">立即续费</string>
     <string name="clouddisk_rename_menutitle">修改云硬盘名称</string>
-    <string name="clouddisk_rename_maxlengthtip">最多输入%d个字符</string>
-    <string name="clouddisk_capacity_format">%d GB</string>
-    <string name="clouddisk_expiry_labelformat">%@ 到期</string>
+    <string name="clouddisk_rename_maxlengthtip" formatted="false">最多输入%d个字符</string>
+    <string name="clouddisk_capacity_format" formatted="false">%d GB</string>
+    <string name="clouddisk_expiry_labelformat" formatted="false">%@ 到期</string>
     <string name="clouddisk_rename_placeholder">请输入云硬盘名称</string>
     <string name="clouddisk_rename_save">保存更改</string>
     <string name="clouddisk_status_expiringsoon">即将到期</string>
     <string name="clouddisk_status_expired">已到期，云设备结束计费后将抹除云硬盘内容。</string>
-    <string name="clouddisk_status_expiredwithdate">%@ 到期，到期后将清除硬盘数据。</string>
+    <string name="clouddisk_status_expiredwithdate" formatted="false">%@ 到期，到期后将清除硬盘数据。</string>
     <string name="clouddisk_status_occupied">已挂载在其他云设备</string>
     <string name="clouddisk_status_incompatiblereset">该云硬盘不适配当前云设备，可前往云硬盘管理页重置，重置后可选择挂载。</string>
     <string name="clouddisk_balance_unit">U币</string>
@@ -1454,19 +1454,19 @@
     <string name="clouddisk_subscription_monthly">连续包月</string>
     <string name="clouddisk_subscription_quarterly">连续包季</string>
     <string name="clouddisk_subscription_yearly">连续包年</string>
-    <string name="clouddisk_expiration_validuntil">有效期至：%@</string>
+    <string name="clouddisk_expiration_validuntil" formatted="false">有效期至：%@</string>
     <string name="clouddisk_guide_title">云硬盘功能上线啦</string>
     <string name="clouddisk_guide_desc">随时存储你的个人资料，最高支持 1TB！</string>
     <string name="clouddisk_guide_dismiss">知道了</string>
-    <string name="clouddisk_toast_expired_content">【%@】已过期，请注意备份数据。</string>
-    <string name="clouddisk_toast_abouttoexpire_content">【%@】即将到期，请及时续费。</string>
-    <string name="clouddisk_toast_occupied_content">【%@】已被其他设备占用，当前无云硬盘可挂载。</string>
+    <string name="clouddisk_toast_expired_content" formatted="false">【%@】已过期，请注意备份数据。</string>
+    <string name="clouddisk_toast_abouttoexpire_content" formatted="false">【%@】即将到期，请及时续费。</string>
+    <string name="clouddisk_toast_occupied_content" formatted="false">【%@】已被其他设备占用，当前无云硬盘可挂载。</string>
     <string name="clouddisk_toast_occupied_button">挂载管理</string>
-    <string name="clouddisk_toast_mounted_content">【%@】已挂载到 D 盘。</string>
+    <string name="clouddisk_toast_mounted_content" formatted="false">【%@】已挂载到 D 盘。</string>
     <string name="clouddisk_toast_mounted_button">挂载管理</string>
     <string name="clouddisk_toast_mountfailed_content">云硬盘自动挂载失败，请尝试手动挂载。</string>
     <string name="clouddisk_reset_menutitle">重置云硬盘数据</string>
-    <string name="clouddisk_reset_confirm_title">确定要重置 %@ 吗？</string>
+    <string name="clouddisk_reset_confirm_title" formatted="false">确定要重置 %@ 吗？</string>
     <string name="clouddisk_reset_confirm_message">重置后将会彻底抹除云硬盘资料，无法复原。</string>
     <string name="clouddisk_reset_confirm_ok">确定重置</string>
     <string name="clouddisk_reset_loading">正在重置</string>
@@ -1481,9 +1481,9 @@
     <string name="clouddisk_reset_button">重置</string>
     <string name="clouddisk_toast_mountfailed_button">挂载管理</string>
     <string name="clouddisk_noti_abouttoexpire_title">云硬盘续费提醒</string>
-    <string name="clouddisk_noti_abouttoexpire_body">【%@】将于 %@到期，请及时续费，以避免数据丢失。</string>
+    <string name="clouddisk_noti_abouttoexpire_body" formatted="false">【%@】将于 %@到期，请及时续费，以避免数据丢失。</string>
     <string name="clouddisk_noti_expired_title">云硬盘到期通知</string>
-    <string name="clouddisk_noti_expired_body">【%@】已过期，请注意备份数据。</string>
+    <string name="clouddisk_noti_expired_body" formatted="false">【%@】已过期，请注意备份数据。</string>
     <string name="clouddisk_mount_select_directboot">直接开机</string>
     <string name="clouddisk_mount_select_mountandboot">挂载并开机</string>
     <string name="clouddisk_mount_select_cancel">取消</string>
@@ -1540,7 +1540,7 @@
     <string name="portmapping_unsupport_message">被控端版本较低，请升级被控端版本后再试。</string>
     <string name="portmapping_title">端口映射</string>
     <string name="portmapping_listtitle">映射列表</string>
-    <string name="portmapping_subtitle">当前设备：%@</string>
+    <string name="portmapping_subtitle" formatted="false">当前设备：%@</string>
     <string name="portmapping_add">添加</string>
     <string name="portmapping_connecting">连接中...</string>
     <string name="portmapping_reconnect">重新连接</string>
@@ -1577,14 +1577,14 @@
     <string name="portmapping_toast_deleted">已删除</string>
     <string name="portmapping_confirm">确定</string>
     <string name="portmapping_delete_title">确定要删除该规则吗？</string>
-    <string name="portmapping_delete_message">删除后规则“%@”将停止生效且无法恢复。</string>
+    <string name="portmapping_delete_message" formatted="false">删除后规则“%@”将停止生效且无法恢复。</string>
     <string name="portmapping_close_title">确定要关闭端口映射吗？</string>
     <string name="portmapping_close_message">关闭后将断开映射连接，所有规则停止生效。</string>
     <string name="portmapping_validation_required">必填</string>
     <string name="portmapping_validation_port">端口范围 1-65535</string>
     <string name="portmapping_validation_host">格式有误</string>
     <string name="portmapping_validation_invaliditem">无效项</string>
-    <string name="portmapping_stat">规则 %d 条，已启用 %d 条，成功 %d 条，失败 %d 条</string>
+    <string name="portmapping_stat" formatted="false">规则 %d 条，已启用 %d 条，成功 %d 条，失败 %d 条</string>
     <string name="setting_keyboard_empty">当前暂无设置</string>
     <string name="setting_keyboard_response_title">发送系统快捷键到被控端</string>
     <string name="setting_keyboard_response_menudetail">开启时，系统快捷键（如 Command+Tab）将传给被控端。\n可通过「配置快捷键」配置例外的按键。</string>
@@ -1719,7 +1719,7 @@
     <string name="clientsecuritylock_unlock_codesent">验证码已发送</string>
     <string name="clientsecuritylock_unlock_getcode">获取验证码</string>
     <string name="clientsecuritylock_unlock_resend">重新获取</string>
-    <string name="clientsecuritylock_unlock_resendcountdown">重新获取（%@s）</string>
+    <string name="clientsecuritylock_unlock_resendcountdown" formatted="false">重新获取（%@s）</string>
     <string name="clientsecuritylock_unlock_passwordlink">使用安全密码解锁</string>
     <string name="clientsecuritylock_unlock_codeerrortitle">提示</string>
     <string name="clientsecuritylock_unlock_codeerrormessage">验证码错误，请重新输入。</string>
@@ -1733,9 +1733,9 @@
     <string name="filetrans_dragdrop_confirm_sendto">发送到主控端</string>
     <string name="filetrans_dragdrop_confirm_send">发送</string>
     <string name="filetrans_dragdrop_confirm_emptyfile">文件</string>
-    <string name="filetrans_dragdrop_confirm_filesummary">%@ 等 %d 项</string>
-    <string name="filetrans_dragdrop_confirm_destination">发送到 %@</string>
-    <string name="filetrans_dragdrop_confirm_path">存放路径：%@</string>
+    <string name="filetrans_dragdrop_confirm_filesummary" formatted="false">%@ 等 %d 项</string>
+    <string name="filetrans_dragdrop_confirm_destination" formatted="false">发送到 %@</string>
+    <string name="filetrans_dragdrop_confirm_path" formatted="false">存放路径：%@</string>
     <string name="filetrans_dragdrop_confirm_unknowndestination">主控端</string>
     <string name="filetrans_dragdrop_confirm_unknownpath">由主控端设置</string>
     <string name="control_filedrag_reconnectrequired">文件拖放无响应，请重新连接后重试</string>
@@ -1761,7 +1761,7 @@
     <string name="memberbenefit_card_coupons">我的卡券</string>
     <string name="memberbenefit_card_opensubtitle">解锁远控新体验</string>
     <string name="memberbenefit_prompt_upgrade_subtitle">请升级会员后使用</string>
-    <string name="memberbenefit_prompt_trial_title">免费领取 %d 天 VIP</string>
+    <string name="memberbenefit_prompt_trial_title" formatted="false">免费领取 %d 天 VIP</string>
     <string name="memberbenefit_prompt_trial_subtitle">领取后可立即解锁 VIP会员功能</string>
     <string name="memberbenefit_prompt_trial_multiwindow_subtitle">领取后可使用多屏功能，适配多显示器，窗口可分可合并，高效切屏提高远控效率。</string>
     <string name="memberbenefit_prompt_trial_multichannel_subtitle">领取后可在多个主控端同时发起远控。</string>
@@ -1779,7 +1779,7 @@
     <string name="memberbenefit_prompt_trial_privacyscreensaver_subtitle">领取后支持自定义隐私防护，一键隐藏桌面画面，守护远程隐私。</string>
     <string name="memberbenefit_prompt_trial_privacyenhanced_subtitle">领取后可使被控端显示屏熄屏，彻底保护屏幕隐私。</string>
     <string name="memberbenefit_prompt_trial_viewingmode_subtitle">领取后可使用观看模式，仅查看画面，零误触风险，告别误操作。</string>
-    <string name="memberbenefit_prompt_trial_successtitle">恭喜获得 %d 天 VIP 试用资格！</string>
+    <string name="memberbenefit_prompt_trial_successtitle" formatted="false">恭喜获得 %d 天 VIP 试用资格！</string>
     <string name="memberbenefit_prompt_trial_successsubtitle">已解锁所有 VIP 权益，快去体验一下吧！</string>
     <string name="memberbenefit_prompt_trial_viewbenefits">立即体验</string>
     <string name="memberbenefit_prompt_trial_close">查看权益</string>
