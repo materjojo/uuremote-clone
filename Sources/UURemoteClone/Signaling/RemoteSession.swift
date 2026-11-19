@@ -1,4 +1,5 @@
 import Foundation
+import AppKit
 import Combine
 import CoreMedia
 import WebRTC
@@ -33,6 +34,8 @@ final class RemoteSession: NSObject, ObservableObject {
     private var reliable: ReliableChannel?
     private var reliableTimer: Timer?
     private let decoder = H265Decoder()
+    let clipboard = ClipboardManager()
+    private var clipboardTimer: Timer?
 
     /// 弱网增强（KCP + RS-FEC）；对端不支持时自动降级为裸 protobuf
     var useReliableTransport = true
@@ -124,6 +127,15 @@ final class RemoteSession: NSObject, ObservableObject {
     override init() {
         super.init()
         useReliableTransport = UserDefaults.standard.object(forKey: "useReliableTransport") as? Bool ?? true
+        clipboardTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
+            guard let self, self.controlReady else { return }
+            var seq = self.seq
+            if let data = self.clipboard.pollAndEncode(seq: &seq) {
+                self.seq = seq
+                if let reliable = self.reliable { reliable.send(data) }
+                else { self.rtc?.sendControl(data) }
+            }
+        }
         decoder.onImage = { buffer, pts in
             VideoFrameBus.shared.push(buffer, pts: pts)
         }
@@ -269,6 +281,13 @@ extension RemoteSession: WebRTCSessionDelegate {
                 }
             }
             screenInfo = screens
+        case .clipboardChange:
+            let text = ClipboardManager.decodeAndApply(message.payload) { pasteText in
+                let pb = NSPasteboard.general
+                pb.clearContents()
+                pb.setString(pasteText, forType: .string)
+            }
+            if let t = text { clipboard.markReceived(t) }
         case .systemStateChange, .captureConfigResponse:
             break
         default:

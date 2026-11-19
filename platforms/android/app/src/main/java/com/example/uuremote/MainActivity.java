@@ -22,6 +22,7 @@ public class MainActivity extends Activity {
     private View pageDevices, pageFiles, pageTerminal, pageSettings;
     private StreamerSession session;
     private RemoteView remoteView;
+    private ClipboardSync clipboard;
 
     private static final int ACCENT = Color.parseColor("#5CD96B");
     private static final int MUTED = Color.parseColor("#9AA0A6");
@@ -190,10 +191,13 @@ public class MainActivity extends Activity {
         stage.addView(back);
         setContentView(stage);
 
+        ClipboardSync clip = new ClipboardSync(this, session::sendControl);
+        clipboard = clip;
+        clip.start();
         session = new StreamerSession(this, new StreamerSession.Listener() {
             @Override public void onOffer(String sdp) { }
             @Override public void onCandidate(org.webrtc.IceCandidate c) { }
-            @Override public void onControl(byte[] data) { }
+            @Override public void onControl(byte[] data) { clip.apply(data); }
             @Override public void onState(String state) {
                 runOnUiThread(() -> Toast.makeText(MainActivity.this, "连接状态：" + state,
                         Toast.LENGTH_SHORT).show());

@@ -14,7 +14,7 @@ namespace UURemoteClone;
 public record Device(string Id, string Name, string Platform);
 
 /// <summary>主窗口：设备列表 -> 远控视图（WebRTC + H264 + gv_pb.InputEvent）</summary>
-public partial class MainWindow : Window, StreamerSession.IListener
+public partial class MainWindow : Window, StreamerSession.IListener, ClipboardSync.Sender
 {
     private readonly List<Device> _devices = new()
     {
@@ -24,6 +24,7 @@ public partial class MainWindow : Window, StreamerSession.IListener
 
     private StreamerSession? _session;
     private WindowsVideoPipeline? _pipeline;
+    private ClipboardSync? _clipboard;
     private long _seq;
 
     public MainWindow()
@@ -44,6 +45,7 @@ public partial class MainWindow : Window, StreamerSession.IListener
             _pipeline = new WindowsVideoPipeline(preferHardware: true);
             _pipeline.FrameDecoded += (bgra, w, h) => VideoCanvas.RenderFrame(bgra, w, h);
             _session = new StreamerSession(this);
+            _clipboard = new ClipboardSync(this, Dispatcher);
             _ = _session.StartAsControllerAsync();
         }
         catch (Exception ex)
@@ -54,6 +56,8 @@ public partial class MainWindow : Window, StreamerSession.IListener
 
     private void Disconnect_Click(object sender, RoutedEventArgs e)
     {
+        _clipboard?.Dispose();
+        _clipboard = null;
         _session?.Dispose();
         _session = null;
         _pipeline?.Dispose();
@@ -106,6 +110,8 @@ public partial class MainWindow : Window, StreamerSession.IListener
 
     public void OnCandidate(RTCIceCandidateInit candidate) { }
 
+    public void SendControl(byte[] data) => _session?.SendControl(data);
+
     public void OnState(RTCPeerConnectionState state) =>
         Dispatcher.Invoke(() => StatusText.Text = "连接状态：" + state);
 
@@ -114,6 +120,7 @@ public partial class MainWindow : Window, StreamerSession.IListener
         try
         {
             var m = Message.Parser.ParseFrom(data);
+            if (m.ClipboardChange != null) { _clipboard?.Apply(data); return; }
             if (m.Screens != null && m.Screens.Screens.Count > 0)
                 Dispatcher.Invoke(() => StatusText.Text = $"屏幕列表：{m.Screens.Screens.Count} 个");
         }
@@ -156,6 +163,7 @@ public partial class MainWindow : Window, StreamerSession.IListener
 
     protected override void OnClosing(CancelEventArgs e)
     {
+        _clipboard?.Dispose();
         _session?.Dispose();
         _pipeline?.Dispose();
         base.OnClosing(e);
