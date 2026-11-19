@@ -251,11 +251,6 @@ final class VideoRenderView: NSView, RTCVideoRenderer {
         VideoFrameBus.shared.sink = self
     }
 
-    override func layout() {
-        super.layout()
-        metal?.frame = bounds
-    }
-
     deinit {
         if VideoFrameBus.shared.sink === self { VideoFrameBus.shared.sink = nil }
     }
@@ -267,6 +262,7 @@ final class VideoRenderView: NSView, RTCVideoRenderer {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         displayLayer.frame = bounds
+        metal?.frame = bounds
         CATransaction.commit()
     }
 

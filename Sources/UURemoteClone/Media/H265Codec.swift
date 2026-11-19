@@ -92,7 +92,7 @@ final class H265Encoder {
 
         var property: CFTypeRef?
         let hwKey = "UsingHardwareAcceleratedVideoEncoder" as CFString
-        if VTSessionCopyProperty(session, key: hwKey, allocator: kCFAllocatorDefault, propertyValueOut: &property) == noErr {
+        if VTSessionCopyProperty(session, key: hwKey, allocator: kCFAllocatorDefault, valueOut: &property) == noErr {
             usingHardware = (property as? Bool) ?? ((property as? NSNumber)?.boolValue ?? false)
         }
 

@@ -38,7 +38,6 @@ final class MetalVideoView: NSView {
         metalLayer.pixelFormat = .bgra8Unorm
         metalLayer.framebufferOnly = true
         metalLayer.isOpaque = true
-        metalLayer.framerate = 60
         layer = metalLayer
         buildPipeline()
         if let device {
