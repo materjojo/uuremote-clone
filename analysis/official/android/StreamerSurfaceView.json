@@ -1,0 +1,168 @@
+{
+  "evidence_id": "ev_3571642fcc659ceb82f83f3df71a2be90ba32f1635ecd901d80d20bca3e9085d",
+  "subject": {
+    "name": "uuyc_4.48.1.apk",
+    "digest": {
+      "sha256": "19252db1dd384f25db000b334e6f77616b9dfa26b2e416ce5383038e973e219f"
+    },
+    "local_path": "/home/ubuntu/rea_uuyc/dist/uuyc_4.48.1.apk",
+    "format": "apk",
+    "architecture": null
+  },
+  "provider": {
+    "id": "jadx",
+    "name": "JADX headless",
+    "version": "0.7.1"
+  },
+  "analysis_profile": null,
+  "predicate_type": "rea.analysis",
+  "operation": "inspect_android_class",
+  "parameters": {
+    "path": "/home/ubuntu/rea_uuyc/dist/uuyc_4.48.1.apk",
+    "class_name": "com.remote.streamer.StreamerSurfaceView"
+  },
+  "raw_result": {
+    "server": {
+      "name": "rea-jadx-bridge",
+      "version": "7"
+    },
+    "bridge_sha256": "e5044a8312dd0731f53af3f095508b3e5cff54df6b971c95d4305e2f39b4fa30",
+    "jar_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+    "loaded": {
+      "state": "LOADED",
+      "apk_path": "/tmp/rea-android-x9aWiq/target.apk",
+      "class_count": 14640,
+      "resource_count": 2146,
+      "threads": 1,
+      "resources": "full"
+    },
+    "calls": [
+      {
+        "operation": "rea_jvm_status",
+        "input": {},
+        "response": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"metadata_scope\":\"parsed_members\",\"engine_reported_version\":\"0.7.1\",\"available_processors\":2,\"java_version\":\"21.0.12.1\",\"max_heap_bytes\":515899392}"
+            }
+          ],
+          "isError": false
+        }
+      },
+      {
+        "operation": "get_class_summary",
+        "input": {
+          "class_name": "com.remote.streamer.StreamerSurfaceView",
+          "dex_static_values": true
+        },
+        "response": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"inner_class_count\":0,\"inner_classes\":[],\"methods\":[{\"signature\":\"\\u003cinit\\u003e(android.content.Context): void\",\"dex_descriptor\":\"(Landroid/content/Context;)V\",\"is_constructor\":true,\"name\":\"\\u003cinit\\u003e\",\"def_pos\":0},{\"signature\":\"\\u003cinit\\u003e(android.content.Context, android.util.AttributeSet): void\",\"dex_descriptor\":\"(Landroid/content/Context;Landroid/util/AttributeSet;)V\",\"is_constructor\":true,\"name\":\"\\u003cinit\\u003e\",\"def_pos\":0},{\"signature\":\"\\u003cinit\\u003e(android.content.Context, android.util.AttributeSet, int): void\",\"dex_descriptor\":\"(Landroid/content/Context;Landroid/util/AttributeSet;I)V\",\"is_constructor\":true,\"name\":\"\\u003cinit\\u003e\",\"def_pos\":0},{\"signature\":\"\\u003cinit\\u003e(android.content.Context, android.util.AttributeSet, int, int): void\",\"dex_descriptor\":\"(Landroid/content/Context;Landroid/util/AttributeSet;II)V\",\"is_constructor\":true,\"name\":\"\\u003cinit\\u003e\",\"def_pos\":0},{\"signature\":\"SetNativeGLesRenderer(long): void\",\"dex_descriptor\":\"(J)V\",\"is_constructor\":false,\"name\":\"SetNativeGLesRenderer\",\"def_pos\":0},{\"signature\":\"invalidate(): void\",\"dex_descriptor\":\"()V\",\"is_constructor\":false,\"name\":\"invalidate\",\"def_pos\":0},{\"signature\":\"nativeRendererInvalidate(long): void\",\"dex_descriptor\":\"(J)V\",\"is_constructor\":false,\"name\":\"nativeRendererInvalidate\",\"def_pos\":0},{\"signature\":\"nativeSetTransform(long, float, float, float, float, float, float): void\",\"dex_descriptor\":\"(JFFFFFF)V\",\"is_constructor\":false,\"name\":\"nativeSetTransform\",\"def_pos\":0},{\"signature\":\"setTransform(float, float, float, float, float, float): void\",\"dex_descriptor\":\"(FFFFFF)V\",\"is_constructor\":false,\"name\":\"setTransform\",\"def_pos\":0}],\"fields\":[{\"name\":\"nativeGLesRendererHandle\",\"def_pos\":0,\"type\":\"long\"}],\"raw_name\":\"com.remote.streamer.StreamerSurfaceView\",\"method_count\":9,\"full_name\":\"com.remote.streamer.StreamerSurfaceView\",\"field_count\":1,\"name\":\"StreamerSurfaceView\"}"
+            }
+          ],
+          "isError": false
+        }
+      }
+    ]
+  },
+  "normalized_result": {
+    "engine": {
+      "name": "jadx-headless-mcp",
+      "version": "0.7.1",
+      "artifact_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+      "source_revision": "5844800a486d2248fa949b74c9896285f5b54de2",
+      "worker_count": 1,
+      "heap_limit_mib": 492
+    },
+    "class_name": "com.remote.streamer.StreamerSurfaceView",
+    "methods": [
+      {
+        "name": "<init>",
+        "reported_signature": "<init>(android.content.Context): void",
+        "overload_index": 0,
+        "is_constructor": true,
+        "dex_descriptor": "(Landroid/content/Context;)V"
+      },
+      {
+        "name": "<init>",
+        "reported_signature": "<init>(android.content.Context, android.util.AttributeSet): void",
+        "overload_index": 1,
+        "is_constructor": true,
+        "dex_descriptor": "(Landroid/content/Context;Landroid/util/AttributeSet;)V"
+      },
+      {
+        "name": "<init>",
+        "reported_signature": "<init>(android.content.Context, android.util.AttributeSet, int): void",
+        "overload_index": 2,
+        "is_constructor": true,
+        "dex_descriptor": "(Landroid/content/Context;Landroid/util/AttributeSet;I)V"
+      },
+      {
+        "name": "<init>",
+        "reported_signature": "<init>(android.content.Context, android.util.AttributeSet, int, int): void",
+        "overload_index": 3,
+        "is_constructor": true,
+        "dex_descriptor": "(Landroid/content/Context;Landroid/util/AttributeSet;II)V"
+      },
+      {
+        "name": "SetNativeGLesRenderer",
+        "reported_signature": "SetNativeGLesRenderer(long): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J)V"
+      },
+      {
+        "name": "invalidate",
+        "reported_signature": "invalidate(): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "()V"
+      },
+      {
+        "name": "nativeRendererInvalidate",
+        "reported_signature": "nativeRendererInvalidate(long): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J)V"
+      },
+      {
+        "name": "nativeSetTransform",
+        "reported_signature": "nativeSetTransform(long, float, float, float, float, float, float): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(JFFFFFF)V"
+      },
+      {
+        "name": "setTransform",
+        "reported_signature": "setTransform(float, float, float, float, float, float): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(FFFFFF)V"
+      }
+    ],
+    "fields": [
+      {
+        "name": "nativeGLesRendererHandle",
+        "reported_type": "long",
+        "dex_static_value": null
+      }
+    ],
+    "inner_classes": []
+  },
+  "confidence": "observed",
+  "authority": "shipped-artifact",
+  "environment": null,
+  "limitations": [
+    "Static decompiler observations do not establish runtime behavior; the APK is never executed.",
+    "Method signatures use provider display types; DEX prototypes come from frozen JADX metadata. Display names may be aliases, and overload indices are local to this engine and artifact.",
+    "Class inventories use parsed metadata before code generation, including synthetic members that may be omitted from decompiled source. Source positions remain unknown.",
+    "Incoming reference totals count JADX using nodes. Direct invoke entries within a using method report raw DEX code-unit offsets and method indexes, but coverage is limited to those nodes and directly matched invokes; it does not establish every possible dynamic or reflective call site.",
+    "Manifest summaries are parsed once by REA's bridge from the exact root AndroidManifest.xml resource, using namespace-aware XML attributes; decoded XML is retained. APK signatures, split APKs, native libraries and Android runtime capture are not verified by this provider."
+  ],
+  "relationship_coverage": null,
+  "locations": [],
+  "evidence_links": []
+}

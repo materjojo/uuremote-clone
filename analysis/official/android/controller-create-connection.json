@@ -1,0 +1,147 @@
+{
+  "evidence_id": "ev_f0a9cead1bd2925600246124968d61d6071a1d4e617a41a632c2390fbe452c8d",
+  "subject": {
+    "name": "uuyc_4.48.1.apk",
+    "digest": {
+      "sha256": "19252db1dd384f25db000b334e6f77616b9dfa26b2e416ce5383038e973e219f"
+    },
+    "local_path": "/home/ubuntu/rea_uuyc/dist/uuyc_4.48.1.apk",
+    "format": "apk",
+    "architecture": null
+  },
+  "provider": {
+    "id": "jadx",
+    "name": "JADX headless",
+    "version": "0.7.1"
+  },
+  "analysis_profile": null,
+  "predicate_type": "rea.analysis",
+  "operation": "inspect_android_method",
+  "parameters": {
+    "path": "/home/ubuntu/rea_uuyc/dist/uuyc_4.48.1.apk",
+    "class_name": "com.remote.streamer.service.ControllerService",
+    "method_name": "createConnection"
+  },
+  "raw_result": {
+    "server": {
+      "name": "rea-jadx-bridge",
+      "version": "7"
+    },
+    "bridge_sha256": "e5044a8312dd0731f53af3f095508b3e5cff54df6b971c95d4305e2f39b4fa30",
+    "jar_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+    "loaded": {
+      "state": "LOADED",
+      "apk_path": "/tmp/rea-android-04VSmP/target.apk",
+      "class_count": 14640,
+      "resource_count": 2146,
+      "threads": 1,
+      "resources": "full"
+    },
+    "calls": [
+      {
+        "operation": "rea_jvm_status",
+        "input": {},
+        "response": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"metadata_scope\":\"parsed_members\",\"engine_reported_version\":\"0.7.1\",\"available_processors\":2,\"java_version\":\"21.0.12.1\",\"max_heap_bytes\":515899392}"
+            }
+          ],
+          "isError": false
+        }
+      },
+      {
+        "operation": "load_apk",
+        "input": {
+          "path": "/tmp/rea-android-04VSmP/target.apk",
+          "threads": 1,
+          "resources": "full"
+        },
+        "response": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"state\":\"LOADED\",\"apk_path\":\"/tmp/rea-android-04VSmP/target.apk\",\"class_count\":14640,\"raw_class_count\":14640,\"resource_count\":2146,\"load_duration_ms\":14317,\"decompile_timeout_ms\":90000,\"threads\":1,\"code_cache_size\":64,\"resources\":\"full\"}"
+            }
+          ],
+          "isError": false
+        }
+      },
+      {
+        "operation": "get_class_summary",
+        "input": {
+          "class_name": "com.remote.streamer.service.ControllerService"
+        },
+        "response": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"name\":\"ControllerService\",\"inner_class_count\":2,\"inner_classes\":[\"com.remote.streamer.service.ControllerService.AnonymousClass1\",\"com.remote.streamer.service.ControllerService.AnonymousClass1\"],\"methods\":[{\"signature\":\"\\u003cinit\\u003e(): void\",\"dex_descriptor\":\"()V\",\"is_constructor\":true,\"name\":\"\\u003cinit\\u003e\",\"def_pos\":0},{\"signature\":\"access$dispatchCallback(com.remote.streamer.service.ControllerService, ke.a): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/service/ControllerService;Lke/a;)V\",\"is_constructor\":false,\"name\":\"access$dispatchCallback\",\"def_pos\":0},{\"signature\":\"access$findCallback(com.remote.streamer.service.ControllerService, long): com.remote.streamer.controller.StreamerControllerCallback\",\"dex_descriptor\":\"(Lcom/remote/streamer/service/ControllerService;J)Lcom/remote/streamer/controller/StreamerControllerCallback;\",\"is_constructor\":false,\"name\":\"access$findCallback\",\"def_pos\":0},{\"signature\":\"access$getPluginStreamer(com.remote.streamer.service.ControllerService): com.remote.streamer.api.IPluginStreamer\",\"dex_descriptor\":\"(Lcom/remote/streamer/service/ControllerService;)Lcom/remote/streamer/api/IPluginStreamer;\",\"is_constructor\":false,\"name\":\"access$getPluginStreamer\",\"def_pos\":0},{\"signature\":\"createConnection(long, Bb.W0, java.lang.String): void\",\"dex_descriptor\":\"(JLBb/W0;Ljava/lang/String;)V\",\"is_constructor\":false,\"name\":\"createConnection\",\"def_pos\":0},{\"signature\":\"destroyConnection(long): void\",\"dex_descriptor\":\"(J)V\",\"is_constructor\":false,\"name\":\"destroyConnection\",\"def_pos\":0},{\"signature\":\"dispatchCallback(ke.a): void\",\"dex_descriptor\":\"(Lke/a;)V\",\"is_constructor\":false,\"name\":\"dispatchCallback\",\"def_pos\":0},{\"signature\":\"exitRoom(long): void\",\"dex_descriptor\":\"(J)V\",\"is_constructor\":false,\"name\":\"exitRoom\",\"def_pos\":0},{\"signature\":\"findCallback(long): com.remote.streamer.controller.StreamerControllerCallback\",\"dex_descriptor\":\"(J)Lcom/remote/streamer/controller/StreamerControllerCallback;\",\"is_constructor\":false,\"name\":\"findCallback\",\"def_pos\":0},{\"signature\":\"getDecodeCapability(): java.lang.String\",\"dex_descriptor\":\"()Ljava/lang/String;\",\"is_constructor\":false,\"name\":\"getDecodeCapability\",\"def_pos\":0},{\"signature\":\"getPluginStreamer(): com.remote.streamer.api.IPluginStreamer\",\"dex_descriptor\":\"()Lcom/remote/streamer/api/IPluginStreamer;\",\"is_constructor\":false,\"name\":\"getPluginStreamer\",\"def_pos\":0},{\"signature\":\"getStreamerAsyncContext$plugin_streamer_phoneProductionRelease(): Be.d0\",\"dex_descriptor\":\"()LBe/d0;\",\"is_constructor\":false,\"name\":\"getStreamerAsyncContext$plugin_streamer_phoneProductionRelease\",\"def_pos\":0},{\"signature\":\"getStreamerController$plugin_streamer_phoneProductionRelease(): com.remote.streamer.controller.StreamerController\",\"dex_descriptor\":\"()Lcom/remote/streamer/controller/StreamerController;\",\"is_constructor\":false,\"name\":\"getStreamerController$plugin_streamer_phoneProductionRelease\",\"def_pos\":0},{\"signature\":\"hasRoomHandle(long): boolean\",\"dex_descriptor\":\"(J)Z\",\"is_constructor\":false,\"name\":\"hasRoomHandle\",\"def_pos\":0},{\"signature\":\"loginRoom(com.remote.streamer.model.StreamerRoomConfig): long\",\"dex_descriptor\":\"(Lcom/remote/streamer/model/StreamerRoomConfig;)J\",\"is_constructor\":false,\"name\":\"loginRoom\",\"def_pos\":0},{\"signature\":\"removeRoomCallback(long): void\",\"dex_descriptor\":\"(J)V\",\"is_constructor\":false,\"name\":\"removeRoomCallback\",\"def_pos\":0},{\"signature\":\"requestConnectionStats(long): void\",\"dex_descriptor\":\"(J)V\",\"is_constructor\":false,\"name\":\"requestConnectionStats\",\"def_pos\":0},{\"signature\":\"sendBinaryData(long, Bb.K3): void\",\"dex_descriptor\":\"(JLBb/K3;)V\",\"is_constructor\":false,\"name\":\"sendBinaryData\",\"def_pos\":0},{\"signature\":\"sendBinaryData(long, byte[]): void\",\"dex_descriptor\":\"(J[B)V\",\"is_constructor\":false,\"name\":\"sendBinaryData\",\"def_pos\":0},{\"signature\":\"sendControlData(long, Bb.K3): void\",\"dex_descriptor\":\"(JLBb/K3;)V\",\"is_constructor\":false,\"name\":\"sendControlData\",\"def_pos\":0},{\"signature\":\"sendControlEvent(long, java.lang.String): void\",\"dex_descriptor\":\"(JLjava/lang/String;)V\",\"is_constructor\":false,\"name\":\"sendControlEvent\",\"def_pos\":0},{\"signature\":\"sendFileData(long, Bb.K3, Zd.d): java.lang.Object\",\"dex_descriptor\":\"(JLBb/K3;LZd/d;)Ljava/lang/Object;\",\"is_constructor\":false,\"name\":\"sendFileData\",\"def_pos\":0},{\"signature\":\"sendFileData$suspendImpl(com.remote.streamer.service.ControllerService, long, Bb.K3, Zd.d): java.lang.Object\",\"dex_descriptor\":\"(Lcom/remote/streamer/service/ControllerService;JLBb/K3;LZd/d;)Ljava/lang/Object;\",\"is_constructor\":false,\"name\":\"sendFileData$suspendImpl\",\"def_pos\":0},{\"signature\":\"sendText(long, java.lang.String): void\",\"dex_descriptor\":\"(JLjava/lang/String;)V\",\"is_constructor\":false,\"name\":\"sendText\",\"def_pos\":0},{\"signature\":\"sendTextData(long, Bb.K3): void\",\"dex_descriptor\":\"(JLBb/K3;)V\",\"is_constructor\":false,\"name\":\"sendTextData\",\"def_pos\":0},{\"signature\":\"setRoomCallback(long, com.remote.streamer.controller.StreamerControllerCallback): void\",\"dex_descriptor\":\"(JLcom/remote/streamer/controller/StreamerControllerCallback;)V\",\"is_constructor\":false,\"name\":\"setRoomCallback\",\"def_pos\":0},{\"signature\":\"switchIceNetwork(long, com.remote.streamer.model.IceNetworkConfig): int\",\"dex_descriptor\":\"(JLcom/remote/streamer/model/IceNetworkConfig;)I\",\"is_constructor\":false,\"name\":\"switchIceNetwork\",\"def_pos\":0}],\"fields\":[{\"name\":\"$stable\",\"def_pos\":0,\"type\":\"int\"},{\"name\":\"delegateImpl\",\"def_pos\":0,\"type\":\"com.remote.streamer.service.ControllerService$delegateImpl$1\"},{\"name\":\"pluginStreamer$delegate\",\"def_pos\":0,\"type\":\"Vd.h\"},{\"name\":\"roomCallback\",\"def_pos\":0,\"type\":\"java.util.Map\\u003cjava.lang.Long, com.remote.streamer.controller.StreamerControllerCallback\\u003e\"},{\"name\":\"streamerAsyncContext\",\"def_pos\":0,\"type\":\"Be.d0\"},{\"name\":\"streamerCallbackContext\",\"def_pos\":0,\"type\":\"Be.d0\"},{\"name\":\"streamerController$delegate\",\"def_pos\":0,\"type\":\"Vd.h\"},{\"name\":\"syncObject\",\"def_pos\":0,\"type\":\"java.lang.Object\"}],\"raw_name\":\"com.remote.streamer.service.ControllerService\",\"method_count\":27,\"full_name\":\"com.remote.streamer.service.ControllerService\",\"field_count\":8}"
+            }
+          ],
+          "isError": false
+        }
+      },
+      {
+        "operation": "get_method_body",
+        "input": {
+          "class_name": "com.remote.streamer.service.ControllerService",
+          "method_name": "createConnection",
+          "overload_index": 0,
+          "smali_fallback": true
+        },
+        "response": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"markers\":[],\"body\":\"    @Override // com.remote.streamer.api.service.IControllerService\\n    public void createConnection(long j, W0 w4, String str) {\\n        le.k.e(w4, \\\"connectOptions\\\");\\n        le.k.e(str, \\\"appControlId\\\");\\n        if (hasRoomHandle(j)) {\\n            String str2 \\u003d \\\"createConnection(\\\" + j + \\\", \\\" + w4 + \\\", \\\" + str + \\\")\\\";\\n            le.k.e(str2, \\\"message\\\");\\n            A0.b.u(\\\"[\\\", Ra.a.f12074b, \\\"][ControllerService]\\\", str2);\\n            try {\\n                byte[] bArrA \\u003d w4.a();\\n                StreamerController streamerController$plugin_streamer_phoneProductionRelease \\u003d getStreamerController$plugin_streamer_phoneProductionRelease();\\n                C.Companion.getClass();\\n                String id2 \\u003d B.a().f9378a.getId();\\n                le.k.d(id2, \\\"getId(...)\\\");\\n                streamerController$plugin_streamer_phoneProductionRelease.connect(j, bArrA, str, id2);\\n            } catch (Exception e5) {\\n                e5.printStackTrace();\\n            }\\n        }\\n    }\",\"mode\":\"java\",\"class_name\":\"com.remote.streamer.service.ControllerService\",\"dex_descriptor\":\"(JLBb/W0;Ljava/lang/String;)V\",\"overload_count\":1,\"method_name\":\"createConnection\",\"overload_index\":0,\"full_name\":\"com.remote.streamer.service.ControllerService.createConnection\",\"fell_back\":false}"
+            }
+          ],
+          "isError": false
+        }
+      }
+    ]
+  },
+  "normalized_result": {
+    "engine": {
+      "name": "jadx-headless-mcp",
+      "version": "0.7.1",
+      "artifact_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+      "source_revision": "5844800a486d2248fa949b74c9896285f5b54de2",
+      "worker_count": 1,
+      "heap_limit_mib": 492
+    },
+    "class_name": "com.remote.streamer.service.ControllerService",
+    "method": {
+      "name": "createConnection",
+      "reported_signature": "createConnection(long, Bb.W0, java.lang.String): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(JLBb/W0;Ljava/lang/String;)V"
+    },
+    "overload_count": 1,
+    "representation": "java",
+    "body_status": "available",
+    "fell_back": false,
+    "markers": [],
+    "source": {
+      "status": "complete",
+      "text": "    @Override // com.remote.streamer.api.service.IControllerService\n    public void createConnection(long j, W0 w4, String str) {\n        le.k.e(w4, \"connectOptions\");\n        le.k.e(str, \"appControlId\");\n        if (hasRoomHandle(j)) {\n            String str2 = \"createConnection(\" + j + \", \" + w4 + \", \" + str + \")\";\n            le.k.e(str2, \"message\");\n            A0.b.u(\"[\", Ra.a.f12074b, \"][ControllerService]\", str2);\n            try {\n                byte[] bArrA = w4.a();\n                StreamerController streamerController$plugin_streamer_phoneProductionRelease = getStreamerController$plugin_streamer_phoneProductionRelease();\n                C.Companion.getClass();\n                String id2 = B.a().f9378a.getId();\n                le.k.d(id2, \"getId(...)\");\n                streamerController$plugin_streamer_phoneProductionRelease.connect(j, bArrA, str, id2);\n            } catch (Exception e5) {\n                e5.printStackTrace();\n            }\n        }\n    }",
+      "reported_total_bytes": null
+    }
+  },
+  "confidence": "derived",
+  "authority": "shipped-artifact",
+  "environment": null,
+  "limitations": [
+    "Static decompiler observations do not establish runtime behavior; the APK is never executed.",
+    "Method signatures use provider display types; DEX prototypes come from frozen JADX metadata. Display names may be aliases, and overload indices are local to this engine and artifact.",
+    "Class inventories use parsed metadata before code generation, including synthetic members that may be omitted from decompiled source. Source positions remain unknown.",
+    "Incoming reference totals count JADX using nodes. Direct invoke entries within a using method report raw DEX code-unit offsets and method indexes, but coverage is limited to those nodes and directly matched invokes; it does not establish every possible dynamic or reflective call site.",
+    "Manifest summaries are parsed once by REA's bridge from the exact root AndroidManifest.xml resource, using namespace-aware XML attributes; decoded XML is retained. APK signatures, split APKs, native libraries and Android runtime capture are not verified by this provider."
+  ],
+  "relationship_coverage": null,
+  "locations": [],
+  "evidence_links": []
+}

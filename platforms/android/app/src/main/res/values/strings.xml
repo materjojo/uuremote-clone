@@ -232,7 +232,6 @@
     <string name="setting_authentication_nameplaceholder">请输入姓名</string>
     <string name="setting_authentication_idplaceholder">请输入身份证号</string>
     <string name="setting_authentication_neteaseauth">已通过网易通行证认证</string>
-    <string name="setting_authentication_topdesc">游戏云电脑已接入防沉迷系统，为保障您的正常使用，请尽快完成平台实名认证。</string>
     <string name="setting_authentication_bottomdesc">根据《关于防止未成年人沉迷网络游戏的通知》《关于进一步严格管理切实防止未成年人沉迷网络游戏的通知》的要求，未实名账号不可体验游戏，未成年人仅可在周五至周日或其他法定节假日的20-21点游玩。</string>
     <string name="setting_authentication_error">实名信息错误，请重新输入</string>
     <string name="setting_authentication_success">实名认证成功</string>
@@ -983,8 +982,6 @@
     <string name="control_filedrag_startfailed">文件拖放失败，请重试</string>
     <string name="home_remotelist_mydevice">我的设备</string>
     <string name="home_remotelist_alldevice">全部设备</string>
-    <string name="home_remotelist_cloudpc">云设备</string>
-    <string name="home_cloudpc_market">市场</string>
     <string name="home_assistance_launch">开始协助</string>
     <string name="home_toolbar_user_logout">退出登录</string>
     <string name="home_toolbar_user_setting">设置</string>
@@ -1170,7 +1167,6 @@
     <string name="nowdevice_updatestatus_failed_feedback">submit feedback</string>
     <string name="device_list_add_title">添加你的其他设备</string>
     <string name="device_list_add_desc">用\U2006Windows\U2006设备访问官网\U2006uuyc.163.com\U2006下载并安装客户端，登录后即可进行远程办公、远程游戏以及文件传输。</string>
-    <string name="device_list_add_hascloudpc_desc">用其他设备访问官网 uuyc.163.com 下载并安装客户端，登录后即可进行远程办公、远程游戏以及文件传输，你也可以选择添加云设备。</string>
     <string name="device_list_add_button">如何添加设备</string>
     <string name="device_list_pc">电脑</string>
     <string name="device_list_mobile">手机/平板</string>
@@ -1201,117 +1197,6 @@
     <string name="common_error_connection_error_backgroundactivitydisabled">错误码：1001，请前往[设置]-[通用]-[登录项与扩展]，允许UU远程在后台运行。</string>
     <string name="common_error_connection_error_legacybackgroundactivitydisabled">错误码：1001，请前往[设置]-[通用]-[登录项]，允许UU远程在后台运行。</string>
     <string name="common_error_connection_connecting">正在连接</string>
-    <string name="cloudpc_main_toolbar_status_offline">未运行</string>
-    <string name="cloudpc_main_toolbar_status_queue">排队中</string>
-    <string name="cloudpc_main_toolbar_status_running">运行中</string>
-    <string name="cloudpc_main_toolbar_status_queueready">已就绪</string>
-    <string name="cloudpc_main_toolbar_hour">小时</string>
-    <string name="cloudpc_main_applist_manager">应用管理</string>
-    <string name="cloudpc_main_applist_add">添加</string>
-    <string name="cloudpc_main_applist_start">快速启动</string>
-    <string name="cloudpc_main_desktop_cloudstorage">云硬盘</string>
-    <string name="cloudpc_main_desktop_comingsoon">即将推出</string>
-    <string name="cloudpc_main_desktop_filetransfer">文件传输</string>
-    <string name="cloudpc_main_desktop_more">更多</string>
-    <string name="cloudpc_main_desktop_rename">重命名</string>
-    <string name="cloudpc_main_desktop_remove">删除设备</string>
-    <string name="cloudpc_main_desktop_control_desc" formatted="false">当前有 %@ 台设备正在控制此电脑</string>
-    <string name="cloudpc_main_desktop_control_us">本账号设备</string>
-    <string name="cloudpc_main_desktop_state_button_canceluse">取消使用</string>
-    <string name="cloudpc_main_desktop_state_button_enterdesktop">进入桌面</string>
-    <string name="cloudpc_main_desktop_state_button_retry">重试</string>
-    <string name="cloudpc_main_desktop_state_button_reinqueue">重新排队</string>
-    <string name="cloudpc_main_desktop_state_button_surestart">确认开机</string>
-    <string name="cloudpc_main_desktop_state_button_shutdown">关机</string>
-    <string name="cloudpc_main_desktop_state_inqueue_waitdesc" formatted="false">预计等待 %d 分钟...</string>
-    <string name="cloudpc_main_desktop_state_inqueue_nocostdesc">排队过程中不会消耗 U币</string>
-    <string name="cloudpc_main_desktop_state_inqueue_nosuredesc">到号时无需确认，立即开机</string>
-    <string name="cloudpc_main_desktop_state_starting">正在启动中</string>
-    <string name="cloudpc_main_desktop_state_expired_title">已过号</string>
-    <string name="cloudpc_main_desktop_state_expired_desc">未及时确认开机，请重新排队</string>
-    <string name="cloudpc_main_desktop_state_startfailed_title">无法启动</string>
-    <string name="cloudpc_main_desktop_state_startfailed_desc">需要重新分配资源，系统将会优先为您分配</string>
-    <string name="cloudpc_main_desktop_state_ready_title">已就绪</string>
-    <string name="cloudpc_main_desktop_state_ready_desc">请在 60 秒内进入桌面，超时需重新排队</string>
-    <string name="cloudpc_main_desktop_state_uncharge_title">已启动</string>
-    <string name="cloudpc_main_desktop_state_uncharge_desc">请尽快进入桌面，超时将自动关机</string>
-    <string name="cloudpc_main_desktop_state_charge_title">运行时间：</string>
-    <string name="cloudpc_main_desktop_state_charge_desc">累计消耗 U币：</string>
-    <string name="cloudpc_main_desktop_state_shutdown_title">关机中</string>
-    <string name="cloudpc_main_alert_button_cancel">取消</string>
-    <string name="cloudpc_main_alert_button_gocharge">去充值</string>
-    <string name="cloudpc_main_alert_button_known">知道了</string>
-    <string name="cloudpc_main_alert_button_goauth">去认证</string>
-    <string name="cloudpc_main_alert_button_bootuse">开机使用</string>
-    <string name="cloudpc_main_alert_button_continueboot">继续开机</string>
-    <string name="cloudpc_main_alert_button_sureshutdown">关机并结束计费</string>
-    <string name="cloudpc_main_alert_button_talklater">以后再说</string>
-    <string name="cloudpc_main_alert_button_goopen">去开启</string>
-    <string name="cloudpc_main_alert_button_suredelete">确定删除</string>
-    <string name="cloudpc_main_alert_button_openpcandapp">开机并启动应用</string>
-    <string name="cloudpc_main_alert_button_takepcandapp">接管并启动应用</string>
-    <string name="cloudpc_main_alert_button_restartqueue">开始重新排队</string>
-    <string name="cloudpc_main_alert_addfailed_title">添加失败</string>
-    <string name="cloudpc_main_alert_addfailed_desc">请稍候再试</string>
-    <string name="cloudpc_main_alert_realnameauth_title">请先完成实名认证</string>
-    <string name="cloudpc_main_alert_realnameauth_desc">按相关规定，使用当前云电脑需要进行实名认证。</string>
-    <string name="cloudpc_main_alert_nomoney_title">余额不足，请先充值</string>
-    <string name="cloudpc_main_alert_nomoney_desc">当前余额不足，请先充值 U币，再开机使用。</string>
-    <string name="cloudpc_main_alert_shutdown_title">退出云电脑？</string>
-    <string name="cloudpc_main_alert_notime_title" formatted="false">是否开机使用 %@ 云电脑？</string>
-    <string name="cloudpc_main_alert_notime_desc">当前余额不足运行 5 分钟，可能会影响您的体验，建议先充值。</string>
-    <string name="cloudpc_main_alert_bootnotice_title">感谢对「云设备」的一路相伴</string>
-    <string name="cloudpc_main_alert_bootnotice_desc">因业务调整，我们已停止售卖 U币与云硬盘，远程业务不受影响。您账户里的余额和云硬盘可照常使用，如需退款，可联系[在线客服]。</string>
-    <string name="cloudpc_main_alert_dontremind">不再提示</string>
-    <string name="cloudpc_main_alert_shutdown_desc">你可以选择退出云电脑，或让它继续在后台运行</string>
-    <string name="cloudpc_main_alert_addiction_title">防沉迷提醒</string>
-    <string name="cloudpc_main_alert_addiction_desc">未成年账号仅可在周五至周日或其他法定节假日的 20-21 点游玩。</string>
-    <string name="cloudpc_main_alert_opennoti_title">开启消息通知</string>
-    <string name="cloudpc_main_alert_opennoti_desc">及时获知排队状态。</string>
-    <string name="cloudpc_main_alert_deletedevice_title">是否继续删除设备？</string>
-    <string name="cloudpc_main_alert_deletedevice_desc">删除云设备后，需要重新添加才可继续使用。</string>
-    <string name="cloudpc_main_alert_openpcandapp_title">提示</string>
-    <string name="cloudpc_main_alert_openpcandapp_desc" formatted="false">是否开机并启动 %@ ？</string>
-    <string name="cloudpc_main_alert_openpcandapp_queueoverdesc" formatted="false">是否要重新排队，并在开机后启动 %@ ？</string>
-    <string name="cloudpc_main_alert_takecloudpcandapp_title">提示</string>
-    <string name="cloudpc_main_alert_takecloudpcandapp_desc">当前设备正在被控中，接管设备后可进行远控。</string>
-    <string name="cloudpc_main_alert_requeueinqueueover_title">提示</string>
-    <string name="cloudpc_main_alert_requeueinqueueover_desc" formatted="false">是否要重新排队，并在开机后启动 %@？</string>
-    <string name="cloudpc_main_alert_lostconnection_title">连接异常中断</string>
-    <string name="cloudpc_main_alert_lostconnection_desc">为避免超额计费，云电脑将在 5 分钟后自动关机。请及时处理重连，或使用其他设备连接使用。</string>
-    <string name="cloudpc_main_alert_lostconnection_persistencedesc">云电脑在后台仍保持运行状态，请尝试重新进入桌面。</string>
-    <string name="cloudpc_main_linecrowded_title">线路拥挤，需排队连接云电脑</string>
-    <string name="cloudpc_main_linecrowded_desc" formatted="false">当前使用人数较多，预计需要排队等待 %d 分钟。</string>
-    <string name="cloudpc_main_maintain_title">云电脑当前不可用</string>
-    <string name="cloudpc_main_maintain_desc">服务器正在维护中，请稍后再使用</string>
-    <string name="cloudpc_purchase_history_title">消费记录</string>
-    <string name="cloudpc_control_exit_warning_title">是否关机结束计费？</string>
-    <string name="cloudpc_control_exit_warning_message">关机将会重置电脑，关机前请确认文件是否保存、Steam等平台存档是否同步完成，避免数据丢失。</string>
-    <string name="cloudpc_control_exit_warning_confirm">确认关机</string>
-    <string name="cloudpc_control_coin_notsufficient" formatted="false">剩余U币不足 %@，消耗完将自动关机</string>
-    <string name="cloudpc_control_coin_purchasenow">立即充值</string>
-    <string name="cloudpc_control_coin_surplus">U币余额</string>
-    <string name="cloudpc_control_schedule_toastcontent">已设置定时关机，将在不久后关机。若想取消关机，请点击「继续使用」。</string>
-    <string name="cloudpc_control_schedule_continuebutton">继续使用</string>
-    <string name="cloudpc_control_details_purchase">充值</string>
-    <string name="cloudpc_control_details_runningtime">运行时间</string>
-    <string name="cloudpc_system_noti_queueremind_title">排队提醒</string>
-    <string name="cloudpc_system_noti_queueremind_desc" formatted="false">%@ 预计 2 分钟后到号，到号后需要确认开机，请关注排队情况。</string>
-    <string name="cloudpc_system_noti_queueready_title">排队已到号，请立即确认开机</string>
-    <string name="cloudpc_system_noti_queueready_desc" formatted="false">%@ 准备好啦，请在倒计时结束前开机使用，避免过号。</string>
-    <string name="cloudpc_system_noti_queueover_title">排队已过号</string>
-    <string name="cloudpc_system_noti_queueover_desc" formatted="false">%@ 由于排队到号后未及时开机，请重新排队。</string>
-    <string name="cloudpc_system_noti_notenoughmoney_title">余额不足提醒</string>
-    <string name="cloudpc_system_noti_notenoughmoney_desc" formatted="false">剩余 U币不足 %d，消耗完将自动关机。</string>
-    <string name="cloudpc_system_noti_minortimeover_title" formatted="false">%@ 已自动关机</string>
-    <string name="cloudpc_system_noti_minortimeover_desc">未成年用户可游戏时间已结束，已自动关机。</string>
-    <string name="cloudpc_system_noti_nomoney_title" formatted="false">%@ 已自动关机</string>
-    <string name="cloudpc_system_noti_nomoney_desc">U币不足，云电脑已自动关机。</string>
-    <string name="cloudpc_system_noti_button_sure">好的</string>
-    <string name="cloudpc_system_noti_button_sureboot">确认开机</string>
-    <string name="cloudpc_system_noti_button_opendevice">打开设备页</string>
-    <string name="cloudpc_system_noti_button_gocharge">去充值</string>
-    <string name="cloudpc_popup_guide_tips">云设备已添加到列表中。</string>
     <string name="app_permission_notice_title">系统权限配置</string>
     <string name="app_permission_notice_subtitle">请前往系统设置-“隐私与安全性”开启以下权限，以使用网易UU远程完整功能。</string>
     <string name="app_permission_notice_cancel">取消</string>
@@ -1357,53 +1242,6 @@
     <string name="control_maccontrolled_assistant_error_desc">该设备未开启“设备控制和数据访问”系统权限。</string>
     <string name="control_maccontrolled_guidepopview_title">被控功能已上线！可前往【设置】-【安全】，开启允许同账号控制本设备。</string>
     <string name="control_maccontrolled_guidepopview_button">知道了</string>
-    <string name="cloudpc_schedule_suffix">后自动关机</string>
-    <string name="cloudpc_schedule_action">操作</string>
-    <string name="cloudpc_schedule_menu_cancel">取消定时关机</string>
-    <string name="cloudpc_schedule_menu_modify">修改定时关机时间</string>
-    <string name="cloudpc_schedule_modifytitle">修改定时关机时间</string>
-    <string name="cloudpc_schedule_modifybutton">修改</string>
-    <string name="cloudpc_schedule_hours">小时</string>
-    <string name="cloudpc_schedule_minutes">分钟</string>
-    <string name="cloudpc_schedule_menu_title">定时关机</string>
-    <string name="cloudpc_schedule_setup_autotitle">自动开始定时关机</string>
-    <string name="cloudpc_schedule_setup_autosubtitle">开启后，每次开机使用云电脑时，都会自动以当前设定的时间定时关机。</string>
-    <string name="cloudpc_schedule_setup_close">关闭</string>
-    <string name="cloudpc_schedule_setup_done">完成</string>
-    <string name="cloudpc_schedule_setup_start">开始</string>
-    <string name="cloudpc_schedule_setup_cancelschedule">取消定时关机</string>
-    <string name="cloudpc_schedule_setup_edittime">修改时间</string>
-    <string name="cloudpc_schedule_setup_errorautoon">自动开始定时关机开启（关闭）失败，请重试。</string>
-    <string name="cloudpc_schedule_setup_autosavefailure">开机自动定时关机时间保存失败</string>
-    <string name="cloudpc_schedule_setup_autosavesuccess" formatted="false">开机自动定时关机时间已修改为%@</string>
-    <string name="cloudpc_schedule_setup_schedulestarted" formatted="false">定时关机已启动，将在%@后自动关机</string>
-    <string name="cloudpc_schedule_setup_modifyerror">修改定时关机失败，请重试。</string>
-    <string name="cloudpc_schedule_setup_cancelerror">取消定时关机失败，请重试。</string>
-    <string name="cloudpc_schedule_setup_mintimewarning" formatted="false">定时关机最小时间为 %d 分钟，请重新输入。</string>
-    <string name="cloudpc_shutdown_alert_title">退出云电脑？</string>
-    <string name="cloudpc_shutdown_alert_message">你可以选择退出云电脑，或让它继续在后台运行。</string>
-    <string name="cloudpc_shutdown_alert_messagewithdisk" formatted="false">本云设备已绑定云硬盘，关机会保留%@盘数据</string>
-    <string name="cloudpc_shutdown_alert_confirm">关机并结束计费</string>
-    <string name="cloudpc_shutdown_alert_background">后台挂机</string>
-    <string name="cloudpc_shutdown_alert_cancel">取消</string>
-    <string name="control_smallwindow_cloudpc_shutdown_title">确定要退出云设备吗？</string>
-    <string name="cloudpc_schedule_detail_tip">倒计时结束后将自动关机</string>
-    <string name="cloudpc_schedule_detail_hours">小时</string>
-    <string name="cloudpc_schedule_detail_minutes">分钟</string>
-    <string name="cloudpc_schedule_detail_hoursminutes" formatted="false">%d小时%d分钟</string>
-    <string name="cloudpc_schedule_cancel_alert_title">是否取消定时关机？</string>
-    <string name="cloudpc_schedule_cancel_alert_messagewithpersistence">取消后，将按照正常计费方式结算，您还可以继续使用您的云电脑。</string>
-    <string name="cloudpc_schedule_cancel_alert_messagenopersistence">取消后，云电脑将会持续运行并按照正常计费方式结算。</string>
-    <string name="cloudpc_schedule_cancel_alert_confirm">取消定时关机</string>
-    <string name="cloudpc_schedule_cancel_alert_cancel">暂不取消</string>
-    <string name="cloudpc_schedule_cancel_alreadyshutdown_title">云电脑已关机</string>
-    <string name="cloudpc_schedule_cancel_alreadyshutdown_message">云电脑已关机，定时关机已自动取消。</string>
-    <string name="cloudpc_schedule_cancel_alreadyshutdown_confirm">我知道了</string>
-    <string name="cloudpc_persistence_menu_title">后台挂机</string>
-    <string name="cloudpc_persistence_menu_off">关闭</string>
-    <string name="cloudpc_persistence_menu_once">仅本次生效</string>
-    <string name="cloudpc_persistence_menu_always">保持开启</string>
-    <string name="cloudpc_persistence_alert_hangup">后台挂机</string>
     <string name="setting_preventsleep_title">让这台 Mac 保持唤醒状态</string>
     <string name="setting_preventsleep_desktop_desc">防止电脑进入睡眠状态，导致无法远程访问。</string>
     <string name="setting_preventsleep_laptop_desc">防止电脑进入睡眠状态，导致无法远程访问（合盖状态下建议连接电源适配器）。</string>
@@ -1413,85 +1251,6 @@
     <string name="wowtool_title">魔兽排队提醒工具</string>
     <string name="wowtool_system_noti_button_goremote">进入远控桌面</string>
     <string name="wowtool_system_noti_button_godevice">进入设备详情页</string>
-    <string name="clouddisk_title">云硬盘</string>
-    <string name="clouddisk_manage_title">云硬盘管理</string>
-    <string name="clouddisk_manage_mounttitle">Cloud Disk Mount</string>
-    <string name="clouddisk_manage_button">管理</string>
-    <string name="clouddisk_manage_empty">No Cloud Disks</string>
-    <string name="clouddisk_purchase_button">购买云硬盘</string>
-    <string name="clouddisk_purchase_newbutton">购买云硬盘</string>
-    <string name="clouddisk_done_button">完成</string>
-    <string name="clouddisk_mount_currentdevice" formatted="false">当前设备：%@</string>
-    <string name="clouddisk_mount_emptyrunning">云硬盘可在关机后保留存储，云硬盘（D盘）内的数据关机后不丢失。在本次云电脑关机前购买，可保存当前云电脑 D 盘数据。</string>
-    <string name="clouddisk_mount_emptystopped">云硬盘可在关机后保留存储，云硬盘（D盘）内的数据关机后不丢失。</string>
-    <string name="clouddisk_mount_automount">启动云设备时优先挂载</string>
-    <string name="clouddisk_mount_nextbooteffect">下次启动生效</string>
-    <string name="clouddisk_mount_driveletter" formatted="false">Drive %@</string>
-    <string name="clouddisk_mount_runninghint">Mounting cloud disk is not supported while the cloud device is running.</string>
-    <string name="clouddisk_renew_button">续费</string>
-    <string name="clouddisk_renew_gorenew">去续费</string>
-    <string name="clouddisk_renew_now">立即续费</string>
-    <string name="clouddisk_rename_menutitle">修改云硬盘名称</string>
-    <string name="clouddisk_rename_maxlengthtip" formatted="false">最多输入%d个字符</string>
-    <string name="clouddisk_capacity_format" formatted="false">%d GB</string>
-    <string name="clouddisk_expiry_labelformat" formatted="false">Expires on %@</string>
-    <string name="clouddisk_rename_placeholder">请输入云硬盘名称</string>
-    <string name="clouddisk_rename_save">保存更改</string>
-    <string name="clouddisk_status_expiringsoon">即将到期</string>
-    <string name="clouddisk_status_expired">已到期，云设备结束计费后将抹除云硬盘内容。</string>
-    <string name="clouddisk_status_expiredwithdate" formatted="false">%@ 到期，到期后将清除硬盘数据。</string>
-    <string name="clouddisk_status_occupied">已挂载在其他云设备</string>
-    <string name="clouddisk_status_incompatiblereset">This cloud disk is not compatible with the current device. You can reset it in the cloud disk management page and then mount it.</string>
-    <string name="clouddisk_balance_unit">U币</string>
-    <string name="clouddisk_shutdown_nodisktitle">关机后数据将不会保存</string>
-    <string name="clouddisk_shutdown_nodiskmessage">由于本设备没有挂载云硬盘，关机将会重置电脑，并清除使用期间产生的所有数据。\n\n使用云硬盘功能可帮助你存储数据，下次使用云电脑时无需重新传输或下载内容。</string>
-    <string name="clouddisk_shutdown_tempcontentmessage">由于本设备没有挂载云硬盘，关机将会重置电脑，并清除使用期间产生的所有数据。\n\n建议挂载云硬盘并保存好数据，避免数据丢失。</string>
-    <string name="clouddisk_shutdown_forceshutdown">仍然关机</string>
-    <string name="clouddisk_shutdown_dontremind">不再提示</string>
-    <string name="clouddisk_shutdown_gomount">去挂载</string>
-    <string name="clouddisk_shutdown_expiredtitle">当前存在已过期的云硬盘，确定要关机吗？</string>
-    <string name="clouddisk_shutdown_expiredmessage">关机结束计费后，已过期的云硬盘将彻底抹除资料，无法复原。</string>
-    <string name="clouddisk_subscription_monthly">连续包月</string>
-    <string name="clouddisk_subscription_quarterly">连续包季</string>
-    <string name="clouddisk_subscription_yearly">连续包年</string>
-    <string name="clouddisk_expiration_validuntil" formatted="false">有效期至：%@</string>
-    <string name="clouddisk_guide_title">云硬盘功能上线啦</string>
-    <string name="clouddisk_guide_desc">随时存储你的个人资料，最高支持 1TB！</string>
-    <string name="clouddisk_guide_dismiss">知道了</string>
-    <string name="clouddisk_toast_expired_content" formatted="false">Cloud Disk [%@] has expired. Please backup your data.</string>
-    <string name="clouddisk_toast_abouttoexpire_content" formatted="false">Cloud Disk [%@] is expiring soon. Please renew in time.</string>
-    <string name="clouddisk_toast_occupied_content" formatted="false">Cloud Disk [%@] is occupied by another device. No cloud disk available.</string>
-    <string name="clouddisk_toast_occupied_button">Manage Disks</string>
-    <string name="clouddisk_toast_mounted_content" formatted="false">Cloud Disk [%@] has been mounted to Drive D.</string>
-    <string name="clouddisk_toast_mounted_button">Manage Disks</string>
-    <string name="clouddisk_toast_mountfailed_content">Cloud disk auto-mount failed. Please try manual mount.</string>
-    <string name="clouddisk_reset_menutitle">Reset Cloud Disk Data</string>
-    <string name="clouddisk_reset_confirm_title" formatted="false">Are you sure you want to reset %@ ?</string>
-    <string name="clouddisk_reset_confirm_message">Resetting will permanently erase all cloud disk data and cannot be undone.</string>
-    <string name="clouddisk_reset_confirm_ok">Confirm Reset</string>
-    <string name="clouddisk_reset_loading">Resetting</string>
-    <string name="clouddisk_reset_success">Cloud disk reset complete</string>
-    <string name="clouddisk_reset_fail_title">Cloud Disk Reset Failed</string>
-    <string name="clouddisk_reset_fail_message">Reset failed. Please try again later.</string>
-    <string name="clouddisk_reset_fail_retry">Retry</string>
-    <string name="clouddisk_reset_fail_ok">OK</string>
-    <string name="clouddisk_reset_fail_retryable_message">Please try again later or contact support.</string>
-    <string name="clouddisk_reset_fail_inuse_message">The cloud disk is in use. Please shut down the corresponding cloud device and try again.</string>
-    <string name="clouddisk_reset_fail_expired_message">The cloud disk has expired and cannot be reset.</string>
-    <string name="clouddisk_reset_button">Reset</string>
-    <string name="clouddisk_toast_mountfailed_button">Manage Disks</string>
-    <string name="clouddisk_noti_abouttoexpire_title">Cloud Disk Renewal Reminder</string>
-    <string name="clouddisk_noti_abouttoexpire_body" formatted="false">Cloud Disk [%@] will expire on %@. Please renew in time to avoid data loss.</string>
-    <string name="clouddisk_noti_expired_title">Cloud Disk Expiration Notice</string>
-    <string name="clouddisk_noti_expired_body" formatted="false">Cloud Disk [%@] has expired. Please backup your data.</string>
-    <string name="clouddisk_mount_select_directboot">Boot Directly</string>
-    <string name="clouddisk_mount_select_mountandboot">Mount &amp; Boot</string>
-    <string name="clouddisk_mount_select_cancel">Cancel</string>
-    <string name="clouddisk_mount_select_title">Select Cloud Disk to Mount</string>
-    <string name="clouddisk_menu_disk">Cloud Disk</string>
-    <string name="clouddisk_menu_mountmanage">Manage Disks</string>
-    <string name="clouddisk_menu_purchaserenew">Purchase / Renew</string>
-    <string name="clouddisk_menu_purchasedisk">Purchase Cloud Disk to Keep Data</string>
     <string name="setting_category_shortcut">Hotkeys</string>
     <string name="setting_category_keyboard">Keyboard</string>
     <string name="setting_shortcut_privacyscreen_title">Dismiss Privacy Screen</string>
@@ -1520,7 +1279,6 @@
     <string name="nologin_alert_assistfavorite_title">登录后可收藏外部远控设备</string>
     <string name="nologin_alert_assistfavorite_desc">使用收藏设备功能，可更快更方便地发起远程协助。</string>
     <string name="nologin_alert_verifyrealname_title">登录后进行实名认证</string>
-    <string name="nologin_alert_verifyrealname_desc">实名认证的账户可使用云设备，秒享高配电脑。</string>
     <string name="nologin_alert_feedback_title">登录后提交反馈</string>
     <string name="nologin_alert_feedback_desc">随时查看您提交问题的处理状态和结果。</string>
     <string name="nologin_alert_opencontrolled_title">登录网易UU远程</string>
@@ -1530,8 +1288,6 @@
     <string name="nologin_alert_oncontrolled_title">登录网易UU远程</string>
     <string name="nologin_alert_oncontrolled_desc">本机被控中，需要断开连接后才可登录，是否断开连接？</string>
     <string name="nologin_alert_oncontrolled_button">断开连接并登录</string>
-    <string name="nologin_alert_cloudpcmarket_title">登录后可使用云设备</string>
-    <string name="nologin_alert_cloudpcmarket_desc">不限硬件配置，低配设备秒享高配云电脑，畅玩 3A 大作。</string>
     <string name="nologin_alert_guideuser_title">登录网易UU远程</string>
     <string name="nologin_alert_guideuser_desc">登录后随时访问个人设备，可用于办公、游戏、文件传输。</string>
     <string name="controllerarbitration_banner_message">Another UU Remote client is running. Please close it to continue.</string>

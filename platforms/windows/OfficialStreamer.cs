@@ -1,140 +1,65 @@
 using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Runtime.InteropServices;
+using System.Text;
+using Microsoft.Win32.SafeHandles;
 
 namespace UURemoteClone;
 
 /// <summary>
-/// 直调官方 streamer.dll（COM 风格接口工厂，Ghidra 逆向确认，见 docs/09-official-api.md）：
-///   ordinal 1 = ExchangeControlledInterface（16 槽回调 → 23 槽 vtable）
-///   ordinal 2 = ExchangeControllerInterface（18 槽回调 → 21 槽 vtable）
-/// 返回静态函数指针表；各槽签名与官方内部实现一致（细节见反编译记录）。
-/// 运行时需将官方 streamer.dll 置于 exe 同目录。
+/// Inspect the supplied streamer.dll through the same native bridge as macOS.
+/// This opens no room and performs no capture. No guessed callbacks or arbitrary
+/// function-table slots are exposed to managed code.
 /// </summary>
 public sealed class OfficialStreamer : IDisposable
 {
-    // ---- 回调委托（签名按官方日志/类型编码推断，槽位顺序确定）----
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void CbGeneric(IntPtr a, IntPtr b, IntPtr c, IntPtr d);
+    public enum Role { Controller = 0, Controlled = 1 }
 
-    // ControllerCallback：18 槽（macOS ObjC 编码顺序）
-    [StructLayout(LayoutKind.Sequential)]
-    public struct ControllerCallback
+    private sealed class LibraryHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        public IntPtr OnReceiveMediaTrack;
-        public IntPtr OnRemoveMediaTrack;
-        public IntPtr OnFrameChange;
-        public IntPtr OnReceiveControlData;
-        public IntPtr OnReceiveTextData;
-        public IntPtr OnReceiveFileData;
-        public IntPtr OnReceiveBinaryData;
-        public IntPtr OnRoomState;
-        public IntPtr OnSignalPush;
-        public IntPtr OnQosStats;
-        public IntPtr OnNatInfo;
-        public IntPtr OnPeerConnectionState;
-        public IntPtr OnConnectionStateCode;
-        public IntPtr OnEventReport;
-        public IntPtr OnDualNegotiateCapability;
-        public IntPtr OnReceiveDataChannel;
-        public IntPtr OnSignalData;
-        public IntPtr Reserved;   // 第 18 槽
+        public LibraryHandle(IntPtr value) : base(true) => SetHandle(value);
+        protected override bool ReleaseHandle() { Close(handle); return true; }
     }
 
-    // ControlledCallback：16 槽
-    [StructLayout(LayoutKind.Sequential)]
-    public struct ControlledCallback
+    [DllImport("gvpb", EntryPoint = "uu_official_open", CallingConvention = CallingConvention.Cdecl)]
+    private static extern IntPtr Open(
+        [MarshalAs(UnmanagedType.LPUTF8Str)] string path, int role,
+        [Out] byte[] error, nuint capacity);
+
+    [DllImport("gvpb", EntryPoint = "uu_official_version", CallingConvention = CallingConvention.Cdecl)]
+    private static extern int GetVersion(LibraryHandle library, [Out] byte[] bytes, nuint capacity);
+
+    [DllImport("gvpb", EntryPoint = "uu_official_close", CallingConvention = CallingConvention.Cdecl)]
+    private static extern void Close(IntPtr library);
+
+    private readonly LibraryHandle _handle;
+
+    public OfficialStreamer(string? path = null, Role role = Role.Controller)
     {
-        public IntPtr OnReceiveControlData;
-        public IntPtr OnReceiveTextData;
-        public IntPtr OnReceiveFileData;
-        public IntPtr OnReceiveBinaryData;
-        public IntPtr OnRoomState;
-        public IntPtr OnSignalPush;
-        public IntPtr OnQosStats;
-        public IntPtr OnCursorChange;
-        public IntPtr OnCaptureFailed;
-        public IntPtr OnMuMuData;
-        public IntPtr OnNewControl;
-        public IntPtr OnPeerConnectionState;
-        public IntPtr OnConnectionStateCode;
-        public IntPtr OnEventReport;
-        public IntPtr OnReceiveDataChannel;
-        public IntPtr Reserved;
+        var error = new byte[1024];
+        var value = Open(Path.GetFullPath(path ?? Path.Combine(AppContext.BaseDirectory, "streamer.dll")),
+            (int)role, error, (nuint)error.Length);
+        if (value == IntPtr.Zero) throw new InvalidOperationException(Utf8(error));
+        _handle = new LibraryHandle(value);
     }
 
-    // ordinal 导出
-    [DllImport("streamer.dll", EntryPoint = "#2", CallingConvention = CallingConvention.Cdecl)]
-    private static extern IntPtr ExchangeControllerInterface(ref ControllerCallback cb);
-
-    [DllImport("streamer.dll", EntryPoint = "#1", CallingConvention = CallingConvention.Cdecl)]
-    private static extern IntPtr ExchangeControlledInterface(ref ControlledCallback cb);
-
-    /// <summary>返回的接口对象：函数指针表（首槽 = 0，其后为方法）</summary>
-    private IntPtr _vtable;
-    private IntPtr[]? _slots;
-    private readonly List<Delegate> _keepAlive = new();
-
-    /// <summary>
-    /// 获取控制端接口。callback 实现 18 个回调；返回 vtable 槽位委托数组（index = 槽位）。
-    /// </summary>
-    public IntPtr[] StartController(ClipboardSync.Sender sender)
+    public string Version
     {
-        var cb = new ControllerCallback();
-        // OnReceiveControlData = 槽 3（顺序表第 4 个）→ 把收到的控制数据回给剪贴板/分发器
-        // 官方回调参数风格（data*, len, ctx）需运行时确认；先透传指针长度
-        var recvControl = new CbGeneric((a, b, c, d) =>
+        get
         {
-            try
-            {
-                int len = (int)(c.ToInt64() & 0xffffff);
-                if (len > 0 && len <= 1 << 20)
-                {
-                    var bytes = new byte[len];
-                    Marshal.Copy(b, bytes, 0, len);
-                    sender.SendControl(bytes);
-                }
-            }
-            catch { }
-        });
-        _keepAlive.Add(recvControl);
-        cb.OnReceiveControlData = Marshal.GetFunctionPointerForDelegate(recvControl);
-
-        _vtable = ExchangeControllerInterface(ref cb);
-        ReadSlots();
-        return _slots ?? Array.Empty<IntPtr>();
-    }
-
-    /// <summary>获取被控端接口</summary>
-    public IntPtr[] StartControlled()
-    {
-        var cb = new ControlledCallback();
-        _vtable = ExchangeControlledInterface(ref cb);
-        ReadSlots();
-        return _slots ?? Array.Empty<IntPtr>();
-    }
-
-    private void ReadSlots()
-    {
-        _slots = new IntPtr[24];
-        for (int i = 0; i < 24; i++)
-        {
-            IntPtr v = Marshal.ReadIntPtr(_vtable, i * IntPtr.Size);
-            if (v == IntPtr.Zero) { Array.Resize(ref _slots, i); break; }
-            _slots[i] = v;
+            ObjectDisposedException.ThrowIf(_handle.IsClosed, this);
+            var bytes = new byte[4097];
+            var status = GetVersion(_handle, bytes, (nuint)bytes.Length);
+            if (status != 0) throw new InvalidOperationException($"Official streamer error: {status}");
+            return Utf8(bytes);
         }
     }
 
-    /// <summary>按槽位调用无参方法（示例：slot 表见 docs/09）</summary>
-    public void Call(int slot)
+    private static string Utf8(byte[] bytes)
     {
-        if (_slots == null || slot >= _slots.Length) return;
-        var fn = Marshal.GetDelegateForFunctionPointer<CbGeneric>(_slots[slot]);
-        fn(IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
+        var end = Array.IndexOf(bytes, (byte)0);
+        return Encoding.UTF8.GetString(bytes, 0, end < 0 ? bytes.Length : end);
     }
 
-    public void Dispose()
-    {
-        _keepAlive.Clear();  // 委托由 _keepAlive 持有防 GC；COM 对象为静态表无需释放
-    }
+    public void Dispose() => _handle.Dispose();
 }

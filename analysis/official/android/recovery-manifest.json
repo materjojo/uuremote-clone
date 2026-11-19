@@ -1,0 +1,124 @@
+{
+  "apk_sha256": "19252db1dd384f25db000b334e6f77616b9dfa26b2e416ce5383038e973e219f",
+  "decompiler": "JADX 1.5.3",
+  "coverage": "selected Java JNI glue only; not application, WebRTC audio or all DEX code",
+  "adaptations": [
+    "remove Kotlin synthetic mask constructors and DefaultImpls",
+    "replace Kotlin null checks with Objects.requireNonNull",
+    "rename non-native finalize()I convenience wrapper to shutdown()I",
+    "optional Java default delegate methods, volatile delegate publication",
+    "load the supplied native libraries on first use"
+  ],
+  "files": [
+    {
+      "path": "controller/AndroidStreamerController.java",
+      "jadx_source_sha256": "3bd0f9b28c0f80a3f7a5d54beda92faf2b00c801b2ae945a11255f7a1c8b4fb4",
+      "adapted_sha256": "9691969224f89e541efa7abc24fb2bb67434eea5fec155356d7dbc09ddceb592"
+    },
+    {
+      "path": "controller/StreamerController.java",
+      "jadx_source_sha256": "d7f7b311fc651b0dfb435ad2130bd77748b1547b3dc82f73494e2d801bddd348",
+      "adapted_sha256": "be4990c5f5d6f7ac7d398db9587270cbc941cfb265d76e54328bbb369755c434"
+    },
+    {
+      "path": "controlled/AndroidStreamerControlled.java",
+      "jadx_source_sha256": "15507bcd77d34d88da870b59947566bc97157f0aa85870274cdbf85a7c88e5f1",
+      "adapted_sha256": "31070acd800d6ebb6b6c20a275a4c91805015d52bd0ee2a3f156d7d59c2caf89"
+    },
+    {
+      "path": "controlled/StreamerControlled.java",
+      "jadx_source_sha256": "1817fddceef3211f84bfb762433c866436671dc093a787190335cad4a4e49716",
+      "adapted_sha256": "0d978b46a8f70cb1b7a21d227377680720cc3e32cf660c9e79257d8408fe39b7"
+    },
+    {
+      "path": "model/AudioCaptureConfig.java",
+      "jadx_source_sha256": "80e5bc1f0fba501b02c8263e9b5801cfe2bd3ada1cc581a5e905a57230983959",
+      "adapted_sha256": "bc140fb465aa45283a8f36d8298b819c2177bacee5440208ecf4dcd99bee61a4"
+    },
+    {
+      "path": "model/AudioRendererConfig.java",
+      "jadx_source_sha256": "f190cecd7a13c57e8a0300d0d10e34802aa9974e718ca1268c7f759fdd1151f3",
+      "adapted_sha256": "4dfb914d227958031bb180402c2adeeecefa27a4e79b24bf26d5146589c75b59"
+    },
+    {
+      "path": "model/VideoCaptureConfig.java",
+      "jadx_source_sha256": "a2e4325133bedb1e55d6782ca3dbdad6cfef15e995fa53c5ac86a161996bc64e",
+      "adapted_sha256": "439395dd994d316c1a3d8449b0055dda9f2cad9ab09f3b555d3cf4784f36bc6f"
+    },
+    {
+      "path": "model/VideoRendererConfig.java",
+      "jadx_source_sha256": "fe4cff5c192a16e9096daf774edd99a33fa94fdfd73c6701d0004da0b817a92d",
+      "adapted_sha256": "bf7bf4a3dc0968c7e64e52f4b276473d3b2d82aa2098c1bb412c0f6a11ae7fd8"
+    },
+    {
+      "path": "model/IceNetworkConfig.java",
+      "jadx_source_sha256": "27073e23cd135749379206c149ed0cae8618ebad1a3762c681c3ac5551e1d850",
+      "adapted_sha256": "ce15b73a1357d2b33e635e56ca2df991ca9805caf3514e6ed6c554475120a5d2"
+    },
+    {
+      "path": "model/StreamerRoomConfig.java",
+      "jadx_source_sha256": "43de5560abfefaf096d1d37aa455f533aa6e2aff327651fcdac0253b806fb1df",
+      "adapted_sha256": "f55f2569323834062875047cadbb74cd3ae902055ffbd02322b8c1e1f88b74fb"
+    },
+    {
+      "path": "model/NewControlInfo.java",
+      "jadx_source_sha256": "d365f6bd16885d4feadf2093a90f911225cab101a3c81131bfb636550417e3e3",
+      "adapted_sha256": "511d9100da5cf5dc5ba19f4b45614d3c5d057a5e052905c03dfe367829883780"
+    },
+    {
+      "path": "model/StreamerAudioCaptureTarget.java",
+      "jadx_source_sha256": "8bcda2d09207baa40c4f09318639d0ded0e804df9f58f4db39de3fa07f8445ea",
+      "adapted_sha256": "7385f33991c3978dfd1a21748dbeb447e358b3e4dee87566f09209809620cb10"
+    },
+    {
+      "path": "model/StreamerChromaSampling.java",
+      "jadx_source_sha256": "dcbac08ad376b74184123b29604bf35d4f17420cb0c3a0906ac7d5a4588da136",
+      "adapted_sha256": "60a183b1ea7b6797a1a73d3c06fd2fd1e2b5a1ef51b996049603081693ce55d2"
+    },
+    {
+      "path": "model/StreamerCodecType.java",
+      "jadx_source_sha256": "23b126972ce2467cbee502cff840a37e164fb7a958fc348ec71a95185688f2d9",
+      "adapted_sha256": "683746dad60da4d582ef0ea176406002f69ba1b337ec410faba8bda6be7f3e04"
+    },
+    {
+      "path": "model/StreamerFrameQuality.java",
+      "jadx_source_sha256": "f90a0b5e4bdb71e27f4605048d1a5c3a85ded3be39739d360833324876540e61",
+      "adapted_sha256": "19b1adaa752ba3dd045f9c29287a3c42149524631f34cfb697e08d738183d60d"
+    },
+    {
+      "path": "model/StreamerScreenSourceType.java",
+      "jadx_source_sha256": "d757379abed0accffc9af836ebd2b158260e3fbb585b619cb4ff24aad6bca189",
+      "adapted_sha256": "5a17114c5019da917c2f6dde24e04860d173a2aa4d1b284f5dafc880bd82c991"
+    },
+    {
+      "path": "model/StreamerVideoCaptureTarget.java",
+      "jadx_source_sha256": "7b5ae6c80d5ca64f4d7f58dfc49dc459867b568c9f881dac59e0ad1fe5070638",
+      "adapted_sha256": "361ad5971cd8a3115d1ffee34a1887ab2316767699a6481618c2a8b29a36445d"
+    },
+    {
+      "path": "StreamerSurfaceView.java",
+      "jadx_source_sha256": "36ea852c3a2c914a60f3da443dfad80f02655074e9191216f5455174a8c92410",
+      "adapted_sha256": "3d859fb200bf8646f3f9fbc84b4be34ea238b300adaecf0481b841955073ed5e"
+    },
+    {
+      "path": "StreamerSurfaceTexture.java",
+      "jadx_source_sha256": "ef3c706dca3bdec1d108274cb592aa7fbbcca347f222f056e29f24a926b9bb89",
+      "adapted_sha256": "de8df2acd7b8dc12e456679b4e8f8f3b7cfc0cb3b9cfb8ce5fbff3fb3147534a"
+    },
+    {
+      "path": "StreamerDisplayListener.java",
+      "jadx_source_sha256": "055772c11f6db081f3e527b7bf4e07fde1d1b1bf9969402b30ea48c2387b3073",
+      "adapted_sha256": "eba6e33d61b220d4b93d1899bb412bfb6bf1d094d7b1864c7715240a46eb2a33"
+    },
+    {
+      "path": "StreamerMediaProjectionCallback.java",
+      "jadx_source_sha256": "902f71a042f5151555110eabacadf6a9ab2ffa7d1c70158ea20588bf925ef219",
+      "adapted_sha256": "9a420d7eedd4a70ec93bb9956a862753112b3f8e8a041b3f530fe359e194415e"
+    },
+    {
+      "path": "StreamerVirtualDisplayCallback.java",
+      "jadx_source_sha256": "7f49cbf3cb46a86f72ad61635a96e01482df78ee8b5a4f9572c8a057ed4bc798",
+      "adapted_sha256": "1b1f62460381ce50d1061fac10547a334317098a055af2fbd9b82bc35cbb2fd4"
+    }
+  ]
+}

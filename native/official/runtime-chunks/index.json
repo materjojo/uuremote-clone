@@ -1,0 +1,209 @@
+{
+  "encoding": "concatenated-gzip-chunks",
+  "files": [
+    {
+      "output": "native/official/runtime/macos/libstreamer.dylib",
+      "bytes": 26609328,
+      "sha256": "ec89d21754e30ff7e6b38534130b5dfb6a5d78968b5816ccf2dbd0740c83cb03",
+      "chunks": [
+        {
+          "path": "macos/libstreamer.dylib.gz.part000",
+          "bytes": 524288,
+          "sha256": "64aa1ae2aca787c97a5a739b2f0e971b36d952f58e494109df766cebd9ef0d58"
+        },
+        {
+          "path": "macos/libstreamer.dylib.gz.part001",
+          "bytes": 524288,
+          "sha256": "0834ea0c810c556b13055be7453da4094b1c0d4991cce54a0d3d03f636cd7888"
+        },
+        {
+          "path": "macos/libstreamer.dylib.gz.part002",
+          "bytes": 524288,
+          "sha256": "0517243323b9ef44848ba923293bd4e1abda588374368aaecc9aa4f43dd67f08"
+        },
+        {
+          "path": "macos/libstreamer.dylib.gz.part003",
+          "bytes": 524288,
+          "sha256": "6c1727c897bd9c6f7ce2f5d6aaf169673cf2dac2ab64dab93807d1f4afb4cf4d"
+        },
+        {
+          "path": "macos/libstreamer.dylib.gz.part004",
+          "bytes": 524288,
+          "sha256": "b2de38ff7dc9b972b85b09e66c9dc6a7bbdf4b278a5de0745f842acc953f9259"
+        },
+        {
+          "path": "macos/libstreamer.dylib.gz.part005",
+          "bytes": 524288,
+          "sha256": "17b7d460e08ad9fa65951adfff78ea600e0485dffd8fdb9fecd3502b81dd2389"
+        },
+        {
+          "path": "macos/libstreamer.dylib.gz.part006",
+          "bytes": 524288,
+          "sha256": "961ddccf268b8c911cb22246b93df01bd31004e3d446e20947b12bd82c639aa5"
+        },
+        {
+          "path": "macos/libstreamer.dylib.gz.part007",
+          "bytes": 524288,
+          "sha256": "3b86fc66736de52b91ef75011a78e5be9b0a01cd7bf840b06352ea07569a22b2"
+        },
+        {
+          "path": "macos/libstreamer.dylib.gz.part008",
+          "bytes": 524288,
+          "sha256": "053aad2964a5e4fbb5818e48d9d509e8ec80a9df6e2bb90aad56bbbf07711286"
+        },
+        {
+          "path": "macos/libstreamer.dylib.gz.part009",
+          "bytes": 524288,
+          "sha256": "9c863c62e36469b8328a4a83fa8c0c58e8283507c53344fb43edc3a809f3b92d"
+        },
+        {
+          "path": "macos/libstreamer.dylib.gz.part010",
+          "bytes": 524288,
+          "sha256": "b7078a70c23124635be04198b9bce30d1a42d05254074f76ea960f927aab6473"
+        },
+        {
+          "path": "macos/libstreamer.dylib.gz.part011",
+          "bytes": 524288,
+          "sha256": "6b51a712701fa1dc0f4b0e48a30f8d202c1cb5ac95345e4dc15b9f1ba0069783"
+        },
+        {
+          "path": "macos/libstreamer.dylib.gz.part012",
+          "bytes": 524288,
+          "sha256": "c92ac5f3dcc5b35eb29aab6780f3472f2c2e92435fdbaed9c945fb9fba87401d"
+        },
+        {
+          "path": "macos/libstreamer.dylib.gz.part013",
+          "bytes": 524288,
+          "sha256": "357b4bfd8c182bb382a879ff9afdab614ce4d88ce97948137f06a22acb484c8b"
+        },
+        {
+          "path": "macos/libstreamer.dylib.gz.part014",
+          "bytes": 524288,
+          "sha256": "4ad54acf35944f0fa6a9614fa76ade14ab2e0293bf7aca9ad152e5eb619d1458"
+        },
+        {
+          "path": "macos/libstreamer.dylib.gz.part015",
+          "bytes": 524288,
+          "sha256": "a471164c4f8dec6f8223f75dd6f3d642daecd2956fa905972ca57b01bd71dadf"
+        },
+        {
+          "path": "macos/libstreamer.dylib.gz.part016",
+          "bytes": 524288,
+          "sha256": "014fdf074269b3105b00b1db052c953e89dbde437e3bcb3ebb26c0eb7cca2e1a"
+        },
+        {
+          "path": "macos/libstreamer.dylib.gz.part017",
+          "bytes": 524288,
+          "sha256": "ae17d17a75e6b8c70d2da0e5c81f037e90db099998996410a85b9d35c0eb1969"
+        },
+        {
+          "path": "macos/libstreamer.dylib.gz.part018",
+          "bytes": 524288,
+          "sha256": "1ec59f4e173c1f1a366ceb185a817d2c7fcba588710f3eb76b1c1d8464821d5c"
+        },
+        {
+          "path": "macos/libstreamer.dylib.gz.part019",
+          "bytes": 524288,
+          "sha256": "ec7422d638f772e4d480d5467591ec7e762965da5d9f746c757f555308c4b783"
+        },
+        {
+          "path": "macos/libstreamer.dylib.gz.part020",
+          "bytes": 524288,
+          "sha256": "9f16736dcb56e35817f28915a429206b5f6d839aaa4b376f67c5a34a536296cd"
+        },
+        {
+          "path": "macos/libstreamer.dylib.gz.part021",
+          "bytes": 154228,
+          "sha256": "f6593c5a9d186b6c4fce3f7b8778eb14354da457d4af3eb3687e45fe73b19152"
+        }
+      ]
+    },
+    {
+      "output": "native/official/runtime/windows/streamer.dll",
+      "bytes": 20443128,
+      "sha256": "ac351cf4e1d489e0b6e1a3df5cdf8aed96348876f7e2c7fcf7162fe59e1bb1c4",
+      "chunks": [
+        {
+          "path": "windows/streamer.dll.gz.part000",
+          "bytes": 524288,
+          "sha256": "ff26ac561860862ca11514a9567e0b5407222fac672d0de7f7b0f81df2f1fbd5"
+        },
+        {
+          "path": "windows/streamer.dll.gz.part001",
+          "bytes": 524288,
+          "sha256": "47c7b1411cf876dc30c290cc24a237a034ab80cf3cb524dbfbef589eb627107c"
+        },
+        {
+          "path": "windows/streamer.dll.gz.part002",
+          "bytes": 524288,
+          "sha256": "9f2eb510cc00ace2a103d6cf79c26936a52443ee4e400ff28b6cc13ef8434454"
+        },
+        {
+          "path": "windows/streamer.dll.gz.part003",
+          "bytes": 524288,
+          "sha256": "563ef38f32650049c733c62a23b07cb3ac99639cf7d26425ac1be93021597dea"
+        },
+        {
+          "path": "windows/streamer.dll.gz.part004",
+          "bytes": 524288,
+          "sha256": "3aa3ff90d0f1999bba67b7411daeb5c6f7c470da2a68a84fd09e829f397a8282"
+        },
+        {
+          "path": "windows/streamer.dll.gz.part005",
+          "bytes": 524288,
+          "sha256": "194ef01ea71cca99809acd39b389515b14d736a1da89aed33b3f8360f6f896b8"
+        },
+        {
+          "path": "windows/streamer.dll.gz.part006",
+          "bytes": 524288,
+          "sha256": "860976869457eda1e4dd7b7d6bc77ceb0d8b93237f9fede23efe7e8f8a01fd10"
+        },
+        {
+          "path": "windows/streamer.dll.gz.part007",
+          "bytes": 524288,
+          "sha256": "3ed74114bf021d57a4d2f5be86f685b17ac363553f918bfbd68c9cd81a30d27a"
+        },
+        {
+          "path": "windows/streamer.dll.gz.part008",
+          "bytes": 524288,
+          "sha256": "b19d35405079e3bb0a0c1efd5c0b605f33301e43ab3e13ca37c71680bbfaef38"
+        },
+        {
+          "path": "windows/streamer.dll.gz.part009",
+          "bytes": 524288,
+          "sha256": "9b2009239a3c8a35dceba2e0853b8a35e30d95aee00a11c83c4439a64bef92af"
+        },
+        {
+          "path": "windows/streamer.dll.gz.part010",
+          "bytes": 524288,
+          "sha256": "6a1f94b95f5ab1d24e711b105159cb118a6f52025c44720173c098a3d951d1f8"
+        },
+        {
+          "path": "windows/streamer.dll.gz.part011",
+          "bytes": 524288,
+          "sha256": "8762ee282e5f57919c2b7d4e730b3b566e049828b4deb47b985db9965bdfc166"
+        },
+        {
+          "path": "windows/streamer.dll.gz.part012",
+          "bytes": 524288,
+          "sha256": "93a217b2bec15b3656a5834adb8dbe957b11bf255579077c5eea45e513ce2d7a"
+        },
+        {
+          "path": "windows/streamer.dll.gz.part013",
+          "bytes": 524288,
+          "sha256": "89cc24622dc71801187078f49b7bac9bf66cda6565ed0be872145b009aa3a07b"
+        },
+        {
+          "path": "windows/streamer.dll.gz.part014",
+          "bytes": 524288,
+          "sha256": "cd7cb24b3916fe365642288344bbc75acdc60a21e0db5df730d62f0e2c113841"
+        },
+        {
+          "path": "windows/streamer.dll.gz.part015",
+          "bytes": 413608,
+          "sha256": "8270b073773866f213a7dfb6600e4beccb65e84cc4123960207dc9399ccff230"
+        }
+      ]
+    }
+  ]
+}

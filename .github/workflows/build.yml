@@ -4,6 +4,13 @@ on:
   push:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   core:
     strategy:
@@ -11,71 +18,113 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+      - name: Restore exact supplied desktop libraries
+        run: python scripts/restore_official_runtime.py
+      - name: Verify installer-member identities and generated tables
+        run: |
+          python scripts/verify_official_runtime.py
+          python scripts/gen_protocol_schema.py --check
       - name: Configure
         run: cmake -S core -B core/build -DCMAKE_BUILD_TYPE=Release
       - name: Build
         run: cmake --build core/build --config Release
-      - name: Test
+      - name: Test (assertions enabled in Release)
         run: ctest --test-dir core/build --output-on-failure -C Release
+      - name: Probe supplied macOS library through shared ABI
+        if: runner.os == 'macOS'
+        run: python scripts/verify_official_runtime.py --bridge core/build/libgvpb.dylib --output build/native-runtime-macos.json
+      - name: Probe supplied Windows library through shared ABI
+        if: runner.os == 'Windows'
+        run: python scripts/verify_official_runtime.py --bridge core/build/Release/gvpb.dll --output build/native-runtime-windows.json
+      - uses: actions/upload-artifact@v4
+        if: runner.os != 'Linux'
+        with:
+          name: Native-ABI-${{ matrix.os }}
+          path: build/native-runtime-*.json
+          if-no-files-found: error
 
   macos-app:
     runs-on: macos-latest
     timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
-      - name: Swift version
-        run: swift --version
+      - name: Restore exact supplied desktop libraries
+        run: python scripts/restore_official_runtime.py
       - name: Resolve
         run: swift package resolve
       - name: Build
         run: swift build -c release
-      - name: Package .app
-        run: bash scripts/make_app.sh
+      - name: Test Swift binding against the supplied dylib
+        env:
+          UU_OFFICIAL_LIBRARY: ${{ github.workspace }}/native/official/runtime/macos/libstreamer.dylib
+        run: swift test -c release
+      - name: Package .app and preserve executable permissions
+        run: |
+          bash scripts/make_app.sh
+          ditto -c -k --sequesterRsrc --keepParent build/UURemoteClone.app build/UURemoteClone-macos.zip
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: UURemoteClone-app
-          path: build/UURemoteClone.app
+          name: UURemoteClone-macos
+          path: build/UURemoteClone-macos.zip
           if-no-files-found: error
 
   windows-app:
     runs-on: windows-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+      - name: Restore exact supplied desktop libraries
+        run: python scripts/restore_official_runtime.py
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
-      - name: Build shared core (gvpb.dll)
+      - name: Build shared core and official ABI (gvpb.dll)
         run: |
           cmake -S core -B core/build -DCMAKE_BUILD_TYPE=Release
           cmake --build core/build --config Release --target gvpb_shared
-      - name: Build WPF app
+          Copy-Item core/build/Release/gvpb.dll platforms/windows/gvpb.dll -Force
+      - name: Test managed binding against the supplied DLL
+        run: dotnet run --project Tests/WindowsOfficialSmoke -c Release -- core/build/Release native/official/runtime/windows/streamer.dll
+      - name: Publish WPF app with native runtime
+        run: dotnet publish platforms/windows/UURemoteClone.Windows.csproj -c Release -r win-x64 --self-contained true -o build/windows
+      - name: Verify package and archive
         run: |
-          $dll = Get-ChildItem -Recurse core/build -Filter gvpb.dll | Select-Object -First 1
-          if ($dll) { Copy-Item $dll.FullName platforms/windows/ -Force }
-          dotnet build platforms/windows/UURemoteClone.Windows.csproj -c Release
+          foreach ($name in @("UURemoteClone.exe", "gvpb.dll", "streamer.dll", "streamer-config.json")) {
+            if (!(Test-Path "build/windows/$name")) { throw "Missing package member: $name" }
+          }
+          Compress-Archive -Path build/windows/* -DestinationPath build/UURemoteClone-windows-x64.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: UURemoteClone-windows-x64
+          path: build/UURemoteClone-windows-x64.zip
+          if-no-files-found: error
 
   android-app:
     runs-on: ubuntu-latest
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
+      - name: Restore exact supplied desktop libraries
+        run: python scripts/restore_official_runtime.py
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
-      - name: Android SDK check
-        run: |
-          echo "SDK=$ANDROID_HOME"
-          ls "$ANDROID_HOME/platforms" | tail -3
       - uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: '8.7'
-      - name: Generated bindings snapshot
-        run: |
-          echo '--- ClipboardChange.java 结构 ---'
-          grep -n 'enum\|class\|public' platforms/android/app/src/main/java/gv_pb/ClipboardChange.java 2>/dev/null | head -8 || echo 'file not found'
-          ls platforms/android/app/src/main/java/gv_pb/ 2>/dev/null | head -5
-      - name: Build APK
+      - name: Build ARM64 APK
         run: gradle -p platforms/android assembleDebug --no-daemon
+      - name: Check compiled JNI contracts against original APK DEX
+        run: python scripts/verify_android_abi.py --classes platforms/android/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes
+      - name: Check native libraries and config inside APK
+        run: python scripts/verify_android_package.py platforms/android/app/build/outputs/apk/debug/app-debug.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: UURemoteClone-android-arm64-debug
+          path: platforms/android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error

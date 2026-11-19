@@ -1,0 +1,8792 @@
+[
+ {
+  "name": "feature_flag.proto",
+  "package": "gv_pb",
+  "deps": [],
+  "messages": [
+   {
+    "name": "FeatureFlag",
+    "fields": [
+     {
+      "name": "ff_capture_setting",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "ff_simple_action",
+      "number": 2,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "ff_system_metrics",
+      "number": 3,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "ff_private_screen",
+      "number": 4,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "ff_update_acquire",
+      "number": 5,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "ff_file_transfer_ftp",
+      "number": 6,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "ff_file_transfer_ftp2",
+      "number": 7,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "ff_clipboard",
+      "number": 8,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "ff_qos_stat",
+      "number": 9,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "ff_mumu_control",
+      "number": 10,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "ff_virtual_mouse_device",
+      "number": 11,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   }
+  ],
+  "enums": [
+   [
+    "FF_CaptureSetting",
+    [
+     [
+      "FF_CAPTURE_SETTING_UNKNOWN",
+      0
+     ],
+     [
+      "FF_CAPTURE_SETTING_INIT_VERION",
+      1
+     ],
+     [
+      "FF_CAPTURE_SETTING_AUTO_CREATE_VIRTUAL_DISPLAY",
+      2
+     ],
+     [
+      "FF_CAPTURE_SETTING_CHROMA_SAMPLING",
+      3
+     ],
+     [
+      "FF_CAPTURE_SETTING_CUSTOM_BITRATE",
+      4
+     ],
+     [
+      "FF_CAPTURE_SETTING_DPI_SCALE",
+      5
+     ],
+     [
+      "FF_CAPTURE_SETTING_HDR",
+      6
+     ]
+    ]
+   ],
+   [
+    "FF_SimpleAction",
+    [
+     [
+      "FF_SIMPLE_ACTION_UNKNOWN",
+      0
+     ],
+     [
+      "FF_SIMPLE_ACTION_MUTING",
+      1
+     ],
+     [
+      "FF_SIMPLE_ACTION_AUTO_LOCK",
+      2
+     ],
+     [
+      "FF_SIMPLE_ACTION_STOP_STREAMING",
+      3
+     ]
+    ]
+   ],
+   [
+    "FF_SystemMetrics",
+    [
+     [
+      "FF_SYSTEM_METRICS_UNKNOWN",
+      0
+     ],
+     [
+      "FF_SYSTEM_METRICS_SETTING",
+      1
+     ],
+     [
+      "FF_SYSTEM_METRICS_SETTING_AUTO_LOCK",
+      2
+     ],
+     [
+      "FF_SYSTEM_METRICS_SETTING_PRIVATE_SCREEN",
+      3
+     ]
+    ]
+   ],
+   [
+    "FF_PrivateScreenSetting",
+    [
+     [
+      "FF_PRIVATE_SCREEN_SETTING_UNKNOWN",
+      0
+     ],
+     [
+      "FF_PRIVATE_SCREEN_SETTING_INIT_VERION",
+      1
+     ],
+     [
+      "FF_PRIVATE_SCREEN_ENHANCED_PRIVACY",
+      2
+     ]
+    ]
+   ],
+   [
+    "FF_UpdateAcquire",
+    [
+     [
+      "FF_UPDATE_ACQUIRE_UNKNOWN",
+      0
+     ],
+     [
+      "FF_UPDATE_ACQUIRE_INIT_VERION",
+      1
+     ]
+    ]
+   ],
+   [
+    "FF_FileTransfer_FTP",
+    [
+     [
+      "FF_FILE_TRANSFER_FTP_UNKNOWN",
+      0
+     ],
+     [
+      "FF_FILE_TRANSFER_FTP_INIT_VERION",
+      1
+     ],
+     [
+      "FF_FILE_TRANSFER_FTP_LIST_COMPRESS",
+      2
+     ]
+    ]
+   ],
+   [
+    "FF_FileTransfer_FTP2",
+    [
+     [
+      "FF_FILE_TRANSFER_FTP2_UNKNOWN",
+      0
+     ],
+     [
+      "FF_FILE_TRANSFER_FTP2_RESUMABLE",
+      1
+     ],
+     [
+      "FF_FILE_TRANSFER_FTP2_SPEEDY",
+      2
+     ]
+    ]
+   ],
+   [
+    "FF_Clipboard",
+    [
+     [
+      "FF_CLIPBOARD_UNKNOWN",
+      0
+     ],
+     [
+      "FF_CLIPBOARD_INIT_VERION",
+      1
+     ],
+     [
+      "FF_CLIPBOARD_SUPPORT_FILE",
+      2
+     ],
+     [
+      "FF_CLIPBOARD_SUPPORT_TEXT_CHANGE",
+      3
+     ]
+    ]
+   ],
+   [
+    "FF_Qos_Stat",
+    [
+     [
+      "FF_QOS_STAT_UNKNOWN",
+      0
+     ],
+     [
+      "FF_QOS_STAT_INIT_VERION",
+      1
+     ]
+    ]
+   ],
+   [
+    "MuMu_Control",
+    [
+     [
+      "FF_MUMU_CONTROL_UNKNOWN",
+      0
+     ],
+     [
+      "FF_MUMU_CONTROL_INIT_VERION",
+      1
+     ]
+    ]
+   ],
+   [
+    "Virtual_Mouse_Device",
+    [
+     [
+      "FF_VIRTUAL_MOUSE_DEVICE_UNKNOWN",
+      0
+     ],
+     [
+      "FF_VIRTUAL_MOUSE_DEVICE_INIT_VERION",
+      1
+     ]
+    ]
+   ]
+  ],
+  "syntax": "proto3"
+ },
+ {
+  "name": "main.proto",
+  "package": "gv_pb",
+  "deps": [
+   "general.proto",
+   "mumu.proto",
+   "notification.proto",
+   "connect.proto",
+   "input_event.proto",
+   "rpc_main.proto",
+   "port_mapping.proto"
+  ],
+  "messages": [
+   {
+    "name": "Message",
+    "fields": [
+     {
+      "name": "seq",
+      "number": 1,
+      "label": 1,
+      "type": 3,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "timestamp",
+      "number": 2,
+      "label": 1,
+      "type": 3,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "simple_action",
+      "number": 3,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.SimpleAction",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "launch_app",
+      "number": 4,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.LaunchApp",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "show_app",
+      "number": 5,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ShowApp",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "mumu_operate",
+      "number": 6,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.MumuOperate",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "screens",
+      "number": 7,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ScreenSources",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "capture_change",
+      "number": 8,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.CaptureChange",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "capture_config",
+      "number": 9,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.CaptureConfig",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "rom_message",
+      "number": 10,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.RomMessage",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "send_to_rom",
+      "number": 11,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.SendToRom",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "report_error",
+      "number": 12,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ReportError",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "system_metrics",
+      "number": 13,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.SystemMetrics",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "report_qos_stats",
+      "number": 14,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ReportQosStats",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "system_state_change",
+      "number": 15,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.SystemStateChange",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "query_system_state",
+      "number": 16,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.QuerySystemState",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "clipboard_change",
+      "number": 17,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ClipboardChange",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "codec_negotiation",
+      "number": 18,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.CodecNegotiation",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "capture_config_response",
+      "number": 19,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.CaptureConfigResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "input_event",
+      "number": 20,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.InputEvent",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "rpc_request",
+      "number": 21,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.RpcRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "rpc_response",
+      "number": 22,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.RpcResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "active_window_change",
+      "number": 23,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ActiveWindowChange",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "launch_cloud_pc_app",
+      "number": 24,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.LaunchCloudPcApp",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "capture_setting_sync",
+      "number": 25,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.CaptureSettingSync",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "remote_download_path",
+      "number": 26,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.RemoteDownloadPath",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "port_mapping_frame",
+      "number": 27,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.PortMappingFrame",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "terminal_session_changed",
+      "number": 28,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.TerminalSessionChanged",
+      "oneof": 0,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": [
+     "which"
+    ]
+   }
+  ],
+  "enums": [],
+  "syntax": "proto3"
+ },
+ {
+  "name": "rpc_main.proto",
+  "package": "gv_pb",
+  "deps": [
+   "rpc_message.proto",
+   "rpc_file_transfer.proto",
+   "clipboard.proto",
+   "draw.proto"
+  ],
+  "messages": [
+   {
+    "name": "RequestHeader",
+    "fields": [
+     {
+      "name": "request_id",
+      "number": 1,
+      "label": 1,
+      "type": 3,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "ResponseHeader",
+    "fields": [
+     {
+      "name": "request_id",
+      "number": 1,
+      "label": 1,
+      "type": 3,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "RpcRequest",
+    "fields": [
+     {
+      "name": "request_header",
+      "number": 1,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.RequestHeader",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "capture_setting",
+      "number": 2,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.CaptureSettingRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "fps_setting",
+      "number": 3,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.FpsSettingRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "video_quality_setting",
+      "number": 4,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.VideoQualitySettingReqeust",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "cursor_setting",
+      "number": 5,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.CursorSettingReqeust",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "resolution_setting",
+      "number": 6,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ResolutionSettingRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "private_screen_setting",
+      "number": 7,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.PrivateScreenSettingRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "file_transfer_ftp_request",
+      "number": 8,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.FileTransferFtpRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "clip_request",
+      "number": 9,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ClipboardRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "text_change_request",
+      "number": 10,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ClipboardTextChangeRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "mouse_switch_request",
+      "number": 11,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.VirtualMouseSwitchRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "create_virtual_display_req",
+      "number": 12,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.CreateVirtualDisplayRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "remove_virtual_display_req",
+      "number": 13,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.RemoveVirtualDisplayRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "quit_super_screen",
+      "number": 14,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.QuitSuperScreenRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "send_video_track_req",
+      "number": 15,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.SendVideoTrackRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "query_plugin_setting_req",
+      "number": 16,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.QueryPluginSettingRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "update_plugin_setting_req",
+      "number": 17,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.UpdatePluginSettingRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "start_download_and_install_plugin_req",
+      "number": 18,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.StartDownloadAndInstallPluginRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "plugin_enable_notification_req",
+      "number": 19,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.PluginEnableNotificationRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "plugin_notification_req",
+      "number": 20,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.PluginNotificationRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "virtual_audio_driver_policy_req",
+      "number": 21,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.VirtualAudioDriverPolicyRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "flip_screen_req",
+      "number": 22,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.SendFlipScreenRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "quick_launch_scan_req",
+      "number": 23,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.QuickLaunchScanRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "quick_launch_app_icon_req",
+      "number": 24,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.QuickLaunchAppIconRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "update_screen_saver_req",
+      "number": 25,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.UpdateScreenSaverRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "enter_super_screen_req",
+      "number": 26,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.EnterSuperScreenRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "draw_req",
+      "number": 27,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.DrawRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "terminal_check_env_req",
+      "number": 28,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.CheckEnvReq",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "terminal_rename_session_req",
+      "number": 29,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.RenameSessionReq",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "user_entitlement_sync_req",
+      "number": 30,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.UserEntitlementSyncRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": [
+     "which"
+    ]
+   },
+   {
+    "name": "RpcResponse",
+    "fields": [
+     {
+      "name": "response_header",
+      "number": 1,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ResponseHeader",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "capture_setting",
+      "number": 2,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.CaptureSettingResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "private_screen_setting",
+      "number": 3,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.PrivateScreenSettingResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "file_transfer_ftp_response",
+      "number": 4,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.FileTransferFtpResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "clip_response",
+      "number": 5,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ClipboardResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "text_change_response",
+      "number": 6,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ClipboardTextChangeResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "mouse_switch_response",
+      "number": 7,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.VirtualMouseSwitchResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "create_virtual_display_rsp",
+      "number": 8,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.CreateVirtualDisplayResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "remove_virtual_display_rsp",
+      "number": 9,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.RemoveVirtualDisplayResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "quit_super_screen",
+      "number": 10,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.QuitSuperScreenResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "send_video_track_rsp",
+      "number": 11,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.SendVideoTrackResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "query_plugin_setting_rsp",
+      "number": 12,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.QueryPluginSettingResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "update_plugin_setting_rsp",
+      "number": 13,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.UpdatePluginSettingResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "start_download_and_install_plugin_rsp",
+      "number": 14,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.StartDownloadAndInstallPluginResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "plugin_enable_notification_rsp",
+      "number": 15,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.PluginEnableNotificationResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "plugin_notification_rsp",
+      "number": 16,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.PluginNotificationResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "virtual_audio_driver_policy_rsp",
+      "number": 17,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.VirtualAudioDriverPolicyResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "flip_screen_rsp",
+      "number": 18,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.SendFlipScreenResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "quick_launch_scan_rsp",
+      "number": 19,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.QuickLaunchScanResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "quick_launch_app_icon_rsp",
+      "number": 20,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.QuickLaunchAppIconResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "update_screen_saver_rsp",
+      "number": 21,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.UpdateScreenSaverResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "enter_super_screen_rep",
+      "number": 22,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.EnterSuperScreenResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "draw_resp",
+      "number": 23,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.DrawResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "terminal_check_env_resp",
+      "number": 24,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.CheckEnvResp",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "terminal_rename_session_resp",
+      "number": 26,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.RenameSessionResp",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "user_entitlement_sync_rsp",
+      "number": 27,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.UserEntitlementSyncResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": [
+     "which"
+    ]
+   }
+  ],
+  "enums": [],
+  "syntax": "proto3"
+ },
+ {
+  "name": "general.proto",
+  "package": "gv_pb",
+  "deps": [
+   "defines.proto",
+   "feature_flag.proto"
+  ],
+  "messages": [
+   {
+    "name": "ActionKeyToggle",
+    "fields": [
+     {
+      "name": "key_type",
+      "number": 1,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.ActionKeyToggle.KeyType",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "toggle",
+      "number": 2,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.ActionKeyToggle.Toggle",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [
+     [
+      "KeyType",
+      [
+       [
+        "UNKNOWN",
+        0
+       ],
+       [
+        "CAPS_LOCK",
+        1
+       ],
+       [
+        "NUM_LOCK",
+        2
+       ],
+       [
+        "SCROLL_LOCK",
+        3
+       ]
+      ]
+     ],
+     [
+      "Toggle",
+      [
+       [
+        "TOGGLE",
+        0
+       ],
+       [
+        "OFF",
+        1
+       ],
+       [
+        "ON",
+        2
+       ]
+      ]
+     ]
+    ],
+    "oneofs": []
+   },
+   {
+    "name": "SimpleAction",
+    "fields": [
+     {
+      "name": "action",
+      "number": 1,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.SimpleAction.ActionType",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "args",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "key_toggle",
+      "number": 3,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ActionKeyToggle",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "feature_flag",
+      "number": 4,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.FeatureFlag",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "value",
+      "number": 5,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": 0,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [
+     [
+      "ActionType",
+      [
+       [
+        "ACTION_TYPE_ECHO_REQUEST",
+        0
+       ],
+       [
+        "ACTION_TYPE_ECHO_RESPONSE",
+        1
+       ],
+       [
+        "ACTION_TYPE_SHOW_DESKTOP",
+        2
+       ],
+       [
+        "ACTION_TYPE_SHOW_WINDOWS",
+        3
+       ],
+       [
+        "ACTION_TYPE_CAPTURE_DESKTOP",
+        4
+       ],
+       [
+        "ACTION_TYPE_CAPTURE_WINDOW",
+        5
+       ],
+       [
+        "ACTION_TYPE_CAPTURE_MUMU",
+        6
+       ],
+       [
+        "ACTION_TYPE_STOP_CAPTURE",
+        7
+       ],
+       [
+        "ACTION_TYPE_RESTART_CAPTURE",
+        8
+       ],
+       [
+        "ACTION_TYPE_REBOOT_SYSTEM",
+        9
+       ],
+       [
+        "ACTION_TYPE_LOCK_SYSTEM",
+        10
+       ],
+       [
+        "ACTION_TYPE_KEY_TOGGLE",
+        11
+       ],
+       [
+        "ACTION_TYPE_SHUTDOWN_SYSTEM",
+        12
+       ],
+       [
+        "ACTION_TYPE_SHOW_TASKMGR",
+        13
+       ],
+       [
+        "ACTION_TYPE_MUTE_SYSTEM",
+        14
+       ],
+       [
+        "ACTION_TYPE_AUTO_UNLOCK_SYSTEM",
+        15
+       ],
+       [
+        "ACTION_TYPE_MUTE_RESTORE",
+        16
+       ],
+       [
+        "ACTION_TYPE_MUTE_PERMANENT",
+        17
+       ],
+       [
+        "ACTION_TYPE_MUTE_TEMPORARY",
+        18
+       ],
+       [
+        "ACTION_TYPE_SET_AUTO_LOCK",
+        19
+       ],
+       [
+        "ACTION_TYPE_STOP_ACQUIRE_UPDATE",
+        20
+       ],
+       [
+        "ACTION_TYPE_QUIT_CAPTURE",
+        21
+       ],
+       [
+        "ACTION_TYPE_ACQUIRE_SYSTEM_INFO",
+        22
+       ],
+       [
+        "ACTION_TYPE_MICROPHONE_OPENED",
+        23
+       ],
+       [
+        "ACTION_TYPE_MICROPHONE_CLOSED",
+        24
+       ],
+       [
+        "ACTION_TYPE_SPEAKER_OPENED",
+        25
+       ],
+       [
+        "ACTION_TYPE_SPEAKER_CLOSED",
+        26
+       ],
+       [
+        "ACTION_TYPE_NEED_RESTART_USERAPP",
+        27
+       ]
+      ]
+     ]
+    ],
+    "oneofs": [
+     "params"
+    ]
+   },
+   {
+    "name": "LaunchApp",
+    "fields": [
+     {
+      "name": "dapp_id",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "name",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "target_path",
+      "number": 3,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "args",
+      "number": 4,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "app_key",
+      "number": 5,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "ShowApp",
+    "fields": [
+     {
+      "name": "dapp_id",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "name",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "target_path",
+      "number": 3,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "args",
+      "number": 4,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "WinRect",
+    "fields": [
+     {
+      "name": "left",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "top",
+      "number": 2,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "width",
+      "number": 3,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "height",
+      "number": 4,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "pixel_width",
+      "number": 5,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "pixel_height",
+      "number": 6,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "DpiScale",
+    "fields": [
+     {
+      "name": "current_dpi",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "recommended_dpi",
+      "number": 2,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "dpis",
+      "number": 3,
+      "label": 3,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "Screen",
+    "fields": [
+     {
+      "name": "id",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "fps",
+      "number": 2,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "resolutions",
+      "number": 3,
+      "label": 3,
+      "type": 11,
+      "type_name": ".gv_pb.WinRect",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "current_resolution",
+      "number": 4,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.WinRect",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "screen_type",
+      "number": 5,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.ScreenType",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "init_resolution",
+      "number": 6,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.WinRect",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "is_primary_screen",
+      "number": 7,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "dpr",
+      "number": 8,
+      "label": 1,
+      "type": 1,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "dpi_scale",
+      "number": 9,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.DpiScale",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "display_name",
+      "number": 10,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "resolution_type",
+      "number": 11,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.ChooseResolutionType",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "video_track_index",
+      "number": 12,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "builtin_screen_type",
+      "number": 13,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.BuiltinScreenType",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "ScreenSources",
+    "fields": [
+     {
+      "name": "screens",
+      "number": 1,
+      "label": 3,
+      "type": 11,
+      "type_name": ".gv_pb.Screen",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "current_screen_id",
+      "number": 2,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "CaptureChange",
+    "fields": [
+     {
+      "name": "capture_type",
+      "number": 1,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.CaptureChange.Type",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "type_value",
+      "number": 2,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "desc",
+      "number": 3,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [
+     [
+      "Type",
+      [
+       [
+        "CT_DESKTOP",
+        0
+       ],
+       [
+        "CT_WINDOW",
+        1
+       ],
+       [
+        "CT_MUMU",
+        2
+       ],
+       [
+        "CT_HOOK",
+        3
+       ],
+       [
+        "CT_NONE",
+        99
+       ]
+      ]
+     ]
+    ],
+    "oneofs": []
+   },
+   {
+    "name": "ReportError",
+    "fields": [
+     {
+      "name": "action",
+      "number": 1,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.ReportError.Action",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "error_code",
+      "number": 2,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "error_msg",
+      "number": 3,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "type_value",
+      "number": 4,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [
+     [
+      "Action",
+      [
+       [
+        "RE_ACTION_CAPTURE_DESKTOP",
+        0
+       ],
+       [
+        "RE_ACTION_CAPTURE_WINDOW",
+        1
+       ],
+       [
+        "RE_ACTION_CAPTURE_MUMU",
+        2
+       ],
+       [
+        "RE_ACTION_CAPTURE_HOOK",
+        3
+       ]
+      ]
+     ]
+    ],
+    "oneofs": []
+   },
+   {
+    "name": "ReportQosStats",
+    "fields": [
+     {
+      "name": "encoder_type",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "capture_type",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "probe_bps",
+      "number": 3,
+      "label": 1,
+      "type": 4,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "video_quality",
+      "number": 4,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.VideoQuality",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "fast_bitrate",
+      "number": 5,
+      "label": 1,
+      "type": 4,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "general_bitrate",
+      "number": 6,
+      "label": 1,
+      "type": 4,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "hd_bitrate",
+      "number": 7,
+      "label": 1,
+      "type": 4,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "bluray_bitrate",
+      "number": 8,
+      "label": 1,
+      "type": 4,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "ClipboardChange",
+    "fields": [
+     {
+      "name": "content_id",
+      "number": 1,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "content",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "to_be_continued",
+      "number": 3,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [
+     [
+      "Type",
+      [
+       [
+        "UNKNOWN",
+        0
+       ],
+       [
+        "TEXT",
+        1
+       ]
+      ]
+     ]
+    ],
+    "oneofs": []
+   },
+   {
+    "name": "ActiveWindowChange",
+    "fields": [
+     {
+      "name": "win_info",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "CaptureConfig",
+    "fields": [
+     {
+      "name": "client",
+      "number": 1,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.CaptureConfig.ClientType",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "fps",
+      "number": 2,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.CaptureConfig.FPSValue",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "frame_quality",
+      "number": 3,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.CaptureConfig.FrameQuality",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "cursor_capture",
+      "number": 4,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "screen_id",
+      "number": 5,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "resolution_width",
+      "number": 6,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "resolution_height",
+      "number": 7,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "config_flag",
+      "number": 8,
+      "label": 1,
+      "type": 3,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [
+     [
+      "FPSValue",
+      [
+       [
+        "FPS_30",
+        0
+       ],
+       [
+        "FPS_60",
+        1
+       ],
+       [
+        "FPS_90",
+        2
+       ],
+       [
+        "FPS_144",
+        3
+       ]
+      ]
+     ],
+     [
+      "FrameQuality",
+      [
+       [
+        "QUALITY_Unknown",
+        0
+       ],
+       [
+        "QUALITY_Fast",
+        1
+       ],
+       [
+        "QUALITY_General",
+        2
+       ],
+       [
+        "QUALITY_HD",
+        3
+       ],
+       [
+        "QUALITY_Bluray",
+        4
+       ],
+       [
+        "QUALITY_Auto",
+        5
+       ]
+      ]
+     ],
+     [
+      "ClientType",
+      [
+       [
+        "Client_IOS",
+        0
+       ],
+       [
+        "Client_MAC",
+        1
+       ],
+       [
+        "Client_ANDROID",
+        2
+       ],
+       [
+        "Client_WINDOWS",
+        3
+       ]
+      ]
+     ]
+    ],
+    "oneofs": []
+   },
+   {
+    "name": "CaptureConfigResponse",
+    "fields": [
+     {
+      "name": "request_seq",
+      "number": 1,
+      "label": 1,
+      "type": 3,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "config_flag",
+      "number": 2,
+      "label": 1,
+      "type": 3,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "err_code",
+      "number": 3,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "error_message",
+      "number": 4,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "RomMessage",
+    "fields": [
+     {
+      "name": "name",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "value",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "index",
+      "number": 3,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "byte_value",
+      "number": 4,
+      "label": 1,
+      "type": 12,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "SendToRom",
+    "fields": [
+     {
+      "name": "input_type",
+      "number": 1,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.SendToRom.MessageType",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "input_msg",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "index",
+      "number": 3,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [
+     [
+      "MessageType",
+      [
+       [
+        "RomMsg_VINPUT",
+        0
+       ],
+       [
+        "RomMsg_Text",
+        1
+       ],
+       [
+        "RomMsg_Snapshot",
+        2
+       ],
+       [
+        "RomMsg_TabManage",
+        3
+       ],
+       [
+        "RomMsg_Rotation",
+        4
+       ],
+       [
+        "RomMsg_Volume",
+        5
+       ]
+      ]
+     ]
+    ],
+    "oneofs": []
+   },
+   {
+    "name": "GeneralMetric",
+    "fields": [
+     {
+      "name": "support_touch",
+      "number": 1,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "system_sound_support",
+      "number": 2,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.SystemSoundSupport",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "win_os_ver",
+      "number": 3,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "SettingMetric",
+    "fields": [
+     {
+      "name": "keep_mute",
+      "number": 1,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "mute_permanent",
+      "number": 2,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "auto_lock",
+      "number": 3,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "private_screen",
+      "number": 4,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "file_transfer_save_location",
+      "number": 5,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "virtual_mouse_switch",
+      "number": 6,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "private_screen_type",
+      "number": 7,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.PrivateScreenType",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "capture_permission_state",
+      "number": 8,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.PermissionAuthState",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "operation_permission_state",
+      "number": 9,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.PermissionAuthState",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "control_allowed_state",
+      "number": 10,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.PermissionAuthState",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "SystemMetrics",
+    "fields": [
+     {
+      "name": "metrics",
+      "number": 1,
+      "label": 3,
+      "type": 14,
+      "type_name": ".gv_pb.SystemMetrics.Metric",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "response",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "general",
+      "number": 3,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.GeneralMetric",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "setting",
+      "number": 4,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.SettingMetric",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [
+     [
+      "Metric",
+      [
+       [
+        "METRIC_MUMU",
+        0
+       ],
+       [
+        "METRIC_GENERAL",
+        1
+       ],
+       [
+        "METRIC_SETTING",
+        2
+       ]
+      ]
+     ]
+    ],
+    "oneofs": []
+   },
+   {
+    "name": "LaunchCloudPcApp",
+    "fields": [
+     {
+      "name": "dapp_id",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "cpc_app_id",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "name",
+      "number": 3,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "target_path",
+      "number": 4,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "args",
+      "number": 5,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "RemoteDownloadPath",
+    "fields": [
+     {
+      "name": "download_path",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "CaptureSettingSync",
+    "fields": [
+     {
+      "name": "fps",
+      "number": 1,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.FPS",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "frame_quality",
+      "number": 2,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.VideoQuality",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "chroma_format",
+      "number": 3,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.ChromaFormat",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "max_custom_bitrate",
+      "number": 4,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "resolution_width",
+      "number": 5,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "resolution_height",
+      "number": 6,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "resolution_type",
+      "number": 7,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.ChooseResolutionType",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "dpi_scale",
+      "number": 8,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "resolution_pixel_width",
+      "number": 9,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "resolution_pixel_height",
+      "number": 10,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "screen_orientation",
+      "number": 11,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.ScreenOrientation",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "TerminalSessionChanged",
+    "fields": [],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   }
+  ],
+  "enums": [],
+  "syntax": "proto3"
+ },
+ {
+  "name": "rpc_message.proto",
+  "package": "gv_pb",
+  "deps": [
+   "defines.proto"
+  ],
+  "messages": [
+   {
+    "name": "CaptureSettingRequest",
+    "fields": [
+     {
+      "name": "fps",
+      "number": 1,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.FPS",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "frame_quality",
+      "number": 2,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.VideoQuality",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "cursor_capture",
+      "number": 3,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "screen_id",
+      "number": 4,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "resolution_width",
+      "number": 5,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "resolution_height",
+      "number": 6,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "chorma_format",
+      "number": 7,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.ChromaFormat",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "max_custom_bitrate",
+      "number": 8,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "dpi_scale",
+      "number": 9,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "resolution_type",
+      "number": 10,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.ChooseResolutionType",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "enable_hdr",
+      "number": 11,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "auto_frame_quality",
+      "number": 12,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.VideoQuality",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "codec_type",
+      "number": 13,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.CodecType",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "max_scale_width",
+      "number": 14,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "max_scale_height",
+      "number": 15,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "resolution_pixel_width",
+      "number": 16,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "resolution_pixel_height",
+      "number": 17,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "fpsCount",
+      "number": 18,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "FpsSettingRequest",
+    "fields": [
+     {
+      "name": "fps",
+      "number": 1,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.FPS",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "VideoQualitySettingReqeust",
+    "fields": [
+     {
+      "name": "frame_quality",
+      "number": 1,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.VideoQuality",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "CursorSettingReqeust",
+    "fields": [
+     {
+      "name": "cursor_capture",
+      "number": 1,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "ResolutionSettingRequest",
+    "fields": [
+     {
+      "name": "resolution_width",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "resolution_height",
+      "number": 2,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "Error",
+    "fields": [
+     {
+      "name": "error_code",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "error_message",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "error_detail",
+      "number": 3,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "UserEntitlementSyncRequest",
+    "fields": [
+     {
+      "name": "entitlement_data",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "current_server_time",
+      "number": 2,
+      "label": 1,
+      "type": 3,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "UserEntitlementSyncResponse",
+    "fields": [
+     {
+      "name": "error_code",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "CaptureSettingResponse",
+    "fields": [
+     {
+      "name": "errors",
+      "number": 1,
+      "label": 3,
+      "type": 11,
+      "type_name": ".gv_pb.Error",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "PrivateScreenSettingRequest",
+    "fields": [
+     {
+      "name": "enable",
+      "number": 1,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "privacy_type",
+      "number": 2,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.PrivateScreenType",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "setting_source",
+      "number": 3,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "PrivateScreenSettingResponse",
+    "fields": [
+     {
+      "name": "error_code",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "req_privacy_type",
+      "number": 2,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.PrivateScreenType",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "cur_privacy_type",
+      "number": 3,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.PrivateScreenType",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "VirtualMouseSwitchRequest",
+    "fields": [
+     {
+      "name": "enable",
+      "number": 1,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "VirtualMouseSwitchResponse",
+    "fields": [
+     {
+      "name": "error_code",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "CreateVirtualDisplayRequest",
+    "fields": [
+     {
+      "name": "local_resolution",
+      "number": 1,
+      "label": 3,
+      "type": 11,
+      "type_name": ".gv_pb.ScreenResolution",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "virtual_display_count",
+      "number": 2,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "CreateVirtualDisplayResponse",
+    "fields": [
+     {
+      "name": "error_code",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "RemoveVirtualDisplayRequest",
+    "fields": [
+     {
+      "name": "screen_id",
+      "number": 1,
+      "label": 3,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "RemoveVirtualDisplayResponse",
+    "fields": [
+     {
+      "name": "error_code",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "QuitSuperScreenRequest",
+    "fields": [],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "QuitSuperScreenResponse",
+    "fields": [
+     {
+      "name": "error_code",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "SendVideoTrackRequest",
+    "fields": [
+     {
+      "name": "video_track_index",
+      "number": 1,
+      "label": 3,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "SendVideoTrackResponse",
+    "fields": [
+     {
+      "name": "error_code",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "QueryPluginSettingRequest",
+    "fields": [
+     {
+      "name": "plugin_id",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "QueryPluginSettingResponse",
+    "fields": [
+     {
+      "name": "error_code",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "enable",
+      "number": 2,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "plugin_id",
+      "number": 3,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "UpdatePluginSettingRequest",
+    "fields": [
+     {
+      "name": "plugin_id",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "enable",
+      "number": 2,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "UpdatePluginSettingResponse",
+    "fields": [
+     {
+      "name": "error_code",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "plugin_package_size",
+      "number": 2,
+      "label": 1,
+      "type": 4,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "plugin_id",
+      "number": 3,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "enable",
+      "number": 4,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "StartDownloadAndInstallPluginRequest",
+    "fields": [
+     {
+      "name": "plugin_id",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "StartDownloadAndInstallPluginResponse",
+    "fields": [
+     {
+      "name": "error_code",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "plugin_id",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "PluginEnableNotificationRequest",
+    "fields": [
+     {
+      "name": "plugin_id",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "PluginEnableNotificationResponse",
+    "fields": [
+     {
+      "name": "error_code",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "plugin_id",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "PluginNotificationRequest",
+    "fields": [
+     {
+      "name": "plugin_id",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "notification_type",
+      "number": 2,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "PluginNotificationResponse",
+    "fields": [
+     {
+      "name": "error_code",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "plugin_id",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "VirtualAudioDriverPolicyRequest",
+    "fields": [
+     {
+      "name": "policy",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "VirtualAudioDriverPolicyResponse",
+    "fields": [
+     {
+      "name": "error_code",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "SendFlipScreenRequest",
+    "fields": [
+     {
+      "name": "screen_orientation",
+      "number": 1,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.ScreenOrientation",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "SendFlipScreenResponse",
+    "fields": [
+     {
+      "name": "error_code",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "QuickLaunchScanRequest",
+    "fields": [],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "QuickLaunchAppItem",
+    "fields": [
+     {
+      "name": "app_key",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "name",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "icon_url",
+      "number": 3,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "target_path",
+      "number": 4,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "app_id",
+      "number": 5,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "QuickLaunchScanResponse",
+    "fields": [
+     {
+      "name": "error_code",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "error_message",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "apps",
+      "number": 3,
+      "label": 3,
+      "type": 11,
+      "type_name": ".gv_pb.QuickLaunchAppItem",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "QuickLaunchAppIconRequest",
+    "fields": [
+     {
+      "name": "app_key",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "QuickLaunchAppIconResponse",
+    "fields": [
+     {
+      "name": "error_code",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "error_message",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "app_key",
+      "number": 3,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "byte_value",
+      "number": 4,
+      "label": 1,
+      "type": 12,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "UpdateScreenSaverRequest",
+    "fields": [],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "UpdateScreenSaverResponse",
+    "fields": [
+     {
+      "name": "error_code",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "EnterSuperScreenFpsNotSupport",
+    "fields": [
+     {
+      "name": "fps_count",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "EnterSuperScreenRequest",
+    "fields": [
+     {
+      "name": "reason",
+      "number": 1,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.EnterSuperScreenRequest.EnterReason",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "resolution",
+      "number": 2,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ScreenResolution",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "dpi_scale",
+      "number": 3,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "enter_fps",
+      "number": 4,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.EnterSuperScreenFpsNotSupport",
+      "oneof": 0,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [
+     [
+      "EnterReason",
+      [
+       [
+        "REASON_UNKNOWN",
+        0
+       ],
+       [
+        "REASON_MANUAL",
+        1
+       ],
+       [
+        "REASON_FPS_NOT_SUPPORT",
+        2
+       ]
+      ]
+     ]
+    ],
+    "oneofs": [
+     "params"
+    ]
+   },
+   {
+    "name": "EnterSuperScreenResponse",
+    "fields": [
+     {
+      "name": "error_code",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "CheckEnvReq",
+    "fields": [],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "CheckEnvResp",
+    "fields": [
+     {
+      "name": "code",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "message",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "RenameSessionReq",
+    "fields": [
+     {
+      "name": "session_id",
+      "number": 1,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "name",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "RenameSessionResp",
+    "fields": [
+     {
+      "name": "session_id",
+      "number": 1,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "code",
+      "number": 2,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "message",
+      "number": 3,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   }
+  ],
+  "enums": [],
+  "syntax": "proto3"
+ },
+ {
+  "name": "clipboard.proto",
+  "package": "gv_pb",
+  "deps": [
+   "defines.proto"
+  ],
+  "messages": [
+   {
+    "name": "ClipboardFormat",
+    "fields": [
+     {
+      "name": "id",
+      "number": 1,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "name",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "DragDropAutoSave",
+    "fields": [
+     {
+      "name": "dest_path",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "DragDropAutoSaveComplete",
+    "fields": [
+     {
+      "name": "total_count",
+      "number": 1,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "success_count",
+      "number": 2,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "first_file_name",
+      "number": 3,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "DragDropAutoSaveCompleteResponse",
+    "fields": [
+     {
+      "name": "err",
+      "number": 1,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.ClipboardError",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "DragDropOleDrop",
+    "fields": [
+     {
+      "name": "target_x",
+      "number": 1,
+      "label": 1,
+      "type": 1,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "target_y",
+      "number": 2,
+      "label": 1,
+      "type": 1,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "screen_id",
+      "number": 3,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "ClipboardFormatListRequest",
+    "fields": [
+     {
+      "name": "formats",
+      "number": 1,
+      "label": 3,
+      "type": 11,
+      "type_name": ".gv_pb.ClipboardFormat",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "has_action",
+      "number": 2,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "auto_save",
+      "number": 3,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.DragDropAutoSave",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "ole_drop",
+      "number": 4,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.DragDropOleDrop",
+      "oneof": 0,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": [
+     "drag_drop_action"
+    ]
+   },
+   {
+    "name": "ClipboardFormatListResponse",
+    "fields": [],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "ClipboardFormatDataAsk",
+    "fields": [
+     {
+      "name": "format_id",
+      "number": 1,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "block_key",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "format_name",
+      "number": 3,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "ClipboardFormatDataConfirm",
+    "fields": [
+     {
+      "name": "err",
+      "number": 1,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.ClipboardError",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "block_key",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "block_count",
+      "number": 3,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "ClipboardDataBlock",
+    "fields": [
+     {
+      "name": "block_key",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "block_id",
+      "number": 2,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "data",
+      "number": 3,
+      "label": 1,
+      "type": 12,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "ClipboardDataBlockConfirm",
+    "fields": [
+     {
+      "name": "block_key",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "block_id",
+      "number": 2,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "err",
+      "number": 3,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.ClipboardError",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "ClipboardFileDescriptor",
+    "fields": [
+     {
+      "name": "file_name",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "file_attributes",
+      "number": 2,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "last_write_time",
+      "number": 3,
+      "label": 1,
+      "type": 4,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "file_size",
+      "number": 4,
+      "label": 1,
+      "type": 4,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "ClipboardFileDescriptorListRequest",
+    "fields": [
+     {
+      "name": "task_id",
+      "number": 1,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "ClipboardFileDescriptorListResponse",
+    "fields": [
+     {
+      "name": "task_id",
+      "number": 1,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "segment_count",
+      "number": 2,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "err",
+      "number": 3,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.ClipboardError",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "ClipboardFileDescriptorSegment",
+    "fields": [
+     {
+      "name": "task_id",
+      "number": 1,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "segment_id",
+      "number": 2,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "file_descs",
+      "number": 3,
+      "label": 3,
+      "type": 11,
+      "type_name": ".gv_pb.ClipboardFileDescriptor",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "ClipboardFileDescriptorSegmentConfirm",
+    "fields": [
+     {
+      "name": "task_id",
+      "number": 1,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "segment_id",
+      "number": 2,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "err",
+      "number": 3,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.ClipboardError",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "ClipboardFileContentsRequest",
+    "fields": [
+     {
+      "name": "task_id",
+      "number": 1,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "list_index",
+      "number": 2,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "flags",
+      "number": 3,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "pos_offset",
+      "number": 4,
+      "label": 1,
+      "type": 4,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "requested_len",
+      "number": 5,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "ClipboardFileContentsResponse",
+    "fields": [
+     {
+      "name": "task_id",
+      "number": 1,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "data",
+      "number": 2,
+      "label": 1,
+      "type": 12,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "err",
+      "number": 3,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.ClipboardError",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "pos_offset",
+      "number": 4,
+      "label": 1,
+      "type": 4,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "list_index",
+      "number": 5,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "ClipboardFileCancelRequest",
+    "fields": [
+     {
+      "name": "task_id",
+      "number": 1,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "ClipboardFileCancelResponse",
+    "fields": [
+     {
+      "name": "task_id",
+      "number": 1,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "err",
+      "number": 2,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.ClipboardError",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "ClipboardTextChangeRequest",
+    "fields": [
+     {
+      "name": "format_id",
+      "number": 1,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "data",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "ClipboardTextChangeResponse",
+    "fields": [
+     {
+      "name": "err",
+      "number": 1,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.ClipboardError",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "ClipboardRequest",
+    "fields": [
+     {
+      "name": "format_list",
+      "number": 1,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ClipboardFormatListRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "format_data_ask",
+      "number": 2,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ClipboardFormatDataAsk",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "data_block",
+      "number": 3,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ClipboardDataBlock",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "file_desc_list_request",
+      "number": 4,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ClipboardFileDescriptorListRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "file_contents_request",
+      "number": 5,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ClipboardFileContentsRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "cancel_request",
+      "number": 6,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ClipboardFileCancelRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "desc_segment",
+      "number": 7,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ClipboardFileDescriptorSegment",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "auto_save_complete",
+      "number": 8,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.DragDropAutoSaveComplete",
+      "oneof": 0,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": [
+     "which"
+    ]
+   },
+   {
+    "name": "ClipboardResponse",
+    "fields": [
+     {
+      "name": "format_list_response",
+      "number": 1,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ClipboardFormatListResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "format_data_confirm",
+      "number": 2,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ClipboardFormatDataConfirm",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "data_block_confirm",
+      "number": 3,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ClipboardDataBlockConfirm",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "file_desc_list_response",
+      "number": 4,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ClipboardFileDescriptorListResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "file_contents_response",
+      "number": 5,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ClipboardFileContentsResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "cancel_response",
+      "number": 6,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ClipboardFileCancelResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "desc_segment_confirm",
+      "number": 7,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ClipboardFileDescriptorSegmentConfirm",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "auto_save_complete_response",
+      "number": 8,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.DragDropAutoSaveCompleteResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": [
+     "which"
+    ]
+   }
+  ],
+  "enums": [],
+  "syntax": "proto3"
+ },
+ {
+  "name": "notification.proto",
+  "package": "gv_pb",
+  "deps": [
+   "defines.proto"
+  ],
+  "messages": [
+   {
+    "name": "SecureDesktopState",
+    "fields": [
+     {
+      "name": "is_locked",
+      "number": 1,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "is_sas_shown",
+      "number": 2,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "pos_x",
+      "number": 3,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "pos_y",
+      "number": 4,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "is_support_auto_logon",
+      "number": 5,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "is_client_ui_ready",
+      "number": 6,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": 0,
+      "proto3_optional": 1
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": [
+     "_is_client_ui_ready"
+    ]
+   },
+   {
+    "name": "ClientUiReadyState",
+    "fields": [
+     {
+      "name": "is_ready",
+      "number": 1,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "CursorShape",
+    "fields": [
+     {
+      "name": "pos_x",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "pos_y",
+      "number": 2,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "width",
+      "number": 3,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "height",
+      "number": 4,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "byte_value",
+      "number": 5,
+      "label": 1,
+      "type": 12,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "cursor_type",
+      "number": 6,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "coordinate_x_scale",
+      "number": 7,
+      "label": 1,
+      "type": 1,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "coordinate_y_scale",
+      "number": 8,
+      "label": 1,
+      "type": 1,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "screen_id",
+      "number": 9,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "PermissionState",
+    "fields": [
+     {
+      "name": "assistant",
+      "number": 1,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "video_capture_allowed",
+      "number": 2,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "capture_content_visible",
+      "number": 3,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "audio_capture_allowed",
+      "number": 4,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "floating_ball",
+      "number": 5,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "RemoteAssistFileTransferState",
+    "fields": [
+     {
+      "name": "enabled",
+      "number": 1,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "PrivateScreenState",
+    "fields": [
+     {
+      "name": "error_code",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "req_privacy_type",
+      "number": 2,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.PrivateScreenType",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "cur_privacy_type",
+      "number": 3,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.PrivateScreenType",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "SystemStateChange",
+    "fields": [
+     {
+      "name": "sd_state",
+      "number": 1,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.SecureDesktopState",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "cursor_shape",
+      "number": 2,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.CursorShape",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "permission_state",
+      "number": 3,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.PermissionState",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "remote_assist_file_transfer_state",
+      "number": 4,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.RemoteAssistFileTransferState",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "private_screen_state",
+      "number": 5,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.PrivateScreenState",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "client_ui_ready_state",
+      "number": 6,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ClientUiReadyState",
+      "oneof": 0,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": [
+     "which"
+    ]
+   },
+   {
+    "name": "QuerySystemState",
+    "fields": [
+     {
+      "name": "id",
+      "number": 1,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.QuerySystemState.StateId",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [
+     [
+      "StateId",
+      [
+       [
+        "SS_ID_NONE",
+        0
+       ],
+       [
+        "SS_ID_SECURE_DESKTOP_STATE",
+        1
+       ]
+      ]
+     ]
+    ],
+    "oneofs": []
+   }
+  ],
+  "enums": [],
+  "syntax": "proto3"
+ },
+ {
+  "name": "connect.proto",
+  "package": "gv_pb",
+  "deps": [
+   "defines.proto",
+   "feature_flag.proto"
+  ],
+  "messages": [
+   {
+    "name": "CaptureParams",
+    "fields": [
+     {
+      "name": "fps",
+      "number": 1,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.FPS",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "video_quality",
+      "number": 2,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.VideoQuality",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "cursor_capture",
+      "number": 3,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "choose_resolution_type",
+      "number": 4,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.ChooseResolutionType",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "local_resolution",
+      "number": 5,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ScreenResolution",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "choose_resolution",
+      "number": 6,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ScreenResolution",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "chroma_format",
+      "number": 7,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.ChromaFormat",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "max_custom_bitrate",
+      "number": 8,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "enable_hdr",
+      "number": 9,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "auto_frame_quality",
+      "number": 10,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.VideoQuality",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "fpsCount",
+      "number": 11,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "DecoderCap",
+    "fields": [
+     {
+      "name": "fps",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "codec_type",
+      "number": 2,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.CodecType",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "resolution_width",
+      "number": 3,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "resolution_height",
+      "number": 4,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "chroma_format",
+      "number": 5,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.ChromaFormat",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "VirtualDisplayMode",
+    "fields": [
+     {
+      "name": "width",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "height",
+      "number": 2,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "VSync",
+      "number": 3,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "VirtualDisplayInitResolution",
+    "fields": [
+     {
+      "name": "width",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "height",
+      "number": 2,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "ConnectOptions",
+    "fields": [
+     {
+      "name": "capture_type",
+      "number": 1,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.ConnectOptions.Type",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "type_value",
+      "number": 2,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "capture_params",
+      "number": 3,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.CaptureParams",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "decoder_cap_list",
+      "number": 4,
+      "label": 3,
+      "type": 11,
+      "type_name": ".gv_pb.DecoderCap",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "force_virtual_display",
+      "number": 5,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "virtual_display_modes",
+      "number": 6,
+      "label": 3,
+      "type": 11,
+      "type_name": ".gv_pb.VirtualDisplayMode",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "virtual_display_init_resolution",
+      "number": 7,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.VirtualDisplayInitResolution",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "client_type",
+      "number": 8,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.ClientType",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "device_id",
+      "number": 9,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "control_connect_type",
+      "number": 10,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.ControlConnectType",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "feature_flag",
+      "number": 11,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.FeatureFlag",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "client_version",
+      "number": 12,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "entitlement_data",
+      "number": 13,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "current_server_time",
+      "number": 14,
+      "label": 1,
+      "type": 3,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [
+     [
+      "Type",
+      [
+       [
+        "CT_UNKNOWN",
+        0
+       ],
+       [
+        "CT_DESKTOP",
+        1
+       ],
+       [
+        "CT_WINDOW",
+        2
+       ],
+       [
+        "CT_MUMU",
+        3
+       ],
+       [
+        "CT_HOOK",
+        4
+       ],
+       [
+        "CT_FILETRANSFER",
+        5
+       ],
+       [
+        "CT_SECOND_SCREEN",
+        6
+       ],
+       [
+        "CT_QUICKLAUNCH",
+        7
+       ],
+       [
+        "CT_TERMINAL",
+        8
+       ],
+       [
+        "CT_PORTMAPPING",
+        9
+       ]
+      ]
+     ]
+    ],
+    "oneofs": []
+   },
+   {
+    "name": "EncoderCap",
+    "fields": [
+     {
+      "name": "capture_mode",
+      "number": 1,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.CaptureMode",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "fps",
+      "number": 2,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "corec_type",
+      "number": 3,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.CodecType",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "resolution_width",
+      "number": 4,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "resolution_height",
+      "number": 5,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "CodecNegotiation",
+    "fields": [
+     {
+      "name": "encoder_cap_list",
+      "number": 1,
+      "label": 3,
+      "type": 11,
+      "type_name": ".gv_pb.EncoderCap",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   }
+  ],
+  "enums": [],
+  "syntax": "proto3"
+ },
+ {
+  "name": "defines.proto",
+  "package": "gv_pb",
+  "deps": [],
+  "messages": [
+   {
+    "name": "ScreenResolution",
+    "fields": [
+     {
+      "name": "width",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "height",
+      "number": 2,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   }
+  ],
+  "enums": [
+   [
+    "FPS",
+    [
+     [
+      "FPS_UNKNOWN",
+      0
+     ],
+     [
+      "FPS_30",
+      1
+     ],
+     [
+      "FPS_60",
+      2
+     ],
+     [
+      "FPS_90",
+      3
+     ],
+     [
+      "FPS_144",
+      4
+     ]
+    ]
+   ],
+   [
+    "ClientType",
+    [
+     [
+      "Client_UNSPECIFIED",
+      0
+     ],
+     [
+      "Client_IOS",
+      1
+     ],
+     [
+      "Client_ANDROID",
+      2
+     ],
+     [
+      "Client_WINDOWS",
+      3
+     ],
+     [
+      "Client_MAC",
+      4
+     ]
+    ]
+   ],
+   [
+    "VideoQuality",
+    [
+     [
+      "VideoQuality_UNKNOWN",
+      0
+     ],
+     [
+      "VideoQuality_Fast",
+      1
+     ],
+     [
+      "VideoQuality_General",
+      2
+     ],
+     [
+      "VideoQuality_HD",
+      3
+     ],
+     [
+      "VideoQuality_Bluray",
+      4
+     ],
+     [
+      "VideoQuality_Auto",
+      5
+     ],
+     [
+      "VideoQuality_Custom",
+      6
+     ]
+    ]
+   ],
+   [
+    "CodecType",
+    [
+     [
+      "CodecType_UNKNOWN",
+      0
+     ],
+     [
+      "CodecType_H264",
+      1
+     ],
+     [
+      "CodecType_H265",
+      2
+     ]
+    ]
+   ],
+   [
+    "CaptureMode",
+    [
+     [
+      "CaptureMode_UNKNOWN",
+      0
+     ],
+     [
+      "CaptureMode_DESKTOP",
+      1
+     ],
+     [
+      "CaptureMode_WINDOW",
+      2
+     ],
+     [
+      "CaptureMode_MUMU",
+      3
+     ],
+     [
+      "CaptureMode_HOOK",
+      4
+     ],
+     [
+      "CaptureMode_GLOBAL",
+      5
+     ]
+    ]
+   ],
+   [
+    "ScreenType",
+    [
+     [
+      "ScreenType_Physics",
+      0
+     ],
+     [
+      "ScreenType_Virtual",
+      1
+     ],
+     [
+      "ScreenType_Super",
+      2
+     ]
+    ]
+   ],
+   [
+    "ChooseResolutionType",
+    [
+     [
+      "ChooseType_UNKNOWN",
+      0
+     ],
+     [
+      "ChooseType_DEFAULT",
+      1
+     ],
+     [
+      "ChooseType_FOLLOW_LOCAL",
+      2
+     ],
+     [
+      "ChooseType_FOLLOW_REMOTE",
+      3
+     ],
+     [
+      "ChooseType_RESOLUTION",
+      4
+     ]
+    ]
+   ],
+   [
+    "ChromaFormat",
+    [
+     [
+      "ChromaFormat_UNKNOWN",
+      0
+     ],
+     [
+      "ChromaFormat_420",
+      1
+     ],
+     [
+      "ChromaFormat_422",
+      2
+     ],
+     [
+      "ChromaFormat_444",
+      3
+     ],
+     [
+      "ChromaFormat_400",
+      4
+     ]
+    ]
+   ],
+   [
+    "ControlConnectType",
+    [
+     [
+      "ControlConnectType_UNKNOWN",
+      0
+     ],
+     [
+      "ControlConnectType_Normal",
+      1
+     ],
+     [
+      "ControlConnectType_Assistance",
+      2
+     ]
+    ]
+   ],
+   [
+    "FileType",
+    [
+     [
+      "FT_Dir",
+      0
+     ],
+     [
+      "FT_DirLink",
+      2
+     ],
+     [
+      "FT_DirDrive",
+      3
+     ],
+     [
+      "FT_File",
+      4
+     ],
+     [
+      "FT_FileLink",
+      5
+     ]
+    ]
+   ],
+   [
+    "FileOperationStrategy",
+    [
+     [
+      "FOS_UNSPECIFIED",
+      0
+     ],
+     [
+      "FOS_OVERRIDE",
+      1
+     ],
+     [
+      "FOS_DUPLICATE",
+      2
+     ],
+     [
+      "FOS_SKIP",
+      3
+     ],
+     [
+      "FOS_RESUME",
+      4
+     ]
+    ]
+   ],
+   [
+    "FileTransferError",
+    [
+     [
+      "FT_UNSPECIFIED",
+      0
+     ],
+     [
+      "FT_SUCCEEDED",
+      1
+     ],
+     [
+      "FT_UNEXPECTED_ERROR",
+      2
+     ],
+     [
+      "FT_PROTOCOL_ERROR",
+      3
+     ],
+     [
+      "FT_PERMISSION_DENIED",
+      4
+     ],
+     [
+      "FT_OUT_OF_DISK_SPACE",
+      5
+     ],
+     [
+      "FT_IO_ERROR",
+      6
+     ],
+     [
+      "FT_CANCELED",
+      7
+     ],
+     [
+      "FT_NOT_LOGGED_IN",
+      8
+     ],
+     [
+      "FT_FILE_NOT_FOUND",
+      9
+     ],
+     [
+      "FT_PAUSED",
+      10
+     ],
+     [
+      "FT_FILE_NOT_RESUMABLE",
+      11
+     ],
+     [
+      "FT_PERMISSION_AUTHORIZATION_PENDING",
+      12
+     ]
+    ]
+   ],
+   [
+    "ClipboardError",
+    [
+     [
+      "CB_UNSPECIFIED",
+      0
+     ],
+     [
+      "CB_SUCCEEDED",
+      1
+     ],
+     [
+      "CB_FAILED",
+      2
+     ]
+    ]
+   ],
+   [
+    "PrivateScreenType",
+    [
+     [
+      "PS_UNSPECIFIED",
+      0
+     ],
+     [
+      "PS_NOT_SET",
+      1
+     ],
+     [
+      "PS_NORMAL_PRIVACY",
+      2
+     ],
+     [
+      "PS_ENHANCED_PRIVACY",
+      3
+     ]
+    ]
+   ],
+   [
+    "PermissionAuthState",
+    [
+     [
+      "PERMISSION_STATE_UNKOWN",
+      0
+     ],
+     [
+      "PERMISSION_STATE_REJECT",
+      1
+     ],
+     [
+      "PERMISSION_STATE_ALLOW",
+      2
+     ]
+    ]
+   ],
+   [
+    "BuiltinScreenType",
+    [
+     [
+      "BS_UNKOWN",
+      0
+     ],
+     [
+      "BS_BUILTIN",
+      1
+     ],
+     [
+      "BS_NOT_BUILTIN",
+      2
+     ]
+    ]
+   ],
+   [
+    "SystemSoundSupport",
+    [
+     [
+      "SS_UNKOWN",
+      0
+     ],
+     [
+      "SS_NONSUPPORT",
+      1
+     ],
+     [
+      "SS_SUPPORT",
+      2
+     ]
+    ]
+   ],
+   [
+    "ScreenOrientation",
+    [
+     [
+      "SO_UNSPECIFIED",
+      0
+     ],
+     [
+      "SO_LANDSCAPE",
+      1
+     ],
+     [
+      "SO_PORTRAIT",
+      2
+     ]
+    ]
+   ]
+  ],
+  "syntax": "proto3"
+ },
+ {
+  "name": "rpc_file_transfer.proto",
+  "package": "gv_pb",
+  "deps": [
+   "defines.proto"
+  ],
+  "messages": [
+   {
+    "name": "FileRename",
+    "fields": [
+     {
+      "name": "path",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "new_name",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "FileDirCreate",
+    "fields": [
+     {
+      "name": "path",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "FileRemoveFile",
+    "fields": [
+     {
+      "name": "path",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "FileOperationResult",
+    "fields": [
+     {
+      "name": "file_error",
+      "number": 1,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.FileTransferError",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "err_msg",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "path",
+      "number": 3,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "FileExist",
+    "fields": [
+     {
+      "name": "path",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "names",
+      "number": 2,
+      "label": 3,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "FileExistResult",
+    "fields": [
+     {
+      "name": "name",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "has_same",
+      "number": 2,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "has_transfering",
+      "number": 3,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "FileExistResponse",
+    "fields": [
+     {
+      "name": "path",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "results",
+      "number": 2,
+      "label": 3,
+      "type": 11,
+      "type_name": ".gv_pb.FileExistResult",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "FileEntry",
+    "fields": [
+     {
+      "name": "entry_type",
+      "number": 1,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.FileType",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "name",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "size",
+      "number": 3,
+      "label": 1,
+      "type": 4,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "modified_time",
+      "number": 4,
+      "label": 1,
+      "type": 4,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "full_path",
+      "number": 5,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "icon_type",
+      "number": 6,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "TaskId",
+    "fields": [
+     {
+      "name": "task_id",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "file_index",
+      "number": 2,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "ReadDir",
+    "fields": [
+     {
+      "name": "id",
+      "number": 1,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.TaskId",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "path",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "DirectoryData",
+    "fields": [
+     {
+      "name": "entries",
+      "number": 1,
+      "label": 3,
+      "type": 11,
+      "type_name": ".gv_pb.FileEntry",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "FileDirectory",
+    "fields": [
+     {
+      "name": "id",
+      "number": 1,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.TaskId",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "path",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "entries",
+      "number": 3,
+      "label": 3,
+      "type": 11,
+      "type_name": ".gv_pb.FileEntry",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "file_error",
+      "number": 4,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.FileTransferError",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "dir_data",
+      "number": 5,
+      "label": 1,
+      "type": 12,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "FileRemoveDir",
+    "fields": [
+     {
+      "name": "id",
+      "number": 1,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.TaskId",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "path",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "recursive",
+      "number": 3,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "FileTransferResult",
+    "fields": [
+     {
+      "name": "id",
+      "number": 1,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.TaskId",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "file_error",
+      "number": 2,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.FileTransferError",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "err_msg",
+      "number": 3,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "FileTransferComplete",
+    "fields": [
+     {
+      "name": "id",
+      "number": 1,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.TaskId",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "error",
+      "number": 2,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.FileTransferError",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "FileTransferAsk",
+    "fields": [
+     {
+      "name": "id",
+      "number": 1,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.TaskId",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "last_modified",
+      "number": 2,
+      "label": 1,
+      "type": 4,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "file_size",
+      "number": 3,
+      "label": 1,
+      "type": 4,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "FileTransferConfirm",
+    "fields": [
+     {
+      "name": "id",
+      "number": 1,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.TaskId",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "skip",
+      "number": 2,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "err",
+      "number": 3,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.FileTransferError",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "resume_point",
+      "number": 4,
+      "label": 1,
+      "type": 4,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "FileTransferBlock",
+    "fields": [
+     {
+      "name": "id",
+      "number": 1,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.TaskId",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "block_id",
+      "number": 2,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "data",
+      "number": 3,
+      "label": 1,
+      "type": 12,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "FileTransferBlockConfirm",
+    "fields": [
+     {
+      "name": "id",
+      "number": 1,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.TaskId",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "block_id",
+      "number": 2,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "err",
+      "number": 3,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.FileTransferError",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "block_len",
+      "number": 4,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "FileInfo",
+    "fields": [
+     {
+      "name": "rel_path",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "size",
+      "number": 2,
+      "label": 1,
+      "type": 4,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "modified_time",
+      "number": 3,
+      "label": 1,
+      "type": 4,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "FileList",
+    "fields": [
+     {
+      "name": "files",
+      "number": 1,
+      "label": 3,
+      "type": 11,
+      "type_name": ".gv_pb.FileInfo",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "DirectorySizeRead",
+    "fields": [
+     {
+      "name": "id",
+      "number": 1,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.TaskId",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "size",
+      "number": 2,
+      "label": 1,
+      "type": 4,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "FileTransferSendRequest",
+    "fields": [
+     {
+      "name": "id",
+      "number": 1,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.TaskId",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "path",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "list_data",
+      "number": 3,
+      "label": 1,
+      "type": 12,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "FileTransferSendResponse",
+    "fields": [
+     {
+      "name": "id",
+      "number": 1,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.TaskId",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "err",
+      "number": 2,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.FileTransferError",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "files",
+      "number": 3,
+      "label": 3,
+      "type": 11,
+      "type_name": ".gv_pb.FileInfo",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "folder_name",
+      "number": 4,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "list_data",
+      "number": 5,
+      "label": 1,
+      "type": 12,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "ClearSendTemp",
+    "fields": [
+     {
+      "name": "task_unique_id",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "FileTransferReceiveRequest",
+    "fields": [
+     {
+      "name": "id",
+      "number": 1,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.TaskId",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "path",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "files",
+      "number": 3,
+      "label": 3,
+      "type": 11,
+      "type_name": ".gv_pb.FileInfo",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "file_op_strategy",
+      "number": 4,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.FileOperationStrategy",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "folder_name",
+      "number": 5,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "list_data",
+      "number": 6,
+      "label": 1,
+      "type": 12,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "task_unique_id",
+      "number": 7,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "FileTransferReceiveResponse",
+    "fields": [
+     {
+      "name": "id",
+      "number": 1,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.TaskId",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "files",
+      "number": 2,
+      "label": 3,
+      "type": 11,
+      "type_name": ".gv_pb.FileInfo",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "err",
+      "number": 3,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.FileTransferError",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "FileTransferFtpRequest",
+    "fields": [
+     {
+      "name": "receive_request",
+      "number": 1,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.FileTransferReceiveRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "send_request",
+      "number": 2,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.FileTransferSendRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "file_ask",
+      "number": 3,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.FileTransferAsk",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "file_block",
+      "number": 4,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.FileTransferBlock",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "rename",
+      "number": 5,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.FileRename",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "dir_create",
+      "number": 6,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.FileDirCreate",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "remove_file",
+      "number": 7,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.FileRemoveFile",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "remove_dir",
+      "number": 8,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.FileRemoveDir",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "complete",
+      "number": 9,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.FileTransferComplete",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "read_dir",
+      "number": 10,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ReadDir",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "file_exist",
+      "number": 11,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.FileExist",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "clear_send_temp",
+      "number": 12,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.ClearSendTemp",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "dir_size_read",
+      "number": 13,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.DirectorySizeRead",
+      "oneof": 0,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": [
+     "which"
+    ]
+   },
+   {
+    "name": "FileTransferFtpResponse",
+    "fields": [
+     {
+      "name": "receive_response",
+      "number": 1,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.FileTransferReceiveResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "send_response",
+      "number": 2,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.FileTransferSendResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "file_confirm",
+      "number": 3,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.FileTransferConfirm",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "block_confirm",
+      "number": 4,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.FileTransferBlockConfirm",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "operation_result",
+      "number": 5,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.FileOperationResult",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "result",
+      "number": 6,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.FileTransferResult",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "file_directory",
+      "number": 7,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.FileDirectory",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "file_exist_response",
+      "number": 8,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.FileExistResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": [
+     "which"
+    ]
+   }
+  ],
+  "enums": [],
+  "syntax": "proto3"
+ },
+ {
+  "name": "input_event.proto",
+  "package": "gv_pb",
+  "deps": [],
+  "messages": [
+   {
+    "name": "TouchEventPoint",
+    "fields": [
+     {
+      "name": "id",
+      "number": 1,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "x",
+      "number": 2,
+      "label": 1,
+      "type": 2,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "y",
+      "number": 3,
+      "label": 1,
+      "type": 2,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "radius_x",
+      "number": 4,
+      "label": 1,
+      "type": 2,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "radius_y",
+      "number": 5,
+      "label": 1,
+      "type": 2,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "angle",
+      "number": 6,
+      "label": 1,
+      "type": 2,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "pressure",
+      "number": 7,
+      "label": 1,
+      "type": 2,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "TouchEvent",
+    "fields": [
+     {
+      "name": "event_type",
+      "number": 1,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.TouchEvent.TouchEventType",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "touch_points",
+      "number": 2,
+      "label": 3,
+      "type": 11,
+      "type_name": ".gv_pb.TouchEventPoint",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [
+     [
+      "TouchEventType",
+      [
+       [
+        "TOUCH_POINT_UNDEFINED",
+        0
+       ],
+       [
+        "TOUCH_POINT_START",
+        1
+       ],
+       [
+        "TOUCH_POINT_MOVE",
+        2
+       ],
+       [
+        "TOUCH_POINT_END",
+        3
+       ],
+       [
+        "TOUCH_POINT_CANCEL",
+        4
+       ]
+      ]
+     ]
+    ],
+    "oneofs": []
+   },
+   {
+    "name": "InputEvent",
+    "fields": [
+     {
+      "name": "touch_event",
+      "number": 1,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.TouchEvent",
+      "oneof": 0,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": [
+     "which"
+    ]
+   }
+  ],
+  "enums": [],
+  "syntax": "proto3"
+ },
+ {
+  "name": "mumu.proto",
+  "package": "gv_pb",
+  "deps": [],
+  "messages": [
+   {
+    "name": "MumuInfo",
+    "fields": [
+     {
+      "name": "vm_index",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "name",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "run_status",
+      "number": 3,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.MumuInfo.enumRunStatus",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [
+     [
+      "enumRunStatus",
+      [
+       [
+        "kMumuRunStatusNotRun",
+        0
+       ],
+       [
+        "kMumuRunStatusProcessStart",
+        1
+       ],
+       [
+        "kMumuRunStatusCompleteCommunication",
+        2
+       ],
+       [
+        "kMumuRunStatusAndroidComplete",
+        3
+       ],
+       [
+        "kMumuRunStatusClosing",
+        4
+       ],
+       [
+        "kMumuRunStatusLaunchFailed",
+        5
+       ]
+      ]
+     ]
+    ],
+    "oneofs": []
+   },
+   {
+    "name": "MumuPlayerList",
+    "fields": [
+     {
+      "name": "get_all",
+      "number": 1,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "list_info",
+      "number": 2,
+      "label": 3,
+      "type": 11,
+      "type_name": ".gv_pb.MumuInfo",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "list_vm_index",
+      "number": 3,
+      "label": 3,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "KeyValue",
+    "fields": [
+     {
+      "name": "key",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "value",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "LanguageValue",
+    "fields": [
+     {
+      "name": "value",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "language_value",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "LanguageKeyValue",
+    "fields": [
+     {
+      "name": "key",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "value",
+      "number": 2,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.LanguageValue",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "OneKeyMultiValue",
+    "fields": [
+     {
+      "name": "key",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "current_value",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "list_value",
+      "number": 3,
+      "label": 3,
+      "type": 11,
+      "type_name": ".gv_pb.LanguageValue",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "Performance",
+    "fields": [
+     {
+      "name": "value",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "language_value",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "cpu_core_num",
+      "number": 3,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "mem_value",
+      "number": 4,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "SettingRangePerformance",
+    "fields": [
+     {
+      "name": "key",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "key_custom_cpu",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "key_custom_mem",
+      "number": 3,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "current_value",
+      "number": 4,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "current_custom_cpu",
+      "number": 5,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "current_custom_mem",
+      "number": 6,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "list_range_custom_cpu",
+      "number": 7,
+      "label": 3,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "list_range_custom_mem",
+      "number": 8,
+      "label": 3,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "list_performance",
+      "number": 9,
+      "label": 3,
+      "type": 11,
+      "type_name": ".gv_pb.Performance",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "MinMax",
+    "fields": [
+     {
+      "name": "min",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "max",
+      "number": 2,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "Resolution",
+    "fields": [
+     {
+      "name": "value",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "width",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "height",
+      "number": 3,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "dpi",
+      "number": 4,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "SettingRangeResolution",
+    "fields": [
+     {
+      "name": "key",
+      "number": 1,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "key_custom_resolution_width",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "key_custom_resolution_height",
+      "number": 3,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "key_custom_resolution_dpi",
+      "number": 4,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "current_value",
+      "number": 5,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "current_custom_width",
+      "number": 6,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "current_custom_height",
+      "number": 7,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "current_custom_dpi",
+      "number": 8,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "range_resolution_width",
+      "number": 9,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.MinMax",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "range_resolution_height",
+      "number": 10,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.MinMax",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "range_resolution_dpi",
+      "number": 11,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.MinMax",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "list_resolution",
+      "number": 12,
+      "label": 3,
+      "type": 11,
+      "type_name": ".gv_pb.Resolution",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "MumuSettingRange",
+    "fields": [
+     {
+      "name": "vm_index",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "language",
+      "number": 2,
+      "label": 1,
+      "type": 9,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "render_list",
+      "number": 3,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.OneKeyMultiValue",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "performance_list",
+      "number": 4,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.SettingRangePerformance",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "resolution_list",
+      "number": 5,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.SettingRangeResolution",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "MumuSetting",
+    "fields": [
+     {
+      "name": "list_vm_index",
+      "number": 1,
+      "label": 3,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "type",
+      "number": 2,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.MumuSetting.enumType",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "set_or_get",
+      "number": 3,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "map_key_value",
+      "number": 4,
+      "label": 3,
+      "type": 11,
+      "type_name": ".gv_pb.MumuSetting.MapKeyValueEntry",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "get_setting_range",
+      "number": 5,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "setting_range",
+      "number": 6,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.MumuSettingRange",
+      "oneof": 0,
+      "proto3_optional": 1
+     }
+    ],
+    "nested": [
+     {
+      "name": "MapKeyValueEntry",
+      "fields": [
+       {
+        "name": "key",
+        "number": 1,
+        "label": 1,
+        "type": 9,
+        "type_name": null,
+        "oneof": null,
+        "proto3_optional": 0
+       },
+       {
+        "name": "value",
+        "number": 2,
+        "label": 1,
+        "type": 9,
+        "type_name": null,
+        "oneof": null,
+        "proto3_optional": 0
+       }
+      ],
+      "nested": [],
+      "enums": [],
+      "oneofs": []
+     }
+    ],
+    "enums": [
+     [
+      "enumType",
+      [
+       [
+        "kMumuSettingLocal",
+        0
+       ],
+       [
+        "kMumuSettingGlobal",
+        1
+       ]
+      ]
+     ]
+    ],
+    "oneofs": [
+     "_setting_range"
+    ]
+   },
+   {
+    "name": "MumuControl",
+    "fields": [
+     {
+      "name": "list_vm_index",
+      "number": 1,
+      "label": 3,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "type",
+      "number": 2,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.MumuControl.enumType",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [
+     [
+      "enumType",
+      [
+       [
+        "kMumuControlLaunch",
+        0
+       ],
+       [
+        "kMumuControlShutdown",
+        1
+       ],
+       [
+        "kMumuControlRestart",
+        2
+       ],
+       [
+        "kMumuControlDelete",
+        3
+       ],
+       [
+        "kMumuControlCreate",
+        4
+       ],
+       [
+        "kMumuControlCopy",
+        5
+       ]
+      ]
+     ]
+    ],
+    "oneofs": []
+   },
+   {
+    "name": "MumuNotifySimple",
+    "fields": [
+     {
+      "name": "vm_index",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "type",
+      "number": 2,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.enumMumuNotifyType",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "error_code",
+      "number": 3,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.enumMumuErrorCode",
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "MumuNotifyProcess",
+    "fields": [
+     {
+      "name": "vm_index",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "type",
+      "number": 2,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.enumMumuNotifyType",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "progress",
+      "number": 3,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "MumuOperate",
+    "fields": [
+     {
+      "name": "player_list",
+      "number": 1,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.MumuPlayerList",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "control",
+      "number": 2,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.MumuControl",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "setting",
+      "number": 3,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.MumuSetting",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "setting_range",
+      "number": 4,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.MumuSettingRange",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "notify_process",
+      "number": 5,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.MumuNotifyProcess",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "notify_result",
+      "number": 6,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.MumuNotifySimple",
+      "oneof": 0,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": [
+     "which"
+    ]
+   }
+  ],
+  "enums": [
+   [
+    "enumMumuNotifyType",
+    [
+     [
+      "kMumuNotifyLaunch",
+      0
+     ],
+     [
+      "kMumuNotifyShutdown",
+      1
+     ],
+     [
+      "kMumuNotifyRestart",
+      2
+     ],
+     [
+      "kMumuNotifyDelete",
+      3
+     ],
+     [
+      "kMumuNotifyCreate",
+      4
+     ],
+     [
+      "kMumuNotifyCopy",
+      5
+     ],
+     [
+      "kMumuNotifyPlayerCrash",
+      6
+     ],
+     [
+      "kMumuNotifyPlayerHeadlessCrash",
+      7
+     ]
+    ]
+   ],
+   [
+    "enumMumuErrorCode",
+    [
+     [
+      "kMumuErrorCodeSuccess",
+      0
+     ],
+     [
+      "kMumuErrorCodeFailed",
+      1
+     ]
+    ]
+   ]
+  ],
+  "syntax": "proto3"
+ },
+ {
+  "name": "port_mapping.proto",
+  "package": "gv_pb",
+  "deps": [],
+  "messages": [
+   {
+    "name": "PortMappingFrame",
+    "fields": [
+     {
+      "name": "session_id",
+      "number": 1,
+      "label": 1,
+      "type": 4,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "rule_id",
+      "number": 2,
+      "label": 1,
+      "type": 4,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "stream_id",
+      "number": 3,
+      "label": 1,
+      "type": 4,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "type",
+      "number": 4,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.PortMappingFrame.FrameType",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "payload",
+      "number": 5,
+      "label": 1,
+      "type": 12,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [
+     [
+      "FrameType",
+      [
+       [
+        "SYN",
+        0
+       ],
+       [
+        "FIN",
+        1
+       ],
+       [
+        "DATA",
+        2
+       ],
+       [
+        "SYN_ACK",
+        3
+       ],
+       [
+        "DATA_ACK",
+        4
+       ]
+      ]
+     ]
+    ],
+    "oneofs": []
+   }
+  ],
+  "enums": [],
+  "syntax": "proto3"
+ },
+ {
+  "name": "draw.proto",
+  "package": "gv_pb",
+  "deps": [],
+  "messages": [
+   {
+    "name": "DrawPoint",
+    "fields": [
+     {
+      "name": "x",
+      "number": 1,
+      "label": 1,
+      "type": 2,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "y",
+      "number": 2,
+      "label": 1,
+      "type": 2,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "DrawStrokeRequest",
+    "fields": [
+     {
+      "name": "stroke_id",
+      "number": 1,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "points",
+      "number": 2,
+      "label": 3,
+      "type": 11,
+      "type_name": ".gv_pb.DrawPoint",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "screen_id",
+      "number": 3,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": 0,
+      "proto3_optional": 1
+     },
+     {
+      "name": "line_width",
+      "number": 4,
+      "label": 1,
+      "type": 2,
+      "type_name": null,
+      "oneof": 1,
+      "proto3_optional": 1
+     },
+     {
+      "name": "color",
+      "number": 5,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": 2,
+      "proto3_optional": 1
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": [
+     "_screen_id",
+     "_line_width",
+     "_color"
+    ]
+   },
+   {
+    "name": "DrawStrokeResponse",
+    "fields": [
+     {
+      "name": "error_code",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "DrawClearRequest",
+    "fields": [
+     {
+      "name": "clear_type",
+      "number": 1,
+      "label": 1,
+      "type": 14,
+      "type_name": ".gv_pb.DrawClearRequest.ClearType",
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "stroke_id",
+      "number": 2,
+      "label": 1,
+      "type": 13,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     },
+     {
+      "name": "screen_id",
+      "number": 3,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": 0,
+      "proto3_optional": 1
+     }
+    ],
+    "nested": [],
+    "enums": [
+     [
+      "ClearType",
+      [
+       [
+        "CLEAR_TYPE_UNKNOWN",
+        0
+       ],
+       [
+        "CLEAR_TYPE_ALL",
+        1
+       ],
+       [
+        "CLEAR_TYPE_BY_ID",
+        2
+       ]
+      ]
+     ]
+    ],
+    "oneofs": [
+     "_screen_id"
+    ]
+   },
+   {
+    "name": "DrawClearResponse",
+    "fields": [
+     {
+      "name": "error_code",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "DrawToggleRequest",
+    "fields": [
+     {
+      "name": "enable",
+      "number": 1,
+      "label": 1,
+      "type": 8,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "DrawToggleResponse",
+    "fields": [
+     {
+      "name": "error_code",
+      "number": 1,
+      "label": 1,
+      "type": 5,
+      "type_name": null,
+      "oneof": null,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": []
+   },
+   {
+    "name": "DrawRequest",
+    "fields": [
+     {
+      "name": "stroke_request",
+      "number": 1,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.DrawStrokeRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "clear_request",
+      "number": 2,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.DrawClearRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "toggle_request",
+      "number": 3,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.DrawToggleRequest",
+      "oneof": 0,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": [
+     "which"
+    ]
+   },
+   {
+    "name": "DrawResponse",
+    "fields": [
+     {
+      "name": "stroke_response",
+      "number": 1,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.DrawStrokeResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "clear_response",
+      "number": 2,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.DrawClearResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     },
+     {
+      "name": "toggle_response",
+      "number": 3,
+      "label": 1,
+      "type": 11,
+      "type_name": ".gv_pb.DrawToggleResponse",
+      "oneof": 0,
+      "proto3_optional": 0
+     }
+    ],
+    "nested": [],
+    "enums": [],
+    "oneofs": [
+     "which"
+    ]
+   }
+  ],
+  "enums": [],
+  "syntax": "proto3"
+ }
+]

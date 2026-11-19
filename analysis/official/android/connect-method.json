@@ -1,0 +1,130 @@
+{
+  "evidence_id": "ev_c7de4ff50472b6f588635021b18a2af2744c4477b7033e91de1e7bc89978c308",
+  "subject": {
+    "name": "uuyc_4.48.1.apk",
+    "digest": {
+      "sha256": "19252db1dd384f25db000b334e6f77616b9dfa26b2e416ce5383038e973e219f"
+    },
+    "local_path": "/home/ubuntu/rea_uuyc/dist/uuyc_4.48.1.apk",
+    "format": "apk",
+    "architecture": null
+  },
+  "provider": {
+    "id": "jadx",
+    "name": "JADX headless",
+    "version": "0.7.1"
+  },
+  "analysis_profile": null,
+  "predicate_type": "rea.analysis",
+  "operation": "inspect_android_method",
+  "parameters": {
+    "path": "/home/ubuntu/rea_uuyc/dist/uuyc_4.48.1.apk",
+    "class_name": "com.remote.streamer.controller.AndroidStreamerController",
+    "method_name": "connect"
+  },
+  "raw_result": {
+    "server": {
+      "name": "rea-jadx-bridge",
+      "version": "7"
+    },
+    "bridge_sha256": "e5044a8312dd0731f53af3f095508b3e5cff54df6b971c95d4305e2f39b4fa30",
+    "jar_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+    "loaded": {
+      "state": "LOADED",
+      "apk_path": "/tmp/rea-android-9PnsgV/target.apk",
+      "class_count": 14640,
+      "resource_count": 2146,
+      "threads": 1,
+      "resources": "full"
+    },
+    "calls": [
+      {
+        "operation": "rea_jvm_status",
+        "input": {},
+        "response": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"max_heap_bytes\":515899392,\"metadata_scope\":\"parsed_members\",\"engine_reported_version\":\"0.7.1\",\"available_processors\":2,\"java_version\":\"21.0.12.1\"}"
+            }
+          ],
+          "isError": false
+        }
+      },
+      {
+        "operation": "get_class_summary",
+        "input": {
+          "class_name": "com.remote.streamer.controller.AndroidStreamerController"
+        },
+        "response": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"full_name\":\"com.remote.streamer.controller.AndroidStreamerController\",\"field_count\":0,\"name\":\"AndroidStreamerController\",\"inner_class_count\":0,\"inner_classes\":[],\"methods\":[{\"signature\":\"\\u003cinit\\u003e(): void\",\"dex_descriptor\":\"()V\",\"is_constructor\":true,\"name\":\"\\u003cinit\\u003e\",\"def_pos\":0},{\"signature\":\"Connect(long, java.nio.ByteBuffer, java.lang.String, java.lang.String): int\",\"dex_descriptor\":\"(JLjava/nio/ByteBuffer;Ljava/lang/String;Ljava/lang/String;)I\",\"is_constructor\":false,\"name\":\"Connect\",\"def_pos\":0},{\"signature\":\"Disconnect(long): int\",\"dex_descriptor\":\"(J)I\",\"is_constructor\":false,\"name\":\"Disconnect\",\"def_pos\":0},{\"signature\":\"ExitRoom(long): int\",\"dex_descriptor\":\"(J)I\",\"is_constructor\":false,\"name\":\"ExitRoom\",\"def_pos\":0},{\"signature\":\"Finalize(): int\",\"dex_descriptor\":\"()I\",\"is_constructor\":false,\"name\":\"Finalize\",\"def_pos\":0},{\"signature\":\"GetConnectionStats(long): int\",\"dex_descriptor\":\"(J)I\",\"is_constructor\":false,\"name\":\"GetConnectionStats\",\"def_pos\":0},{\"signature\":\"GetDecodeCapability(): java.lang.String\",\"dex_descriptor\":\"()Ljava/lang/String;\",\"is_constructor\":false,\"name\":\"GetDecodeCapability\",\"def_pos\":0},{\"signature\":\"GetStreamerVersion(): java.lang.String\",\"dex_descriptor\":\"()Ljava/lang/String;\",\"is_constructor\":false,\"name\":\"GetStreamerVersion\",\"def_pos\":0},{\"signature\":\"Initialize(java.lang.String, java.lang.String): int\",\"dex_descriptor\":\"(Ljava/lang/String;Ljava/lang/String;)I\",\"is_constructor\":false,\"name\":\"Initialize\",\"def_pos\":0},{\"signature\":\"LoginRoom(com.remote.streamer.model.StreamerRoomConfig): long\",\"dex_descriptor\":\"(Lcom/remote/streamer/model/StreamerRoomConfig;)J\",\"is_constructor\":false,\"name\":\"LoginRoom\",\"def_pos\":0},{\"signature\":\"SendBinaryData(long, java.nio.ByteBuffer): int\",\"dex_descriptor\":\"(JLjava/nio/ByteBuffer;)I\",\"is_constructor\":false,\"name\":\"SendBinaryData\",\"def_pos\":0},{\"signature\":\"SendControlData(long, java.nio.ByteBuffer): int\",\"dex_descriptor\":\"(JLjava/nio/ByteBuffer;)I\",\"is_constructor\":false,\"name\":\"SendControlData\",\"def_pos\":0},{\"signature\":\"SendFileData(long, java.nio.ByteBuffer): int\",\"dex_descriptor\":\"(JLjava/nio/ByteBuffer;)I\",\"is_constructor\":false,\"name\":\"SendFileData\",\"def_pos\":0},{\"signature\":\"SendTextData(long, java.nio.ByteBuffer): int\",\"dex_descriptor\":\"(JLjava/nio/ByteBuffer;)I\",\"is_constructor\":false,\"name\":\"SendTextData\",\"def_pos\":0},{\"signature\":\"StartAudioCapture(long, com.remote.streamer.model.AudioCaptureConfig): int\",\"dex_descriptor\":\"(JLcom/remote/streamer/model/AudioCaptureConfig;)I\",\"is_constructor\":false,\"name\":\"StartAudioCapture\",\"def_pos\":0},{\"signature\":\"StartAudioRender(long, com.remote.streamer.model.AudioRendererConfig): int\",\"dex_descriptor\":\"(JLcom/remote/streamer/model/AudioRendererConfig;)I\",\"is_constructor\":false,\"name\":\"StartAudioRender\",\"def_pos\":0},{\"signature\":\"StartVideoRender(long, com.remote.streamer.model.VideoRendererConfig): int\",\"dex_descriptor\":\"(JLcom/remote/streamer/model/VideoRendererConfig;)I\",\"is_constructor\":false,\"name\":\"StartVideoRender\",\"def_pos\":0},{\"signature\":\"StopAudioCapture(long, int): int\",\"dex_descriptor\":\"(JI)I\",\"is_constructor\":false,\"name\":\"StopAudioCapture\",\"def_pos\":0},{\"signature\":\"StopAudioRender(long, int): int\",\"dex_descriptor\":\"(JI)I\",\"is_constructor\":false,\"name\":\"StopAudioRender\",\"def_pos\":0},{\"signature\":\"StopVideoRender(long, int): int\",\"dex_descriptor\":\"(JI)I\",\"is_constructor\":false,\"name\":\"StopVideoRender\",\"def_pos\":0},{\"signature\":\"SwitchIceNetwork(long, com.remote.streamer.model.IceNetworkConfig): int\",\"dex_descriptor\":\"(JLcom/remote/streamer/model/IceNetworkConfig;)I\",\"is_constructor\":false,\"name\":\"SwitchIceNetwork\",\"def_pos\":0},{\"signature\":\"connect(long, byte[], java.lang.String, java.lang.String): int\",\"dex_descriptor\":\"(J[BLjava/lang/String;Ljava/lang/String;)I\",\"is_constructor\":false,\"name\":\"connect\",\"def_pos\":0},{\"signature\":\"disconnect(long): int\",\"dex_descriptor\":\"(J)I\",\"is_constructor\":false,\"name\":\"disconnect\",\"def_pos\":0},{\"signature\":\"exitRoom(long): int\",\"dex_descriptor\":\"(J)I\",\"is_constructor\":false,\"name\":\"exitRoom\",\"def_pos\":0},{\"signature\":\"finalize(): int\",\"dex_descriptor\":\"()I\",\"is_constructor\":false,\"name\":\"finalize\",\"def_pos\":0},{\"signature\":\"getConnectionStats(long): int\",\"dex_descriptor\":\"(J)I\",\"is_constructor\":false,\"name\":\"getConnectionStats\",\"def_pos\":0},{\"signature\":\"getDecodeCapability(): java.lang.String\",\"dex_descriptor\":\"()Ljava/lang/String;\",\"is_constructor\":false,\"name\":\"getDecodeCapability\",\"def_pos\":0},{\"signature\":\"getStreamerVersion(): java.lang.String\",\"dex_descriptor\":\"()Ljava/lang/String;\",\"is_constructor\":false,\"name\":\"getStreamerVersion\",\"def_pos\":0},{\"signature\":\"initialize(java.lang.String, java.lang.String): int\",\"dex_descriptor\":\"(Ljava/lang/String;Ljava/lang/String;)I\",\"is_constructor\":false,\"name\":\"initialize\",\"def_pos\":0},{\"signature\":\"loginRoom(com.remote.streamer.model.StreamerRoomConfig): long\",\"dex_descriptor\":\"(Lcom/remote/streamer/model/StreamerRoomConfig;)J\",\"is_constructor\":false,\"name\":\"loginRoom\",\"def_pos\":0},{\"signature\":\"sendBinaryData(long, byte[]): int\",\"dex_descriptor\":\"(J[B)I\",\"is_constructor\":false,\"name\":\"sendBinaryData\",\"def_pos\":0},{\"signature\":\"sendControlData(long, byte[]): int\",\"dex_descriptor\":\"(J[B)I\",\"is_constructor\":false,\"name\":\"sendControlData\",\"def_pos\":0},{\"signature\":\"sendFileData(long, byte[]): int\",\"dex_descriptor\":\"(J[B)I\",\"is_constructor\":false,\"name\":\"sendFileData\",\"def_pos\":0},{\"signature\":\"sendTextData(long, byte[]): int\",\"dex_descriptor\":\"(J[B)I\",\"is_constructor\":false,\"name\":\"sendTextData\",\"def_pos\":0},{\"signature\":\"startAudioCapture(long, com.remote.streamer.model.AudioCaptureConfig): int\",\"dex_descriptor\":\"(JLcom/remote/streamer/model/AudioCaptureConfig;)I\",\"is_constructor\":false,\"name\":\"startAudioCapture\",\"def_pos\":0},{\"signature\":\"startAudioRender(long, com.remote.streamer.model.AudioRendererConfig): int\",\"dex_descriptor\":\"(JLcom/remote/streamer/model/AudioRendererConfig;)I\",\"is_constructor\":false,\"name\":\"startAudioRender\",\"def_pos\":0},{\"signature\":\"startVideoRender(long, com.remote.streamer.model.VideoRendererConfig): int\",\"dex_descriptor\":\"(JLcom/remote/streamer/model/VideoRendererConfig;)I\",\"is_constructor\":false,\"name\":\"startVideoRender\",\"def_pos\":0},{\"signature\":\"stopAudioCapture(long, int): int\",\"dex_descriptor\":\"(JI)I\",\"is_constructor\":false,\"name\":\"stopAudioCapture\",\"def_pos\":0},{\"signature\":\"stopAudioRender(long, int): int\",\"dex_descriptor\":\"(JI)I\",\"is_constructor\":false,\"name\":\"stopAudioRender\",\"def_pos\":0},{\"signature\":\"stopVideoRender(long, int): int\",\"dex_descriptor\":\"(JI)I\",\"is_constructor\":false,\"name\":\"stopVideoRender\",\"def_pos\":0},{\"signature\":\"switchIceNetwork(long, com.remote.streamer.model.IceNetworkConfig): int\",\"dex_descriptor\":\"(JLcom/remote/streamer/model/IceNetworkConfig;)I\",\"is_constructor\":false,\"name\":\"switchIceNetwork\",\"def_pos\":0}],\"fields\":[],\"raw_name\":\"com.remote.streamer.controller.AndroidStreamerController\",\"method_count\":41}"
+            }
+          ],
+          "isError": false
+        }
+      },
+      {
+        "operation": "get_method_body",
+        "input": {
+          "class_name": "com.remote.streamer.controller.AndroidStreamerController",
+          "method_name": "connect",
+          "overload_index": 0,
+          "smali_fallback": true
+        },
+        "response": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"markers\":[],\"body\":\"    @Override // com.remote.streamer.controller.StreamerController\\n    public int connect(long j, byte[] bArr, String str, String str2) {\\n        k.e(bArr, \\\"config\\\");\\n        k.e(str, \\\"appControlId\\\");\\n        k.e(str2, \\\"timezone\\\");\\n        ByteBuffer byteBufferAllocateDirect \\u003d ByteBuffer.allocateDirect(bArr.length);\\n        byteBufferAllocateDirect.put(bArr);\\n        byteBufferAllocateDirect.flip();\\n        return Connect(j, byteBufferAllocateDirect, str, str2);\\n    }\",\"mode\":\"java\",\"class_name\":\"com.remote.streamer.controller.AndroidStreamerController\",\"dex_descriptor\":\"(J[BLjava/lang/String;Ljava/lang/String;)I\",\"overload_count\":1,\"method_name\":\"connect\",\"overload_index\":0,\"full_name\":\"com.remote.streamer.controller.AndroidStreamerController.connect\",\"fell_back\":false}"
+            }
+          ],
+          "isError": false
+        }
+      }
+    ]
+  },
+  "normalized_result": {
+    "engine": {
+      "name": "jadx-headless-mcp",
+      "version": "0.7.1",
+      "artifact_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+      "source_revision": "5844800a486d2248fa949b74c9896285f5b54de2",
+      "worker_count": 1,
+      "heap_limit_mib": 492
+    },
+    "class_name": "com.remote.streamer.controller.AndroidStreamerController",
+    "method": {
+      "name": "connect",
+      "reported_signature": "connect(long, byte[], java.lang.String, java.lang.String): int",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(J[BLjava/lang/String;Ljava/lang/String;)I"
+    },
+    "overload_count": 1,
+    "representation": "java",
+    "body_status": "available",
+    "fell_back": false,
+    "markers": [],
+    "source": {
+      "status": "complete",
+      "text": "    @Override // com.remote.streamer.controller.StreamerController\n    public int connect(long j, byte[] bArr, String str, String str2) {\n        k.e(bArr, \"config\");\n        k.e(str, \"appControlId\");\n        k.e(str2, \"timezone\");\n        ByteBuffer byteBufferAllocateDirect = ByteBuffer.allocateDirect(bArr.length);\n        byteBufferAllocateDirect.put(bArr);\n        byteBufferAllocateDirect.flip();\n        return Connect(j, byteBufferAllocateDirect, str, str2);\n    }",
+      "reported_total_bytes": null
+    }
+  },
+  "confidence": "derived",
+  "authority": "shipped-artifact",
+  "environment": null,
+  "limitations": [
+    "Static decompiler observations do not establish runtime behavior; the APK is never executed.",
+    "Method signatures use provider display types; DEX prototypes come from frozen JADX metadata. Display names may be aliases, and overload indices are local to this engine and artifact.",
+    "Class inventories use parsed metadata before code generation, including synthetic members that may be omitted from decompiled source. Source positions remain unknown.",
+    "Incoming reference totals count JADX using nodes. Direct invoke entries within a using method report raw DEX code-unit offsets and method indexes, but coverage is limited to those nodes and directly matched invokes; it does not establish every possible dynamic or reflective call site.",
+    "Manifest summaries are parsed once by REA's bridge from the exact root AndroidManifest.xml resource, using namespace-aware XML attributes; decoded XML is retained. APK signatures, split APKs, native libraries and Android runtime capture are not verified by this provider."
+  ],
+  "relationship_coverage": null,
+  "locations": [],
+  "evidence_links": []
+}

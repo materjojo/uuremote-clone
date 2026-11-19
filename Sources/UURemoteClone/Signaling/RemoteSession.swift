@@ -38,7 +38,7 @@ final class RemoteSession: NSObject, ObservableObject {
     private var clipboardTimer: Timer?
 
     /// 弱网增强（KCP + RS-FEC）；对端不支持时自动降级为裸 protobuf
-    var useReliableTransport = true
+    var useReliableTransport = false
 
     func connect(device: DeviceInfo) {
         self.device = device
@@ -61,8 +61,7 @@ final class RemoteSession: NSObject, ObservableObject {
 
         guard let server = room.signalingServer ?? room.signalingList?.first,
               let host = URL(string: server)?.host else {
-            // 演示模式：没有真实信令服务器时直接进入本地预览
-            phase = .connected
+            phase = .failed("房间未返回有效信令服务器，无法建立连接")
             return
         }
 
@@ -115,7 +114,11 @@ final class RemoteSession: NSObject, ObservableObject {
     func disconnect() {
         socket?.disconnect()
         socket = nil
+        rtc?.delegate = nil
         rtc = nil
+        reliableTimer?.invalidate()
+        reliableTimer = nil
+        reliable = nil
         controlReady = false
         queued.removeAll()
         phase = .idle
@@ -126,7 +129,9 @@ final class RemoteSession: NSObject, ObservableObject {
 
     override init() {
         super.init()
-        useReliableTransport = UserDefaults.standard.object(forKey: "useReliableTransport") as? Bool ?? true
+        // The experimental wrapper has no observed official negotiation contract.
+        // It must be explicitly enabled by a caller that controls both endpoints.
+        useReliableTransport = false
         clipboardTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
             guard let self, self.controlReady else { return }
             var seq = self.seq

@@ -23,6 +23,7 @@ public class MainActivity extends Activity {
     private StreamerSession session;
     private RemoteView remoteView;
     private ClipboardSync clipboard;
+    private View rootView;
 
     private static final int ACCENT = Color.parseColor("#5CD96B");
     private static final int MUTED = Color.parseColor("#9AA0A6");
@@ -77,7 +78,8 @@ public class MainActivity extends Activity {
 
         ScrollView scroll = new ScrollView(this);
         scroll.addView(root);
-        setContentView(scroll);
+        rootView = scroll;
+        setContentView(rootView);
         selectPage(0);
     }
 
@@ -127,11 +129,6 @@ public class MainActivity extends Activity {
             page.addView(deviceCard(d[0], d[1]));
         }
 
-        TextView footer = new TextView(this);
-        footer.setText("协议消息 " + Gvpb.schemaMessageCount() + " 条 · 云设备已剔除");
-        footer.setTextColor(MUTED);
-        footer.setTextSize(10);
-        page.addView(footer);
         return page;
     }
 
@@ -170,8 +167,8 @@ public class MainActivity extends Activity {
     }
 
     private void connectRemote(String name) {
-        Toast.makeText(this, "连接 " + name + "（协议 " + Gvpb.schemaMessageCount() + " 条）",
-                Toast.LENGTH_SHORT).show();
+        disconnectRemote();
+        Toast.makeText(this, "正在连接 " + name, Toast.LENGTH_SHORT).show();
         // 远控画面容器：与官方一致用 SurfaceViewRenderer
         LinearLayout stage = new LinearLayout(this);
         stage.setOrientation(LinearLayout.VERTICAL);
@@ -184,29 +181,55 @@ public class MainActivity extends Activity {
         back.setText("断开");
         back.setTextColor(ACCENT);
         back.setBackgroundColor(Color.TRANSPARENT);
-        back.setOnClickListener(v -> {
-            if (session != null) { session.stop(); session = null; }
-            setContentView(buildRootView());
-        });
+        back.setOnClickListener(v -> disconnectRemote());
         stage.addView(back);
         setContentView(stage);
 
-        ClipboardSync clip = new ClipboardSync(this, session::sendControl);
+        ClipboardSync clip = new ClipboardSync(this, data -> {
+            if (session != null) session.sendControl(data);
+        });
         clipboard = clip;
-        clip.start();
         session = new StreamerSession(this, new StreamerSession.Listener() {
             @Override public void onOffer(String sdp) { }
             @Override public void onCandidate(org.webrtc.IceCandidate c) { }
-            @Override public void onControl(byte[] data) { clip.apply(data); }
+            @Override public void onControl(byte[] data) {
+                runOnUiThread(() -> { if (clipboard == clip) clip.apply(data); });
+            }
             @Override public void onState(String state) {
                 runOnUiThread(() -> Toast.makeText(MainActivity.this, "连接状态：" + state,
                         Toast.LENGTH_SHORT).show());
             }
         });
-        session.start();
+        try {
+            session.start();
+            clip.start();
+        } catch (RuntimeException error) {
+            disconnectRemote();
+            Toast.makeText(this, "初始化失败：" + error.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
-    private View buildRootView() { return getWindow().getDecorView(); }
+    private void disconnectRemote() {
+        if (clipboard != null) { clipboard.stop(); clipboard = null; }
+        if (session != null) { session.stop(); session = null; }
+        if (remoteView != null) { remoteView.release(); remoteView = null; }
+        if (rootView != null) setContentView(rootView);
+    }
+
+    @Override public void onBackPressed() {
+        if (session != null) disconnectRemote();
+        else super.onBackPressed();
+    }
+
+    @Override protected void onDestroy() {
+        if (clipboard != null) clipboard.stop();
+        if (session != null) session.stop();
+        if (remoteView != null) remoteView.release();
+        clipboard = null;
+        session = null;
+        remoteView = null;
+        super.onDestroy();
+    }
 
     private View buildPlaceholder(String title, String sub) {
         LinearLayout p = new LinearLayout(this);

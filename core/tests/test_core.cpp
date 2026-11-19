@@ -31,7 +31,9 @@ int main() {
     gvpb_free(d);
 
     // 2. schema（来自官方 descriptor）
-    assert(gvpb_schema_message_count() >= 170);
+    assert(gvpb_schema_message_count() == 179);
+    assert(gvpb_schema_number("ScreenResolution", "width") == 1);
+    assert(gvpb_schema_number("MumuSetting.MapKeyValueEntry", "value") == 2);
     assert(gvpb_schema_number("Message", "input_event") == 20);
     assert(std::strcmp(gvpb_schema_name("Message", 20), "input_event") == 0);
     assert(gvpb_schema_number("ConnectOptions", "decoder_cap_list") == 4);
@@ -65,6 +67,8 @@ int main() {
 
     std::vector<std::vector<uint8_t>> origin(k, std::vector<uint8_t>(sz));
     for (int i = 0; i < k; ++i) origin[i] = shards[i];
+    std::memcpy(ptrs[4], parity0.data(), sz);
+    std::memcpy(ptrs[5], parity1.data(), sz);
     // 丢掉 0 和 2
     std::fill(shards[0].begin(), shards[0].end(), 0);
     std::fill(shards[2].begin(), shards[2].end(), 0);

@@ -7,6 +7,8 @@ BIN="$ROOT/.build/release/UURemoteClone"
 rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources" "$APP/Contents/Frameworks"
 cp "$BIN" "$APP/Contents/MacOS/UURemoteClone"
+cp "$ROOT/native/official/runtime/macos/libstreamer.dylib" "$APP/Contents/Frameworks/"
+cp "$ROOT/native/official/runtime/macos/streamer-config.json" "$APP/Contents/Resources/"
 
 # SwiftPM 二进制依赖需要随包嵌入
 FRAMEWORK="$(find "$ROOT/.build" -maxdepth 5 -name "WebRTC.framework" -type d 2>/dev/null | head -1)"
@@ -36,6 +38,8 @@ cat > "$APP/Contents/Info.plist" <<'PLIST'
 </plist>
 PLIST
 
-codesign --force --deep --sign - "$APP" || true
+# Preserve the supplied streamer's own signature; sign the enclosing app only.
+codesign --force --sign - "$APP"
+codesign --verify --deep --strict "$APP"
 echo "built: $APP"
 du -sh "$APP"

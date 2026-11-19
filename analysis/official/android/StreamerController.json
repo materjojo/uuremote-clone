@@ -1,0 +1,397 @@
+{
+  "evidence_id": "ev_dd5b9a90b26f2638d2a739a071e1989c123d2b50aac3e4c07ab99df5e73b459a",
+  "subject": {
+    "name": "uuyc_4.48.1.apk",
+    "digest": {
+      "sha256": "19252db1dd384f25db000b334e6f77616b9dfa26b2e416ce5383038e973e219f"
+    },
+    "local_path": "/home/ubuntu/rea_uuyc/dist/uuyc_4.48.1.apk",
+    "format": "apk",
+    "architecture": null
+  },
+  "provider": {
+    "id": "jadx",
+    "name": "JADX headless",
+    "version": "0.7.1"
+  },
+  "analysis_profile": null,
+  "predicate_type": "rea.analysis",
+  "operation": "inspect_android_class",
+  "parameters": {
+    "path": "/home/ubuntu/rea_uuyc/dist/uuyc_4.48.1.apk",
+    "class_name": "com.remote.streamer.controller.StreamerController"
+  },
+  "raw_result": {
+    "server": {
+      "name": "rea-jadx-bridge",
+      "version": "7"
+    },
+    "bridge_sha256": "e5044a8312dd0731f53af3f095508b3e5cff54df6b971c95d4305e2f39b4fa30",
+    "jar_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+    "loaded": {
+      "state": "LOADED",
+      "apk_path": "/tmp/rea-android-x9aWiq/target.apk",
+      "class_count": 14640,
+      "resource_count": 2146,
+      "threads": 1,
+      "resources": "full"
+    },
+    "calls": [
+      {
+        "operation": "rea_jvm_status",
+        "input": {},
+        "response": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"metadata_scope\":\"parsed_members\",\"engine_reported_version\":\"0.7.1\",\"available_processors\":2,\"java_version\":\"21.0.12.1\",\"max_heap_bytes\":515899392}"
+            }
+          ],
+          "isError": false
+        }
+      },
+      {
+        "operation": "load_apk",
+        "input": {
+          "path": "/tmp/rea-android-x9aWiq/target.apk",
+          "threads": 1,
+          "resources": "full"
+        },
+        "response": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"state\":\"LOADED\",\"apk_path\":\"/tmp/rea-android-x9aWiq/target.apk\",\"class_count\":14640,\"raw_class_count\":14640,\"resource_count\":2146,\"load_duration_ms\":13853,\"decompile_timeout_ms\":90000,\"threads\":1,\"code_cache_size\":64,\"resources\":\"full\"}"
+            }
+          ],
+          "isError": false
+        }
+      },
+      {
+        "operation": "get_class_summary",
+        "input": {
+          "class_name": "com.remote.streamer.controller.StreamerController",
+          "dex_static_values": true
+        },
+        "response": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"inner_class_count\":1,\"inner_classes\":[\"com.remote.streamer.controller.StreamerController.Delegate\"],\"methods\":[{\"signature\":\"\\u003cinit\\u003e(): void\",\"dex_descriptor\":\"()V\",\"is_constructor\":true,\"name\":\"\\u003cinit\\u003e\",\"def_pos\":0},{\"signature\":\"OnConnectionError(long, int): void\",\"dex_descriptor\":\"(JI)V\",\"is_constructor\":false,\"name\":\"OnConnectionError\",\"def_pos\":0},{\"signature\":\"OnConnectionState(long, int, int): void\",\"dex_descriptor\":\"(JII)V\",\"is_constructor\":false,\"name\":\"OnConnectionState\",\"def_pos\":0},{\"signature\":\"OnDualNegotiate(long, java.lang.String): void\",\"dex_descriptor\":\"(JLjava/lang/String;)V\",\"is_constructor\":false,\"name\":\"OnDualNegotiate\",\"def_pos\":0},{\"signature\":\"OnEventReport(long, java.lang.String, java.lang.String): void\",\"dex_descriptor\":\"(JLjava/lang/String;Ljava/lang/String;)V\",\"is_constructor\":false,\"name\":\"OnEventReport\",\"def_pos\":0},{\"signature\":\"OnNatInfo(long, java.lang.String): void\",\"dex_descriptor\":\"(JLjava/lang/String;)V\",\"is_constructor\":false,\"name\":\"OnNatInfo\",\"def_pos\":0},{\"signature\":\"OnQosStats(long, java.lang.String): void\",\"dex_descriptor\":\"(JLjava/lang/String;)V\",\"is_constructor\":false,\"name\":\"OnQosStats\",\"def_pos\":0},{\"signature\":\"OnReceiveBinaryData(long, byte[]): void\",\"dex_descriptor\":\"(J[B)V\",\"is_constructor\":false,\"name\":\"OnReceiveBinaryData\",\"def_pos\":0},{\"signature\":\"OnReceiveControlData(long, java.lang.String): void\",\"dex_descriptor\":\"(JLjava/lang/String;)V\",\"is_constructor\":false,\"name\":\"OnReceiveControlData\",\"def_pos\":0},{\"signature\":\"OnReceiveControlData(long, byte[]): void\",\"dex_descriptor\":\"(J[B)V\",\"is_constructor\":false,\"name\":\"OnReceiveControlData\",\"def_pos\":0},{\"signature\":\"OnReceiveDataChannel(long, java.lang.String): void\",\"dex_descriptor\":\"(JLjava/lang/String;)V\",\"is_constructor\":false,\"name\":\"OnReceiveDataChannel\",\"def_pos\":0},{\"signature\":\"OnReceiveFileData(long, byte[]): void\",\"dex_descriptor\":\"(J[B)V\",\"is_constructor\":false,\"name\":\"OnReceiveFileData\",\"def_pos\":0},{\"signature\":\"OnReceiveMediaTrack(long, int, java.lang.String): void\",\"dex_descriptor\":\"(JILjava/lang/String;)V\",\"is_constructor\":false,\"name\":\"OnReceiveMediaTrack\",\"def_pos\":0},{\"signature\":\"OnReceiveTextData(long, byte[]): void\",\"dex_descriptor\":\"(J[B)V\",\"is_constructor\":false,\"name\":\"OnReceiveTextData\",\"def_pos\":0},{\"signature\":\"OnRemoveMediaTrack(long, int, java.lang.String): void\",\"dex_descriptor\":\"(JILjava/lang/String;)V\",\"is_constructor\":false,\"name\":\"OnRemoveMediaTrack\",\"def_pos\":0},{\"signature\":\"OnRoomState(long, int): void\",\"dex_descriptor\":\"(JI)V\",\"is_constructor\":false,\"name\":\"OnRoomState\",\"def_pos\":0},{\"signature\":\"OnSignalData(long, byte[]): void\",\"dex_descriptor\":\"(J[B)V\",\"is_constructor\":false,\"name\":\"OnSignalData\",\"def_pos\":0},{\"signature\":\"OnSignalPush(long, java.lang.String): void\",\"dex_descriptor\":\"(JLjava/lang/String;)V\",\"is_constructor\":false,\"name\":\"OnSignalPush\",\"def_pos\":0},{\"signature\":\"connect(long, byte[], java.lang.String, java.lang.String): int\",\"dex_descriptor\":\"(J[BLjava/lang/String;Ljava/lang/String;)I\",\"is_constructor\":false,\"name\":\"connect\",\"def_pos\":0},{\"signature\":\"disconnect(long): int\",\"dex_descriptor\":\"(J)I\",\"is_constructor\":false,\"name\":\"disconnect\",\"def_pos\":0},{\"signature\":\"exitRoom(long): int\",\"dex_descriptor\":\"(J)I\",\"is_constructor\":false,\"name\":\"exitRoom\",\"def_pos\":0},{\"signature\":\"finalize(): int\",\"dex_descriptor\":\"()I\",\"is_constructor\":false,\"name\":\"finalize\",\"def_pos\":0},{\"signature\":\"getConnectionStats(long): int\",\"dex_descriptor\":\"(J)I\",\"is_constructor\":false,\"name\":\"getConnectionStats\",\"def_pos\":0},{\"signature\":\"getDecodeCapability(): java.lang.String\",\"dex_descriptor\":\"()Ljava/lang/String;\",\"is_constructor\":false,\"name\":\"getDecodeCapability\",\"def_pos\":0},{\"signature\":\"getStreamerVersion(): java.lang.String\",\"dex_descriptor\":\"()Ljava/lang/String;\",\"is_constructor\":false,\"name\":\"getStreamerVersion\",\"def_pos\":0},{\"signature\":\"initialize(java.lang.String, java.lang.String): int\",\"dex_descriptor\":\"(Ljava/lang/String;Ljava/lang/String;)I\",\"is_constructor\":false,\"name\":\"initialize\",\"def_pos\":0},{\"signature\":\"loginRoom(com.remote.streamer.model.StreamerRoomConfig): long\",\"dex_descriptor\":\"(Lcom/remote/streamer/model/StreamerRoomConfig;)J\",\"is_constructor\":false,\"name\":\"loginRoom\",\"def_pos\":0},{\"signature\":\"onFrameChange(long, int, int, int, int, java.lang.String): void\",\"dex_descriptor\":\"(JIIIILjava/lang/String;)V\",\"is_constructor\":false,\"name\":\"onFrameChange\",\"def_pos\":0},{\"signature\":\"sendBinaryData(long, byte[]): int\",\"dex_descriptor\":\"(J[B)I\",\"is_constructor\":false,\"name\":\"sendBinaryData\",\"def_pos\":0},{\"signature\":\"sendControlData(long, byte[]): int\",\"dex_descriptor\":\"(J[B)I\",\"is_constructor\":false,\"name\":\"sendControlData\",\"def_pos\":0},{\"signature\":\"sendFileData(long, byte[]): int\",\"dex_descriptor\":\"(J[B)I\",\"is_constructor\":false,\"name\":\"sendFileData\",\"def_pos\":0},{\"signature\":\"sendTextData(long, byte[]): int\",\"dex_descriptor\":\"(J[B)I\",\"is_constructor\":false,\"name\":\"sendTextData\",\"def_pos\":0},{\"signature\":\"setDelegate(com.remote.streamer.controller.StreamerController$Delegate): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/controller/StreamerController$Delegate;)V\",\"is_constructor\":false,\"name\":\"setDelegate\",\"def_pos\":0},{\"signature\":\"startAudioCapture(long, com.remote.streamer.model.AudioCaptureConfig): int\",\"dex_descriptor\":\"(JLcom/remote/streamer/model/AudioCaptureConfig;)I\",\"is_constructor\":false,\"name\":\"startAudioCapture\",\"def_pos\":0},{\"signature\":\"startAudioRender(long, com.remote.streamer.model.AudioRendererConfig): int\",\"dex_descriptor\":\"(JLcom/remote/streamer/model/AudioRendererConfig;)I\",\"is_constructor\":false,\"name\":\"startAudioRender\",\"def_pos\":0},{\"signature\":\"stopAudioCapture(long, int): int\",\"dex_descriptor\":\"(JI)I\",\"is_constructor\":false,\"name\":\"stopAudioCapture\",\"def_pos\":0},{\"signature\":\"stopAudioRender(long, int): int\",\"dex_descriptor\":\"(JI)I\",\"is_constructor\":false,\"name\":\"stopAudioRender\",\"def_pos\":0},{\"signature\":\"stopVideoRender(long, int): int\",\"dex_descriptor\":\"(JI)I\",\"is_constructor\":false,\"name\":\"stopVideoRender\",\"def_pos\":0},{\"signature\":\"switchIceNetwork(long, com.remote.streamer.model.IceNetworkConfig): int\",\"dex_descriptor\":\"(JLcom/remote/streamer/model/IceNetworkConfig;)I\",\"is_constructor\":false,\"name\":\"switchIceNetwork\",\"def_pos\":0}],\"fields\":[{\"name\":\"delegate\",\"def_pos\":0,\"type\":\"com.remote.streamer.controller.StreamerController$Delegate\"}],\"raw_name\":\"com.remote.streamer.controller.StreamerController\",\"method_count\":39,\"full_name\":\"com.remote.streamer.controller.StreamerController\",\"field_count\":1,\"name\":\"StreamerController\"}"
+            }
+          ],
+          "isError": false
+        }
+      }
+    ]
+  },
+  "normalized_result": {
+    "engine": {
+      "name": "jadx-headless-mcp",
+      "version": "0.7.1",
+      "artifact_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+      "source_revision": "5844800a486d2248fa949b74c9896285f5b54de2",
+      "worker_count": 1,
+      "heap_limit_mib": 492
+    },
+    "class_name": "com.remote.streamer.controller.StreamerController",
+    "methods": [
+      {
+        "name": "<init>",
+        "reported_signature": "<init>(): void",
+        "overload_index": 0,
+        "is_constructor": true,
+        "dex_descriptor": "()V"
+      },
+      {
+        "name": "OnConnectionError",
+        "reported_signature": "OnConnectionError(long, int): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(JI)V"
+      },
+      {
+        "name": "OnConnectionState",
+        "reported_signature": "OnConnectionState(long, int, int): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(JII)V"
+      },
+      {
+        "name": "OnDualNegotiate",
+        "reported_signature": "OnDualNegotiate(long, java.lang.String): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(JLjava/lang/String;)V"
+      },
+      {
+        "name": "OnEventReport",
+        "reported_signature": "OnEventReport(long, java.lang.String, java.lang.String): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(JLjava/lang/String;Ljava/lang/String;)V"
+      },
+      {
+        "name": "OnNatInfo",
+        "reported_signature": "OnNatInfo(long, java.lang.String): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(JLjava/lang/String;)V"
+      },
+      {
+        "name": "OnQosStats",
+        "reported_signature": "OnQosStats(long, java.lang.String): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(JLjava/lang/String;)V"
+      },
+      {
+        "name": "OnReceiveBinaryData",
+        "reported_signature": "OnReceiveBinaryData(long, byte[]): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J[B)V"
+      },
+      {
+        "name": "OnReceiveControlData",
+        "reported_signature": "OnReceiveControlData(long, java.lang.String): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(JLjava/lang/String;)V"
+      },
+      {
+        "name": "OnReceiveControlData",
+        "reported_signature": "OnReceiveControlData(long, byte[]): void",
+        "overload_index": 1,
+        "is_constructor": false,
+        "dex_descriptor": "(J[B)V"
+      },
+      {
+        "name": "OnReceiveDataChannel",
+        "reported_signature": "OnReceiveDataChannel(long, java.lang.String): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(JLjava/lang/String;)V"
+      },
+      {
+        "name": "OnReceiveFileData",
+        "reported_signature": "OnReceiveFileData(long, byte[]): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J[B)V"
+      },
+      {
+        "name": "OnReceiveMediaTrack",
+        "reported_signature": "OnReceiveMediaTrack(long, int, java.lang.String): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(JILjava/lang/String;)V"
+      },
+      {
+        "name": "OnReceiveTextData",
+        "reported_signature": "OnReceiveTextData(long, byte[]): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J[B)V"
+      },
+      {
+        "name": "OnRemoveMediaTrack",
+        "reported_signature": "OnRemoveMediaTrack(long, int, java.lang.String): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(JILjava/lang/String;)V"
+      },
+      {
+        "name": "OnRoomState",
+        "reported_signature": "OnRoomState(long, int): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(JI)V"
+      },
+      {
+        "name": "OnSignalData",
+        "reported_signature": "OnSignalData(long, byte[]): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J[B)V"
+      },
+      {
+        "name": "OnSignalPush",
+        "reported_signature": "OnSignalPush(long, java.lang.String): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(JLjava/lang/String;)V"
+      },
+      {
+        "name": "connect",
+        "reported_signature": "connect(long, byte[], java.lang.String, java.lang.String): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J[BLjava/lang/String;Ljava/lang/String;)I"
+      },
+      {
+        "name": "disconnect",
+        "reported_signature": "disconnect(long): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J)I"
+      },
+      {
+        "name": "exitRoom",
+        "reported_signature": "exitRoom(long): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J)I"
+      },
+      {
+        "name": "finalize",
+        "reported_signature": "finalize(): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "()I"
+      },
+      {
+        "name": "getConnectionStats",
+        "reported_signature": "getConnectionStats(long): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J)I"
+      },
+      {
+        "name": "getDecodeCapability",
+        "reported_signature": "getDecodeCapability(): java.lang.String",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "()Ljava/lang/String;"
+      },
+      {
+        "name": "getStreamerVersion",
+        "reported_signature": "getStreamerVersion(): java.lang.String",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "()Ljava/lang/String;"
+      },
+      {
+        "name": "initialize",
+        "reported_signature": "initialize(java.lang.String, java.lang.String): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Ljava/lang/String;Ljava/lang/String;)I"
+      },
+      {
+        "name": "loginRoom",
+        "reported_signature": "loginRoom(com.remote.streamer.model.StreamerRoomConfig): long",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/model/StreamerRoomConfig;)J"
+      },
+      {
+        "name": "onFrameChange",
+        "reported_signature": "onFrameChange(long, int, int, int, int, java.lang.String): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(JIIIILjava/lang/String;)V"
+      },
+      {
+        "name": "sendBinaryData",
+        "reported_signature": "sendBinaryData(long, byte[]): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J[B)I"
+      },
+      {
+        "name": "sendControlData",
+        "reported_signature": "sendControlData(long, byte[]): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J[B)I"
+      },
+      {
+        "name": "sendFileData",
+        "reported_signature": "sendFileData(long, byte[]): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J[B)I"
+      },
+      {
+        "name": "sendTextData",
+        "reported_signature": "sendTextData(long, byte[]): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J[B)I"
+      },
+      {
+        "name": "setDelegate",
+        "reported_signature": "setDelegate(com.remote.streamer.controller.StreamerController$Delegate): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/controller/StreamerController$Delegate;)V"
+      },
+      {
+        "name": "startAudioCapture",
+        "reported_signature": "startAudioCapture(long, com.remote.streamer.model.AudioCaptureConfig): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(JLcom/remote/streamer/model/AudioCaptureConfig;)I"
+      },
+      {
+        "name": "startAudioRender",
+        "reported_signature": "startAudioRender(long, com.remote.streamer.model.AudioRendererConfig): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(JLcom/remote/streamer/model/AudioRendererConfig;)I"
+      },
+      {
+        "name": "stopAudioCapture",
+        "reported_signature": "stopAudioCapture(long, int): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(JI)I"
+      },
+      {
+        "name": "stopAudioRender",
+        "reported_signature": "stopAudioRender(long, int): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(JI)I"
+      },
+      {
+        "name": "stopVideoRender",
+        "reported_signature": "stopVideoRender(long, int): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(JI)I"
+      },
+      {
+        "name": "switchIceNetwork",
+        "reported_signature": "switchIceNetwork(long, com.remote.streamer.model.IceNetworkConfig): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(JLcom/remote/streamer/model/IceNetworkConfig;)I"
+      }
+    ],
+    "fields": [
+      {
+        "name": "delegate",
+        "reported_type": "com.remote.streamer.controller.StreamerController$Delegate",
+        "dex_static_value": null
+      }
+    ],
+    "inner_classes": [
+      "com.remote.streamer.controller.StreamerController.Delegate"
+    ]
+  },
+  "confidence": "observed",
+  "authority": "shipped-artifact",
+  "environment": null,
+  "limitations": [
+    "Static decompiler observations do not establish runtime behavior; the APK is never executed.",
+    "Method signatures use provider display types; DEX prototypes come from frozen JADX metadata. Display names may be aliases, and overload indices are local to this engine and artifact.",
+    "Class inventories use parsed metadata before code generation, including synthetic members that may be omitted from decompiled source. Source positions remain unknown.",
+    "Incoming reference totals count JADX using nodes. Direct invoke entries within a using method report raw DEX code-unit offsets and method indexes, but coverage is limited to those nodes and directly matched invokes; it does not establish every possible dynamic or reflective call site.",
+    "Manifest summaries are parsed once by REA's bridge from the exact root AndroidManifest.xml resource, using namespace-aware XML attributes; decoded XML is retained. APK signatures, split APKs, native libraries and Android runtime capture are not verified by this provider."
+  ],
+  "relationship_coverage": null,
+  "locations": [],
+  "evidence_links": []
+}

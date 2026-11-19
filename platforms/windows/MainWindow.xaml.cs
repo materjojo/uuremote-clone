@@ -85,11 +85,7 @@ public partial class MainWindow : Window, StreamerSession.IListener, ClipboardSy
                 PagePlaceholder.Text = "终端\n\n通过 tmux 会话管理被控端终端（uuyc-cli）。";
                 break;
             case "settings":
-                var dll = System.IO.File.Exists("gvpb.dll");
-                PagePlaceholder.Text =
-                    $"设置\n\n协议消息：{Gvpb.SchemaMessageCount()} 条（官方 FileDescriptorProto）\n" +
-                    $"共享核心 gvpb.dll：{(dll ? "已加载" : "未找到")}\n" +
-                    "H.265 编码：已启用\n弱网增强（KCP+RS-FEC）：已启用\n云设备：已剔除";
+                PagePlaceholder.Text = "设置\n\nUURemoteClone 4.48.1\n远程连接与媒体功能正在开发。";
                 break;
             default:
                 PagePlaceholder.Text = "";

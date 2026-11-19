@@ -16,7 +16,6 @@
   <data name="choose.device.beOccupied" xml:space="preserve"><value>被占用</value></data>
   <data name="Assistance.exit" xml:space="preserve"><value>退出远程协助</value></data>
   <data name="ClientSecurityLock.Unlock.getCode" xml:space="preserve"><value>获取验证码</value></data>
-  <data name="CloudPC.Shutdown.Alert.Message" xml:space="preserve"><value>你可以选择退出云电脑，或让它继续在后台运行。</value></data>
   <data name="Setting.FileTransfer.ReceiveDirectory.createFailed" xml:space="preserve"><value>创建文件夹失败，请选择其他路径。</value></data>
   <data name="Control.ViewMode.Toolbar.Tooltip.windowMode" xml:space="preserve"><value>窗口模式</value></data>
   <data name="Control.ManualTransfer.Toast.switchP2P" xml:space="preserve"><value>已切换至P2P</value></data>
@@ -57,7 +56,6 @@
   <data name="LoginView.privacyPolicy" xml:space="preserve"><value>《隐私政策》</value></data>
   <data name="Terminal.State.lockedSubtitle" xml:space="preserve"><value>请输入被控端账户密码验证身份，此过程不会解锁被控端。\n在桌面远控开启「自动解锁被控端」功能后可自动验证。</value></data>
   <data name="Control.Toast.ViewMode.Annotation.screenLocked" xml:space="preserve"><value>请先解锁被控端。</value></data>
-  <data name="CloudPc.System.Noti.NoMoney.desc" xml:space="preserve"><value>U币不足，云电脑已自动关机。</value></data>
   <data name="Control.Menu.VideoColor.tureColor.error1" xml:space="preserve"><value>当前被控端不支持真彩模式</value></data>
   <data name="LoginView.AgreeUserPolicy" xml:space="preserve"><value>《用户协议》《隐私政策》《儿童隐私政策》《第三方服务共享清单》</value></data>
   <data name="NowDevice.Detail.Controlled.NotAllow.desc" xml:space="preserve"><value>请在该设备的网易UU远程【设置】-【安全】进行权限设置。</value></data>
@@ -65,13 +63,10 @@
   <data name="Tooltip.Reload.data" xml:space="preserve"><value>刷新</value></data>
   <data name="Control.VirtualDisplay.notSupport" xml:space="preserve"><value>被控端操作系统版本过低，强制虚拟屏功能未生效</value></data>
   <data name="Screen.Super.InformativeText.highlight" xml:space="preserve"><value>被控端显示屏将被关闭</value></data>
-  <data name="CloudPc.System.Noti.QueueRemind.desc" xml:space="preserve"><value>%@ 预计 2 分钟后到号，到号后需要确认开机，请关注排队情况。</value></data>
   <data name="choose.tips.devicePerformanceLimitation" xml:space="preserve"><value>由于设备性能受限，当前使用的画面清晰度，帧率以及被控端分辨率难以维持远控画面流畅。请尝试降低这些设置参数，以获得更好的远控体验。</value></data>
   <data name="NoLogin.Alert.RemoteAssistant.desc" xml:space="preserve"><value>登录后即可通过设备ID及验证码远控他人设备。</value></data>
   <data name="Common.Error.Alert.retry" xml:space="preserve"><value>重试</value></data>
   <data name="FileTrans.documents" xml:space="preserve"><value>我的文档</value></data>
-  <data name="CloudPc.Main.DeskTop.State.Button.shutDown" xml:space="preserve"><value>关机</value></data>
-  <data name="CloudPc.Schedule.Cancel.Alert.title" xml:space="preserve"><value>是否取消定时关机？</value></data>
   <data name="App.Permission.Contolled.FileFolder.title" xml:space="preserve"><value>文件与文件夹</value></data>
   <data name="MemberBenefit.Prompt.Trial.successSubtitle" xml:space="preserve"><value>已解锁所有 VIP 权益，快去体验一下吧！</value></data>
   <data name="RegionSelect.section.hot" xml:space="preserve"><value>热门国家/地区</value></data>
@@ -87,12 +82,10 @@
   <data name="Assist.Favorite.remarkCounter" xml:space="preserve"><value>%d/40</value></data>
   <data name="Control.Toast.ViewMode.Annotation.toggleFailed" xml:space="preserve"><value>批注开启失败，错误码 %d</value></data>
   <data name="PortMapping.validation.host" xml:space="preserve"><value>格式有误</value></data>
-  <data name="CloudPc.Main.AppList.manager" xml:space="preserve"><value>应用管理</value></data>
   <data name="Control.Privacy.Mode.blankScreen.error" xml:space="preserve"><value>被控端黑屏防护设置失败，错误码</value></data>
   <data name="MemberBenefit.Prompt.Trial.SecondScreen.subtitle" xml:space="preserve"><value>领取后可使用无线副屏，将本机屏幕扩展到移动设备上，享受本地多屏体验。</value></data>
   <data name="Home.SecondScreen.controlling" xml:space="preserve"><value>远控中</value></data>
   <data name="ClientSecurityLock.LockPage.unlockNow" xml:space="preserve"><value>立即解锁</value></data>
-  <data name="CloudPc.System.Noti.MinorTimeOver.desc" xml:space="preserve"><value>未成年用户可游戏时间已结束，已自动关机。</value></data>
   <data name="Control.Virtual.Display.Error.Toast.message" xml:space="preserve"><value>虚拟屏创建失败，错误码：%@</value></data>
   <data name="Control.Menu.volume" xml:space="preserve"><value>声音</value></data>
   <data name="Terminal.State.componentUnavailableSubtitle" xml:space="preserve"><value>请稍后再试</value></data>
@@ -104,7 +97,6 @@
   <data name="Paste.file.process.title.to" xml:space="preserve"><value>拷贝到</value></data>
   <data name="FileTrans.operate" xml:space="preserve"><value>操作</value></data>
   <data name="Screen.Super.Enter.Fps.message" xml:space="preserve"><value>被控端性能受限无法支持该帧率，若使用「超级屏」，\n所有内容将适配显示至「超级屏」，\n同时关闭被控端显示屏。</value></data>
-  <data name="CloudPc.Main.Alert.NoMoney.title" xml:space="preserve"><value>余额不足，请先充值</value></data>
   <data name="PortMapping.empty" xml:space="preserve"><value>暂无映射规则</value></data>
   <data name="MemberBenefit.Prompt.upgrade" xml:space="preserve"><value>开通会员</value></data>
   <data name="Setting.Proxy.System.NotFound.ok" xml:space="preserve"><value>知道了</value></data>
@@ -113,20 +105,16 @@
   <data name="DeviceManage.deleteDevice" xml:space="preserve"><value>删除设备</value></data>
   <data name="Home.Device.PowerOff.Device.Dialog.Online.message" xml:space="preserve"><value>请确保已保存所有工作，确定关机吗？</value></data>
   <data name="Home.SecondScreen.connectableDevices" xml:space="preserve"><value>可连接设备</value></data>
-  <data name="CloudPc.Main.Alert.LostConnection.desc" xml:space="preserve"><value>为避免超额计费，云电脑将在 5 分钟后自动关机。请及时处理重连，或使用其他设备连接使用。</value></data>
-  <data name="CloudPc.Control.Schedule.ContinueButton" xml:space="preserve"><value>继续使用</value></data>
   <data name="Home.SecondScreen.Settings.queryFailed" xml:space="preserve"><value>副屏配置读取失败，请重试</value></data>
   <data name="FileTrans.Delete.success" xml:space="preserve"><value>已经删除传输记录</value></data>
   <data name="Assistance.InputCode.title" xml:space="preserve"><value>输入设备验证码</value></data>
   <data name="Control.Menu.Other.screenScale" xml:space="preserve"><value>其他缩放</value></data>
   <data name="Control.Privacy.Mode.blankScreen.desc" xml:space="preserve"><value>在被控端显示屏上显示黑屏画面，遮挡屏幕内容。</value></data>
-  <data name="CloudPc.Main.Toolbar.hour" xml:space="preserve"><value>小时</value></data>
   <data name="Setting.Keyboard.WindowsMapping.Source.command" xml:space="preserve"><value>Command（⌘）键</value></data>
   <data name="Setting.Shortcut.Reset.button" xml:space="preserve"><value>重置</value></data>
   <data name="Recipient.verification.customChange" xml:space="preserve"><value>修改自定义验证码</value></data>
   <data name="Control.SmallWindow.opacity" xml:space="preserve"><value>不透明度</value></data>
   <data name="ConnectState.init" xml:space="preserve"><value>初始化连接</value></data>
-  <data name="CloudPc.Schedule.Setup.autoSaveSuccess" xml:space="preserve"><value>开机自动定时关机时间已修改为%@</value></data>
   <data name="NowDevice.WakeOnLan.guide2" xml:space="preserve"><value>远程开机前，请确保该设备已完成配置，如有需要可\U2006查看教程\U2006。</value></data>
   <data name="Setting.Controlled.System.permission" xml:space="preserve"><value>系统权限未完整配置，无法使用全部远程功能。</value></data>
   <data name="Control.Menu.FrameLimit.middle" xml:space="preserve"><value>60\U2006帧</value></data>
@@ -134,14 +122,12 @@
   <data name="GamePad.leftRockerButton" xml:space="preserve"><value>左摇杆按键</value></data>
   <data name="Assist.Favorite.Error.limit" xml:space="preserve"><value>收藏数量已达上限</value></data>
   <data name="LoginView.Status.TimeOut.title" xml:space="preserve"><value>二维码超时</value></data>
-  <data name="Home.CloudPc.Market" xml:space="preserve"><value>市场</value></data>
   <data name="Terminal.Session.closed" xml:space="preserve"><value>终端会话已关闭</value></data>
   <data name="FileTrans.delete" xml:space="preserve"><value>删除</value></data>
   <data name="Control.PrivacyScreen.Alert.knowIt" xml:space="preserve"><value>知道了</value></data>
   <data name="Setting.Keyboard.Function.viewModeToggle" xml:space="preserve"><value>切换观看/操控模式</value></data>
   <data name="Terminal.State.autoUnlockLocked" xml:space="preserve"><value>正在通过「自动解锁被控端」验证身份，此过程不会解锁被控端</value></data>
   <data name="FileTrans.downloads" xml:space="preserve"><value>下载</value></data>
-  <data name="CloudDisk.Manage.button" xml:space="preserve"><value>管理</value></data>
   <data name="Home.SecondScreen.enableControlGuide" xml:space="preserve"><value>请先前往开启「允许控制本设备」才可使用</value></data>
   <data name="LoginView.Error.phoneChangedError" xml:space="preserve"><value>手机号码已修改，请重新获取验证码。</value></data>
   <data name="Recipient.passCode.express" xml:space="preserve"><value>显示验证码</value></data>
@@ -161,13 +147,11 @@
   <data name="HomeView.RemoteHelp.remoteError" xml:space="preserve"><value>验证码错误，请重新输入</value></data>
   <data name="Control.PrivacySecurity.statusTitle" xml:space="preserve"><value>安全状态</value></data>
   <data name="NowDevice.WakeOnLan.Failed.No.Device.message" xml:space="preserve"><value>局域网内没有辅助设备在线，无法转发唤醒指令辅助开机。</value></data>
-  <data name="CloudPc.Schedule.Setup.cancelSchedule" xml:space="preserve"><value>取消定时关机</value></data>
   <data name="LoginView.childInfoProtocol" xml:space="preserve"><value>《儿童隐私政策》</value></data>
   <data name="Assistance.Connect.Error.title" xml:space="preserve"><value>远控失败</value></data>
   <data name="MemberBenefit.Prompt.PrivacyEnhanced.subtitle" xml:space="preserve"><value>使被控端显示屏熄屏，彻底保护屏幕隐私。</value></data>
   <data name="Assistance.title" xml:space="preserve"><value>远程协助</value></data>
   <data name="Control.Menu.NegotiateInfo.Color.Close.HDR.message" xml:space="preserve"><value>被控端显卡暂时不支持同时开启\U2006HDR\U2006与真彩模式，我们将尽快优化。</value></data>
-  <data name="CloudDisk.Status.expired" xml:space="preserve"><value>已到期，云设备结束计费后将抹除云硬盘内容。</value></data>
   <data name="Control.Menu.Mouse.ControlMouse.desc" xml:space="preserve"><value>有更好的跟手性，部分软件或游戏不兼容。</value></data>
   <data name="Setting.Proxy.Test.button" xml:space="preserve"><value>检测</value></data>
   <data name="Unlock.Alert.message1" xml:space="preserve"><value>网易UU远程 正在尝试自动解锁被控端屏幕</value></data>
@@ -183,26 +167,20 @@
   <data name="Recipient.setting.custom.change" xml:space="preserve"><value>修改</value></data>
   <data name="Setting.Menu.User.logout" xml:space="preserve"><value>退出登录</value></data>
   <data name="Home.NowDevice.Add.Alert.title" xml:space="preserve"><value>首次使用须知</value></data>
-  <data name="CloudDisk.Manage.mountTitle" xml:space="preserve"><value>云硬盘挂载</value></data>
-  <data name="CloudPc.Main.Alert.BootNotice.desc" xml:space="preserve"><value>因业务调整，我们已停止售卖 U币与云硬盘，远程业务不受影响。您账户里的余额和云硬盘可照常使用，如需退款，可联系[在线客服]。</value></data>
   <data name="PortMapping.reconnect" xml:space="preserve"><value>重新连接</value></data>
-  <data name="CloudPc.System.Noti.Button.sure" xml:space="preserve"><value>好的</value></data>
   <data name="ClientSecurityLock.Unlock.codeSendError" xml:space="preserve"><value>验证码发送失败，请稍后重试</value></data>
   <data name="Control.RemoteInfo.hardwareEncoder" xml:space="preserve"><value>硬编</value></data>
   <data name="RegionSelect.section.other" xml:space="preserve"><value>其他国家/地区</value></data>
   <data name="Control.Menu.NegotiateInfo.HDR.Not.Controller.support" xml:space="preserve"><value>当前控制端不支持\U2006HDR\U2006。</value></data>
   <data name="Terminal.Kill.confirm" xml:space="preserve"><value>终止</value></data>
   <data name="FileTrans.unknownName" xml:space="preserve"><value>未知文件名</value></data>
-  <data name="CloudDisk.Mount.nextBootEffect" xml:space="preserve"><value>下次启动生效</value></data>
   <data name="Unlock.opennow" xml:space="preserve"><value>立即开启</value></data>
   <data name="NowDevice.Tools.title" xml:space="preserve"><value>更多工具</value></data>
   <data name="Terminal.Error.connectionError" xml:space="preserve"><value>连接错误: %@</value></data>
   <data name="Setting.Keyboard.Permission.Guide.title" xml:space="preserve"><value>该功能需要开启辅助功能权限才能正常使用</value></data>
   <data name="UURemoteName" xml:space="preserve"><value>网易UU远程</value></data>
   <data name="Application.pinnedFull" xml:space="preserve"><value>置顶已满</value></data>
-  <data name="CloudPc.Main.DeskTop.State.Button.cancelUse" xml:space="preserve"><value>取消使用</value></data>
   <data name="Control.SmallWindow.SwitchDevice.Alert.message" xml:space="preserve"><value>小窗模式仅支持单个设备，切换后将关闭原设备小窗。</value></data>
-  <data name="CloudPc.Main.Alert.LostConnection.persistenceDesc" xml:space="preserve"><value>云电脑在后台仍保持运行状态，请尝试重新进入桌面。</value></data>
   <data name="HomeView.RemoteHelp.MacNoSupportAssistance" xml:space="preserve"><value>Mac版本暂不支持接受他人远程协助</value></data>
   <data name="Setting.Keyboard.ControllerOnly.desc" xml:space="preserve"><value>远控时按下以下快捷键，仅在控制端本地响应，不会发送到被控端。</value></data>
   <data name="Control.RemoteInfo.SecurityLan" xml:space="preserve"><value>局域网直连</value></data>
@@ -216,7 +194,6 @@
   <data name="NoLogin.Alert.Feedback.desc" xml:space="preserve"><value>随时查看您提交问题的处理状态和结果。</value></data>
   <data name="PortMapping.retry" xml:space="preserve"><value>重试</value></data>
   <data name="ClientSecurityLock.LockPage.desc" xml:space="preserve"><value>防止客户端设置被修改，保障数据与使用安全</value></data>
-  <data name="CloudDisk.Reset.Confirm.title" xml:space="preserve"><value>确定要重置 %@ 吗？</value></data>
   <data name="Control.Menu.NegotiateInfo.Color.Close.HDR.confirm" xml:space="preserve"><value>关闭\U2006HDR\U2006并开启真彩</value></data>
   <data name="Control.Menu.WindowSetting.opacity" xml:space="preserve"><value>不透明度</value></data>
   <data name="Application.gameOrApplication" xml:space="preserve"><value>【游戏/应用名称】</value></data>
@@ -225,16 +202,13 @@
   <data name="PortMapping.add" xml:space="preserve"><value>添加</value></data>
   <data name="Home.Device.InterruptConnectTips.secondScreenFileTransfer" xml:space="preserve"><value>当前设备正在使用无线副屏功能，继续传输文件将会断开副屏连接。</value></data>
   <data name="Control.Menu.VideoColor.tureColor.error3" xml:space="preserve"><value>真彩模式不支持所设画质</value></data>
-  <data name="CloudPc.Main.Alert.Button.known" xml:space="preserve"><value>知道了</value></data>
   <data name="FloatingBall.Tips.Enable" xml:space="preserve"><value>开启后，全屏状态下不显示悬浮球。可使用 </value></data>
   <data name="SilentUpgrade.defeated" xml:space="preserve"><value>被控端更新遇到问题，正在重连</value></data>
   <data name="Setting.Keyboard.Shortcut.delete" xml:space="preserve"><value>删除</value></data>
   <data name="Home.Device.CancelAppPinnedSuccess" xml:space="preserve"><value>取消置顶成功</value></data>
   <data name="Screen.Super.Enter.highlight" xml:space="preserve"><value>同时关闭被控端显示屏</value></data>
-  <data name="CloudDisk.Shutdown.expiredTitle" xml:space="preserve"><value>当前存在已过期的云硬盘，确定要关机吗？</value></data>
   <data name="MemberBenefit.Prompt.Trial.HDR.subtitle" xml:space="preserve"><value>领取后可开启HDR，增强明暗对比，还原真实光影与立体层次。</value></data>
   <data name="GamePad.touchpadFinger2" xml:space="preserve"><value>触摸板手指2</value></data>
-  <data name="CloudPc.Schedule.Cancel.AlreadyShutdown.confirm" xml:space="preserve"><value>我知道了</value></data>
   <data name="Unlock.Alert.Failed.message" xml:space="preserve"><value>被控端自动解锁失败，请稍后重试。</value></data>
   <data name="Terminal.Password.title" xml:space="preserve"><value>输入被控端账户密码</value></data>
   <data name="Control.NegotiateInfo.Connect.notice4" xml:space="preserve"><value>设备性能受限，已关闭\U2006HDR</value></data>
@@ -249,32 +223,25 @@
   <data name="Control.Menu.Mouse.ControlledMouse.desc" xml:space="preserve"><value>有更好的兼容性，但鼠标显示受网络延迟\n影响。</value></data>
   <data name="Setting.PreventSleep.LapTop.desc" xml:space="preserve"><value>防止电脑进入睡眠状态，导致无法远程访问（合盖状态下建议连接电源适配器）。</value></data>
   <data name="Setting.virtualDisplay.title" xml:space="preserve"><value>自动创建虚拟屏</value></data>
-  <data name="CloudDisk.Purchase.button" xml:space="preserve"><value>购买云硬盘</value></data>
   <data name="Recipient.passCode.secret" xml:space="preserve"><value>隐藏验证码</value></data>
   <data name="FileTrans.Notification.Body.send" xml:space="preserve"><value>接收设备：%@\n发送文件：%@</value></data>
   <data name="Control.SmallWindow.exit" xml:space="preserve"><value>退出小窗模式</value></data>
   <data name="Home.Computer.SaveEdit" xml:space="preserve"><value>保存更改</value></data>
   <data name="Setting.FileTransfer.ReceiveDirectory.title" xml:space="preserve"><value>移动设备传输文件存储路径</value></data>
-  <data name="CloudPc.Control.Coin.surplus" xml:space="preserve"><value>U币余额</value></data>
   <data name="Control.RemoteInfo.controlTerminalVersion" xml:space="preserve"><value>控制端版本: </value></data>
   <data name="Control.Menu.GameMode.title" xml:space="preserve"><value>开启游戏鼠标模式</value></data>
   <data name="Control.Menu.switchNextScreen" xml:space="preserve"><value>切换下一个屏幕</value></data>
   <data name="Control.RemoteInfo.current" xml:space="preserve"><value>当前</value></data>
   <data name="MemberBenefit.Prompt.Trial.PrivacyScreensaver.subtitle" xml:space="preserve"><value>领取后支持自定义隐私防护，一键隐藏桌面画面，守护远程隐私。</value></data>
   <data name="Control.Menu.keyboard" xml:space="preserve"><value>键盘</value></data>
-  <data name="CloudPc.Main.Alert.Button.goAuth" xml:space="preserve"><value>去认证</value></data>
   <data name="HomeView.computerCard.show.window" xml:space="preserve"><value>显示远控窗口</value></data>
   <data name="Unlock.Alert.Double.Authentication.success" xml:space="preserve"><value>双重验证开启成功</value></data>
   <data name="Setting.Keyboard.Shortcut.Display.command" xml:space="preserve"><value>Command</value></data>
-  <data name="CloudPc.Persistence.Menu.always" xml:space="preserve"><value>保持开启</value></data>
-  <data name="CloudDisk.Mount.Select.cancel" xml:space="preserve"><value>取消</value></data>
   <data name="PortMapping.validation.port" xml:space="preserve"><value>端口范围 1-65535</value></data>
   <data name="Setting.Keyboard.WindowsMapping.title" xml:space="preserve"><value>远控 Windows 按键映射</value></data>
   <data name="HomeView.RemoteHelp.Sharing.waitConnecting" xml:space="preserve"><value>本机允许被远程控制，正在等待连接...</value></data>
   <data name="Control.State.connectionError" xml:space="preserve"><value>连接出错，错误码%@。</value></data>
   <data name="Control.Menu.microphone.error.systemNotSupported" xml:space="preserve"><value>被控系统不支持，建议升级被控电脑系统到 Windows 10 以上。</value></data>
-  <data name="CloudPc.Main.Toolbar.Status.running" xml:space="preserve"><value>运行中</value></data>
-  <data name="CloudDisk.Reset.Fail.message" xml:space="preserve"><value>重置失败，请稍后重试</value></data>
   <data name="Control.PrivacySecurity.autoLockEnabled" xml:space="preserve"><value>结束远程自动锁屏</value></data>
   <data name="Control.RemoteInfo.capture" xml:space="preserve"><value>采集方式: </value></data>
   <data name="Setting.FileTransfer.ReceiveDirectory.openFailed" xml:space="preserve"><value>打开文件夹失败，请修改路径后重试</value></data>
@@ -282,17 +249,14 @@
   <data name="Control.Menu.microphone.noDevice" xml:space="preserve"><value>当前无麦克风设备</value></data>
   <data name="Control.Menu.VideoColor.tureColor.error2" xml:space="preserve"><value>本设备不支持在当前被控端开启真彩模式</value></data>
   <data name="Home.Computer.Info" xml:space="preserve"><value>信息</value></data>
-  <data name="CloudPc.Schedule.Setup.close" xml:space="preserve"><value>关闭</value></data>
   <data name="Terminal.Connect.listRetry" xml:space="preserve"><value>获取终端列表超时，正在第 %d 次重试</value></data>
   <data name="Home.SecondScreen.Error.lowVersionMessage" xml:space="preserve"><value>该设备上的网易UU远程客户端版本过低，请先更新版本。</value></data>
-  <data name="CloudPc.Main.Alert.DeleteDevice.title" xml:space="preserve"><value>是否继续删除设备？</value></data>
   <data name="Control.FileDrag.unsupported" xml:space="preserve"><value>当前被控端暂不支持文件拖拽</value></data>
   <data name="Control.Menu.Apple.Screen.tip" xml:space="preserve"><value>因系统限制，非\U2006Mac\U2006内建屏部分分辨率无法设置。</value></data>
   <data name="Control.PrivacyScreen.Alert.useNow" xml:space="preserve"><value>立即使用</value></data>
   <data name="MemberBenefit.Prompt.MultiWindow.subtitle" xml:space="preserve"><value>适配多显示器，窗口可分可合并，高效切屏提高远控效率。</value></data>
   <data name="Control.Menu.NegotiateInfo.HDR.close" xml:space="preserve"><value>\U2006HDR\U2006已关闭</value></data>
   <data name="ConnectState.reconnecting" xml:space="preserve"><value>正在尝试重连</value></data>
-  <data name="CloudDisk.Mount.currentDevice" xml:space="preserve"><value>当前设备：%@</value></data>
   <data name="Control.RemoteInfo.frameLatency" xml:space="preserve"><value>帧延时: </value></data>
   <data name="GamePad.rightRockerButton" xml:space="preserve"><value>右摇杆按键</value></data>
   <data name="Device.List.Add.desc" xml:space="preserve"><value>用\U2006Windows\U2006设备访问官网\U2006uuyc.163.com\U2006下载并安装客户端，登录后即可进行远程办公、远程游戏以及文件传输。</value></data>
@@ -304,15 +268,11 @@
   <data name="Control.Connection.notice6" xml:space="preserve"><value>被控端资源占用较高，导致性能不足。请尝试关闭其他应用，以改善远程控制体验。</value></data>
   <data name="LoginView.BottomLabel" xml:space="preserve"><value>首次使用手机登录将自动为你注册</value></data>
   <data name="Terminal.Unlock.locked" xml:space="preserve"><value>检测被控Windows未登录，无法启动命令行。</value></data>
-  <data name="CloudDisk.Menu.purchaseRenew" xml:space="preserve"><value>购买或续费</value></data>
-  <data name="CloudPC.Shutdown.Alert.MessageWithDisk" xml:space="preserve"><value>本云设备已绑定云硬盘，关机会保留%@盘数据</value></data>
   <data name="Control.Menu.microphone.toast.enabled" xml:space="preserve"><value>已开启麦克风</value></data>
   <data name="Setting.Keyboard.Permission.Accessibility.guideSubtitle" xml:space="preserve"><value>授权后，远程时才能准确识别系统快捷键。</value></data>
   <data name="Terminal.Kill.cancel" xml:space="preserve"><value>取消</value></data>
   <data name="NowDevice.WakeOnLan.desc.fail" xml:space="preserve"><value>1.\U2006网卡未正确设置相关唤醒选项；\n2.\U2006主板\U2006BIOS\U2006未开启\U2006\U2006Wake\U2006On\U2006LAN\U2006。\n若问题未解决，可\U2006查看教程\U2006或\U2006联系客服\U2006。</value></data>
   <data name="Control.PrivacyScreen.Settings.title" xml:space="preserve"><value>设置隐私屏保</value></data>
-  <data name="CloudDisk.Done.button" xml:space="preserve"><value>完成</value></data>
-  <data name="CloudDisk.Shutdown.expiredMessage" xml:space="preserve"><value>关机结束计费后，已过期的云硬盘将彻底抹除资料，无法复原。</value></data>
   <data name="Setting.Shortcut.Reset.title" xml:space="preserve"><value>快捷键还原</value></data>
   <data name="Home.Device.Menu.Restart" xml:space="preserve"><value>重启电脑</value></data>
   <data name="FileTrans.acceptPath" xml:space="preserve"><value>接收路径</value></data>
@@ -320,14 +280,12 @@
   <data name="Terminal.List.createSession" xml:space="preserve"><value>创建会话</value></data>
   <data name="NowDevice.UpdateStatus.Failed.desc" xml:space="preserve"><value>请在该设备重新启动网易UU远程软件。可以\U2006提交反馈\U2006 帮助我们做得更好。</value></data>
   <data name="Screen.Super.nomore" xml:space="preserve"><value>不再提示</value></data>
-  <data name="CloudDisk.Reset.loading" xml:space="preserve"><value>正在重置</value></data>
   <data name="Setting.Keyboard.Function.privacyMode" xml:space="preserve"><value>被控时解除防窥模式</value></data>
   <data name="Recipient.setting.fileTransfer.title" xml:space="preserve"><value>被远程协助时允许文件互传</value></data>
   <data name="Control.Menu.microphone.error.systemBSODRisk" xml:space="preserve"><value>当前功能存在异常，请联系在线客服处理。</value></data>
   <data name="Control.PrivacySecurity.remoteMuteEnabled" xml:space="preserve"><value>已静音</value></data>
   <data name="MemberBenefit.ExpiringSoon.restoreBenefits" xml:space="preserve"><value>恢复权益</value></data>
   <data name="Control.Trigger.ControlledVersion.Update.Alert.confirm" xml:space="preserve"><value>更新被控端</value></data>
-  <data name="CloudPC.Shutdown.Alert.Title" xml:space="preserve"><value>退出云电脑？</value></data>
   <data name="Control.PrivacyScreen.Settings.preset" xml:space="preserve"><value>预设</value></data>
   <data name="Setting.PreventSleep.title" xml:space="preserve"><value>让这台 Mac 保持唤醒状态</value></data>
   <data name="MemberBenefit.Card.svipTitle" xml:space="preserve"><value>SVIP</value></data>
@@ -344,23 +302,18 @@
   <data name="Control.RemoteInfo.softwareEncoder" xml:space="preserve"><value>软编</value></data>
   <data name="GamePad.leftRocker" xml:space="preserve"><value>左摇杆</value></data>
   <data name="Connect.PermissionReject.message" xml:space="preserve"><value>与远端设备的连接已断开，请重试。</value></data>
-  <data name="CloudDisk.Toast.Mounted.button" xml:space="preserve"><value>挂载管理</value></data>
   <data name="Screen.Super.Enter.Fps.confirm" xml:space="preserve"><value>确定使用</value></data>
   <data name="NowDevice.Controlled.disconnectAll" xml:space="preserve"><value>断开所有远控</value></data>
   <data name="Home.Computer.EditDeviceName" xml:space="preserve"><value>修改设备名称</value></data>
   <data name="Setting.FileTransfer.ReceiveDirectory.change" xml:space="preserve"><value>修改路径</value></data>
   <data name="Common.Error.Connection.connecting" xml:space="preserve"><value>正在连接</value></data>
   <data name="Recipient.share.pasteboard.custom" xml:space="preserve"><value>使用 网易UU远程 即可对我发起远程协助\n设备ID：%@\n设备验证码：已设置自定义验证码，请联系我获取\n网易UU远程 下载地址：https://uuyc.163.com/</value></data>
-  <data name="CloudDisk.Renew.button" xml:space="preserve"><value>续费</value></data>
   <data name="Control.PrivacyScreen.Alert.title" xml:space="preserve"><value>提示</value></data>
   <data name="Control.Menu.switchScreen.shortcut" xml:space="preserve"><value>可使用 %@ 快速切换屏幕</value></data>
   <data name="GamePad.homePage" xml:space="preserve"><value>主页</value></data>
-  <data name="CloudDisk.Menu.mountManage" xml:space="preserve"><value>挂载管理</value></data>
   <data name="FileTrans.confirmStop" xml:space="preserve"><value>确定终止</value></data>
   <data name="Terminal.Unlock.timeout" xml:space="preserve"><value>验证超时，请检查被控端状态</value></data>
-  <data name="CloudPc.System.Noti.Button.openDevice" xml:space="preserve"><value>打开设备页</value></data>
   <data name="HomeView.RemoteHelp.connectExist" xml:space="preserve"><value>该设备已连接，不要重复连接</value></data>
-  <data name="CloudPc.Main.DeskTop.more" xml:space="preserve"><value>更多</value></data>
   <data name="Control.NegotiateInfo.Choose.notice12" xml:space="preserve"><value>设备性能受限，可尝试关闭真彩能力后重试。</value></data>
   <data name="NowDevice.Controlled.time" xml:space="preserve"><value>连接时长 %@</value></data>
   <data name="Control.Menu.ViewMode.enable" xml:space="preserve"><value>启用观看模式</value></data>
@@ -390,10 +343,8 @@
   <data name="Setting.ClientSecurityLock.title" xml:space="preserve"><value>客户端锁定</value></data>
   <data name="App.Permission.Contolled.AssistantOperationMacOS27.title" xml:space="preserve"><value>设备控制和数据访问</value></data>
   <data name="NewUser.Guide.Segment1.Step1.desc" xml:space="preserve"><value>用手机扫描右方二维码，下载并安装\n网易UU远程 App</value></data>
-  <data name="CloudPc.Control.Details.Purchase" xml:space="preserve"><value>充值</value></data>
   <data name="Home.SecondScreen.connecting" xml:space="preserve"><value>连接中</value></data>
   <data name="Terminal.State.inputPassword" xml:space="preserve"><value>输入密码</value></data>
-  <data name="CloudDisk.Mount.runningHint" xml:space="preserve"><value>云设备运行期间暂不支持挂载云硬盘。</value></data>
   <data name="Control.ConnectError.reconnect" xml:space="preserve"><value>重新连接</value></data>
   <data name="FileTrans.sendNumber" xml:space="preserve"><value>已传输 %@ 个文件</value></data>
   <data name="LoginView.Status.Success.button" xml:space="preserve"><value>返回二维码</value></data>
@@ -418,28 +369,23 @@
   <data name="Home.SecondScreen.Error.offline" xml:space="preserve"><value>该设备为离线状态，请先启动设备上的网易UU远程客户端。</value></data>
   <data name="Error.encounterProblems" xml:space="preserve"><value>我可能遇到了问题</value></data>
   <data name="FileTrans.selNumber" xml:space="preserve"><value>选中 %@ 文件</value></data>
-  <data name="CloudPc.Main.Alert.OpenPCAndAPP.title" xml:space="preserve"><value>提示</value></data>
   <data name="Device.List.pc" xml:space="preserve"><value>电脑</value></data>
   <data name="Control.MacControlled.GuidePopView.title" xml:space="preserve"><value>被控功能已上线！可前往【设置】-【安全】，开启允许同账号控制本设备。</value></data>
   <data name="Assistance.noSupport" xml:space="preserve"><value>被控端版本不支持该特性，请先更新被控端</value></data>
-  <data name="CloudPc.Main.Alert.Button.sureShutDown" xml:space="preserve"><value>关机并结束计费</value></data>
   <data name="NowDevice.Model.assistance" xml:space="preserve"><value>远程协助</value></data>
   <data name="Terminal.Rename.errorInvalidChar" xml:space="preserve"><value>名称包含无效字符</value></data>
   <data name="FileTrans.DragDrop.confirm.send" xml:space="preserve"><value>发送</value></data>
   <data name="Control.FileDrag.assistDisabled" xml:space="preserve"><value>对方已关闭远程协助文件传输</value></data>
-  <data name="CloudPc.Main.LineCrowded.title" xml:space="preserve"><value>线路拥挤，需排队连接云电脑</value></data>
   <data name="Control.Menu.CustomBitrateSetting.StartCustomBitrate.title" xml:space="preserve"><value>启用自定义码率</value></data>
   <data name="Control.Virtual.Display.Alert.title" xml:space="preserve"><value>已自动使用“虚拟屏”</value></data>
   <data name="Control.Menu.NegotiateInfo.Color.Not.Match.Frame.quality" xml:space="preserve"><value>当前画质下无法开启真彩，请降低画质后再试。</value></data>
   <data name="FileTrans.Notification.Action.openFolder" xml:space="preserve"><value>打开所在文件夹</value></data>
   <data name="Control.PrivacyScreen.unsupportedSystemVersion" xml:space="preserve"><value>被控端系统版本较低，暂不支持隐私屏保</value></data>
   <data name="Control.ViewMode.Toolbar.Tooltip.zoomIn" xml:space="preserve"><value>放大（⌘=）</value></data>
-  <data name="CloudPc.Main.Alert.LostConnection.title" xml:space="preserve"><value>连接异常中断</value></data>
   <data name="Control.FileDrag.upgradeRequired" xml:space="preserve"><value>暂不支持拖拽发送文件，请先更新被控端</value></data>
   <data name="Terminal.Session.exitedLabel" xml:space="preserve"><value>已退出</value></data>
   <data name="Control.PrivateScreen.winNotsupport" xml:space="preserve"><value>被控端操作系统不支持设置防窥模式，请升级至Win10及以上</value></data>
   <data name="Control.WowPlugIn.Toast.ToolOpen.openSuccess" xml:space="preserve"><value>排队工具已开启</value></data>
-  <data name="CloudPc.Schedule.Menu.title" xml:space="preserve"><value>定时关机</value></data>
   <data name="Setting.Keyboard.Function.previousScreen" xml:space="preserve"><value>切换上一个屏幕</value></data>
   <data name="Home.SecondScreen.Error.switchFailed" xml:space="preserve"><value>副屏切换失败，请重试。</value></data>
   <data name="NeteaseOversea.Login.isValidEmail" xml:space="preserve"><value>Please enter a valid email address</value></data>
@@ -449,7 +395,6 @@
   <data name="Home.Device.InterruptConnectTips.secondScreenPortMapping" xml:space="preserve"><value>当前设备正在使用无线副屏功能，继续使用端口映射将会断开副屏连接。</value></data>
   <data name="Terminal.Rename.errorConflict" xml:space="preserve"><value>该名称已被占用，请换一个名称</value></data>
   <data name="HomeView.RemoteHelp.connectRemote" xml:space="preserve"><value>远程协助伙伴</value></data>
-  <data name="CloudPc.Main.Alert.OpenNoti.desc" xml:space="preserve"><value>及时获知排队状态。</value></data>
   <data name="FileTrans.transFail.send" xml:space="preserve"><value>文件发送失败，请重试</value></data>
   <data name="Setting.Proxy.System.NotFound.title" xml:space="preserve"><value>未检测到系统代理,请手动设置。</value></data>
   <data name="FileTrans.music" xml:space="preserve"><value>音乐</value></data>
@@ -486,14 +431,12 @@
   <data name="FileTrans.DragDrop.compact.title" xml:space="preserve"><value>把文件拖到这儿，即可发送给主控端</value></data>
   <data name="FileTrans.Forbidden.path" xml:space="preserve"><value>无法向该路径发送文件</value></data>
   <data name="Control.PrivacyScreen.Settings.preview" xml:space="preserve"><value>预览</value></data>
-  <data name="CloudPc.Main.Alert.Button.openPCAndAPP" xml:space="preserve"><value>开机并启动应用</value></data>
   <data name="FileTrans.Permission.Alert.authorizationPending" xml:space="preserve"><value>被控端无访问权限，可前往被控端系统“设置”-“隐私与安全性”-“文件与文件夹”，开启对应路径访问权限后再试。</value></data>
   <data name="Setting.Keyboard.Permission.InputMonitoring.title" xml:space="preserve"><value>输入监控</value></data>
   <data name="Recipient.share.copy" xml:space="preserve"><value>已复制</value></data>
   <data name="Control.Net.Info.Quality.auto" xml:space="preserve"><value>auto</value></data>
   <data name="Control.Menu.Mouse.ControlMouse.title" xml:space="preserve"><value>使用主控端鼠标</value></data>
   <data name="Control.FileDrag.reconnectRequired" xml:space="preserve"><value>文件拖放无响应，请重新连接后重试</value></data>
-  <data name="CloudDisk.Rename.menuTitle" xml:space="preserve"><value>修改云硬盘名称</value></data>
   <data name="Home.SecondScreen.Error.controlling" xml:space="preserve"><value>“%@”正在远控其他设备，请先退出远控后重试。</value></data>
   <data name="NowDevice.UpdateStatus.Failed.title" xml:space="preserve"><value>该设备更新失败</value></data>
   <data name="Setting.Shortcut.PrivacyScreen.set" xml:space="preserve"><value>设置快捷键</value></data>
@@ -502,18 +445,14 @@
   <data name="Home.SecondScreen.Login.title" xml:space="preserve"><value>登录后使用无线副屏</value></data>
   <data name="NowDevice.WakeOnLan.disable" xml:space="preserve"><value>无法开机，请排查以下原因</value></data>
   <data name="Screen.Super.quit" xml:space="preserve"><value>确定要退出「超级屏」吗？</value></data>
-  <data name="CloudPc.Control.Coin.PurchaseNow" xml:space="preserve"><value>立即充值</value></data>
   <data name="NowDevice.WakeOnLan.tutorial" xml:space="preserve"><value>查看教程</value></data>
   <data name="Home.Device.Restart.Device.Dialog.title" xml:space="preserve"><value>重启被控端</value></data>
   <data name="Control.Alert.ViewMode.Annotation.userNotLogin" xml:space="preserve"><value>被控端尚未登录系统账户，当前无法使用批注。请先在被控端完成系统登录。</value></data>
   <data name="Terminal.Connect.reconnecting" xml:space="preserve"><value>连接中断，正在重新连接...</value></data>
   <data name="Setting.Proxy.Test.success" xml:space="preserve"><value>检测到此代理服务可用</value></data>
   <data name="Terminal.Unlock.verifyManualWithHint" xml:space="preserve"><value>检测到被控端已锁屏，请输入被控端账户密码验证身份，此过程不会解锁被控端。在桌面远控开启「自动解锁被控端」功能后可自动验证</value></data>
-  <data name="CloudPc.Main.DeskTop.State.Expired.desc" xml:space="preserve"><value>未及时确认开机，请重新排队</value></data>
-  <data name="Setting.Authentication.topDesc" xml:space="preserve"><value>游戏云电脑已接入防沉迷系统，为保障您的正常使用，请尽快完成平台实名认证。</value></data>
   <data name="Setting.Menu.feedback" xml:space="preserve"><value>帮助与反馈</value></data>
   <data name="MemberBenefit.Card.openSubtitle" xml:space="preserve"><value>解锁远控新体验</value></data>
-  <data name="CloudDisk.Reset.Fail.ok" xml:space="preserve"><value>知道了</value></data>
   <data name="Terminal.State.disconnectedTitle" xml:space="preserve"><value>提示</value></data>
   <data name="Control.Menu.GameMode.menuTips" xml:space="preserve"><value>快捷键：Ctrl\U2006+\U2006Option\U2006+\U2006Enter</value></data>
   <data name="mobileDevice" xml:space="preserve"><value>移动设备</value></data>
@@ -522,39 +461,30 @@
   <data name="Control.Menu.CustomBitrateSetting.StartCustomBitrate.description.detail2" xml:space="preserve"><value>码率过高可能因网络/设备限制导致卡顿。</value></data>
   <data name="Control.NegotiateInfo.Connect.notice5" xml:space="preserve"><value>设备性能受限，已关闭真彩并降低到%@画质</value></data>
   <data name="Control.Privacy.Mode.setScreensaver" xml:space="preserve"><value>设置隐私屏保</value></data>
-  <data name="CloudPc.Main.Alert.Button.goCharge" xml:space="preserve"><value>去充值</value></data>
   <data name="Control.Menu.WindowSetting.adaptive" xml:space="preserve"><value>自适应</value></data>
   <data name="Screen.Super.Enter.fail" xml:space="preserve"><value>超级屏创建失败，错误码 %@</value></data>
   <data name="App.Permission.Contolled.ScreenCapture.notice" xml:space="preserve"><value>由于未开启录屏与系统录音权限，【允许本设备被控】将保持关闭状态。</value></data>
   <data name="Control.Menu.Resolution.controled" xml:space="preserve"><value>跟随被控端</value></data>
   <data name="PortMapping.toast.duplicated" xml:space="preserve"><value>已复制，副本需补充本地端口后保存</value></data>
   <data name="FileTrans.DragDrop.overlay.title" xml:space="preserve"><value>网易UU远程</value></data>
-  <data name="CloudPc.Main.DeskTop.State.Starting" xml:space="preserve"><value>正在启动中</value></data>
   <data name="FileTrans.Notification.Body.receive" xml:space="preserve"><value>文件来源：%@\n存放路径：%@</value></data>
   <data name="DeviceManage.Tips.remoteingCannotOperate" xml:space="preserve"><value>该设备正在远程连接，暂无法操作</value></data>
   <data name="FileTrans.stopTrans" xml:space="preserve"><value>确定终止当前文件传输吗？</value></data>
   <data name="Control.NegotiateInfo.Connect.notice3" xml:space="preserve"><value>设备性能受限，已关闭\U2006HDR\U2006并降低到%@画质</value></data>
-  <data name="CloudPc.Main.DeskTop.State.Expired.title" xml:space="preserve"><value>已过号</value></data>
-  <data name="CloudPc.Schedule.Setup.autoSaveFailure" xml:space="preserve"><value>开机自动定时关机时间保存失败</value></data>
   <data name="NoLogin.Alert.OnlineService.desc" xml:space="preserve"><value>快速接入人工服务，高效解决问题。</value></data>
   <data name="NowDevice.More.restart" xml:space="preserve"><value>重启</value></data>
   <data name="NowDevice.Tools.sort" xml:space="preserve"><value>调整顺序</value></data>
   <data name="Control.PrivacyScreen.Alert.uploadSuccessTitle" xml:space="preserve"><value>上传成功，是否使用作为隐私屏保？</value></data>
   <data name="MemberBenefit.Prompt.Trial.ScreenQuality.subtitle" xml:space="preserve"><value>领取后可享最高原画画质。</value></data>
-  <data name="CloudPc.Main.Alert.BootNotice.title" xml:space="preserve"><value>感谢对「云设备」的一路相伴</value></data>
   <data name="Terminal.Rename.maxLengthTip" xml:space="preserve"><value>最多可输入 40 个字符</value></data>
-  <data name="CloudPc.Main.AppList.start" xml:space="preserve"><value>快速启动</value></data>
   <data name="App.Permission.Contolled.ScreenCapture.openNow" xml:space="preserve"><value>立即配置</value></data>
-  <data name="CloudDisk.Guide.title" xml:space="preserve"><value>云硬盘功能上线啦</value></data>
   <data name="Home.SecondScreen.connected" xml:space="preserve"><value>已作为副屏</value></data>
   <data name="Control.Menu.device" xml:space="preserve"><value>外设</value></data>
   <data name="Tooltip.Device.detail" xml:space="preserve"><value>设备详情</value></data>
   <data name="Terminal.State.notLoggedInSubtitle" xml:space="preserve"><value>被控端未登录，请输入被控端账户密码解锁被控端。</value></data>
   <data name="Control.MemberRestore.title" xml:space="preserve"><value>VIP已生效</value></data>
   <data name="Setting.Proxy.Proto.socks5" xml:space="preserve"><value>SOCKS5</value></data>
-  <data name="CloudDisk.Reset.success" xml:space="preserve"><value>云硬盘重置已完成</value></data>
   <data name="Terminal.CloseList.cancel" xml:space="preserve"><value>取消</value></data>
-  <data name="CloudPc.Main.AppList.add" xml:space="preserve"><value>添加</value></data>
   <data name="MemberBenefit.Prompt.VirtualScreen.subtitle" xml:space="preserve"><value>创建虚拟屏，扩展独立桌面空间。开通会员后可使用。</value></data>
   <data name="Control.PrivacySecurity.UnsetToast.noMore" xml:space="preserve"><value>不再提示</value></data>
   <data name="Recipient.switch.title" xml:space="preserve"><value>允许他人远程协助</value></data>
@@ -569,13 +499,9 @@
   <data name="Terminal.Stage.hint" xml:space="preserve"><value>提示</value></data>
   <data name="Setting.Keyboard.Function.quitRemote" xml:space="preserve"><value>立即退出远控</value></data>
   <data name="App.Permission.toOpen" xml:space="preserve"><value>去开启</value></data>
-  <data name="CloudPC.Shutdown.Alert.Cancel" xml:space="preserve"><value>取消</value></data>
-  <data name="CloudPC.Shutdown.Alert.Confirm" xml:space="preserve"><value>关机并结束计费</value></data>
   <data name="FileTrans.wait" xml:space="preserve"><value>等待中</value></data>
-  <data name="CloudPc.Main.DeskTop.remove" xml:space="preserve"><value>删除设备</value></data>
   <data name="Terminal.Unlock.prompt" xml:space="preserve"><value>请输入被控解锁密码</value></data>
   <data name="HomeView.RemoteHelp.remoteId" xml:space="preserve"><value>伙伴ID：</value></data>
-  <data name="CloudPc.Main.DeskTop.State.StartFailed.desc" xml:space="preserve"><value>需要重新分配资源，系统将会优先为您分配</value></data>
   <data name="Control.PrivacyScreen.Settings.inUse" xml:space="preserve"><value>正在使用</value></data>
   <data name="FileTrans.sendPath" xml:space="preserve"><value>发送路径</value></data>
   <data name="Home.Device.Close" xml:space="preserve"><value>关闭</value></data>
@@ -583,19 +509,16 @@
   <data name="Terminal.Error.confirm" xml:space="preserve"><value>知道了</value></data>
   <data name="Control.Menu.exitFullScreen" xml:space="preserve"><value>缩小</value></data>
   <data name="Setting.Keyboard.Response.title" xml:space="preserve"><value>发送系统快捷键到被控端</value></data>
-  <data name="CloudDisk.Reset.Confirm.ok" xml:space="preserve"><value>确定重置</value></data>
   <data name="Setting.Shortcut.Reset.Alert.message" xml:space="preserve"><value>确定要将快捷键还原至默认值吗？</value></data>
   <data name="Setting.Keyboard.Function.fullScreen" xml:space="preserve"><value>远控窗口全屏/窗口化</value></data>
   <data name="PortMapping.operation.duplicate" xml:space="preserve"><value>创建副本</value></data>
   <data name="NowDevice.WakeOnLan.Guide.tips" xml:space="preserve"><value>如需远程开机，请确保该设备已完成远程开机配置，如有需要可查看教程。</value></data>
   <data name="Setting.Proxy.titlePort" xml:space="preserve"><value>端口:</value></data>
   <data name="Screen.Window.Close.title" xml:space="preserve"><value>确定要关闭该远程窗口吗？</value></data>
-  <data name="CloudPc.System.Noti.QueueRemind.title" xml:space="preserve"><value>排队提醒</value></data>
   <data name="MemberBenefit.ExpiringSoon.title" xml:space="preserve"><value>SVIP 即将到期</value></data>
   <data name="Assist.Favorite.connect" xml:space="preserve"><value>连接</value></data>
   <data name="Control.Menu.tool" xml:space="preserve"><value>工具</value></data>
   <data name="Home.SecondScreen.Error.disconnected" xml:space="preserve"><value>“%@”已断开副屏连接，请重新发起。</value></data>
-  <data name="CloudPc.Main.DeskTop.State.StartFailed.title" xml:space="preserve"><value>无法启动</value></data>
   <data name="FileTrans.transFail.fullDisk" xml:space="preserve"><value>磁盘空间不足，请清理后重试</value></data>
   <data name="Recipient.verification.both" xml:space="preserve"><value>同时使用两种验证码</value></data>
   <data name="Recipient.custom.number" xml:space="preserve"><value>数字</value></data>
@@ -622,7 +545,6 @@
   <data name="Recipient.deviceId.title" xml:space="preserve"><value>本设备ID</value></data>
   <data name="FileTrans.windowsTitle" xml:space="preserve"><value>文件传输</value></data>
   <data name="Setting.ClosingWindow.hideToMenuBar" xml:space="preserve"><value>隐藏到菜单栏</value></data>
-  <data name="CloudPc.Schedule.modifyTitle" xml:space="preserve"><value>修改定时关机时间</value></data>
   <data name="FileTrans.tips" xml:space="preserve"><value>提示</value></data>
   <data name="DeviceManage.Tips.RemoteControl" xml:space="preserve"><value>如何远程操控\U2006Windows\U2006？</value></data>
   <data name="Home.Device.DataLossTips" xml:space="preserve"><value>这个操作可能会导致未保存的数据丢失或应用状态的不可逆改变。确定要继续吗？</value></data>
@@ -652,22 +574,16 @@
   <data name="Setting.ClientSecurityLock.password.checkMark" xml:space="preserve"><value>✓</value></data>
   <data name="Control.RemoteInfo.hardwareDecoder" xml:space="preserve"><value>硬解</value></data>
   <data name="Home.ToolBar.User.logout" xml:space="preserve"><value>退出登录</value></data>
-  <data name="CloudPc.Main.Toolbar.Status.queue" xml:space="preserve"><value>排队中</value></data>
   <data name="Setting.Keyboard.ControllerOnly.createTitle" xml:space="preserve"><value>添加控制端快捷键</value></data>
-  <data name="CloudPc.Main.DeskTop.State.Ready.desc" xml:space="preserve"><value>请在 60 秒内进入桌面，超时需重新排队</value></data>
   <data name="Assist.Favorite.Edit.title" xml:space="preserve"><value>编辑</value></data>
   <data name="Control.Menu.VideoColor.tureColor" xml:space="preserve"><value>真彩</value></data>
-  <data name="CloudDisk.Guide.desc" xml:space="preserve"><value>随时存储你的个人资料，最高支持 1TB！</value></data>
   <data name="FileTrans.Quit.tips" xml:space="preserve"><value>退出将会中断正在进行的传输任务，确定要退出文件传输吗？</value></data>
   <data name="ClientSecurityLock.Unlock.smsPlaceholder" xml:space="preserve"><value>短信验证码</value></data>
   <data name="Control.MemberRestore.reentryFailed" xml:space="preserve"><value>无法自动重新进入远控，请从设备主页重新进入。</value></data>
   <data name="App.Permission.Contolled.ScreenCapture.subTitle" xml:space="preserve"><value>授权后重启网易UU远程，在远程时方可支持观看本设备屏幕。</value></data>
   <data name="Control.PrivacyScreen.Alert.sensitiveImage" xml:space="preserve"><value>图片涉及敏感内容，请更换图片重新上传。</value></data>
   <data name="Setting.Proxy.titleHost" xml:space="preserve"><value>代理地址:</value></data>
-  <data name="CloudPc.Main.Alert.Button.goOpen" xml:space="preserve"><value>去开启</value></data>
   <data name="Setting.Proxy.titlePassword" xml:space="preserve"><value>密码:</value></data>
-  <data name="CloudPc.System.Noti.NotEnoughMoney.title" xml:space="preserve"><value>余额不足提醒</value></data>
-  <data name="CloudDisk.Mount.autoMount" xml:space="preserve"><value>启动云设备时优先挂载</value></data>
   <data name="Setting.ClosingWindow.title" xml:space="preserve"><value>关闭窗口时</value></data>
   <data name="HomeView.RemoteHelp.Sharing.copy" xml:space="preserve"><value>复制并分享</value></data>
   <data name="Control.Menu.WoWTool.on" xml:space="preserve"><value>开启</value></data>
@@ -682,16 +598,13 @@
   <data name="Setting.Keyboard.Function.smallWindowMode" xml:space="preserve"><value>进入/退出小窗模式</value></data>
   <data name="NoLogin.Alert.OpenControlled.title" xml:space="preserve"><value>登录网易UU远程</value></data>
   <data name="Assist.Favorite.deviceIdPlaceholder" xml:space="preserve"><value>请输入设备 ID</value></data>
-  <data name="CloudDisk.Status.incompatibleReset" xml:space="preserve"><value>该云硬盘不适配当前云设备，可前往云硬盘管理页重置，重置后可选择挂载。</value></data>
   <data name="Assist.Favorite.deviceId" xml:space="preserve"><value>伙伴的设备 ID</value></data>
-  <data name="NoLogin.Alert.VerifyRealName.desc" xml:space="preserve"><value>实名认证的账户可使用云设备，秒享高配电脑。</value></data>
   <data name="Unlock.Alert.Double.Authentication.title" xml:space="preserve"><value>启用双重验证保护密码信息</value></data>
   <data name="PortMapping.status.success" xml:space="preserve"><value>成功</value></data>
   <data name="Application.enterRemoteDesktop" xml:space="preserve"><value>进入远程桌面</value></data>
   <data name="MemberBenefit.Prompt.SecondScreen.subtitle" xml:space="preserve"><value>将本机屏幕扩展到移动设备上，享受本地多屏体验。</value></data>
   <data name="Control.Trigger.Upgrade.Top.Toast.title" xml:space="preserve"><value>被控端将在%@秒后重启软件完成更新</value></data>
   <data name="Setting.Menu.Common.Settings" xml:space="preserve"><value>常用设置</value></data>
-  <data name="CloudPc.Schedule.Setup.cancelError" xml:space="preserve"><value>取消定时关机失败，请重试。</value></data>
   <data name="Control.Menu.microphone.toast.disabled" xml:space="preserve"><value>已关闭麦克风</value></data>
   <data name="Control.MemberRestore.Notice.title" xml:space="preserve"><value>VIP 已生效</value></data>
   <data name="FileTrans.DragDrop.confirm.unknownPath" xml:space="preserve"><value>由主控端设置</value></data>
@@ -701,13 +614,9 @@
   <data name="Setting.AutoStart.title" xml:space="preserve"><value>自动启动</value></data>
   <data name="Control.Menu.NegotiateInfo.HDR.Close.Color.message" xml:space="preserve"><value>被控端显卡暂时不支持同时开启\U2006HDR\U2006与真彩模式，我们将尽快优化。</value></data>
   <data name="Control.Menu.FrameLimit.recommend" xml:space="preserve"><value>推荐</value></data>
-  <data name="CloudPc.Control.Exit.Warning.confirm" xml:space="preserve"><value>确认关机</value></data>
-  <data name="CloudDisk.Toast.AboutToExpire.content" xml:space="preserve"><value>【%@】即将到期，请及时续费。</value></data>
   <data name="Setting.Keyboard.Shortcut.create" xml:space="preserve"><value>创建</value></data>
   <data name="Control.RemoteInfo.connectionTime" xml:space="preserve"><value>连接时间: </value></data>
   <data name="MemberBenefit.Prompt.title" xml:space="preserve"><value>该功能属于会员专属权益</value></data>
-  <data name="CloudPc.Main.DeskTop.State.InQueue.noSureDesc" xml:space="preserve"><value>到号时无需确认，立即开机</value></data>
-  <data name="CloudDisk.Noti.Expired.title" xml:space="preserve"><value>云硬盘到期通知</value></data>
   <data name="NoLogin.Device.Empty.login" xml:space="preserve"><value>立即登录</value></data>
   <data name="Control.NegotiateInfo.Choose.notice13" xml:space="preserve"><value>设备性能受限，可降低画质到%@后重试。</value></data>
   <data name="Setting.Keyboard.Function.ctrlAltDelete" xml:space="preserve"><value>发送 Ctrl+Alt+Delete 组合键</value></data>
@@ -715,33 +624,25 @@
   <data name="Terminal.Connect.waitReadyExhausted" xml:space="preserve"><value>等待被控端就绪超时，请检查被控端状态后重试。</value></data>
   <data name="Control.MacControlled.Screen.Error.desc" xml:space="preserve"><value>请先为该设备连接物理显示屏。</value></data>
   <data name="Setting.Keyboard.Permission.InputMonitoring.alert" xml:space="preserve"><value>该功能需要开启「输入监控」权限才能正常使用。</value></data>
-  <data name="CloudPc.Main.Toolbar.Status.offline" xml:space="preserve"><value>未运行</value></data>
   <data name="NowDevice.Tools.viewMode" xml:space="preserve"><value>观看模式</value></data>
-  <data name="CloudPc.Schedule.Cancel.Alert.cancel" xml:space="preserve"><value>暂不取消</value></data>
   <data name="Setting.Keyboard.WindowsMapping.desc" xml:space="preserve"><value>远控 Windows 设备时，将本地按键自动映射为 Windows 对应按键。</value></data>
   <data name="Alert.UpdateNotice.welcome" xml:space="preserve"><value>欢迎立即体验</value></data>
   <data name="Paste.file.error.noSpace" xml:space="preserve"><value>无法完成粘贴，磁盘空间不足，请清理后重试</value></data>
-  <data name="CloudPc.System.Noti.QueueReady.desc" xml:space="preserve"><value>%@ 准备好啦，请在倒计时结束前开机使用，避免过号。</value></data>
   <data name="Application.Search.findResultCount" xml:space="preserve"><value>共有%@个符合的结果</value></data>
-  <data name="CloudDisk.Toast.Mounted.content" xml:space="preserve"><value>【%@】已挂载到 D 盘。</value></data>
   <data name="SilentUpgrade.updating" xml:space="preserve"><value>被控端更新中，请稍等...</value></data>
   <data name="Control.Menu.microphone.permission.openSettings" xml:space="preserve"><value>打开系统设置</value></data>
   <data name="Control.OK" xml:space="preserve"><value>好的</value></data>
-  <data name="CloudPc.Main.DeskTop.State.ShutDown.title" xml:space="preserve"><value>关机中</value></data>
   <data name="Home.Device.TakeOverCurrentRemoteController" xml:space="preserve"><value>接管当前设备</value></data>
   <data name="PortMapping.column.mappingStatus" xml:space="preserve"><value>映射状态</value></data>
-  <data name="CloudPc.Schedule.Cancel.AlreadyShutdown.title" xml:space="preserve"><value>云电脑已关机</value></data>
   <data name="GamePad.rightShoulderMachine" xml:space="preserve"><value>右肩机</value></data>
   <data name="Home.Device.CloseApplication" xml:space="preserve"><value>关闭应用</value></data>
   <data name="Setting.DragDropOverlay.title" xml:space="preserve"><value>被控时拖拽文件显示发送浮窗</value></data>
   <data name="Terminal.List.menuRename" xml:space="preserve"><value>重命名</value></data>
-  <data name="CloudDisk.Mount.emptyRunning" xml:space="preserve"><value>云硬盘可在关机后保留存储，云硬盘（D盘）内的数据关机后不丢失。在本次云电脑关机前购买，可保存当前云电脑 D 盘数据。</value></data>
   <data name="NoDevice.StepTwo.title" xml:space="preserve"><value>Windows\U2006设备下载网易UU远程并登录</value></data>
   <data name="Terminal.Unlock.winNotLoggedIn" xml:space="preserve"><value>检测到被控Windows未登录系统账户，无法启动终端。</value></data>
   <data name="MemberBenefit.Prompt.MultiChannel.subtitle" xml:space="preserve"><value>开通会员后，支持多个主控端同时发起远控。</value></data>
   <data name="Terminal.Connect.enter" xml:space="preserve"><value>进入远程CLI功能...</value></data>
   <data name="Control.ViewMode.Toolbar.Tooltip.closeWithShortcut" xml:space="preserve"><value>隐藏工具栏（%@）</value></data>
-  <data name="CloudDisk.Shutdown.dontRemind" xml:space="preserve"><value>不再提示</value></data>
   <data name="Control.Menu.GameMode.speed" xml:space="preserve"><value>游戏鼠标速度</value></data>
   <data name="Error.networkError" xml:space="preserve"><value>网络异常</value></data>
   <data name="PortMapping.Menu.title" xml:space="preserve"><value>端口映射</value></data>
@@ -752,7 +653,6 @@
   <data name="Control.MacControlled.Controllable.Error.title" xml:space="preserve"><value>该设备未开启被控功能</value></data>
   <data name="NowDevice.Quick.start" xml:space="preserve"><value>快速启动</value></data>
   <data name="Assist.Favorite.retry" xml:space="preserve"><value>重试</value></data>
-  <data name="CloudPc.Main.Alert.NoTime.desc" xml:space="preserve"><value>当前余额不足运行 5 分钟，可能会影响您的体验，建议先充值。</value></data>
   <data name="Screen.Control.quit" xml:space="preserve"><value>退出远控</value></data>
   <data name="Control.Menu.microphone.error.softwareConflict" xml:space="preserve"><value>被控端存在软件冲突，请联系在线客服处理。</value></data>
   <data name="Home.Device.Restart.Device.Dialog.message" xml:space="preserve"><value>该设备正在被远控中，确定要重启吗？</value></data>
@@ -766,9 +666,7 @@
   <data name="Setting.Controlled.allowed" xml:space="preserve"><value>允许同账号控制本设备</value></data>
   <data name="Control.Menu.microphone.error.internalError" xml:space="preserve"><value>当前功能存在异常，请联系在线客服处理。</value></data>
   <data name="Control.Volume.subTitle" xml:space="preserve"><value>开启后会将被控端设置为静音，控制端仍能播放被控端声音。</value></data>
-  <data name="CloudPc.Schedule.Setup.done" xml:space="preserve"><value>完成</value></data>
   <data name="Control.Toast.ViewMode.toolbarHiddenNoShortcut" xml:space="preserve"><value>已隐藏工具栏，可通过控制中心恢复显示</value></data>
-  <data name="CloudPc.Main.Alert.DeleteDevice.desc" xml:space="preserve"><value>删除云设备后，需要重新添加才可继续使用。</value></data>
   <data name="Terminal.Error.serverErrorState" xml:space="preserve"><value>被控端内部错误</value></data>
   <data name="Setting.ClientSecurityLock.policy.remoteAssistance" xml:space="preserve"><value>远程协助本设备期间，自动锁定客户端</value></data>
   <data name="ClientSecurityLock.Unlock.resend" xml:space="preserve"><value>重新获取</value></data>
@@ -776,10 +674,8 @@
   <data name="Control.Menu.ViewMode.toolbar" xml:space="preserve"><value>显示工具栏</value></data>
   <data name="MemberBenefit.Prompt.Trial.MultiChannel.subtitle" xml:space="preserve"><value>领取后可在多个主控端同时发起远控。</value></data>
   <data name="Setting.Authentication.finish" xml:space="preserve"><value>完成</value></data>
-  <data name="CloudDisk.Status.expiredWithDate" xml:space="preserve"><value>%@ 到期，到期后将清除硬盘数据。</value></data>
   <data name="Home.Device.Restart.Device.Dialog.Online.title" xml:space="preserve"><value>重启被控端</value></data>
   <data name="Paste.file.process.title.about" xml:space="preserve"><value>大约</value></data>
-  <data name="Home.RemoteList.CloudPC" xml:space="preserve"><value>云设备</value></data>
   <data name="Home.SecondScreen.Error.secondScreenMessage" xml:space="preserve"><value>该设备已被其他设备连接为副屏，请先断开连接后重试。</value></data>
   <data name="PortMapping.validation.invalidItem" xml:space="preserve"><value>无效项</value></data>
   <data name="ConnectState.buildServer" xml:space="preserve"><value>建立服务器连接</value></data>
@@ -795,7 +691,6 @@
   <data name="Assistance.WaitConfirm.cancel" xml:space="preserve"><value>取消远程协助</value></data>
   <data name="Setting.ClientSecurityLock.policy.startup" xml:space="preserve"><value>启动时自动锁定客户端</value></data>
   <data name="Home.SecondScreen.Error.controllingMessage" xml:space="preserve"><value>该设备正在远程控制或文件传输中，请先断开连接后重试。</value></data>
-  <data name="CloudDisk.Toast.Occupied.content" xml:space="preserve"><value>【%@】已被其他设备占用，当前无云硬盘可挂载。</value></data>
   <data name="Setting.Keyboard.Function.nextScreen" xml:space="preserve"><value>切换下一个屏幕</value></data>
   <data name="Control.PrivacySecurity.UnsetToast.title" xml:space="preserve"><value>被控端防窥模式未设置</value></data>
   <data name="Setting.Keyboard.Response.remoteFirst" xml:space="preserve"><value>优先在被控端响应</value></data>
@@ -806,35 +701,28 @@
   <data name="CodeVerify.desc" xml:space="preserve"><value>验证码已发送到你的手机</value></data>
   <data name="Assist.Favorite.empty" xml:space="preserve"><value>暂无收藏</value></data>
   <data name="FileTrans.unknownDate" xml:space="preserve"><value>未知时间</value></data>
-  <data name="CloudDisk.Expiry.labelFormat" xml:space="preserve"><value>%@ 到期</value></data>
   <data name="Control.NegotiateInfo.Choose.notice4" xml:space="preserve"><value>当前主控端不支持真彩。</value></data>
   <data name="FileTrans.computer" xml:space="preserve"><value>此电脑</value></data>
   <data name="Assistance.Connect.Error" xml:space="preserve"><value>设备ID 错误或不存在，请重试并确保被控端已开启「允许他人远程协助」功能。</value></data>
-  <data name="CloudPc.Main.Alert.OpenNoti.title" xml:space="preserve"><value>开启消息通知</value></data>
   <data name="Unlock.Alert.informative4" xml:space="preserve"><value>请更新 %@。</value></data>
   <data name="Control.NegotiateInfo.Choose.notice5" xml:space="preserve"><value>设备性能受限，最高支持%@画质。</value></data>
   <data name="Setting.Proxy.Mode.manual" xml:space="preserve"><value>手动设置</value></data>
-  <data name="CloudPC.Shutdown.Alert.Background" xml:space="preserve"><value>后台挂机</value></data>
   <data name="NowDevice.Model.control" xml:space="preserve"><value>远程控制</value></data>
   <data name="Terminal.Password.unlockMessage" xml:space="preserve"><value>验证成功将解锁被控端</value></data>
   <data name="Setting.Proxy.enable" xml:space="preserve"><value>启用</value></data>
   <data name="Control.Volume.mute" xml:space="preserve"><value>被控端静音运行</value></data>
   <data name="Setting.Menu.uploadLog" xml:space="preserve"><value>上传日志</value></data>
-  <data name="CloudPc.Main.DeskTop.State.Button.enterDeskTop" xml:space="preserve"><value>进入桌面</value></data>
   <data name="Device.List.tv" xml:space="preserve"><value>电视</value></data>
   <data name="Setting.Shortcut.Reset.defaultButton" xml:space="preserve"><value>还原默认按键</value></data>
   <data name="Assist.Favorite.saveSuccess" xml:space="preserve"><value>保存成功</value></data>
   <data name="Control.RemoteInfo.qualityFrame" xml:space="preserve"><value>画质</value></data>
   <data name="Control.Alert.ViewMode.Annotation.title" xml:space="preserve"><value>无法使用批注</value></data>
   <data name="Recipient.verification.temporary" xml:space="preserve"><value>仅使用临时验证码</value></data>
-  <data name="CloudPc.Main.DeskTop.State.Button.sureStart" xml:space="preserve"><value>确认开机</value></data>
   <data name="Screen.Virtual.Remove.fail" xml:space="preserve"><value>当前远程连接仅有该虚拟屏，无法删除。</value></data>
-  <data name="CloudPc.Main.DeskTop.State.InQueue.noCostDesc" xml:space="preserve"><value>排队过程中不会消耗 U币</value></data>
   <data name="MemberBenefit.Prompt.later" xml:space="preserve"><value>下次再说</value></data>
   <data name="HomeView.RemoteHelp.Sharing.connecting" xml:space="preserve"><value>本机正在被他人远程控制</value></data>
   <data name="Home.SecondScreen.Settings.portrait" xml:space="preserve"><value>纵向</value></data>
   <data name="Home.Update.Confirm.title" xml:space="preserve"><value>有新版本发布！</value></data>
-  <data name="CloudPc.Main.Alert.Addiction.title" xml:space="preserve"><value>防沉迷提醒</value></data>
   <data name="Home.Device.Runing" xml:space="preserve"><value>运行中</value></data>
   <data name="Home.Update.Manual.Latest.title" xml:space="preserve"><value>检查更新</value></data>
   <data name="FileTrans.renameFail" xml:space="preserve"><value>重命名失败</value></data>
@@ -868,9 +756,7 @@
   <data name="Unlock.Alert.informative3" xml:space="preserve"><value>在解锁被控端时校验触控ID以确认身份</value></data>
   <data name="Device.App.Management.Append.finish" xml:space="preserve"><value>完成</value></data>
   <data name="Control.Menu.NegotiateInfo.HDR.Close.Color.title" xml:space="preserve"><value>无法开启\U2006HDR\U2006</value></data>
-  <data name="CloudPc.Schedule.Detail.hours" xml:space="preserve"><value>小时</value></data>
   <data name="Setting.Menu.securityLock" xml:space="preserve"><value>安全锁定</value></data>
-  <data name="CloudPc.Schedule.action" xml:space="preserve"><value>操作</value></data>
   <data name="Recipient.verification.custom" xml:space="preserve"><value>仅使用自定义验证码</value></data>
   <data name="Control.Toast.ViewMode.Annotation.strokeFailed" xml:space="preserve"><value>批注失败，错误码 %d</value></data>
   <data name="Control.Menu.FrameLimit.high" xml:space="preserve"><value>90\U2006帧</value></data>
@@ -878,7 +764,6 @@
   <data name="HomeView.Connect.Alert.NoNetStartConnect.title" xml:space="preserve"><value>无法发起远控</value></data>
   <data name="Unlock.touch1" xml:space="preserve"><value>解锁被控端</value></data>
   <data name="NowDevice.WakeOnLan.failed" xml:space="preserve"><value>远程开机指令发送失败，请重新操作。</value></data>
-  <data name="CloudDisk.Noti.AboutToExpire.title" xml:space="preserve"><value>云硬盘续费提醒</value></data>
   <data name="Setting.Keyboard.ControllerOnly.editTitle" xml:space="preserve"><value>编辑控制端快捷键</value></data>
   <data name="Security.Alert.message" xml:space="preserve"><value>应用已被修改，为保障你的账户安全，请从官方渠道重新下载安装。</value></data>
   <data name="Recipient.setting.switch" xml:space="preserve"><value>允许他人远程协助</value></data>
@@ -892,20 +777,15 @@
   <data name="Terminal.Error.mac402Hint" xml:space="preserve"><value>请先在被控设备上手动登录后重试。</value></data>
   <data name="FileTrans.cancel" xml:space="preserve"><value>取消</value></data>
   <data name="Home.Assistance.Launch" xml:space="preserve"><value>开始协助</value></data>
-  <data name="CloudDisk.Renew.goRenew" xml:space="preserve"><value>去续费</value></data>
   <data name="Error.networkNotAvailable" xml:space="preserve"><value>网络不可用，请检查网络设置</value></data>
   <data name="Control.RemoteInfo.terminalIP" xml:space="preserve"><value>被控端IP: </value></data>
   <data name="Home.SecondScreen.Settings.direction" xml:space="preserve"><value>方向</value></data>
   <data name="Control.ManualTransfer.Toast.switchTransfer" xml:space="preserve"><value>已切换至安全中转连接</value></data>
-  <data name="CloudDisk.Mount.Select.directBoot" xml:space="preserve"><value>直接开机</value></data>
-  <data name="CloudPc.Schedule.Setup.scheduleStarted" xml:space="preserve"><value>定时关机已启动，将在%@后自动关机</value></data>
   <data name="Control.MacControlled.GuidePopView.button" xml:space="preserve"><value>知道了</value></data>
   <data name="PortMapping.status.disconnectedHint" xml:space="preserve"><value>连接后会自动启动已启用规则的本地监听。</value></data>
   <data name="Recipient.custom.letter" xml:space="preserve"><value>字母</value></data>
-  <data name="CloudPc.Main.Alert.RealNameAuth.title" xml:space="preserve"><value>请先完成实名认证</value></data>
   <data name="Assist.Favorite.Error.duplicate" xml:space="preserve"><value>该设备已收藏</value></data>
   <data name="FileTrans.location" xml:space="preserve"><value>位置</value></data>
-  <data name="CloudDisk.Guide.dismiss" xml:space="preserve"><value>知道了</value></data>
   <data name="name" xml:space="preserve"><value>名字</value></data>
   <data name="PortMapping.status.connectedHint" xml:space="preserve"><value>已启用规则正在监听本机 127.0.0.1。</value></data>
   <data name="Setting.Authentication.namePlaceholder" xml:space="preserve"><value>请输入姓名</value></data>
@@ -915,8 +795,6 @@
   <data name="Home.SecondScreen.Error.driver" xml:space="preserve"><value>当前设备虚拟屏驱动异常，请检查驱动状态。</value></data>
   <data name="Unlock.Password.Phrase.macos" xml:space="preserve"><value>macOS 登录密码</value></data>
   <data name="AppMenu.new" xml:space="preserve"><value>新建</value></data>
-  <data name="CloudPc.Main.DeskTop.State.Button.reInQueue" xml:space="preserve"><value>重新排队</value></data>
-  <data name="CloudPc.Schedule.modifyButton" xml:space="preserve"><value>修改</value></data>
   <data name="Control.Menu.microphone.error.driverAbnormal" xml:space="preserve"><value>当前被控端驱动存在异常，请重启被控端电脑系统后重试。</value></data>
   <data name="Device.App.Management.Append.ControlledToast" xml:space="preserve"><value>该设备被控中，无法添加应用。</value></data>
   <data name="Home.SecondScreen.Guide.title" xml:space="preserve"><value>无线副屏功能上线啦!</value></data>
@@ -926,7 +804,6 @@
   <data name="Assistance.WaitConfirm.title" xml:space="preserve"><value>正在等待被控端（%@）同意被控。</value></data>
   <data name="Control.RemoteInfo.SecurityServiceTransit" xml:space="preserve"><value>安全中转连接</value></data>
   <data name="Unlock.Password.Phrase.windows" xml:space="preserve"><value>Windows 开机密码</value></data>
-  <data name="CloudDisk.Reset.Fail.retry" xml:space="preserve"><value>重试</value></data>
   <data name="Device.App.Management.Append.cancel" xml:space="preserve"><value>取消</value></data>
   <data name="FileTrans.sent" xml:space="preserve"><value>发送</value></data>
   <data name="FileTrans.fileSize" xml:space="preserve"><value>大小</value></data>
@@ -942,17 +819,12 @@
   <data name="FileTrans.clearAll" xml:space="preserve"><value>确认清除全部已完结任务？</value></data>
   <data name="Setting.PreventSleep.Desktop.desc" xml:space="preserve"><value>防止电脑进入睡眠状态，导致无法远程访问。</value></data>
   <data name="choose.device.exitGameMouse" xml:space="preserve"><value>可退出游戏鼠标</value></data>
-  <data name="CloudDisk.Shutdown.forceShutdown" xml:space="preserve"><value>仍然关机</value></data>
   <data name="PortMapping.operation.delete" xml:space="preserve"><value>删除</value></data>
   <data name="NowDevice.WakeOnLan.guide1" xml:space="preserve"><value>如需远程开机该设备，可\U2006查看教程\U2006。</value></data>
   <data name="MemberBenefit.Prompt.Trial.viewBenefits" xml:space="preserve"><value>立即体验</value></data>
   <data name="Terminal.Unlock.verifyManual" xml:space="preserve"><value>检测到被控端已锁屏，请输入被控端账户密码验证身份，此过程不会解锁被控端</value></data>
   <data name="LoginView.scanTitle" xml:space="preserve"><value>扫码登录</value></data>
-  <data name="CloudDisk.Mount.driveLetter" xml:space="preserve"><value>%@盘</value></data>
   <data name="Control.Menu.NegotiateInfo.HDR.Not.Controlled.support" xml:space="preserve"><value>当前被控端不支持\U2006HDR\U2006。</value></data>
-  <data name="CloudPc.Main.Alert.Addiction.desc" xml:space="preserve"><value>未成年账号仅可在周五至周日或其他法定节假日的 20-21 点游玩。</value></data>
-  <data name="NoLogin.Alert.CloudPCMarket.desc" xml:space="preserve"><value>不限硬件配置，低配设备秒享高配云电脑，畅玩 3A 大作。</value></data>
-  <data name="CloudPc.Main.Alert.dontRemind" xml:space="preserve"><value>不再提示</value></data>
   <data name="Screen.Virtual.name" xml:space="preserve"><value>虚拟屏</value></data>
   <data name="NoDevice.StepTwo.Official.Website.description" xml:space="preserve"><value>uuyc.163.com\U2006下载并安装客户端</value></data>
   <data name="MemberBenefit.Prompt.InternationalConnect.title" xml:space="preserve"><value>全球远控属于 SVIP 专属权益</value></data>
@@ -963,7 +835,6 @@
   <data name="Control.WowPlugIn.Alert.ToolOpen.Download.desc" xml:space="preserve"><value>首次使用此工具需要在被控端下载插件，大小约 %dMB。</value></data>
   <data name="Control.Volume.title" xml:space="preserve"><value>音量</value></data>
   <data name="Control.WowPlugIn.Toast.ToolOpen.closeSuccess" xml:space="preserve"><value>排队工具已关闭</value></data>
-  <data name="CloudDisk.Reset.button" xml:space="preserve"><value>重置</value></data>
   <data name="ConnectState.optimizedConnectionPath" xml:space="preserve"><value>优化连接路径</value></data>
   <data name="Unlock.Alert.informative1" xml:space="preserve"><value>输入被控端开机密码</value></data>
   <data name="Application.cancelPinned" xml:space="preserve"><value>取消置顶</value></data>
@@ -973,14 +844,12 @@
   <data name="Control.Unlock.Menu.Double.Authentication.desc" xml:space="preserve"><value>可通过本机 macOS 登录密码、触控ID 及 Apple Watch 确认身份，解锁更安全。</value></data>
   <data name="Control.Connection.notice9" xml:space="preserve"><value>设备性能受限，可能会导致画面卡顿。请尝试降低画质，以改善远程控制体验。</value></data>
   <data name="MemberBenefit.ExpirationReminder.content" xml:space="preserve"><value>会员已到期，远控连接已断开</value></data>
-  <data name="CloudPc.Schedule.Menu.modify" xml:space="preserve"><value>修改定时关机时间</value></data>
   <data name="Terminal.State.creatingSession" xml:space="preserve"><value>创建中...</value></data>
   <data name="Setting.Proxy.Host.placeholder" xml:space="preserve"><value>请输入 IP 或域名</value></data>
   <data name="Setting.Keyboard.ControllerOnly.title" xml:space="preserve"><value>仅控制端响应的快捷键</value></data>
   <data name="NoDevice.StepTwo.Official.Website.title" xml:space="preserve"><value>用\U2006Windows\U2006设备访问官网：</value></data>
   <data name="Control.Menu.switchNextScreen.singleScreenToast" xml:space="preserve"><value>当前远程窗口仅有 1 个屏幕，无需切换</value></data>
   <data name="Terminal.Unlock.winNotLoggedInManual" xml:space="preserve"><value>请输入被控端解锁密码。在桌面远控开启「自动解锁被控端」功能后可自动验证。</value></data>
-  <data name="CloudDisk.Purchase.newButton" xml:space="preserve"><value>购买云硬盘</value></data>
   <data name="Control.RemoteInfo.packageLost" xml:space="preserve"><value>丢包率: </value></data>
   <data name="HomeView.computerCard.connect" xml:space="preserve"><value>连接电脑</value></data>
   <data name="About" xml:space="preserve"><value>关于</value></data>
@@ -998,18 +867,14 @@
   <data name="NowDevice.Controlled.sideDesc" xml:space="preserve"><value>当前有 %@ 台设备正在连接此电脑</value></data>
   <data name="FileTrans.desktop" xml:space="preserve"><value>桌面</value></data>
   <data name="Control.WowPlugIn.Toast.hasPermissionDownload" xml:space="preserve"><value>插件下载中，将在完成后自动开启</value></data>
-  <data name="CloudPc.Main.Alert.Button.takePCAndAPP" xml:space="preserve"><value>接管并启动应用</value></data>
   <data name="FileTrans.folder" xml:space="preserve"><value>文件夹</value></data>
   <data name="Control.Connection.notice2" xml:space="preserve"><value>检测到网络延迟高，请尝试切换到更好的网络环境，以改善远程控制体验</value></data>
-  <data name="CloudPc.Main.Alert.Button.reStartQueue" xml:space="preserve"><value>开始重新排队</value></data>
   <data name="GamePad.directionKey" xml:space="preserve"><value>方向键</value></data>
-  <data name="CloudPc.Persistence.Alert.hangup" xml:space="preserve"><value>后台挂机</value></data>
   <data name="Home.Device.ConfirmTakeSecondScreenPortMapping" xml:space="preserve"><value>继续端口映射</value></data>
   <data name="Control.RecordTipView.notRemind" xml:space="preserve"><value>本次远程不再提醒</value></data>
   <data name="Terminal.Unlock.encodeFail" xml:space="preserve"><value>密码编码失败</value></data>
   <data name="Control.Menu.onGameMode.toast" xml:space="preserve"><value>正在使用被控端鼠标，快捷键“%@”可解锁鼠标</value></data>
   <data name="Unlock.touch2" xml:space="preserve"><value>启用触控ID以保护密码信息</value></data>
-  <data name="CloudDisk.title" xml:space="preserve"><value>云硬盘</value></data>
   <data name="Terminal.State.checkingLock" xml:space="preserve"><value>正在进行锁屏校验</value></data>
   <data name="Application.lastOpenTime" xml:space="preserve"><value>上次打开时间</value></data>
   <data name="Terminal.State.connectionErrorSubtitle" xml:space="preserve"><value>请稍后再试</value></data>
@@ -1021,9 +886,7 @@
   <data name="PortMapping.close.title" xml:space="preserve"><value>确定要关闭端口映射吗？</value></data>
   <data name="Assistance.WaitConfirm.Reject.message" xml:space="preserve"><value>被控端（%@）拒绝被控。</value></data>
   <data name="Setting.Menu.setting" xml:space="preserve"><value>设置</value></data>
-  <data name="CloudPc.Main.Alert.Button.bootUse" xml:space="preserve"><value>开机使用</value></data>
   <data name="Recipient.share.pasteboard.normal" xml:space="preserve"><value>使用 网易UU远程 即可对我发起远程协助\n设备ID：%@\n设备验证码：%@\n网易UU远程 下载地址：https://uuyc.163.com/</value></data>
-  <data name="CloudPc.Main.Alert.Button.cancel" xml:space="preserve"><value>取消</value></data>
   <data name="MemberBenefit.Prompt.InternationalConnect.subtitle" xml:space="preserve"><value>SVIP 为海外运维、企业跨境业务提供稳定远控通道。</value></data>
   <data name="PortMapping.delete.title" xml:space="preserve"><value>确定要删除该规则吗？</value></data>
   <data name="FileTrans.Folder.fail" xml:space="preserve"><value>创建文件夹失败</value></data>
@@ -1036,9 +899,6 @@
   <data name="Common.Error.Connection.timeCount" xml:space="preserve"><value>重新连接 (%@s）</value></data>
   <data name="Setting.Keyboard.Shortcut.Display.control" xml:space="preserve"><value>Control</value></data>
   <data name="Control.PrivacyScreen.Alert.reupload" xml:space="preserve"><value>重新上传</value></data>
-  <data name="CloudPc.Persistence.Menu.off" xml:space="preserve"><value>关闭</value></data>
-  <data name="CloudPc.Purchase.History.title" xml:space="preserve"><value>消费记录</value></data>
-  <data name="CloudPc.Schedule.Setup.errorAutoOn" xml:space="preserve"><value>自动开始定时关机开启（关闭）失败，请重试。</value></data>
   <data name="Terminal.CloseList.title" xml:space="preserve"><value>要退出终端远控吗？</value></data>
   <data name="Common.Button.finish" xml:space="preserve"><value>完成</value></data>
   <data name="Setting.Authentication.bottomDesc" xml:space="preserve"><value>根据《关于防止未成年人沉迷网络游戏的通知》《关于进一步严格管理切实防止未成年人沉迷网络游戏的通知》的要求，未实名账号不可体验游戏，未成年人仅可在周五至周日或其他法定节假日的20-21点游玩。</value></data>
@@ -1047,18 +907,15 @@
   <data name="Setting.virtualDisplay.subTitle" xml:space="preserve"><value>发起远程时将创建虚拟屏，所有桌面内容将仅在虚拟屏上显示。远程断开后被控端恢复原状。</value></data>
   <data name="FileTrans.movie" xml:space="preserve"><value>视频</value></data>
   <data name="Screen.Scale.title" xml:space="preserve"><value>缩放</value></data>
-  <data name="CloudPc.Schedule.Detail.tip" xml:space="preserve"><value>倒计时结束后将自动关机</value></data>
   <data name="Setting.Category.keyboard" xml:space="preserve"><value>键盘</value></data>
   <data name="Control.Super.Display.Error.Toast.message" xml:space="preserve"><value>超级屏创建失败，错误码：%@</value></data>
   <data name="Home.Device.ConfirmTakeSecondScreenController" xml:space="preserve"><value>继续发起远控</value></data>
   <data name="Screen.Tab.Close.title" xml:space="preserve"><value>确定要断开与%@的连接吗？</value></data>
   <data name="CodeVerify.retrieveCode" xml:space="preserve"><value>重新获取验证码</value></data>
   <data name="MemberBenefit.Prompt.Trial.SuperScreen.subtitle" xml:space="preserve"><value>领取后可使用超级屏，畅享高分辨率、高帧率。</value></data>
-  <data name="CloudPc.Main.DeskTop.State.Charge.desc" xml:space="preserve"><value>累计消耗 U币：</value></data>
   <data name="Control.setting.recordTip" xml:space="preserve"><value>设备性能受限，当前画质帧率不支持</value></data>
   <data name="Terminal.Error.unlockFailedState" xml:space="preserve"><value>解锁失败</value></data>
   <data name="Terminal.Kill.message" xml:space="preserve"><value>终止后该终端会话将立即结束且无法恢复，确定终止？</value></data>
-  <data name="CloudDisk.Manage.empty" xml:space="preserve"><value>暂无云硬盘</value></data>
   <data name="Control.Volume.subTitleMuted" xml:space="preserve"><value>被控端已静音。关闭后恢复被控端声音设置。</value></data>
   <data name="Setting.Keyboard.Function.title" xml:space="preserve"><value>功能快捷键</value></data>
   <data name="FileTrans.pictures" xml:space="preserve"><value>图片</value></data>
@@ -1066,15 +923,12 @@
   <data name="Control.ManualTransfer.Toast.loading" xml:space="preserve"><value>正在切换连接通道</value></data>
   <data name="Control.Error.rdp" xml:space="preserve"><value>被控端系统会话发生变化，画面会有短暂卡顿，请稍候</value></data>
   <data name="Control.Virtual.Display.Alert.tip" xml:space="preserve"><value>不再提醒</value></data>
-  <data name="CloudPc.Main.Alert.TakeCloudPCAndApp.title" xml:space="preserve"><value>提示</value></data>
   <data name="Alert.UpdateNotice.knowMore" xml:space="preserve"><value>了解更多</value></data>
   <data name="DeviceManage.deviceDeleted" xml:space="preserve"><value>设备已删除</value></data>
   <data name="choose.device.beOpening" xml:space="preserve"><value>正在启动</value></data>
   <data name="App.Permission.Contolled.AssistantOperation.title" xml:space="preserve"><value>辅助功能</value></data>
-  <data name="CloudDisk.Balance.unit" xml:space="preserve"><value>U币</value></data>
   <data name="Control.MacControlled.Screen.Error.title" xml:space="preserve"><value>该设备未连接显示屏</value></data>
   <data name="Setting.Proxy.Test.fail" xml:space="preserve"><value>此代理服务不可用,请检查设置。</value></data>
-  <data name="CloudDisk.Rename.save" xml:space="preserve"><value>保存更改</value></data>
   <data name="Error.loginEmailError" xml:space="preserve"><value>邮箱错误</value></data>
   <data name="Common.Button.cancel" xml:space="preserve"><value>取消</value></data>
   <data name="Home.SecondScreen.Error.title" xml:space="preserve"><value>连接失败</value></data>
@@ -1084,7 +938,6 @@
   <data name="Terminal.Unlock.success" xml:space="preserve"><value>密码正确，验证成功</value></data>
   <data name="Terminal.State.lockedTitle" xml:space="preserve"><value>检测到被控端已锁屏</value></data>
   <data name="Setting.Menu.newVersion" xml:space="preserve"><value>发现新版本 %@</value></data>
-  <data name="CloudDisk.Mount.Select.mountAndBoot" xml:space="preserve"><value>挂载并开机</value></data>
   <data name="Control.RemoteInfo.Copy" xml:space="preserve"><value>复制全部信息</value></data>
   <data name="NowDevice.Controlled.assistant" xml:space="preserve"><value>副屏连接中</value></data>
   <data name="Control.Menu.show" xml:space="preserve"><value>显示</value></data>
@@ -1108,7 +961,6 @@
   <data name="Home.Device.Activate" xml:space="preserve"><value>启动</value></data>
   <data name="App.Permission.Notice.title" xml:space="preserve"><value>系统权限配置</value></data>
   <data name="Tooltip.setting" xml:space="preserve"><value>设置</value></data>
-  <data name="CloudPc.Schedule.Detail.hoursMinutes" xml:space="preserve"><value>%d小时%d分钟</value></data>
   <data name="Setting.Keyboard.WindowsMapping.Source.fnDelete" xml:space="preserve"><value>Fn + Delete 键</value></data>
   <data name="FileTrans.Conflict.skip" xml:space="preserve"><value>跳过</value></data>
   <data name="AppMenu.hideOthers" xml:space="preserve"><value>隐藏其他</value></data>
@@ -1117,21 +969,18 @@
   <data name="Control.RemoteInfo.average" xml:space="preserve"><value>平均延时：</value></data>
   <data name="Assist.Favorite.edit" xml:space="preserve"><value>编辑</value></data>
   <data name="MemberBenefit.Prompt.SuperScreen.resolutionTitle" xml:space="preserve"><value>使用「超级屏」可兼容分辨率</value></data>
-  <data name="CloudDisk.Reset.Fail.Expired.message" xml:space="preserve"><value>该云硬盘已过有效期，无法重置。</value></data>
   <data name="Tooltip.update" xml:space="preserve"><value>更新</value></data>
   <data name="Alert.Logout.subTitle" xml:space="preserve"><value>退出登录会中断正在进行中的连接，你的设备也将从本账户删除。请谨慎操作！</value></data>
   <data name="FileTrans.modificationDate" xml:space="preserve"><value>修改日期</value></data>
   <data name="Control.Trigger.Filetransfer.Resume.Update.Alert.message" xml:space="preserve"><value>升级被控端后，可支持暂停传输任务，传输文件更便捷</value></data>
   <data name="Setting.Proxy.title" xml:space="preserve"><value>代理设置</value></data>
   <data name="Control.Menu.inFullScreen" xml:space="preserve"><value>进入全屏幕</value></data>
-  <data name="CloudPc.Main.Alert.Button.sureDelete" xml:space="preserve"><value>确定删除</value></data>
   <data name="Terminal.List.openTerminal" xml:space="preserve"><value>打开终端</value></data>
   <data name="MemberBenefit.ExpirationReminder.title" xml:space="preserve"><value>会员到期提醒</value></data>
   <data name="Recipient.passCode.haveSet" xml:space="preserve"><value>已设置自定义验证码</value></data>
   <data name="Terminal.Rename.errorEmpty" xml:space="preserve"><value>名称不能为空</value></data>
   <data name="NoLogin.Alert.GuideUser.title" xml:space="preserve"><value>登录网易UU远程</value></data>
   <data name="choose.device.offline" xml:space="preserve"><value>离线</value></data>
-  <data name="CloudPc.Main.LineCrowded.desc" xml:space="preserve"><value>当前使用人数较多，预计需要排队等待 %d 分钟。</value></data>
   <data name="Terminal.List.Empty.line2" xml:space="preserve"><value>当前无正在运行的终端会话</value></data>
   <data name="Application.confirmReplace" xml:space="preserve"><value>确认替换</value></data>
   <data name="FileTrans.start" xml:space="preserve"><value>全部开始</value></data>
@@ -1141,12 +990,10 @@
   <data name="Setting.Keyboard.Function.networkStatus" xml:space="preserve"><value>显示/隐藏网络状态</value></data>
   <data name="Control.Menu.Mouse.FirstShow.title" xml:space="preserve"><value>已启用「使用被控端鼠标」模式</value></data>
   <data name="Control.WowPlugIn.Toast.openNotification" xml:space="preserve"><value>开启消息权限</value></data>
-  <data name="CloudPc.Main.Alert.AddFailed.desc" xml:space="preserve"><value>请稍候再试</value></data>
   <data name="File" xml:space="preserve"><value>文件</value></data>
   <data name="Terminal.State.notLoggedInTitle" xml:space="preserve"><value>检测到被控端未登录</value></data>
   <data name="MemberBenefit.Prompt.Trial.subtitle" xml:space="preserve"><value>领取后可立即解锁 VIP会员功能</value></data>
   <data name="FileTrans.Notification.unknownDevice" xml:space="preserve"><value>未知设备</value></data>
-  <data name="CloudDisk.Reset.Fail.title" xml:space="preserve"><value>云硬盘重置失败</value></data>
   <data name="FileTrans.DragDrop.confirm.fileSummary" xml:space="preserve"><value>%@ 等 %d 项</value></data>
   <data name="Control.Trigger.Custom.SeperateWindow.Update.Alert.message" xml:space="preserve"><value>暂不支持多窗口显示多屏幕，请先更新被控端。</value></data>
   <data name="NowDevice.WakeOnLan.success" xml:space="preserve"><value>远程开机指令已发送，请等待设备开机。</value></data>
@@ -1187,58 +1034,47 @@
   <data name="GamePad.backKey1" xml:space="preserve"><value>背键1</value></data>
   <data name="FileTrans.Connect.Alert.MacServiceNotReady.message" xml:space="preserve"><value>Mac 被控文件传输服务未就绪</value></data>
   <data name="NowDevice.More.disconnect" xml:space="preserve"><value>断开远控</value></data>
-  <data name="CloudPc.Main.Alert.Button.talkLater" xml:space="preserve"><value>以后再说</value></data>
   <data name="FileTrans.openFileFail" xml:space="preserve"><value>mac无法找到该路径</value></data>
   <data name="Tooltip.more" xml:space="preserve"><value>更多</value></data>
   <data name="Alert.DeleteComputer.title" xml:space="preserve"><value>确定要删除{}吗？</value></data>
   <data name="Home.Device.PowerOff.Device.Dialog.title" xml:space="preserve"><value>被控端关机</value></data>
   <data name="Control.Menu.SmallWindow.mode" xml:space="preserve"><value>小窗模式</value></data>
-  <data name="CloudPc.Schedule.Setup.start" xml:space="preserve"><value>开始</value></data>
-  <data name="CloudPc.Main.Alert.OpenPCAndAPP.queueOverDesc" xml:space="preserve"><value>是否要重新排队，并在开机后启动 %@ ？</value></data>
   <data name="MemberBenefit.Card.vipTitle" xml:space="preserve"><value>VIP</value></data>
   <data name="Unlock.Alert.Timeout.informative" xml:space="preserve"><value>被控端长时间未响应，可点击重试</value></data>
   <data name="FileTrans.clean" xml:space="preserve"><value>确定清空记录吗？此操作不会删除已传输的文件。</value></data>
   <data name="Control.Menu.network" xml:space="preserve"><value>显示网络状态</value></data>
   <data name="Control.Menu.NegotiateInfo.Color.Not.Controller.support" xml:space="preserve"><value>当前控制端不支持真彩。</value></data>
   <data name="Control.NegotiateInfo.Connect.notice6" xml:space="preserve"><value>设备性能受限，已关闭真彩</value></data>
-  <data name="CloudPc.Schedule.Cancel.AlreadyShutdown.message" xml:space="preserve"><value>云电脑已关机，定时关机已自动取消。</value></data>
   <data name="Terminal.Connect.bound" xml:space="preserve"><value>绑定完成。你输入的命令将实时映射到被控端。</value></data>
   <data name="Setting.Proxy.Mode.none" xml:space="preserve"><value>不使用代理</value></data>
   <data name="Terminal.Connect.openExhausted" xml:space="preserve"><value>打开终端超时，请检查被控端连接状态。</value></data>
   <data name="Device.App.Management.Append.search" xml:space="preserve"><value>搜索</value></data>
   <data name="Setting.ClientSecurityLock.password.set" xml:space="preserve"><value>设置</value></data>
   <data name="Setting.Keyboard.Permission.open" xml:space="preserve"><value>去开启</value></data>
-  <data name="CloudPc.System.Noti.NoMoney.title" xml:space="preserve"><value>%@ 已自动关机</value></data>
   <data name="Control.Menu.switchScreen" xml:space="preserve"><value>显示屏</value></data>
   <data name="Screen.Super.Enter.success" xml:space="preserve"><value>超级屏创建成功，同时关闭被控端显示屏</value></data>
   <data name="ClientSecurityLock.LockPage.remoteTitle" xml:space="preserve"><value>本机正在被远程协助</value></data>
-  <data name="CloudPc.Main.DeskTop.State.UnCharge.desc" xml:space="preserve"><value>请尽快进入桌面，超时将自动关机</value></data>
   <data name="Common.Error.Connection.check" xml:space="preserve"><value>请检查网络状态或配置</value></data>
   <data name="ComputerDetails.copy" xml:space="preserve"><value>复制全部</value></data>
-  <data name="Control.SmallWindow.CloudPC.Shutdown.title" xml:space="preserve"><value>确定要退出云设备吗？</value></data>
   <data name="NowDevice.WakeOnLan.Failed.No.Device.title" xml:space="preserve"><value>无法远程开机</value></data>
   <data name="Unlock.touch3" xml:space="preserve"><value>关闭触控ID校验功能</value></data>
   <data name="Control.Connection.notice4" xml:space="preserve"><value>被控端显卡驱动版本过低。请尝试升级驱动，以改善远程控制体验。</value></data>
   <data name="Terminal.Password.message" xml:space="preserve"><value>此过程不会解锁被控端</value></data>
   <data name="FloatingBall.gShowOrHide" xml:space="preserve"><value> G 显示或隐藏</value></data>
-  <data name="CloudDisk.Noti.Expired.body" xml:space="preserve"><value>【%@】已过期，请注意备份数据。</value></data>
   <data name="Home.SecondScreen.Error.timeout" xml:space="preserve"><value>连接超时，请确保“%@”设备上的网易UU远程客户端正常运行。</value></data>
   <data name="App.Permission.Notice.done" xml:space="preserve"><value>允许被控</value></data>
   <data name="GamePad.leftTrigger" xml:space="preserve"><value>左扳机</value></data>
   <data name="Terminal.Unlock.exhausted" xml:space="preserve"><value>密码错误次数超限（第%d次/共%d次），验证失败</value></data>
   <data name="SilentUpgrade.success" xml:space="preserve"><value>被控端更新成功，正在重连</value></data>
   <data name="Setting.Proxy.Password.placeholder" xml:space="preserve"><value>选填</value></data>
-  <data name="CloudDisk.Toast.MountFailed.content" xml:space="preserve"><value>云硬盘自动挂载失败，请尝试手动挂载。</value></data>
   <data name="FileTrans.stopAll" xml:space="preserve"><value>全部暂停</value></data>
   <data name="Terminal.List.menuKill" xml:space="preserve"><value>终止对话</value></data>
   <data name="ComputerDetails.title" xml:space="preserve"><value>设备详情</value></data>
   <data name="Setting.Keyboard.Function.viewModeToggleAnnotation" xml:space="preserve"><value>观看模式，开关批注</value></data>
   <data name="Setting.Keyboard.Function.bossKey" xml:space="preserve"><value>老板键（隐藏/显示所有客户端窗口）</value></data>
   <data name="Unlock.Alert.NoPermission.message" xml:space="preserve"><value>被控端无辅助功能权限，可前往被控端系统“设置”-“隐私与安全性”-“辅助功能”，开启对应权限后再试。</value></data>
-  <data name="CloudPc.Main.Alert.TakeCloudPCAndApp.desc" xml:space="preserve"><value>当前设备正在被控中，接管设备后可进行远控。</value></data>
   <data name="Screen.Window.Quit.title" xml:space="preserve"><value>退出远程连接</value></data>
   <data name="Alert.downLoadMobile" xml:space="preserve"><value>扫描下方二维码下载</value></data>
-  <data name="CloudPc.Main.Toolbar.Status.queueReady" xml:space="preserve"><value>已就绪</value></data>
   <data name="Setting.Proxy.Test.failTitle" xml:space="preserve"><value>提示</value></data>
   <data name="FileTrans.DragDrop.confirm.destination" xml:space="preserve"><value>发送到 %@</value></data>
   <data name="Control.Trigger.Upgrade.Alert.gotoUpdate" xml:space="preserve"><value>前去更新</value></data>
@@ -1254,17 +1090,13 @@
   <data name="Assistance.Network.title" xml:space="preserve"><value>无法发起远程协助</value></data>
   <data name="Setting.Authentication.title" xml:space="preserve"><value>实名认证</value></data>
   <data name="FileTrans.disconnect.close.silent.upgrade.tip" xml:space="preserve"><value>与远端设备的连接已断开。</value></data>
-  <data name="CloudDisk.Shutdown.goMount" xml:space="preserve"><value>去挂载</value></data>
   <data name="Control.MacControlled.Controllable.Error.desc" xml:space="preserve"><value>请在该设备的网易UU远程【设置】-【安全】进行权限设置。</value></data>
   <data name="NoDevice.StepOne.Next.step" xml:space="preserve"><value>下一步</value></data>
   <data name="Terminal.Rename.alertFailed" xml:space="preserve"><value>重命名失败，请稍后再试</value></data>
   <data name="Control.Menu.WoWTool.off" xml:space="preserve"><value>关闭</value></data>
-  <data name="CloudPc.Schedule.Setup.modifyError" xml:space="preserve"><value>修改定时关机失败，请重试。</value></data>
   <data name="FileTrans.DragDrop.confirm.path" xml:space="preserve"><value>存放路径：%@</value></data>
-  <data name="CloudDisk.Shutdown.noDiskTitle" xml:space="preserve"><value>关机后数据将不会保存</value></data>
   <data name="Terminal.State.autoUnlockFailedTitle" xml:space="preserve"><value>「自动解锁被控端」验证失败</value></data>
   <data name="MemberBenefit.Card.openTitle" xml:space="preserve"><value>开通会员</value></data>
-  <data name="CloudPc.Main.Alert.RealNameAuth.desc" xml:space="preserve"><value>按相关规定，使用当前云电脑需要进行实名认证。</value></data>
   <data name="FileTrans.DragDrop.confirm.sendTo" xml:space="preserve"><value>发送到主控端</value></data>
   <data name="Control.ViewMode.Toolbar.Tooltip.close" xml:space="preserve"><value>隐藏工具栏</value></data>
   <data name="PortMapping.confirm" xml:space="preserve"><value>确定</value></data>
@@ -1272,14 +1104,11 @@
   <data name="FileTrans.cancelAll" xml:space="preserve"><value>全部取消</value></data>
   <data name="Unlock.closeHint" xml:space="preserve"><value>可前往【控制中心】-【安全】开启自动解锁被控端</value></data>
   <data name="Setting.Proxy.Proto.http" xml:space="preserve"><value>HTTP</value></data>
-  <data name="CloudPc.Persistence.Menu.once" xml:space="preserve"><value>仅本次生效</value></data>
   <data name="Home.Device.TakeOverRemoteController" xml:space="preserve"><value>接管远控</value></data>
   <data name="MemberBenefit.Prompt.PrivacyScreensaver.subtitle" xml:space="preserve"><value>支持自定义隐私防护，一键隐藏桌面画面，守护远程隐私。</value></data>
   <data name="NoLogin.Alert.RemoteAssistant.title" xml:space="preserve"><value>登录后可发起远程协助</value></data>
   <data name="Control.SmallWindow.Preview.title" xml:space="preserve"><value>小窗效果预览</value></data>
-  <data name="CloudPc.Schedule.hours" xml:space="preserve"><value>小时</value></data>
   <data name="Setting.Keyboard.Permission.AccessibilityMacOS27.title" xml:space="preserve"><value>设备控制和数据访问</value></data>
-  <data name="CloudDisk.Status.occupied" xml:space="preserve"><value>已挂载在其他云设备</value></data>
   <data name="Control.ConnectError.title" xml:space="preserve"><value>连接意外断开，重新连接失败！</value></data>
   <data name="Setting.Shortcut.Recorder.desc" xml:space="preserve"><value>按下键盘按键可设置快捷键，按下 ⌫ 按键可删除快捷键。</value></data>
   <data name="NowDevice.Quick.add" xml:space="preserve"><value>添加</value></data>
@@ -1289,14 +1118,11 @@
   <data name="Control.NegotiateInfo.Choose.notice14" xml:space="preserve"><value>设备性能受限，可尝试关闭真彩能力 并降低画质到%@后重试。</value></data>
   <data name="Control.PrivacyScreen.Settings.confirmModify" xml:space="preserve"><value>修改隐私屏保</value></data>
   <data name="LoginView.Status.Failed.title" xml:space="preserve"><value>二维码加载失败</value></data>
-  <data name="CloudPc.Main.DeskTop.fileTransfer" xml:space="preserve"><value>文件传输</value></data>
   <data name="Assistance.descriptionID" xml:space="preserve"><value>通过其他设备的【设备ID】及【设备验证码】启动远程控制</value></data>
   <data name="FileTrans.selAllOption" xml:space="preserve"><value>应用到全部文件</value></data>
   <data name="Error.loginNumberError" xml:space="preserve"><value>号码错误</value></data>
   <data name="Control.Connection.notice1" xml:space="preserve"><value>检测到网络延迟高，请尝试降低画质或帧率，以改善远程控制体验</value></data>
   <data name="FileTrans.Conflict.title" xml:space="preserve"><value>%@ 文件已存在</value></data>
-  <data name="CloudDisk.Mount.Select.title" xml:space="preserve"><value>选择要挂载的云硬盘</value></data>
-  <data name="CloudPc.Main.DeskTop.rename" xml:space="preserve"><value>重命名</value></data>
   <data name="LoginView.thirdPartyServices" xml:space="preserve"><value>《第三方服务共享清单》</value></data>
   <data name="Control.RemoteInfo.encoderDecoder" xml:space="preserve"><value>编解码器: </value></data>
   <data name="ClientSecurityLock.Unlock.passwordError" xml:space="preserve"><value>密码错误，请重新输入。</value></data>
@@ -1319,7 +1145,6 @@
   <data name="Control.RemoteInfo.EncryptionChannel" xml:space="preserve"><value>加密通道: </value></data>
   <data name="Control.Trigger.Filetransfer.Resume.Update.Alert.title" xml:space="preserve"><value>被控端版本较低</value></data>
   <data name="Device.List.Add.button" xml:space="preserve"><value>如何添加设备</value></data>
-  <data name="CloudDisk.Shutdown.tempContentMessage" xml:space="preserve"><value>由于本设备没有挂载云硬盘，关机将会重置电脑，并清除使用期间产生的所有数据。\n\n建议挂载云硬盘并保存好数据，避免数据丢失。</value></data>
   <data name="Terminal.State.autoUnlockWindowsNotLoggedIn" xml:space="preserve"><value>正在通过「自动解锁被控端」验证身份，验证成功将解锁被控端</value></data>
   <data name="Control.Volume.Shortcut.unsupportedAdjustment" xml:space="preserve"><value>被控端系统版本较低，暂不支持声音调整。</value></data>
   <data name="Control.AutoLock.title" xml:space="preserve"><value>远程结束后，被控端自动锁屏</value></data>
@@ -1329,7 +1154,6 @@
   <data name="MemberBenefit.Prompt.ViewingMode.subtitle" xml:space="preserve"><value>仅支持查看画面，零误触风险，告别误操作。</value></data>
   <data name="PortMapping.title" xml:space="preserve"><value>端口映射</value></data>
   <data name="HomeView.computerCard.editName" xml:space="preserve"><value>修改电脑名</value></data>
-  <data name="CloudDisk.Toast.Occupied.button" xml:space="preserve"><value>挂载管理</value></data>
   <data name="Control.Menu.microphone.error.alertTitle" xml:space="preserve"><value>麦克风功能开启失败</value></data>
   <data name="NeteaseOversea.Login.thirdPartyServices" xml:space="preserve"><value>Terms of Service</value></data>
   <data name="Control.Menu.WindowSetting.smallWindowMode" xml:space="preserve"><value>小窗模式</value></data>
@@ -1346,9 +1170,6 @@
   <data name="LoginView.messageCode" xml:space="preserve"><value>短信验证码</value></data>
   <data name="Unlock.Alert.title" xml:space="preserve"><value>无法解锁</value></data>
   <data name="Setting.Proxy.DisableConfirm.title" xml:space="preserve"><value>确定要停用代理吗?</value></data>
-  <data name="CloudPc.Main.DeskTop.comingSoon" xml:space="preserve"><value>即将推出</value></data>
-  <data name="CloudDisk.Manage.title" xml:space="preserve"><value>云硬盘管理</value></data>
-  <data name="CloudPc.Schedule.Cancel.Alert.messageNoPersistence" xml:space="preserve"><value>取消后，云电脑将会持续运行并按照正常计费方式结算。</value></data>
   <data name="Control.Menu.microphone.title" xml:space="preserve"><value>麦克风</value></data>
   <data name="FileTrans.received" xml:space="preserve"><value>已接收</value></data>
   <data name="Application.Search.noFindGameOrApp" xml:space="preserve"><value>找不到符合的游戏或应用？</value></data>
@@ -1363,13 +1184,11 @@
   <data name="NowDevice.WakeOnLan.CMD.send" xml:space="preserve"><value>开机指令已发送</value></data>
   <data name="Terminal.Session.exited" xml:space="preserve"><value>被控端终端已关闭 (exit code: %d)</value></data>
   <data name="Terminal.Rename.title" xml:space="preserve"><value>修改终端名称</value></data>
-  <data name="CloudPc.Main.Alert.ShutDown.desc" xml:space="preserve"><value>你可以选择退出云电脑，或让它继续在后台运行</value></data>
   <data name="MemberBenefit.Prompt.Trial.alreadyClaimed" xml:space="preserve"><value>已领取过，不能重复领取</value></data>
   <data name="Home.Device.Restart.Device.Dialog.Online.message" xml:space="preserve"><value>请确保已保存所有工作，确定重启被控端吗？</value></data>
   <data name="Setting.Proxy.titleUsername" xml:space="preserve"><value>用户名:</value></data>
   <data name="Control.Fix.title" xml:space="preserve"><value>控制中心</value></data>
   <data name="choose.device.steerableDevice" xml:space="preserve"><value>可控设备</value></data>
-  <data name="CloudDisk.Status.expiringSoon" xml:space="preserve"><value>即将到期</value></data>
   <data name="FileTrans.remote" xml:space="preserve"><value>远端</value></data>
   <data name="Control.WowPlugIn.Toast.noPermissionDownload" xml:space="preserve"><value>插件下载中，请先开启通知权限，以接收排队提醒</value></data>
   <data name="FileTrans.Notification.Receive.failureTitle" xml:space="preserve"><value>文件接收失败</value></data>
@@ -1395,11 +1214,9 @@
   <data name="FileTrans.Notification.Receive.successTitle" xml:space="preserve"><value>已接收 %@ 个文件</value></data>
   <data name="Device.App.Management.Append.Guidetitle" xml:space="preserve"><value>添加快速启动应用</value></data>
   <data name="Tooltip.Show.User.info" xml:space="preserve"><value>账户</value></data>
-  <data name="CloudPc.Main.Alert.ReQueueInQueueOver.desc" xml:space="preserve"><value>是否要重新排队，并在开机后启动 %@？</value></data>
   <data name="HomeView.computerCard.detail" xml:space="preserve"><value>电脑详情</value></data>
   <data name="HomeView.RemoteHelp.localTips" xml:space="preserve"><value>为了确保安全，点击【允许控制本机】后可生成验证码</value></data>
   <data name="Control.PrivacyScreen.enableSuccess" xml:space="preserve"><value>被控端防窥模式已设置隐私屏保</value></data>
-  <data name="CloudPc.System.Noti.QueueOver.desc" xml:space="preserve"><value>%@ 由于排队到号后未及时开机，请重新排队。</value></data>
   <data name="Control.PrivacyScreen.Settings.custom" xml:space="preserve"><value>自定义</value></data>
   <data name="NowDevice.Wallpaper.more" xml:space="preserve"><value>更多</value></data>
   <data name="NoLogin.Alert.Feedback.title" xml:space="preserve"><value>登录后提交反馈</value></data>
@@ -1413,7 +1230,6 @@
   <data name="Setting.Authentication.success" xml:space="preserve"><value>实名认证成功</value></data>
   <data name="Control.RemoteInfo.terminalSystem" xml:space="preserve"><value>控制端系统: </value></data>
   <data name="Setting.Keyboard.WindowsMapping.Source.delete" xml:space="preserve"><value>Delete 键</value></data>
-  <data name="CloudDisk.Expiration.validUntil" xml:space="preserve"><value>有效期至：%@</value></data>
   <data name="ConnectState.transmittingScreen" xml:space="preserve"><value>正在传输画面</value></data>
   <data name="Control.Menu.WindowSetting.originResolution" xml:space="preserve"><value>实际大小 1:1</value></data>
   <data name="Setting.PreventSleep.LapTop.never" xml:space="preserve"><value>永不</value></data>
@@ -1422,9 +1238,7 @@
   <data name="MemberBenefit.Prompt.open" xml:space="preserve"><value>开通</value></data>
   <data name="FileTrans.selAll" xml:space="preserve"><value>全选</value></data>
   <data name="Control.PrivacyScreen.Alert.invalidImage" xml:space="preserve"><value>请上传不小于 1920×1080 且不超过 2M 的 JPG/PNG 图片。</value></data>
-  <data name="CloudPc.Main.Maintain.title" xml:space="preserve"><value>云电脑当前不可用</value></data>
   <data name="MemberBenefit.Card.renew" xml:space="preserve"><value>续费</value></data>
-  <data name="CloudPc.Main.Alert.AddFailed.title" xml:space="preserve"><value>添加失败</value></data>
   <data name="Screen.Super.informativeText" xml:space="preserve"><value>%@的分辨率与控制端不兼容，若\n使用「超级屏」，所有内容将适配显示至\n「超级屏」，被控端显示屏将被关闭。</value></data>
   <data name="HomeView.RemoteHelp.Sharing.exitTips" xml:space="preserve"><value>退出后将不再允许他人控制本机</value></data>
   <data name="Control.PrivacySecurity.autoLockTitle" xml:space="preserve"><value>自动锁屏</value></data>
@@ -1434,7 +1248,6 @@
   <data name="Control.Connection.notice5" xml:space="preserve"><value>控制端资源占用较高，导致性能不足。请尝试关闭其他应用，以改善远程控制体验。</value></data>
   <data name="Setting.Keyboard.Permission.InputMonitoring.guideSubtitle" xml:space="preserve"><value>授权后，远程时才能捕获系统快捷键，用于系统快捷键的发送和录入。</value></data>
   <data name="Control.PrivacySecurity.privacyModeDisabledDesc" xml:space="preserve"><value>被控端屏幕未防护，\n旁人可见</value></data>
-  <data name="CloudPc.System.Noti.Button.goCharge" xml:space="preserve"><value>去充值</value></data>
   <data name="AppMenu.edit" xml:space="preserve"><value>编辑</value></data>
   <data name="Control.Menu.Quality.highDefinition" xml:space="preserve"><value>超清</value></data>
   <data name="Unlock.Alert.informative2" xml:space="preserve"><value>开启功能需先录入 %@。网易UU远程 仅在本地加密存储密码，不会上传密码信息。</value></data>
@@ -1443,20 +1256,14 @@
   <data name="Control.State.disconnection" xml:space="preserve"><value>当前连接已断开</value></data>
   <data name="NowDevice.Controlled.inDesc" xml:space="preserve"><value>当前有 %@ 台本账号设备正在控制此电脑</value></data>
   <data name="HomeView.TitleBar.signalConnect.normal" xml:space="preserve"><value>服务器安全连接已准备就绪</value></data>
-  <data name="CloudDisk.Reset.Fail.Retryable.message" xml:space="preserve"><value>请稍后重试，或联系客服处理。</value></data>
   <data name="Control.Menu.unGameMode.toast" xml:space="preserve"><value>已关闭游戏鼠标模式</value></data>
   <data name="Control.Menu.other" xml:space="preserve"><value>其他分辨率</value></data>
   <data name="Home.Device.Restart.Device.success" xml:space="preserve"><value>重启电脑指令已发送</value></data>
   <data name="NeteaseOversea.Login.Code.Input.title" xml:space="preserve"><value>We\'ve send a 6-digit verification code to</value></data>
-  <data name="CloudPc.Control.Exit.Warning.title" xml:space="preserve"><value>是否关机结束计费？</value></data>
   <data name="NeteaseOversea.Login.getCode" xml:space="preserve"><value>Get Verification code</value></data>
-  <data name="CloudDisk.Capacity.format" xml:space="preserve"><value>%d GB</value></data>
   <data name="Home.RemoteList.MyDevice" xml:space="preserve"><value>我的设备</value></data>
   <data name="Terminal.Unlock.failExit" xml:space="preserve"><value>验证失败，请在被控设备上手动登录后重试</value></data>
-  <data name="CloudPc.Persistence.Menu.title" xml:space="preserve"><value>后台挂机</value></data>
-  <data name="CloudPc.Schedule.Cancel.Alert.messageWithPersistence" xml:space="preserve"><value>取消后，将按照正常计费方式结算，您还可以继续使用您的云电脑。</value></data>
   <data name="MemberBenefit.Prompt.upgradeMembership" xml:space="preserve"><value>升级会员</value></data>
-  <data name="CloudPc.Main.DeskTop.cloudStorage" xml:space="preserve"><value>云硬盘</value></data>
   <data name="ClientSecurityLock.Unlock.codeErrorMessage" xml:space="preserve"><value>验证码错误，请重新输入。</value></data>
   <data name="Control.ConnectError.reason" xml:space="preserve"><value>可能由以下因素导致：\n• 被控/主控设备无网络或意外断线\n• 被控/主控设备已关机、重启\n请检查设备环境后再尝试重新连接</value></data>
   <data name="Setting.Category.Network" xml:space="preserve"><value>网络</value></data>
@@ -1476,28 +1283,20 @@
   <data name="Home.Device.InterruptConnectTips.secondScreen" xml:space="preserve"><value>当前设备正在使用无线副屏功能，继续远控将会断开副屏连接。</value></data>
   <data name="Setting.FileTransfer.ReceiveDirectory.panelTitle" xml:space="preserve"><value>选择传输文件存储路径</value></data>
   <data name="Terminal.State.viewSolution" xml:space="preserve"><value>查看解决方案</value></data>
-  <data name="CloudDisk.Rename.placeholder" xml:space="preserve"><value>请输入云硬盘名称</value></data>
-  <data name="CloudPc.System.Noti.MinorTimeOver.title" xml:space="preserve"><value>%@ 已自动关机</value></data>
   <data name="Terminal.State.openRemoteWindow" xml:space="preserve"><value>打开远控窗口</value></data>
   <data name="Setting.Authentication.error" xml:space="preserve"><value>实名信息错误，请重新输入</value></data>
   <data name="GamePad.rightTrigger" xml:space="preserve"><value>右扳机</value></data>
   <data name="NowDevice.Detail.Controlled.NotAllow.title" xml:space="preserve"><value>该设备不允许被控</value></data>
   <data name="Setting.Proxy.DisableConfirm.ok" xml:space="preserve"><value>确定</value></data>
   <data name="Terminal.Kill.title" xml:space="preserve"><value>终止对话</value></data>
-  <data name="Device.List.Add.Hascloudpc.desc" xml:space="preserve"><value>用其他设备访问官网 uuyc.163.com 下载并安装客户端，登录后即可进行远程办公、远程游戏以及文件传输，你也可以选择添加云设备。</value></data>
   <data name="Setting.ClientSecurityLock.policy.mainWindowClose" xml:space="preserve"><value>关闭主界面时自动锁定客户端</value></data>
   <data name="Control.Volume.Shortcut.unmuted" xml:space="preserve"><value>已取消静音</value></data>
-  <data name="CloudPc.Schedule.Cancel.Alert.confirm" xml:space="preserve"><value>取消定时关机</value></data>
-  <data name="CloudDisk.Toast.MountFailed.button" xml:space="preserve"><value>挂载管理</value></data>
-  <data name="CloudPc.Control.Coin.NotSufficient" xml:space="preserve"><value>剩余U币不足 %@，消耗完将自动关机</value></data>
   <data name="Control.Privacy.Mode.closeScreen.error" xml:space="preserve"><value>被控端显示屏关闭失败，错误码</value></data>
   <data name="HomeView.myComputer" xml:space="preserve"><value>我的电脑</value></data>
   <data name="PortMapping.toast.saved" xml:space="preserve"><value>保存成功</value></data>
   <data name="Controlled.Device.Detail.Head.desc" xml:space="preserve"><value>当前有 %d 台设备正在控制此电脑</value></data>
   <data name="Control.NegotiateInfo.Choose.notice6" xml:space="preserve"><value>设备性能受限，可尝试关闭\U2006HDR\U2006能力后重试。</value></data>
   <data name="PortMapping.Unsupport.message" xml:space="preserve"><value>被控端版本较低，请升级被控端版本后再试。</value></data>
-  <data name="CloudDisk.Menu.disk" xml:space="preserve"><value>云硬盘</value></data>
-  <data name="CloudDisk.Shutdown.noDiskMessage" xml:space="preserve"><value>由于本设备没有挂载云硬盘，关机将会重置电脑，并清除使用期间产生的所有数据。\n\n使用云硬盘功能可帮助你存储数据，下次使用云电脑时无需重新传输或下载内容。</value></data>
   <data name="Setting.ClientSecurityLock.enableConfirm.desc" xml:space="preserve"><value>防止客户端设置被修改，保障数据与使用安全。</value></data>
   <data name="Alert.UpdateNotice.knew" xml:space="preserve"><value>知道了</value></data>
   <data name="Control.NegotiateInfo.Choose.notice3" xml:space="preserve"><value>当前被控端不支持真彩。</value></data>
@@ -1520,23 +1319,19 @@
   <data name="modifySuccess" xml:space="preserve"><value>修改成功</value></data>
   <data name="Setting.ClosingWindow.quit" xml:space="preserve"><value>退出主程序</value></data>
   <data name="Control.Unlock.Menu.Double.Authentication.title" xml:space="preserve"><value>双重验证</value></data>
-  <data name="CloudPc.Control.Schedule.ToastContent" xml:space="preserve"><value>已设置定时关机，将在不久后关机。若想取消关机，请点击「继续使用」。</value></data>
   <data name="Setting.ClientSecurityLock.policy.remoteAssistance.desc" xml:space="preserve"><value>远程协助结束后，客户端将自动解锁。</value></data>
   <data name="PortMapping.editor.addTitle" xml:space="preserve"><value>添加映射规则</value></data>
   <data name="Assist.Favorite.codePlaceholder" xml:space="preserve"><value>请输入设备验证码</value></data>
   <data name="Terminal.Rename.save" xml:space="preserve"><value>保存更改</value></data>
   <data name="NowDevice.WakeOnLan.booting" xml:space="preserve"><value>正在开机</value></data>
-  <data name="CloudPc.Schedule.minutes" xml:space="preserve"><value>分钟</value></data>
   <data name="Control.Menu.microphone.error.unknownError" xml:space="preserve"><value>当前功能存在异常，请尝试重启电脑或联系在线客服处理。</value></data>
   <data name="Home.Device.BeClose" xml:space="preserve"><value>正在关闭</value></data>
   <data name="NeteaseOversea.Login.privacyPolicy" xml:space="preserve"><value>Privacy Policy</value></data>
   <data name="HomeView.computerCard.delete" xml:space="preserve"><value>删除电脑</value></data>
   <data name="ConnectState.settingRemoteConversation" xml:space="preserve"><value>设置远程会话</value></data>
   <data name="FileTrans.DragDrop.confirm.emptyFile" xml:space="preserve"><value>文件</value></data>
-  <data name="CloudPc.Schedule.suffix" xml:space="preserve"><value>后自动关机</value></data>
   <data name="ClientSecurityLock.Unlock.resendCountdown" xml:space="preserve"><value>重新获取（%@s）</value></data>
   <data name="NowDevice.Controlled.selfDesc" xml:space="preserve"><value>本机正在控制此电脑</value></data>
-  <data name="CloudDisk.Menu.purchaseDisk" xml:space="preserve"><value>购买云硬盘保留数据</value></data>
   <data name="HomeView.TitleBar.signalConnect.connection" xml:space="preserve"><value>服务器正在连接...</value></data>
   <data name="Control.Menu.more" xml:space="preserve"><value>更多</value></data>
   <data name="NeteaseOversea.Login.Code.Input.login" xml:space="preserve"><value>Log in</value></data>
@@ -1547,20 +1342,17 @@
   <data name="Control.Volume.Shortcut.muted" xml:space="preserve"><value>已静音</value></data>
   <data name="Home.Device.BeRemoteControlle" xml:space="preserve"><value>正在被 %@ 远程控制中</value></data>
   <data name="App.Permission.Contolled.FileFolder.defaultName" xml:space="preserve"><value>当前文件夹</value></data>
-  <data name="CloudPc.Schedule.Setup.minTimeWarning" xml:space="preserve"><value>定时关机最小时间为 %d 分钟，请重新输入。</value></data>
   <data name="Control.Menu.WoWTool.title" xml:space="preserve"><value>魔兽世界排队提醒工具</value></data>
   <data name="Unlock.Alert.message2" xml:space="preserve"><value>录入被控端 %@</value></data>
   <data name="Terminal.Unlock.wrongPassword" xml:space="preserve"><value>密码错误（第%d次/共%d次），请重新输入</value></data>
   <data name="FileTrans.deleteFileFail" xml:space="preserve"><value>删除文件失败</value></data>
   <data name="Application.replacePinnedTips" xml:space="preserve"><value>替换后，快速启动项也会更新。</value></data>
   <data name="Screen.Tab.Close.tips" xml:space="preserve"><value>如需重新连接，可在窗口顶部栏【+】的菜单选项重新打开。</value></data>
-  <data name="CloudDisk.Reset.menuTitle" xml:space="preserve"><value>重置云硬盘数据</value></data>
   <data name="Control.Menu.CustomBitrateSetting.StartCustomBitrate.description.detail1" xml:space="preserve"><value>高码率画质更优，推荐稳定高速网络下使用。</value></data>
   <data name="Setting.ClientSecurityLock.passwordDialog.title" xml:space="preserve"><value>设置安全密码</value></data>
   <data name="Terminal.Connect.listExhausted" xml:space="preserve"><value>获取终端列表超时，请检查被控端连接状态。</value></data>
   <data name="Control.Menu.VideoColor.toast" xml:space="preserve"><value>本机显卡暂不支持开启真彩</value></data>
   <data name="DeviceManage.localDevice" xml:space="preserve"><value>本设备</value></data>
-  <data name="CloudPc.Popup.Guide.Tips" xml:space="preserve"><value>云设备已添加到列表中。</value></data>
   <data name="Control.Menu.windowSetting" xml:space="preserve"><value>窗口设置</value></data>
   <data name="Setting.Keyboard.Shortcut.Display.shift" xml:space="preserve"><value>Shift</value></data>
   <data name="Home.Device.MoreApplication" xml:space="preserve"><value>更多应用</value></data>
@@ -1571,30 +1363,24 @@
   <data name="Terminal.State.connectionErrorTitle" xml:space="preserve"><value>终端连接异常</value></data>
   <data name="DeepLink.Device.notFound" xml:space="preserve"><value>设备不存在或已移除，请刷新设备列表后重试</value></data>
   <data name="Control.NegotiateInfo.Choose.notice7" xml:space="preserve"><value>设备性能受限，可尝试关闭真彩能力后重试。</value></data>
-  <data name="CloudDisk.Mount.emptyStopped" xml:space="preserve"><value>云硬盘可在关机后保留存储，云硬盘（D盘）内的数据关机后不丢失。</value></data>
   <data name="Recipient.refresh.toolTip" xml:space="preserve"><value>刷新设置</value></data>
   <data name="Control.Privacy.Mode.closeScreen.success" xml:space="preserve"><value>被控端显示屏已关闭，仅使用虚拟屏幕</value></data>
   <data name="Control.Menu.VideoColor.normalColor" xml:space="preserve"><value>常规色彩</value></data>
   <data name="Control.Menu.Mouse.AutoMouse.title" xml:space="preserve"><value>智能鼠标</value></data>
-  <data name="CloudDisk.Renew.now" xml:space="preserve"><value>立即续费</value></data>
   <data name="LoginView.Error.LoginError.text" xml:space="preserve"><value>请重试。</value></data>
   <data name="Assist.Favorite.title" xml:space="preserve"><value>收藏设备</value></data>
   <data name="Home.Update.Confirm.Later.update" xml:space="preserve"><value>稍后再说</value></data>
   <data name="Terminal.Rename.errorFailed" xml:space="preserve"><value>重命名失败，请重试</value></data>
   <data name="Application.Search.gameOrApplication" xml:space="preserve"><value>搜索游戏或应用</value></data>
-  <data name="CloudPc.Schedule.Menu.cancel" xml:space="preserve"><value>取消定时关机</value></data>
-  <data name="CloudPc.Main.DeskTop.State.Ready.title" xml:space="preserve"><value>已就绪</value></data>
   <data name="Screen.SuperScreen.exit" xml:space="preserve"><value>退出超级屏</value></data>
   <data name="FileTrans.remoteTab" xml:space="preserve"><value>远端</value></data>
   <data name="Terminal.State.disconnectedSubtitle" xml:space="preserve"><value>与被控端的连接已断开。</value></data>
   <data name="Setting.Keyboard.Shortcut.Display.enter" xml:space="preserve"><value>Return</value></data>
   <data name="LoginView.Error.phoneNumberError" xml:space="preserve"><value>请输入正确的手机号码。</value></data>
   <data name="Assist.Favorite.codeCaption" xml:space="preserve"><value>设备验证码（可选）</value></data>
-  <data name="CloudPc.Main.DeskTop.Control.desc" xml:space="preserve"><value>当前有 %@ 台设备正在控制此电脑</value></data>
   <data name="Control.Menu.microphone.permission.title" xml:space="preserve"><value>暂无麦克风使用权限</value></data>
   <data name="Setting.ClientSecurityLock.desc" xml:space="preserve"><value>防止客户端设置被修改，保障数据与使用安全。</value></data>
   <data name="Control.Menu.Mouse.ControlledMouse.title" xml:space="preserve"><value>使用被控端鼠标</value></data>
-  <data name="CloudPc.Main.DeskTop.State.Charge.title" xml:space="preserve"><value>运行时间：</value></data>
   <data name="Home.Device.ConfirmTakeSecondScreenFileTransfer" xml:space="preserve"><value>继续文件传输</value></data>
   <data name="Home.Device.TakeOverAndOpenApplication" xml:space="preserve"><value>接管远控并打开应用</value></data>
   <data name="Unlock.computer" xml:space="preserve"><value>解锁电脑</value></data>
@@ -1610,21 +1396,17 @@
   <data name="ClientSecurityLock.Unlock.passwordPlaceholder" xml:space="preserve"><value>请输入安全密码</value></data>
   <data name="Paste.file.error.count.diff" xml:space="preserve"><value>无法完整接收文件，请重试</value></data>
   <data name="Common.Error.Alert.title" xml:space="preserve"><value>操作失败</value></data>
-  <data name="CloudDisk.Noti.AboutToExpire.body" xml:space="preserve"><value>【%@】将于 %@到期，请及时续费，以避免数据丢失。</value></data>
   <data name="Setting.PreventSleep.LapTop.usePower" xml:space="preserve"><value>仅使用电源适配器时</value></data>
   <data name="HomeView.RemoteHelp.remoteIdPlaceholder" xml:space="preserve"><value>请输入被控电脑ID</value></data>
   <data name="Control.Virtual.Display.Alert.message" xml:space="preserve"><value>被控端与本机的分辨率不匹配，已创建“虚拟屏”来显示桌面所有内容。</value></data>
   <data name="Home.Update.Manual.Latest.message" xml:space="preserve"><value>当前已是最新版本</value></data>
   <data name="Setting.Keyboard.Response.controllerFirst" xml:space="preserve"><value>优先在控制端响应</value></data>
   <data name="Setting.Keyboard.Function.lockMouse" xml:space="preserve"><value>锁定鼠标在远控窗口中</value></data>
-  <data name="CloudPc.Main.Alert.OpenPCAndAPP.desc" xml:space="preserve"><value>是否开机并启动 %@ ？</value></data>
-  <data name="NoLogin.Alert.CloudPCMarket.title" xml:space="preserve"><value>登录后可使用云设备</value></data>
   <data name="Controlled.Device.Detail.Head.title" xml:space="preserve"><value>本机被控中</value></data>
   <data name="Home.Update.Confirm.Restart.update" xml:space="preserve"><value>重启更新</value></data>
   <data name="Terminal.CloseList.message" xml:space="preserve"><value>退出后将会断开已连接的终端会话。</value></data>
   <data name="Unlock.Alert.Double.Authentication.Open.tips" xml:space="preserve"><value>启用双重验证以保护密码信息</value></data>
   <data name="Alert.iGotIt" xml:space="preserve"><value>知道了</value></data>
-  <data name="CloudPc.Main.Maintain.desc" xml:space="preserve"><value>服务器正在维护中，请稍后再使用</value></data>
   <data name="Setting.Shortcut.Recorder.placeholder" xml:space="preserve"><value>请设置快捷键</value></data>
   <data name="Terminal.Unlock.timeoutHint" xml:space="preserve"><value>验证失败，请在被控设备上手动登录后重试</value></data>
   <data name="Device.App.Management.Append.title" xml:space="preserve"><value>选择要添加的快速启动应用</value></data>
@@ -1633,7 +1415,6 @@
   <data name="Assist.Favorite.addSuccess" xml:space="preserve"><value>收藏成功</value></data>
   <data name="LoginView.readAndAgressClause" xml:space="preserve"><value>请阅读并同意以下条款</value></data>
   <data name="Setting.Menu.deviceManage" xml:space="preserve"><value>设备管理</value></data>
-  <data name="CloudDisk.Subscription.monthly" xml:space="preserve"><value>连续包月</value></data>
   <data name="Setting.Keyboard.ControllerOnly.add" xml:space="preserve"><value>添加控制端快捷键</value></data>
   <data name="Control.Menu.resolution" xml:space="preserve"><value>分辨率</value></data>
   <data name="Control.Menu.Quality.original" xml:space="preserve"><value>原画</value></data>
@@ -1643,10 +1424,8 @@
   <data name="Assist.Favorite.delete" xml:space="preserve"><value>删除设备</value></data>
   <data name="Screen.Super.quitText" xml:space="preserve"><value>退出后，将恢复至使用超级屏之前的屏幕显示状态。</value></data>
   <data name="Control.Menu.Quality.Normal.Video.presentation" xml:space="preserve"><value>1080P</value></data>
-  <data name="CloudPc.Main.DeskTop.State.UnCharge.title" xml:space="preserve"><value>已启动</value></data>
   <data name="Unlock.guide" xml:space="preserve"><value>开启自动解锁被控端，远控更便捷</value></data>
   <data name="Setting.Keyboard.WindowsMapping.Source.option" xml:space="preserve"><value>Option（⌥）键</value></data>
-  <data name="CloudPc.Main.DeskTop.State.InQueue.waitDesc" xml:space="preserve"><value>预计等待 %d 分钟...</value></data>
   <data name="NowDevice.More.Power.off" xml:space="preserve"><value>关机</value></data>
   <data name="Home.NowDevice.Add.Alert.desc" xml:space="preserve"><value>添加快速启动应用，需要连接并访问被控端以获取应用信息。</value></data>
   <data name="Recipient.refresh.hour" xml:space="preserve"><value>每%@小时</value></data>
@@ -1657,7 +1436,6 @@
   <data name="Terminal.Rename.cancel" xml:space="preserve"><value>取消</value></data>
   <data name="LoginView.tips" xml:space="preserve"><value>提示</value></data>
   <data name="Recipient.custom.title" xml:space="preserve"><value>设置自定义验证码</value></data>
-  <data name="CloudPc.Schedule.Setup.autoSubtitle" xml:space="preserve"><value>开启后，每次开机使用云电脑时，都会自动以当前设定的时间定时关机。</value></data>
   <data name="NowDevice.UpdateStatus.Failed.feedback" xml:space="preserve"><value>提交反馈</value></data>
   <data name="Terminal.State.macNotLoggedInSubtitle" xml:space="preserve"><value>请先前往被控端登录</value></data>
   <data name="About.App.thirdPartyCopyright" xml:space="preserve"><value>《第三方版权》</value></data>
@@ -1669,10 +1447,8 @@
   <data name="PortMapping.column.name" xml:space="preserve"><value>名称</value></data>
   <data name="Control.Menu.microphone.error.speakerDisabled" xml:space="preserve"><value>被控设备上扬声器-\"网易虚拟音频\"被禁用，请在 Windows 系统设置或设备管理器里启用。</value></data>
   <data name="Setting.ClientSecurityLock.passwordDialog.save" xml:space="preserve"><value>保存</value></data>
-  <data name="CloudPc.Schedule.Detail.minutes" xml:space="preserve"><value>分钟</value></data>
   <data name="AppMenu.selectAll" xml:space="preserve"><value>全选</value></data>
   <data name="Terminal.Close.cancel" xml:space="preserve"><value>取消</value></data>
-  <data name="CloudPc.Schedule.Setup.editTime" xml:space="preserve"><value>修改时间</value></data>
   <data name="Device.App.Management.Append.Available" xml:space="preserve"><value>共有 %@ 个应用可添加</value></data>
   <data name="Controlled.Device.Detail.List.assistance" xml:space="preserve"><value>外部设备</value></data>
   <data name="Control.Menu.microphone.error.driverInstallFailed" xml:space="preserve"><value>被控端驱动安装失败，请联系在线客服处理。</value></data>
@@ -1681,9 +1457,7 @@
   <data name="FileTrans.removeDone" xml:space="preserve"><value>清除完结任务</value></data>
   <data name="Unlock.TouchID.fail" xml:space="preserve"><value>触控ID 短时间内错误多次，请稍后再试。</value></data>
   <data name="DeviceManage.LocalInfo.NetwokeCard" xml:space="preserve"><value>网卡</value></data>
-  <data name="CloudDisk.Toast.Expired.content" xml:space="preserve"><value>【%@】已过期，请注意备份数据。</value></data>
   <data name="FileTrans.rename" xml:space="preserve"><value>重命名</value></data>
-  <data name="CloudPc.Main.Alert.NoMoney.desc" xml:space="preserve"><value>当前余额不足，请先充值 U币，再开机使用。</value></data>
   <data name="MemberBenefit.Prompt.Trial.CustomBitrate.subtitle" xml:space="preserve"><value>领取后可享最高 500Mbps 码率画质。</value></data>
   <data name="WowTool.System.Noti.Button.goRemote" xml:space="preserve"><value>进入远控桌面</value></data>
   <data name="Control.WowPlugIn.Toast.startMonitor" xml:space="preserve"><value>检测到魔兽排队进程，开始监测</value></data>
@@ -1692,10 +1466,8 @@
   <data name="NowDevice.More.terminal" xml:space="preserve"><value>终端</value></data>
   <data name="Screen.Virtual.remove" xml:space="preserve"><value>删除虚拟屏</value></data>
   <data name="NoLogin.Alert.OnControlled.desc" xml:space="preserve"><value>本机被控中，需要断开连接后才可登录，是否断开连接？</value></data>
-  <data name="CloudPc.System.Noti.NotEnoughMoney.desc" xml:space="preserve"><value>剩余 U币不足 %d，消耗完将自动关机。</value></data>
   <data name="Control.NegotiateInfo.Choose.notice9" xml:space="preserve"><value>设备性能受限，可尝试关闭\U2006HDR\U2006能力后重试。</value></data>
   <data name="Setting.AutoStart.subTitle" xml:space="preserve"><value>开机自启动</value></data>
-  <data name="CloudPc.Main.Alert.ShutDown.title" xml:space="preserve"><value>退出云电脑？</value></data>
   <data name="Control.Menu.Quality.normal" xml:space="preserve"><value>高清</value></data>
   <data name="Terminal.State.preparingComponent" xml:space="preserve"><value>正在准备终端组件</value></data>
   <data name="Assistance.deviceCode" xml:space="preserve"><value>请输入设备验证码</value></data>
@@ -1706,7 +1478,6 @@
   <data name="Setting.Keyboard.Shortcut.Display.option" xml:space="preserve"><value>Option</value></data>
   <data name="Control.Menu.ManualTransfer.title" xml:space="preserve"><value>使用安全中转连接</value></data>
   <data name="Home.RemoteList.AllDevice" xml:space="preserve"><value>全部设备</value></data>
-  <data name="CloudPc.Main.Alert.ReQueueInQueueOver.title" xml:space="preserve"><value>提示</value></data>
   <data name="Terminal.Close.message" xml:space="preserve"><value>如何关闭当前终端会话？</value></data>
   <data name="Control.WowPlugIn.Toast.lowVersion" xml:space="preserve"><value>被控端 Windows 版本过低，请升级系统版本后重试。</value></data>
   <data name="Setting.Authentication.neteaseAuth" xml:space="preserve"><value>已通过网易通行证认证</value></data>
@@ -1719,9 +1490,7 @@
   <data name="Assist.Favorite.Error.title" xml:space="preserve"><value>收藏失败</value></data>
   <data name="Control.PrivacySecurity.privacyModeTitle" xml:space="preserve"><value>防窥模式</value></data>
   <data name="MemberBenefit.Prompt.Trial.FileTransport.subtitle" xml:space="preserve"><value>领取后可使用高速中转通道传输文件。</value></data>
-  <data name="CloudDisk.Subscription.quarterly" xml:space="preserve"><value>连续包季</value></data>
   <data name="Home.Update.Confirm.pleaseUpdateVersion" xml:space="preserve"><value>请更新到新版本</value></data>
-  <data name="CloudPc.System.Noti.QueueReady.title" xml:space="preserve"><value>排队已到号，请立即确认开机</value></data>
   <data name="Home.Device.BeLocalControlle" xml:space="preserve"><value>正在被【本机】%@ 控制中</value></data>
   <data name="Control.Menu.Quality.HighDefinition.Video.presentation" xml:space="preserve"><value>2K</value></data>
   <data name="App.Permission.FloatingGuide.instruction" xml:space="preserve"><value>将“%@”拖到上面的列表中以完成授权</value></data>
@@ -1737,12 +1506,9 @@
   <data name="Terminal.Rename.errorSessionGone" xml:space="preserve"><value>该会话已结束</value></data>
   <data name="NowDevice.Controlled.desc" xml:space="preserve"><value>当前有 %@ 台设备正在控制此电脑</value></data>
   <data name="Home.SecondScreen.title" xml:space="preserve"><value>无线副屏</value></data>
-  <data name="CloudPc.Main.DeskTop.Control.us" xml:space="preserve"><value>本账号设备</value></data>
   <data name="Setting.Remote.title" xml:space="preserve"><value>远控设置</value></data>
   <data name="Terminal.windowTitle" xml:space="preserve"><value>终端远控</value></data>
-  <data name="CloudPc.Schedule.Setup.autoTitle" xml:space="preserve"><value>自动开始定时关机</value></data>
   <data name="Control.MemberRestore.nextConnectionMessage" xml:space="preserve"><value>下次连接将自动恢复之前保存的 VIP 远控配置。</value></data>
-  <data name="CloudPc.Main.DeskTop.State.Button.retry" xml:space="preserve"><value>重试</value></data>
   <data name="Paste.file.process.start" xml:space="preserve"><value>正在将</value></data>
   <data name="Setting.FileTransfer.ReceiveDirectory.notWritable" xml:space="preserve"><value>该文件夹不可写，请选择其他路径。</value></data>
   <data name="Control.Menu.Mouse.FirstShow.descWin" xml:space="preserve"><value>点击 \"%@\" 可解锁鼠标。注意该模式下开启隐私屏保，被控端无法完全隐藏鼠标。</value></data>
@@ -1750,22 +1516,16 @@
   <data name="Common.Error.Connection.Error.legacyBackgroundActivityDisabled" xml:space="preserve"><value>错误码：1001，请前往[设置]-[通用]-[登录项]，允许UU远程在后台运行。</value></data>
   <data name="Control.PrivacyScreen.Settings.loadFailed" xml:space="preserve"><value>加载失败，请重试</value></data>
   <data name="Control.Menu.microphone.error.microphoneDisabled" xml:space="preserve"><value>被控设备上麦克风-\"网易虚拟音频\"被禁用，请在 Windows 系统设置或设备管理器里启用。</value></data>
-  <data name="CloudDisk.Subscription.yearly" xml:space="preserve"><value>连续包年</value></data>
   <data name="Alert.EditComputer.title" xml:space="preserve"><value>请编辑设备名称：</value></data>
-  <data name="CloudPc.Control.Exit.Warning.message" xml:space="preserve"><value>关机将会重置电脑，关机前请确认文件是否保存、Steam等平台存档是否同步完成，避免数据丢失。</value></data>
   <data name="Paste.file.error.normal" xml:space="preserve"><value>当前传输因文件变更可能导致失败</value></data>
-  <data name="CloudPc.System.Noti.Button.sureBoot" xml:space="preserve"><value>确认开机</value></data>
   <data name="Setting.Menu.downLoadMobile" xml:space="preserve"><value>下载移动端</value></data>
   <data name="Setting.Keyboard.WindowsMapping.config" xml:space="preserve"><value>配置 Windows 按键映射</value></data>
   <data name="GamePad.leftShoulderMachine" xml:space="preserve"><value>左肩机</value></data>
-  <data name="CloudPc.System.Noti.QueueOver.title" xml:space="preserve"><value>排队已过号</value></data>
   <data name="DeviceManage.Tips.guideQRCodeDowloadGV" xml:space="preserve"><value>手机扫描二维码下载UU远程并登录，可控制电脑。</value></data>
   <data name="Control.Menu.quality" xml:space="preserve"><value>画质</value></data>
   <data name="Control.PrivacyScreen.Settings.retry" xml:space="preserve"><value>重试</value></data>
   <data name="Exit" xml:space="preserve"><value>退出</value></data>
   <data name="LoginView.Error.codeError" xml:space="preserve"><value>验证码错误，请重新输入。</value></data>
-  <data name="CloudPc.Main.Alert.NoTime.title" xml:space="preserve"><value>是否开机使用 %@ 云电脑？</value></data>
-  <data name="CloudPc.Main.Alert.Button.continueBoot" xml:space="preserve"><value>继续开机</value></data>
   <data name="Setting.Shortcut.PrivacyScreen.title" xml:space="preserve"><value>被控时解除防窥模式</value></data>
   <data name="Control.PrivacySecurity.privacyModeScreensaverDesc" xml:space="preserve"><value>被控端屏幕已防护，\n遮挡屏幕内容</value></data>
   <data name="ClientSecurityLock.Unlock.codeSent" xml:space="preserve"><value>验证码已发送</value></data>
@@ -1782,8 +1542,6 @@
   <data name="Setting..." xml:space="preserve"><value>设置...</value></data>
   <data name="Terminal.Unsupport.message" xml:space="preserve"><value>被控端版本较低，请升级被控端版本后再试。</value></data>
   <data name="Control.NegotiateInfo.Choose.notice11" xml:space="preserve"><value>设备性能受限，可尝试关闭\U2006HDR\U2006能力 并降低画质到%@后重试。</value></data>
-  <data name="CloudDisk.Reset.Fail.InUse.message" xml:space="preserve"><value>当前云硬盘正在使用中，请将对应云设备关机后重试。</value></data>
-  <data name="CloudDisk.Rename.maxLengthTip" xml:space="preserve"><value>最多输入%d个字符</value></data>
   <data name="Setting.Authentication.goAuth" xml:space="preserve"><value>去认证</value></data>
   <data name="Control.Trigger.Common.Update.Alert.title" xml:space="preserve"><value>被控端版本较低</value></data>
   <data name="FileTrans.Connect.Alert.UnsupportedAbility.message" xml:space="preserve"><value>被控版本暂不支持文件传输</value></data>
@@ -1806,11 +1564,9 @@
   <data name="Control.SmallWindow.switchScreen" xml:space="preserve"><value>切换屏幕</value></data>
   <data name="Screen.Super.messageText" xml:space="preserve"><value>无法切换到指定分辨率，建议使用「超级屏」实现效果</value></data>
   <data name="UserMenu.memberExpiredDate" xml:space="preserve"><value>会员到期时间</value></data>
-  <data name="CloudDisk.Reset.Confirm.message" xml:space="preserve"><value>重置后将会彻底抹除云硬盘资料，无法复原。</value></data>
   <data name="Application.deviceOfflineNotOperation" xml:space="preserve"><value>设备已离线，无法操作</value></data>
   <data name="GamePad.share" xml:space="preserve"><value>分享</value></data>
   <data name="FileTrans.transFail.receive" xml:space="preserve"><value>文件接收失败，请重试</value></data>
-  <data name="CloudPc.Control.Details.RunningTime" xml:space="preserve"><value>运行时间</value></data>
   <data name="Setting.Keyboard.Function.viewMode" xml:space="preserve"><value>观看模式</value></data>
   <data name="Terminal.Unlock.successReopen" xml:space="preserve"><value>验证成功，正在启动被控命令行...</value></data>
   <data name="Control.State.Disconnection.timeOut" xml:space="preserve"><value>(超时)</value></data>

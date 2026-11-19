@@ -1,0 +1,68 @@
+{
+  "app_version": "4.48.1",
+  "streamer_version": "V4.14.2",
+  "provenance": "Supplied installers; binaries copied unchanged, no reimplementation of their media core",
+  "files": [
+    {
+      "platform": "macos",
+      "path": "native/official/runtime/macos/libstreamer.dylib",
+      "sha256": "ec89d21754e30ff7e6b38534130b5dfb6a5d78968b5816ccf2dbd0740c83cb03",
+      "bytes": 26609328,
+      "installer_sha256": "0e1c1c8e751f6fb8b79f6ecad4863a68494ad4b5f4825d95fd2542c7e145df9b",
+      "member": "Applications/UURemote.app/Contents/Frameworks/libstreamer.dylib"
+    },
+    {
+      "platform": "windows",
+      "path": "native/official/runtime/windows/streamer.dll",
+      "sha256": "ac351cf4e1d489e0b6e1a3df5cdf8aed96348876f7e2c7fcf7162fe59e1bb1c4",
+      "bytes": 20443128,
+      "installer_sha256": "44d256737c33ec8ea49c8e0115223dd3a7a94b0cdd760bbaefccba4ea55af4c1",
+      "member": "$_38_/streamer.dll"
+    },
+    {
+      "platform": "macos",
+      "path": "native/official/runtime/macos/streamer-config.json",
+      "sha256": "c5fe4da866c26085eda6462f1fef7bdf7336e75db2b58d7b7e71d363f4873d9e",
+      "bytes": 590,
+      "kind": "config"
+    },
+    {
+      "platform": "windows",
+      "path": "native/official/runtime/windows/streamer-config.json",
+      "sha256": "3c9b63db00cfe50ebce90aa8f4a3afc2dd7a3119876e80e15213185d72b8486a",
+      "bytes": 763,
+      "kind": "config"
+    },
+    {
+      "platform": "android",
+      "path": "platforms/android/app/src/main/assets/streamer/streamer-config.json",
+      "sha256": "bfc7f1e68742d3e9251018290f765ad88c32c1343159552cf6306b01b05116f0",
+      "bytes": 841,
+      "kind": "config"
+    },
+    {
+      "platform": "android",
+      "path": "platforms/android/app/src/main/jniLibs/arm64-v8a/libstreamer-jni.so",
+      "sha256": "6e8ae7965a0b35332277b113844490529551c55901a46d25635d62eb5cfb0bf9",
+      "bytes": 1038512,
+      "installer_sha256": "19252db1dd384f25db000b334e6f77616b9dfa26b2e416ce5383038e973e219f",
+      "member": "lib/arm64-v8a/libstreamer-jni.so"
+    },
+    {
+      "platform": "android",
+      "path": "platforms/android/app/src/main/jniLibs/arm64-v8a/libstreamer.so",
+      "sha256": "8ee34e11b789463c7d30dca64614a262d928dc4e6b82debc8d8292d05ff2f836",
+      "bytes": 15917392,
+      "installer_sha256": "19252db1dd384f25db000b334e6f77616b9dfa26b2e416ce5383038e973e219f",
+      "member": "lib/arm64-v8a/libstreamer.so"
+    },
+    {
+      "platform": "android",
+      "path": "platforms/android/app/src/main/jniLibs/arm64-v8a/libc++_shared.so",
+      "sha256": "2ef1458f6d2eba75757ec92cbdc6118c9ea791ee298cc9d80e1d045e5117c93b",
+      "bytes": 1027408,
+      "installer_sha256": "19252db1dd384f25db000b334e6f77616b9dfa26b2e416ce5383038e973e219f",
+      "member": "lib/arm64-v8a/libc++_shared.so"
+    }
+  ]
+}

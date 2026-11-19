@@ -21,6 +21,8 @@ public final class ClipboardSync {
     private String lastSent;
     private String lastReceived;
     private long seq = 1;
+    private boolean listening;
+    private final ClipboardManager.OnPrimaryClipChangedListener clipListener = this::onClipboardChanged;
 
     public ClipboardSync(Context context, Sender sender) {
         this.cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
@@ -28,18 +30,25 @@ public final class ClipboardSync {
     }
 
     public void start() {
-        cm.addPrimaryClipChangedListener(this::onClipboardChanged);
+        if (cm != null && !listening) {
+            cm.addPrimaryClipChangedListener(clipListener);
+            listening = true;
+        }
     }
 
     public void stop() {
-        // ClipboardManager 无对应 remove API（监听器随进程结束），置空防泄漏即可
+        if (cm != null && listening) cm.removePrimaryClipChangedListener(clipListener);
+        listening = false;
         lastSent = null;
+        lastReceived = null;
     }
 
     private void onClipboardChanged() {
         try {
-            CharSequence text = cm.getPrimaryClip() != null
-                    ? cm.getPrimaryClip().getItemAt(0).getText() : null;
+            if (!listening || cm == null) return;
+            ClipData clip = cm.getPrimaryClip();
+            CharSequence text = clip != null && clip.getItemCount() > 0
+                    ? clip.getItemAt(0).getText() : null;
             if (text == null || text.length() == 0) return;
             String t = text.toString();
             if (t.equals(lastSent) || t.equals(lastReceived)) return;

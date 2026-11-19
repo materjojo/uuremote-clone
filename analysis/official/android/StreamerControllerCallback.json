@@ -1,0 +1,416 @@
+{
+  "evidence_id": "ev_8ba79655c71821ec10ce284f58e4c54084ec8bdef9a024b782dbfbbc15303ba1",
+  "subject": {
+    "name": "uuyc_4.48.1.apk",
+    "digest": {
+      "sha256": "19252db1dd384f25db000b334e6f77616b9dfa26b2e416ce5383038e973e219f"
+    },
+    "local_path": "/home/ubuntu/rea_uuyc/dist/uuyc_4.48.1.apk",
+    "format": "apk",
+    "architecture": null
+  },
+  "provider": {
+    "id": "jadx",
+    "name": "JADX headless",
+    "version": "0.7.1"
+  },
+  "analysis_profile": null,
+  "predicate_type": "rea.analysis",
+  "operation": "inspect_android_class",
+  "parameters": {
+    "path": "/home/ubuntu/rea_uuyc/dist/uuyc_4.48.1.apk",
+    "class_name": "com.remote.streamer.controller.StreamerControllerCallback"
+  },
+  "raw_result": {
+    "server": {
+      "name": "rea-jadx-bridge",
+      "version": "7"
+    },
+    "bridge_sha256": "e5044a8312dd0731f53af3f095508b3e5cff54df6b971c95d4305e2f39b4fa30",
+    "jar_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+    "loaded": {
+      "state": "LOADED",
+      "apk_path": "/tmp/rea-android-rdOFgl/target.apk",
+      "class_count": 14640,
+      "resource_count": 2146,
+      "threads": 1,
+      "resources": "full"
+    },
+    "calls": [
+      {
+        "operation": "rea_jvm_status",
+        "input": {},
+        "response": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"max_heap_bytes\":515899392,\"metadata_scope\":\"parsed_members\",\"engine_reported_version\":\"0.7.1\",\"available_processors\":2,\"java_version\":\"21.0.12.1\"}"
+            }
+          ],
+          "isError": false
+        }
+      },
+      {
+        "operation": "get_class_summary",
+        "input": {
+          "class_name": "com.remote.streamer.controller.StreamerControllerCallback",
+          "dex_static_values": true
+        },
+        "response": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"method_count\":45,\"full_name\":\"com.remote.streamer.controller.StreamerControllerCallback\",\"field_count\":0,\"name\":\"StreamerControllerCallback\",\"inner_class_count\":1,\"inner_classes\":[\"com.remote.streamer.controller.StreamerControllerCallback.DefaultImpls\"],\"methods\":[{\"def_pos\":0,\"signature\":\"access$onConnectionErrorCode$jd(com.remote.streamer.controller.StreamerControllerCallback, int): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/controller/StreamerControllerCallback;I)V\",\"is_constructor\":false,\"name\":\"access$onConnectionErrorCode$jd\"},{\"def_pos\":0,\"signature\":\"access$onConnectionState$jd(com.remote.streamer.controller.StreamerControllerCallback, com.remote.streamer.controller.PeerConnectionState, com.remote.streamer.controller.PeerUnavailableReason): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/controller/StreamerControllerCallback;Lcom/remote/streamer/controller/PeerConnectionState;Lcom/remote/streamer/controller/PeerUnavailableReason;)V\",\"is_constructor\":false,\"name\":\"access$onConnectionState$jd\"},{\"def_pos\":0,\"signature\":\"access$onControllerPush$jd(com.remote.streamer.controller.StreamerControllerCallback, java.lang.String): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/controller/StreamerControllerCallback;Ljava/lang/String;)V\",\"is_constructor\":false,\"name\":\"access$onControllerPush$jd\"},{\"def_pos\":0,\"signature\":\"access$onEventReport$jd(com.remote.streamer.controller.StreamerControllerCallback, java.lang.String, java.lang.String): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/controller/StreamerControllerCallback;Ljava/lang/String;Ljava/lang/String;)V\",\"is_constructor\":false,\"name\":\"access$onEventReport$jd\"},{\"def_pos\":0,\"signature\":\"access$onFrameChange$jd(com.remote.streamer.controller.StreamerControllerCallback, com.remote.streamer.controller.VideoContent): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/controller/StreamerControllerCallback;Lcom/remote/streamer/controller/VideoContent;)V\",\"is_constructor\":false,\"name\":\"access$onFrameChange$jd\"},{\"def_pos\":0,\"signature\":\"access$onNatInfo$jd(com.remote.streamer.controller.StreamerControllerCallback, java.lang.String): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/controller/StreamerControllerCallback;Ljava/lang/String;)V\",\"is_constructor\":false,\"name\":\"access$onNatInfo$jd\"},{\"def_pos\":0,\"signature\":\"access$onNegotiateResult$jd(com.remote.streamer.controller.StreamerControllerCallback, java.lang.String): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/controller/StreamerControllerCallback;Ljava/lang/String;)V\",\"is_constructor\":false,\"name\":\"access$onNegotiateResult$jd\"},{\"def_pos\":0,\"signature\":\"access$onQosStats$jd(com.remote.streamer.controller.StreamerControllerCallback, com.remote.streamer.StatsInfo): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/controller/StreamerControllerCallback;Lcom/remote/streamer/StatsInfo;)V\",\"is_constructor\":false,\"name\":\"access$onQosStats$jd\"},{\"def_pos\":0,\"signature\":\"access$onReceiveBinaryData$jd(com.remote.streamer.controller.StreamerControllerCallback, Ab.k): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/controller/StreamerControllerCallback;LAb/k;)V\",\"is_constructor\":false,\"name\":\"access$onReceiveBinaryData$jd\"},{\"def_pos\":0,\"signature\":\"access$onReceiveBinaryData$jd(com.remote.streamer.controller.StreamerControllerCallback, byte[]): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/controller/StreamerControllerCallback;[B)V\",\"is_constructor\":false,\"name\":\"access$onReceiveBinaryData$jd\"},{\"def_pos\":0,\"signature\":\"access$onReceiveControlData$jd(com.remote.streamer.controller.StreamerControllerCallback, Ab.k): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/controller/StreamerControllerCallback;LAb/k;)V\",\"is_constructor\":false,\"name\":\"access$onReceiveControlData$jd\"},{\"def_pos\":0,\"signature\":\"access$onReceiveControlData$jd(com.remote.streamer.controller.StreamerControllerCallback, java.lang.String): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/controller/StreamerControllerCallback;Ljava/lang/String;)V\",\"is_constructor\":false,\"name\":\"access$onReceiveControlData$jd\"},{\"def_pos\":0,\"signature\":\"access$onReceiveDataChannel$jd(com.remote.streamer.controller.StreamerControllerCallback, java.lang.String): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/controller/StreamerControllerCallback;Ljava/lang/String;)V\",\"is_constructor\":false,\"name\":\"access$onReceiveDataChannel$jd\"},{\"def_pos\":0,\"signature\":\"access$onReceiveFileData$jd(com.remote.streamer.controller.StreamerControllerCallback, Ab.k): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/controller/StreamerControllerCallback;LAb/k;)V\",\"is_constructor\":false,\"name\":\"access$onReceiveFileData$jd\"},{\"def_pos\":0,\"signature\":\"access$onReceiveMediaTrack$jd(com.remote.streamer.controller.StreamerControllerCallback, int, java.lang.String): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/controller/StreamerControllerCallback;ILjava/lang/String;)V\",\"is_constructor\":false,\"name\":\"access$onReceiveMediaTrack$jd\"},{\"def_pos\":0,\"signature\":\"access$onReceiveRpcRequest$jd(com.remote.streamer.controller.StreamerControllerCallback, com.remote.proto.RecvRpcRequest): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/controller/StreamerControllerCallback;Lcom/remote/proto/RecvRpcRequest;)V\",\"is_constructor\":false,\"name\":\"access$onReceiveRpcRequest$jd\"},{\"def_pos\":0,\"signature\":\"access$onReceiveRpcResponse$jd(com.remote.streamer.controller.StreamerControllerCallback, com.remote.proto.RecvRpcResponse): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/controller/StreamerControllerCallback;Lcom/remote/proto/RecvRpcResponse;)V\",\"is_constructor\":false,\"name\":\"access$onReceiveRpcResponse$jd\"},{\"def_pos\":0,\"signature\":\"access$onReceiveTextData$jd(com.remote.streamer.controller.StreamerControllerCallback, Ab.k): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/controller/StreamerControllerCallback;LAb/k;)V\",\"is_constructor\":false,\"name\":\"access$onReceiveTextData$jd\"},{\"def_pos\":0,\"signature\":\"access$onRemoveMediaTrack$jd(com.remote.streamer.controller.StreamerControllerCallback, int, java.lang.String): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/controller/StreamerControllerCallback;ILjava/lang/String;)V\",\"is_constructor\":false,\"name\":\"access$onRemoveMediaTrack$jd\"},{\"def_pos\":0,\"signature\":\"access$onRoomState$jd(com.remote.streamer.controller.StreamerControllerCallback, com.remote.streamer.controller.ControllerRoomState): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/controller/StreamerControllerCallback;Lcom/remote/streamer/controller/ControllerRoomState;)V\",\"is_constructor\":false,\"name\":\"access$onRoomState$jd\"},{\"def_pos\":0,\"signature\":\"access$onSignalData$jd(com.remote.streamer.controller.StreamerControllerCallback, Ab.k): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/controller/StreamerControllerCallback;LAb/k;)V\",\"is_constructor\":false,\"name\":\"access$onSignalData$jd\"},{\"def_pos\":0,\"signature\":\"access$onSignalData$jd(com.remote.streamer.controller.StreamerControllerCallback, byte[]): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/controller/StreamerControllerCallback;[B)V\",\"is_constructor\":false,\"name\":\"access$onSignalData$jd\"},{\"def_pos\":0,\"signature\":\"onConnectionErrorCode(int): void\",\"dex_descriptor\":\"(I)V\",\"is_constructor\":false,\"name\":\"onConnectionErrorCode\"},{\"def_pos\":0,\"signature\":\"onConnectionState(com.remote.streamer.controller.PeerConnectionState, com.remote.streamer.controller.PeerUnavailableReason): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/controller/PeerConnectionState;Lcom/remote/streamer/controller/PeerUnavailableReason;)V\",\"is_constructor\":false,\"name\":\"onConnectionState\"},{\"def_pos\":0,\"signature\":\"onConnectionState$default(com.remote.streamer.controller.StreamerControllerCallback, com.remote.streamer.controller.PeerConnectionState, com.remote.streamer.controller.PeerUnavailableReason, int, java.lang.Object): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/controller/StreamerControllerCallback;Lcom/remote/streamer/controller/PeerConnectionState;Lcom/remote/streamer/controller/PeerUnavailableReason;ILjava/lang/Object;)V\",\"is_constructor\":false,\"name\":\"onConnectionState$default\"},{\"def_pos\":0,\"signature\":\"onControllerPush(java.lang.String): void\",\"dex_descriptor\":\"(Ljava/lang/String;)V\",\"is_constructor\":false,\"name\":\"onControllerPush\"},{\"def_pos\":0,\"signature\":\"onEventReport(java.lang.String, java.lang.String): void\",\"dex_descriptor\":\"(Ljava/lang/String;Ljava/lang/String;)V\",\"is_constructor\":false,\"name\":\"onEventReport\"},{\"def_pos\":0,\"signature\":\"onFrameChange(com.remote.streamer.controller.VideoContent): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/controller/VideoContent;)V\",\"is_constructor\":false,\"name\":\"onFrameChange\"},{\"def_pos\":0,\"signature\":\"onNatInfo(java.lang.String): void\",\"dex_descriptor\":\"(Ljava/lang/String;)V\",\"is_constructor\":false,\"name\":\"onNatInfo\"},{\"def_pos\":0,\"signature\":\"onNegotiateResult(java.lang.String): void\",\"dex_descriptor\":\"(Ljava/lang/String;)V\",\"is_constructor\":false,\"name\":\"onNegotiateResult\"},{\"def_pos\":0,\"signature\":\"onQosStats(com.remote.streamer.StatsInfo): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/StatsInfo;)V\",\"is_constructor\":false,\"name\":\"onQosStats\"},{\"def_pos\":0,\"signature\":\"onReceiveBinaryData(Ab.k): void\",\"dex_descriptor\":\"(LAb/k;)V\",\"is_constructor\":false,\"name\":\"onReceiveBinaryData\"},{\"def_pos\":0,\"signature\":\"onReceiveBinaryData(byte[]): void\",\"dex_descriptor\":\"([B)V\",\"is_constructor\":false,\"name\":\"onReceiveBinaryData\"},{\"def_pos\":0,\"signature\":\"onReceiveControlData(Ab.k): void\",\"dex_descriptor\":\"(LAb/k;)V\",\"is_constructor\":false,\"name\":\"onReceiveControlData\"},{\"def_pos\":0,\"signature\":\"onReceiveControlData(java.lang.String): void\",\"dex_descriptor\":\"(Ljava/lang/String;)V\",\"is_constructor\":false,\"name\":\"onReceiveControlData\"},{\"def_pos\":0,\"signature\":\"onReceiveDataChannel(java.lang.String): void\",\"dex_descriptor\":\"(Ljava/lang/String;)V\",\"is_constructor\":false,\"name\":\"onReceiveDataChannel\"},{\"def_pos\":0,\"signature\":\"onReceiveFileData(Ab.k): void\",\"dex_descriptor\":\"(LAb/k;)V\",\"is_constructor\":false,\"name\":\"onReceiveFileData\"},{\"def_pos\":0,\"signature\":\"onReceiveMediaTrack(int, java.lang.String): void\",\"dex_descriptor\":\"(ILjava/lang/String;)V\",\"is_constructor\":false,\"name\":\"onReceiveMediaTrack\"},{\"def_pos\":0,\"signature\":\"onReceiveRpcRequest(com.remote.proto.RecvRpcRequest): void\",\"dex_descriptor\":\"(Lcom/remote/proto/RecvRpcRequest;)V\",\"is_constructor\":false,\"name\":\"onReceiveRpcRequest\"},{\"def_pos\":0,\"signature\":\"onReceiveRpcResponse(com.remote.proto.RecvRpcResponse): void\",\"dex_descriptor\":\"(Lcom/remote/proto/RecvRpcResponse;)V\",\"is_constructor\":false,\"name\":\"onReceiveRpcResponse\"},{\"def_pos\":0,\"signature\":\"onReceiveTextData(Ab.k): void\",\"dex_descriptor\":\"(LAb/k;)V\",\"is_constructor\":false,\"name\":\"onReceiveTextData\"},{\"def_pos\":0,\"signature\":\"onRemoveMediaTrack(int, java.lang.String): void\",\"dex_descriptor\":\"(ILjava/lang/String;)V\",\"is_constructor\":false,\"name\":\"onRemoveMediaTrack\"},{\"def_pos\":0,\"signature\":\"onRoomState(com.remote.streamer.controller.ControllerRoomState): void\",\"dex_descriptor\":\"(Lcom/remote/streamer/controller/ControllerRoomState;)V\",\"is_constructor\":false,\"name\":\"onRoomState\"},{\"def_pos\":0,\"signature\":\"onSignalData(Ab.k): void\",\"dex_descriptor\":\"(LAb/k;)V\",\"is_constructor\":false,\"name\":\"onSignalData\"},{\"def_pos\":0,\"signature\":\"onSignalData(byte[]): void\",\"dex_descriptor\":\"([B)V\",\"is_constructor\":false,\"name\":\"onSignalData\"}],\"fields\":[],\"raw_name\":\"com.remote.streamer.controller.StreamerControllerCallback\"}"
+            }
+          ],
+          "isError": false
+        }
+      }
+    ]
+  },
+  "normalized_result": {
+    "engine": {
+      "name": "jadx-headless-mcp",
+      "version": "0.7.1",
+      "artifact_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+      "source_revision": "5844800a486d2248fa949b74c9896285f5b54de2",
+      "worker_count": 1,
+      "heap_limit_mib": 492
+    },
+    "class_name": "com.remote.streamer.controller.StreamerControllerCallback",
+    "methods": [
+      {
+        "name": "access$onConnectionErrorCode$jd",
+        "reported_signature": "access$onConnectionErrorCode$jd(com.remote.streamer.controller.StreamerControllerCallback, int): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/controller/StreamerControllerCallback;I)V"
+      },
+      {
+        "name": "access$onConnectionState$jd",
+        "reported_signature": "access$onConnectionState$jd(com.remote.streamer.controller.StreamerControllerCallback, com.remote.streamer.controller.PeerConnectionState, com.remote.streamer.controller.PeerUnavailableReason): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/controller/StreamerControllerCallback;Lcom/remote/streamer/controller/PeerConnectionState;Lcom/remote/streamer/controller/PeerUnavailableReason;)V"
+      },
+      {
+        "name": "access$onControllerPush$jd",
+        "reported_signature": "access$onControllerPush$jd(com.remote.streamer.controller.StreamerControllerCallback, java.lang.String): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/controller/StreamerControllerCallback;Ljava/lang/String;)V"
+      },
+      {
+        "name": "access$onEventReport$jd",
+        "reported_signature": "access$onEventReport$jd(com.remote.streamer.controller.StreamerControllerCallback, java.lang.String, java.lang.String): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/controller/StreamerControllerCallback;Ljava/lang/String;Ljava/lang/String;)V"
+      },
+      {
+        "name": "access$onFrameChange$jd",
+        "reported_signature": "access$onFrameChange$jd(com.remote.streamer.controller.StreamerControllerCallback, com.remote.streamer.controller.VideoContent): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/controller/StreamerControllerCallback;Lcom/remote/streamer/controller/VideoContent;)V"
+      },
+      {
+        "name": "access$onNatInfo$jd",
+        "reported_signature": "access$onNatInfo$jd(com.remote.streamer.controller.StreamerControllerCallback, java.lang.String): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/controller/StreamerControllerCallback;Ljava/lang/String;)V"
+      },
+      {
+        "name": "access$onNegotiateResult$jd",
+        "reported_signature": "access$onNegotiateResult$jd(com.remote.streamer.controller.StreamerControllerCallback, java.lang.String): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/controller/StreamerControllerCallback;Ljava/lang/String;)V"
+      },
+      {
+        "name": "access$onQosStats$jd",
+        "reported_signature": "access$onQosStats$jd(com.remote.streamer.controller.StreamerControllerCallback, com.remote.streamer.StatsInfo): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/controller/StreamerControllerCallback;Lcom/remote/streamer/StatsInfo;)V"
+      },
+      {
+        "name": "access$onReceiveBinaryData$jd",
+        "reported_signature": "access$onReceiveBinaryData$jd(com.remote.streamer.controller.StreamerControllerCallback, Ab.k): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/controller/StreamerControllerCallback;LAb/k;)V"
+      },
+      {
+        "name": "access$onReceiveBinaryData$jd",
+        "reported_signature": "access$onReceiveBinaryData$jd(com.remote.streamer.controller.StreamerControllerCallback, byte[]): void",
+        "overload_index": 1,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/controller/StreamerControllerCallback;[B)V"
+      },
+      {
+        "name": "access$onReceiveControlData$jd",
+        "reported_signature": "access$onReceiveControlData$jd(com.remote.streamer.controller.StreamerControllerCallback, Ab.k): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/controller/StreamerControllerCallback;LAb/k;)V"
+      },
+      {
+        "name": "access$onReceiveControlData$jd",
+        "reported_signature": "access$onReceiveControlData$jd(com.remote.streamer.controller.StreamerControllerCallback, java.lang.String): void",
+        "overload_index": 1,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/controller/StreamerControllerCallback;Ljava/lang/String;)V"
+      },
+      {
+        "name": "access$onReceiveDataChannel$jd",
+        "reported_signature": "access$onReceiveDataChannel$jd(com.remote.streamer.controller.StreamerControllerCallback, java.lang.String): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/controller/StreamerControllerCallback;Ljava/lang/String;)V"
+      },
+      {
+        "name": "access$onReceiveFileData$jd",
+        "reported_signature": "access$onReceiveFileData$jd(com.remote.streamer.controller.StreamerControllerCallback, Ab.k): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/controller/StreamerControllerCallback;LAb/k;)V"
+      },
+      {
+        "name": "access$onReceiveMediaTrack$jd",
+        "reported_signature": "access$onReceiveMediaTrack$jd(com.remote.streamer.controller.StreamerControllerCallback, int, java.lang.String): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/controller/StreamerControllerCallback;ILjava/lang/String;)V"
+      },
+      {
+        "name": "access$onReceiveRpcRequest$jd",
+        "reported_signature": "access$onReceiveRpcRequest$jd(com.remote.streamer.controller.StreamerControllerCallback, com.remote.proto.RecvRpcRequest): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/controller/StreamerControllerCallback;Lcom/remote/proto/RecvRpcRequest;)V"
+      },
+      {
+        "name": "access$onReceiveRpcResponse$jd",
+        "reported_signature": "access$onReceiveRpcResponse$jd(com.remote.streamer.controller.StreamerControllerCallback, com.remote.proto.RecvRpcResponse): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/controller/StreamerControllerCallback;Lcom/remote/proto/RecvRpcResponse;)V"
+      },
+      {
+        "name": "access$onReceiveTextData$jd",
+        "reported_signature": "access$onReceiveTextData$jd(com.remote.streamer.controller.StreamerControllerCallback, Ab.k): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/controller/StreamerControllerCallback;LAb/k;)V"
+      },
+      {
+        "name": "access$onRemoveMediaTrack$jd",
+        "reported_signature": "access$onRemoveMediaTrack$jd(com.remote.streamer.controller.StreamerControllerCallback, int, java.lang.String): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/controller/StreamerControllerCallback;ILjava/lang/String;)V"
+      },
+      {
+        "name": "access$onRoomState$jd",
+        "reported_signature": "access$onRoomState$jd(com.remote.streamer.controller.StreamerControllerCallback, com.remote.streamer.controller.ControllerRoomState): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/controller/StreamerControllerCallback;Lcom/remote/streamer/controller/ControllerRoomState;)V"
+      },
+      {
+        "name": "access$onSignalData$jd",
+        "reported_signature": "access$onSignalData$jd(com.remote.streamer.controller.StreamerControllerCallback, Ab.k): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/controller/StreamerControllerCallback;LAb/k;)V"
+      },
+      {
+        "name": "access$onSignalData$jd",
+        "reported_signature": "access$onSignalData$jd(com.remote.streamer.controller.StreamerControllerCallback, byte[]): void",
+        "overload_index": 1,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/controller/StreamerControllerCallback;[B)V"
+      },
+      {
+        "name": "onConnectionErrorCode",
+        "reported_signature": "onConnectionErrorCode(int): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(I)V"
+      },
+      {
+        "name": "onConnectionState",
+        "reported_signature": "onConnectionState(com.remote.streamer.controller.PeerConnectionState, com.remote.streamer.controller.PeerUnavailableReason): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/controller/PeerConnectionState;Lcom/remote/streamer/controller/PeerUnavailableReason;)V"
+      },
+      {
+        "name": "onConnectionState$default",
+        "reported_signature": "onConnectionState$default(com.remote.streamer.controller.StreamerControllerCallback, com.remote.streamer.controller.PeerConnectionState, com.remote.streamer.controller.PeerUnavailableReason, int, java.lang.Object): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/controller/StreamerControllerCallback;Lcom/remote/streamer/controller/PeerConnectionState;Lcom/remote/streamer/controller/PeerUnavailableReason;ILjava/lang/Object;)V"
+      },
+      {
+        "name": "onControllerPush",
+        "reported_signature": "onControllerPush(java.lang.String): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Ljava/lang/String;)V"
+      },
+      {
+        "name": "onEventReport",
+        "reported_signature": "onEventReport(java.lang.String, java.lang.String): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Ljava/lang/String;Ljava/lang/String;)V"
+      },
+      {
+        "name": "onFrameChange",
+        "reported_signature": "onFrameChange(com.remote.streamer.controller.VideoContent): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/controller/VideoContent;)V"
+      },
+      {
+        "name": "onNatInfo",
+        "reported_signature": "onNatInfo(java.lang.String): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Ljava/lang/String;)V"
+      },
+      {
+        "name": "onNegotiateResult",
+        "reported_signature": "onNegotiateResult(java.lang.String): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Ljava/lang/String;)V"
+      },
+      {
+        "name": "onQosStats",
+        "reported_signature": "onQosStats(com.remote.streamer.StatsInfo): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/StatsInfo;)V"
+      },
+      {
+        "name": "onReceiveBinaryData",
+        "reported_signature": "onReceiveBinaryData(Ab.k): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(LAb/k;)V"
+      },
+      {
+        "name": "onReceiveBinaryData",
+        "reported_signature": "onReceiveBinaryData(byte[]): void",
+        "overload_index": 1,
+        "is_constructor": false,
+        "dex_descriptor": "([B)V"
+      },
+      {
+        "name": "onReceiveControlData",
+        "reported_signature": "onReceiveControlData(Ab.k): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(LAb/k;)V"
+      },
+      {
+        "name": "onReceiveControlData",
+        "reported_signature": "onReceiveControlData(java.lang.String): void",
+        "overload_index": 1,
+        "is_constructor": false,
+        "dex_descriptor": "(Ljava/lang/String;)V"
+      },
+      {
+        "name": "onReceiveDataChannel",
+        "reported_signature": "onReceiveDataChannel(java.lang.String): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Ljava/lang/String;)V"
+      },
+      {
+        "name": "onReceiveFileData",
+        "reported_signature": "onReceiveFileData(Ab.k): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(LAb/k;)V"
+      },
+      {
+        "name": "onReceiveMediaTrack",
+        "reported_signature": "onReceiveMediaTrack(int, java.lang.String): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(ILjava/lang/String;)V"
+      },
+      {
+        "name": "onReceiveRpcRequest",
+        "reported_signature": "onReceiveRpcRequest(com.remote.proto.RecvRpcRequest): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/proto/RecvRpcRequest;)V"
+      },
+      {
+        "name": "onReceiveRpcResponse",
+        "reported_signature": "onReceiveRpcResponse(com.remote.proto.RecvRpcResponse): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/proto/RecvRpcResponse;)V"
+      },
+      {
+        "name": "onReceiveTextData",
+        "reported_signature": "onReceiveTextData(Ab.k): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(LAb/k;)V"
+      },
+      {
+        "name": "onRemoveMediaTrack",
+        "reported_signature": "onRemoveMediaTrack(int, java.lang.String): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(ILjava/lang/String;)V"
+      },
+      {
+        "name": "onRoomState",
+        "reported_signature": "onRoomState(com.remote.streamer.controller.ControllerRoomState): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/controller/ControllerRoomState;)V"
+      },
+      {
+        "name": "onSignalData",
+        "reported_signature": "onSignalData(Ab.k): void",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(LAb/k;)V"
+      },
+      {
+        "name": "onSignalData",
+        "reported_signature": "onSignalData(byte[]): void",
+        "overload_index": 1,
+        "is_constructor": false,
+        "dex_descriptor": "([B)V"
+      }
+    ],
+    "fields": [],
+    "inner_classes": [
+      "com.remote.streamer.controller.StreamerControllerCallback.DefaultImpls"
+    ]
+  },
+  "confidence": "observed",
+  "authority": "shipped-artifact",
+  "environment": null,
+  "limitations": [
+    "Static decompiler observations do not establish runtime behavior; the APK is never executed.",
+    "Method signatures use provider display types; DEX prototypes come from frozen JADX metadata. Display names may be aliases, and overload indices are local to this engine and artifact.",
+    "Class inventories use parsed metadata before code generation, including synthetic members that may be omitted from decompiled source. Source positions remain unknown.",
+    "Incoming reference totals count JADX using nodes. Direct invoke entries within a using method report raw DEX code-unit offsets and method indexes, but coverage is limited to those nodes and directly matched invokes; it does not establish every possible dynamic or reflective call site.",
+    "Manifest summaries are parsed once by REA's bridge from the exact root AndroidManifest.xml resource, using namespace-aware XML attributes; decoded XML is retained. APK signatures, split APKs, native libraries and Android runtime capture are not verified by this provider."
+  ],
+  "relationship_coverage": null,
+  "locations": [],
+  "evidence_links": []
+}

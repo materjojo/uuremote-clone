@@ -1,0 +1,358 @@
+{
+  "evidence_id": "ev_85dc83480ceda790b7fb798f3e72dbbc475c895e51706e259350985b3591608c",
+  "subject": {
+    "name": "uuyc_4.48.1.apk",
+    "digest": {
+      "sha256": "19252db1dd384f25db000b334e6f77616b9dfa26b2e416ce5383038e973e219f"
+    },
+    "local_path": "/home/ubuntu/rea_uuyc/dist/uuyc_4.48.1.apk",
+    "format": "apk",
+    "architecture": null
+  },
+  "provider": {
+    "id": "jadx",
+    "name": "JADX headless",
+    "version": "0.7.1"
+  },
+  "analysis_profile": null,
+  "predicate_type": "rea.analysis",
+  "operation": "inspect_android_class",
+  "parameters": {
+    "path": "/home/ubuntu/rea_uuyc/dist/uuyc_4.48.1.apk",
+    "class_name": "com.remote.streamer.controlled.AndroidStreamerControlled"
+  },
+  "raw_result": {
+    "server": {
+      "name": "rea-jadx-bridge",
+      "version": "7"
+    },
+    "bridge_sha256": "e5044a8312dd0731f53af3f095508b3e5cff54df6b971c95d4305e2f39b4fa30",
+    "jar_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+    "loaded": {
+      "state": "LOADED",
+      "apk_path": "/tmp/rea-android-9PnsgV/target.apk",
+      "class_count": 14640,
+      "resource_count": 2146,
+      "threads": 1,
+      "resources": "full"
+    },
+    "calls": [
+      {
+        "operation": "rea_jvm_status",
+        "input": {},
+        "response": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"max_heap_bytes\":515899392,\"metadata_scope\":\"parsed_members\",\"engine_reported_version\":\"0.7.1\",\"available_processors\":2,\"java_version\":\"21.0.12.1\"}"
+            }
+          ],
+          "isError": false
+        }
+      },
+      {
+        "operation": "get_class_summary",
+        "input": {
+          "class_name": "com.remote.streamer.controlled.AndroidStreamerControlled",
+          "dex_static_values": true
+        },
+        "response": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"full_name\":\"com.remote.streamer.controlled.AndroidStreamerControlled\",\"field_count\":0,\"name\":\"AndroidStreamerControlled\",\"inner_class_count\":0,\"inner_classes\":[],\"methods\":[{\"signature\":\"\\u003cinit\\u003e(): void\",\"dex_descriptor\":\"()V\",\"is_constructor\":true,\"name\":\"\\u003cinit\\u003e\",\"def_pos\":0},{\"signature\":\"CheckAlive(): int\",\"dex_descriptor\":\"()I\",\"is_constructor\":false,\"name\":\"CheckAlive\",\"def_pos\":0},{\"signature\":\"ClearRoom(long): int\",\"dex_descriptor\":\"(J)I\",\"is_constructor\":false,\"name\":\"ClearRoom\",\"def_pos\":0},{\"signature\":\"CreateRoom(com.remote.streamer.model.StreamerRoomConfig): long\",\"dex_descriptor\":\"(Lcom/remote/streamer/model/StreamerRoomConfig;)J\",\"is_constructor\":false,\"name\":\"CreateRoom\",\"def_pos\":0},{\"signature\":\"DestroyRoom(long): int\",\"dex_descriptor\":\"(J)I\",\"is_constructor\":false,\"name\":\"DestroyRoom\",\"def_pos\":0},{\"signature\":\"Finalize(): int\",\"dex_descriptor\":\"()I\",\"is_constructor\":false,\"name\":\"Finalize\",\"def_pos\":0},{\"signature\":\"GetConnectionStats(long): int\",\"dex_descriptor\":\"(J)I\",\"is_constructor\":false,\"name\":\"GetConnectionStats\",\"def_pos\":0},{\"signature\":\"GetEncodeCapability(): java.lang.String\",\"dex_descriptor\":\"()Ljava/lang/String;\",\"is_constructor\":false,\"name\":\"GetEncodeCapability\",\"def_pos\":0},{\"signature\":\"GetStreamerVersion(): java.lang.String\",\"dex_descriptor\":\"()Ljava/lang/String;\",\"is_constructor\":false,\"name\":\"GetStreamerVersion\",\"def_pos\":0},{\"signature\":\"Initialize(java.lang.String, java.lang.String): int\",\"dex_descriptor\":\"(Ljava/lang/String;Ljava/lang/String;)I\",\"is_constructor\":false,\"name\":\"Initialize\",\"def_pos\":0},{\"signature\":\"SendBinaryData(long, byte[]): int\",\"dex_descriptor\":\"(J[B)I\",\"is_constructor\":false,\"name\":\"SendBinaryData\",\"def_pos\":0},{\"signature\":\"SendControlData(long, byte[]): int\",\"dex_descriptor\":\"(J[B)I\",\"is_constructor\":false,\"name\":\"SendControlData\",\"def_pos\":0},{\"signature\":\"SendFileData(long, byte[]): int\",\"dex_descriptor\":\"(J[B)I\",\"is_constructor\":false,\"name\":\"SendFileData\",\"def_pos\":0},{\"signature\":\"SendSignalData(long, byte[]): int\",\"dex_descriptor\":\"(J[B)I\",\"is_constructor\":false,\"name\":\"SendSignalData\",\"def_pos\":0},{\"signature\":\"SendTextData(long, byte[]): int\",\"dex_descriptor\":\"(J[B)I\",\"is_constructor\":false,\"name\":\"SendTextData\",\"def_pos\":0},{\"signature\":\"StartAudioCapture(long, com.remote.streamer.model.AudioCaptureConfig): int\",\"dex_descriptor\":\"(JLcom/remote/streamer/model/AudioCaptureConfig;)I\",\"is_constructor\":false,\"name\":\"StartAudioCapture\",\"def_pos\":0},{\"signature\":\"StartVideoCapture(long, com.remote.streamer.model.VideoCaptureConfig): int\",\"dex_descriptor\":\"(JLcom/remote/streamer/model/VideoCaptureConfig;)I\",\"is_constructor\":false,\"name\":\"StartVideoCapture\",\"def_pos\":0},{\"signature\":\"StopAudioCapture(long, int): int\",\"dex_descriptor\":\"(JI)I\",\"is_constructor\":false,\"name\":\"StopAudioCapture\",\"def_pos\":0},{\"signature\":\"StopVideoCapture(long, int): int\",\"dex_descriptor\":\"(JI)I\",\"is_constructor\":false,\"name\":\"StopVideoCapture\",\"def_pos\":0},{\"signature\":\"checkAlive(): int\",\"dex_descriptor\":\"()I\",\"is_constructor\":false,\"name\":\"checkAlive\",\"def_pos\":0},{\"signature\":\"clearRoom(long): int\",\"dex_descriptor\":\"(J)I\",\"is_constructor\":false,\"name\":\"clearRoom\",\"def_pos\":0},{\"signature\":\"createRoom(com.remote.streamer.model.StreamerRoomConfig): long\",\"dex_descriptor\":\"(Lcom/remote/streamer/model/StreamerRoomConfig;)J\",\"is_constructor\":false,\"name\":\"createRoom\",\"def_pos\":0},{\"signature\":\"destroyRoom(long): int\",\"dex_descriptor\":\"(J)I\",\"is_constructor\":false,\"name\":\"destroyRoom\",\"def_pos\":0},{\"signature\":\"finalize(): int\",\"dex_descriptor\":\"()I\",\"is_constructor\":false,\"name\":\"finalize\",\"def_pos\":0},{\"signature\":\"getConnectionStats(long): int\",\"dex_descriptor\":\"(J)I\",\"is_constructor\":false,\"name\":\"getConnectionStats\",\"def_pos\":0},{\"signature\":\"getEncodeCapability(): java.lang.String\",\"dex_descriptor\":\"()Ljava/lang/String;\",\"is_constructor\":false,\"name\":\"getEncodeCapability\",\"def_pos\":0},{\"signature\":\"getStreamerVersion(): java.lang.String\",\"dex_descriptor\":\"()Ljava/lang/String;\",\"is_constructor\":false,\"name\":\"getStreamerVersion\",\"def_pos\":0},{\"signature\":\"initialize(java.lang.String, java.lang.String): int\",\"dex_descriptor\":\"(Ljava/lang/String;Ljava/lang/String;)I\",\"is_constructor\":false,\"name\":\"initialize\",\"def_pos\":0},{\"signature\":\"sendBinaryData(long, byte[]): int\",\"dex_descriptor\":\"(J[B)I\",\"is_constructor\":false,\"name\":\"sendBinaryData\",\"def_pos\":0},{\"signature\":\"sendControlData(long, byte[]): int\",\"dex_descriptor\":\"(J[B)I\",\"is_constructor\":false,\"name\":\"sendControlData\",\"def_pos\":0},{\"signature\":\"sendFileData(long, byte[]): int\",\"dex_descriptor\":\"(J[B)I\",\"is_constructor\":false,\"name\":\"sendFileData\",\"def_pos\":0},{\"signature\":\"sendSignalData(long, byte[]): int\",\"dex_descriptor\":\"(J[B)I\",\"is_constructor\":false,\"name\":\"sendSignalData\",\"def_pos\":0},{\"signature\":\"sendTextData(long, byte[]): int\",\"dex_descriptor\":\"(J[B)I\",\"is_constructor\":false,\"name\":\"sendTextData\",\"def_pos\":0},{\"signature\":\"startAudioCapture(long, com.remote.streamer.model.AudioCaptureConfig): int\",\"dex_descriptor\":\"(JLcom/remote/streamer/model/AudioCaptureConfig;)I\",\"is_constructor\":false,\"name\":\"startAudioCapture\",\"def_pos\":0},{\"signature\":\"startVideoCapture(long, com.remote.streamer.model.VideoCaptureConfig): int\",\"dex_descriptor\":\"(JLcom/remote/streamer/model/VideoCaptureConfig;)I\",\"is_constructor\":false,\"name\":\"startVideoCapture\",\"def_pos\":0},{\"signature\":\"stopAudioCapture(long, int): int\",\"dex_descriptor\":\"(JI)I\",\"is_constructor\":false,\"name\":\"stopAudioCapture\",\"def_pos\":0},{\"signature\":\"stopVideoCapture(long, int): int\",\"dex_descriptor\":\"(JI)I\",\"is_constructor\":false,\"name\":\"stopVideoCapture\",\"def_pos\":0}],\"fields\":[],\"raw_name\":\"com.remote.streamer.controlled.AndroidStreamerControlled\",\"method_count\":37}"
+            }
+          ],
+          "isError": false
+        }
+      }
+    ]
+  },
+  "normalized_result": {
+    "engine": {
+      "name": "jadx-headless-mcp",
+      "version": "0.7.1",
+      "artifact_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+      "source_revision": "5844800a486d2248fa949b74c9896285f5b54de2",
+      "worker_count": 1,
+      "heap_limit_mib": 492
+    },
+    "class_name": "com.remote.streamer.controlled.AndroidStreamerControlled",
+    "methods": [
+      {
+        "name": "<init>",
+        "reported_signature": "<init>(): void",
+        "overload_index": 0,
+        "is_constructor": true,
+        "dex_descriptor": "()V"
+      },
+      {
+        "name": "CheckAlive",
+        "reported_signature": "CheckAlive(): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "()I"
+      },
+      {
+        "name": "ClearRoom",
+        "reported_signature": "ClearRoom(long): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J)I"
+      },
+      {
+        "name": "CreateRoom",
+        "reported_signature": "CreateRoom(com.remote.streamer.model.StreamerRoomConfig): long",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/model/StreamerRoomConfig;)J"
+      },
+      {
+        "name": "DestroyRoom",
+        "reported_signature": "DestroyRoom(long): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J)I"
+      },
+      {
+        "name": "Finalize",
+        "reported_signature": "Finalize(): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "()I"
+      },
+      {
+        "name": "GetConnectionStats",
+        "reported_signature": "GetConnectionStats(long): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J)I"
+      },
+      {
+        "name": "GetEncodeCapability",
+        "reported_signature": "GetEncodeCapability(): java.lang.String",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "()Ljava/lang/String;"
+      },
+      {
+        "name": "GetStreamerVersion",
+        "reported_signature": "GetStreamerVersion(): java.lang.String",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "()Ljava/lang/String;"
+      },
+      {
+        "name": "Initialize",
+        "reported_signature": "Initialize(java.lang.String, java.lang.String): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Ljava/lang/String;Ljava/lang/String;)I"
+      },
+      {
+        "name": "SendBinaryData",
+        "reported_signature": "SendBinaryData(long, byte[]): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J[B)I"
+      },
+      {
+        "name": "SendControlData",
+        "reported_signature": "SendControlData(long, byte[]): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J[B)I"
+      },
+      {
+        "name": "SendFileData",
+        "reported_signature": "SendFileData(long, byte[]): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J[B)I"
+      },
+      {
+        "name": "SendSignalData",
+        "reported_signature": "SendSignalData(long, byte[]): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J[B)I"
+      },
+      {
+        "name": "SendTextData",
+        "reported_signature": "SendTextData(long, byte[]): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J[B)I"
+      },
+      {
+        "name": "StartAudioCapture",
+        "reported_signature": "StartAudioCapture(long, com.remote.streamer.model.AudioCaptureConfig): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(JLcom/remote/streamer/model/AudioCaptureConfig;)I"
+      },
+      {
+        "name": "StartVideoCapture",
+        "reported_signature": "StartVideoCapture(long, com.remote.streamer.model.VideoCaptureConfig): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(JLcom/remote/streamer/model/VideoCaptureConfig;)I"
+      },
+      {
+        "name": "StopAudioCapture",
+        "reported_signature": "StopAudioCapture(long, int): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(JI)I"
+      },
+      {
+        "name": "StopVideoCapture",
+        "reported_signature": "StopVideoCapture(long, int): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(JI)I"
+      },
+      {
+        "name": "checkAlive",
+        "reported_signature": "checkAlive(): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "()I"
+      },
+      {
+        "name": "clearRoom",
+        "reported_signature": "clearRoom(long): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J)I"
+      },
+      {
+        "name": "createRoom",
+        "reported_signature": "createRoom(com.remote.streamer.model.StreamerRoomConfig): long",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Lcom/remote/streamer/model/StreamerRoomConfig;)J"
+      },
+      {
+        "name": "destroyRoom",
+        "reported_signature": "destroyRoom(long): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J)I"
+      },
+      {
+        "name": "finalize",
+        "reported_signature": "finalize(): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "()I"
+      },
+      {
+        "name": "getConnectionStats",
+        "reported_signature": "getConnectionStats(long): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J)I"
+      },
+      {
+        "name": "getEncodeCapability",
+        "reported_signature": "getEncodeCapability(): java.lang.String",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "()Ljava/lang/String;"
+      },
+      {
+        "name": "getStreamerVersion",
+        "reported_signature": "getStreamerVersion(): java.lang.String",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "()Ljava/lang/String;"
+      },
+      {
+        "name": "initialize",
+        "reported_signature": "initialize(java.lang.String, java.lang.String): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(Ljava/lang/String;Ljava/lang/String;)I"
+      },
+      {
+        "name": "sendBinaryData",
+        "reported_signature": "sendBinaryData(long, byte[]): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J[B)I"
+      },
+      {
+        "name": "sendControlData",
+        "reported_signature": "sendControlData(long, byte[]): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J[B)I"
+      },
+      {
+        "name": "sendFileData",
+        "reported_signature": "sendFileData(long, byte[]): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J[B)I"
+      },
+      {
+        "name": "sendSignalData",
+        "reported_signature": "sendSignalData(long, byte[]): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J[B)I"
+      },
+      {
+        "name": "sendTextData",
+        "reported_signature": "sendTextData(long, byte[]): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(J[B)I"
+      },
+      {
+        "name": "startAudioCapture",
+        "reported_signature": "startAudioCapture(long, com.remote.streamer.model.AudioCaptureConfig): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(JLcom/remote/streamer/model/AudioCaptureConfig;)I"
+      },
+      {
+        "name": "startVideoCapture",
+        "reported_signature": "startVideoCapture(long, com.remote.streamer.model.VideoCaptureConfig): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(JLcom/remote/streamer/model/VideoCaptureConfig;)I"
+      },
+      {
+        "name": "stopAudioCapture",
+        "reported_signature": "stopAudioCapture(long, int): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(JI)I"
+      },
+      {
+        "name": "stopVideoCapture",
+        "reported_signature": "stopVideoCapture(long, int): int",
+        "overload_index": 0,
+        "is_constructor": false,
+        "dex_descriptor": "(JI)I"
+      }
+    ],
+    "fields": [],
+    "inner_classes": []
+  },
+  "confidence": "observed",
+  "authority": "shipped-artifact",
+  "environment": null,
+  "limitations": [
+    "Static decompiler observations do not establish runtime behavior; the APK is never executed.",
+    "Method signatures use provider display types; DEX prototypes come from frozen JADX metadata. Display names may be aliases, and overload indices are local to this engine and artifact.",
+    "Class inventories use parsed metadata before code generation, including synthetic members that may be omitted from decompiled source. Source positions remain unknown.",
+    "Incoming reference totals count JADX using nodes. Direct invoke entries within a using method report raw DEX code-unit offsets and method indexes, but coverage is limited to those nodes and directly matched invokes; it does not establish every possible dynamic or reflective call site.",
+    "Manifest summaries are parsed once by REA's bridge from the exact root AndroidManifest.xml resource, using namespace-aware XML attributes; decoded XML is retained. APK signatures, split APKs, native libraries and Android runtime capture are not verified by this provider."
+  ],
+  "relationship_coverage": null,
+  "locations": [],
+  "evidence_links": []
+}

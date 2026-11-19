@@ -1,0 +1,748 @@
+{
+  "evidence_id": "ev_fe1c642cd1d519f67cc6bff36d4ccdc312e5adb71a66c57dca00cdde4a60c735",
+  "subject": {
+    "name": "streamer.dll",
+    "digest": {
+      "sha256": "ac351cf4e1d489e0b6e1a3df5cdf8aed96348876f7e2c7fcf7162fe59e1bb1c4"
+    },
+    "local_path": "/home/ubuntu/rea_uuyc/dist/exe/$_38_/streamer.dll",
+    "format": "pe",
+    "architecture": null
+  },
+  "provider": {
+    "id": "rea-native-exports",
+    "name": "REA PE/ELF export table reader",
+    "version": "1"
+  },
+  "analysis_profile": null,
+  "predicate_type": "rea.analysis",
+  "operation": "inspect_native_exports",
+  "parameters": {
+    "path": "/home/ubuntu/rea_uuyc/dist/exe/$_38_/streamer.dll",
+    "max_file_bytes": 268435456
+  },
+  "raw_result": null,
+  "normalized_result": {
+    "artifact": {
+      "path": "/home/ubuntu/rea_uuyc/dist/exe/$_38_/streamer.dll",
+      "sha256": "ac351cf4e1d489e0b6e1a3df5cdf8aed96348876f7e2c7fcf7162fe59e1bb1c4",
+      "bytes": 20443128
+    },
+    "format": "pe",
+    "architecture": "amd64",
+    "bits": 64,
+    "export_directory": {
+      "rva": 19717600,
+      "size": 3876,
+      "dll_name": "streamer.dll",
+      "ordinal_base": 1,
+      "timestamp": 4294967295
+    },
+    "exports": [
+      {
+        "name": "AmdPowerXpressRequestHighPerformance",
+        "ordinal": 1,
+        "address": "0x1812e3fa0",
+        "forwarder": null
+      },
+      {
+        "name": "ExchangeControlledInterface",
+        "ordinal": 2,
+        "address": "0x180a2a780",
+        "forwarder": null
+      },
+      {
+        "name": "ExchangeControllerInterface",
+        "ordinal": 3,
+        "address": "0x180a2a6f0",
+        "forwarder": null
+      },
+      {
+        "name": "NvOptimusEnablement",
+        "ordinal": 4,
+        "address": "0x1812e3fa4",
+        "forwarder": null
+      },
+      {
+        "name": "ctlAUXAccess",
+        "ordinal": 5,
+        "address": "0x180adb570",
+        "forwarder": null
+      },
+      {
+        "name": "ctlCheckDriverVersion",
+        "ordinal": 6,
+        "address": "0x180adb060",
+        "forwarder": null
+      },
+      {
+        "name": "ctlClose",
+        "ordinal": 7,
+        "address": "0x180adae10",
+        "forwarder": null
+      },
+      {
+        "name": "ctlEdidManagement",
+        "ordinal": 8,
+        "address": "0x180adbe20",
+        "forwarder": null
+      },
+      {
+        "name": "ctlEngineGetActivity",
+        "ordinal": 9,
+        "address": "0x180adc300",
+        "forwarder": null
+      },
+      {
+        "name": "ctlEngineGetProperties",
+        "ordinal": 10,
+        "address": "0x180adc2a0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlEnumEngineGroups",
+        "ordinal": 11,
+        "address": "0x180adc230",
+        "forwarder": null
+      },
+      {
+        "name": "ctlEnumFans",
+        "ordinal": 12,
+        "address": "0x180adc360",
+        "forwarder": null
+      },
+      {
+        "name": "ctlEnumFrequencyDomains",
+        "ordinal": 13,
+        "address": "0x180adc600",
+        "forwarder": null
+      },
+      {
+        "name": "ctlEnumLeds",
+        "ordinal": 14,
+        "address": "0x180adc8c0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlEnumMemoryModules",
+        "ordinal": 15,
+        "address": "0x180adcb20",
+        "forwarder": null
+      },
+      {
+        "name": "ctlEnumPowerDomains",
+        "ordinal": 16,
+        "address": "0x180add400",
+        "forwarder": null
+      },
+      {
+        "name": "ctlEnumTemperatureSensors",
+        "ordinal": 17,
+        "address": "0x180add5f0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlEnumerateDevices",
+        "ordinal": 18,
+        "address": "0x180adb0b0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlEnumerateDisplayOutputs",
+        "ordinal": 19,
+        "address": "0x180adb120",
+        "forwarder": null
+      },
+      {
+        "name": "ctlEnumerateI2CPinPairs",
+        "ordinal": 20,
+        "address": "0x180adb190",
+        "forwarder": null
+      },
+      {
+        "name": "ctlEnumerateMuxDevices",
+        "ordinal": 21,
+        "address": "0x180adbc30",
+        "forwarder": null
+      },
+      {
+        "name": "ctlFanGetConfig",
+        "ordinal": 22,
+        "address": "0x180adc430",
+        "forwarder": null
+      },
+      {
+        "name": "ctlFanGetProperties",
+        "ordinal": 23,
+        "address": "0x180adc3d0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlFanGetState",
+        "ordinal": 24,
+        "address": "0x180adc590",
+        "forwarder": null
+      },
+      {
+        "name": "ctlFanSetDefaultMode",
+        "ordinal": 25,
+        "address": "0x180adc490",
+        "forwarder": null
+      },
+      {
+        "name": "ctlFanSetFixedSpeedMode",
+        "ordinal": 26,
+        "address": "0x180adc4d0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlFanSetSpeedTableMode",
+        "ordinal": 27,
+        "address": "0x180adc530",
+        "forwarder": null
+      },
+      {
+        "name": "ctlFrequencyGetAvailableClocks",
+        "ordinal": 28,
+        "address": "0x180adc6d0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlFrequencyGetProperties",
+        "ordinal": 29,
+        "address": "0x180adc670",
+        "forwarder": null
+      },
+      {
+        "name": "ctlFrequencyGetRange",
+        "ordinal": 30,
+        "address": "0x180adc740",
+        "forwarder": null
+      },
+      {
+        "name": "ctlFrequencyGetState",
+        "ordinal": 31,
+        "address": "0x180adc800",
+        "forwarder": null
+      },
+      {
+        "name": "ctlFrequencyGetThrottleTime",
+        "ordinal": 32,
+        "address": "0x180adc860",
+        "forwarder": null
+      },
+      {
+        "name": "ctlFrequencySetRange",
+        "ordinal": 33,
+        "address": "0x180adc7a0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetAdaperDisplayEncoderProperties",
+        "ordinal": 34,
+        "address": "0x180adb2c0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetBrightnessSetting",
+        "ordinal": 35,
+        "address": "0x180adb750",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetCurrentScaling",
+        "ordinal": 36,
+        "address": "0x180adb9f0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetCurrentSharpness",
+        "ordinal": 37,
+        "address": "0x180adb3f0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetDeviceProperties",
+        "ordinal": 38,
+        "address": "0x180adb200",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetDisplayProperties",
+        "ordinal": 39,
+        "address": "0x180adb260",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetIntelArcSyncInfoForMonitor",
+        "ordinal": 40,
+        "address": "0x180adbbd0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetIntelArcSyncProfile",
+        "ordinal": 41,
+        "address": "0x180adbd60",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetLACEConfig",
+        "ordinal": 42,
+        "address": "0x180adbab0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetLinkedDisplayAdapters",
+        "ordinal": 43,
+        "address": "0x180adc0b0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetMuxProperties",
+        "ordinal": 44,
+        "address": "0x180adbca0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetPowerOptimizationCaps",
+        "ordinal": 45,
+        "address": "0x180adb5d0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetPowerOptimizationSetting",
+        "ordinal": 46,
+        "address": "0x180adb630",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetSet3DFeature",
+        "ordinal": 47,
+        "address": "0x180adb000",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetSetCombinedDisplay",
+        "ordinal": 48,
+        "address": "0x180adbee0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetSetCustomMode",
+        "ordinal": 49,
+        "address": "0x180adbe80",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetSetDisplayGenlock",
+        "ordinal": 50,
+        "address": "0x180adbf40",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetSetDisplaySettings",
+        "ordinal": 51,
+        "address": "0x180adc1d0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetSetDynamicContrastEnhancement",
+        "ordinal": 52,
+        "address": "0x180adc110",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetSetRetroScaling",
+        "ordinal": 53,
+        "address": "0x180adb930",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetSetVideoProcessingFeature",
+        "ordinal": 54,
+        "address": "0x180adcac0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetSetWireFormat",
+        "ordinal": 55,
+        "address": "0x180adc170",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetSharpnessCaps",
+        "ordinal": 56,
+        "address": "0x180adb390",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetSupported3DCapabilities",
+        "ordinal": 57,
+        "address": "0x180adafa0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetSupportedRetroScalingCapability",
+        "ordinal": 58,
+        "address": "0x180adb8d0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetSupportedScalingCapability",
+        "ordinal": 59,
+        "address": "0x180adb990",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetSupportedVideoProcessingCapabilities",
+        "ordinal": 60,
+        "address": "0x180adca60",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetVblankTimestamp",
+        "ordinal": 61,
+        "address": "0x180adbfb0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlGetZeDevice",
+        "ordinal": 62,
+        "address": "0x180adb320",
+        "forwarder": null
+      },
+      {
+        "name": "ctlI2CAccess",
+        "ordinal": 63,
+        "address": "0x180adb4b0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlI2CAccessOnPinPair",
+        "ordinal": 64,
+        "address": "0x180adb510",
+        "forwarder": null
+      },
+      {
+        "name": "ctlInit",
+        "ordinal": 65,
+        "address": "0x180adacd0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlLedGetProperties",
+        "ordinal": 66,
+        "address": "0x180adc930",
+        "forwarder": null
+      },
+      {
+        "name": "ctlLedGetState",
+        "ordinal": 67,
+        "address": "0x180adc990",
+        "forwarder": null
+      },
+      {
+        "name": "ctlLedSetState",
+        "ordinal": 68,
+        "address": "0x180adc9f0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlLinkDisplayAdapters",
+        "ordinal": 69,
+        "address": "0x180adc010",
+        "forwarder": null
+      },
+      {
+        "name": "ctlMemoryGetBandwidth",
+        "ordinal": 70,
+        "address": "0x180adcc50",
+        "forwarder": null
+      },
+      {
+        "name": "ctlMemoryGetProperties",
+        "ordinal": 71,
+        "address": "0x180adcb90",
+        "forwarder": null
+      },
+      {
+        "name": "ctlMemoryGetState",
+        "ordinal": 72,
+        "address": "0x180adcbf0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlOverclockGetProperties",
+        "ordinal": 73,
+        "address": "0x180adccb0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlOverclockGpuFrequencyOffsetGet",
+        "ordinal": 74,
+        "address": "0x180adcd50",
+        "forwarder": null
+      },
+      {
+        "name": "ctlOverclockGpuFrequencyOffsetSet",
+        "ordinal": 75,
+        "address": "0x180adcdb0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlOverclockGpuLockGet",
+        "ordinal": 76,
+        "address": "0x180adced0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlOverclockGpuLockSet",
+        "ordinal": 77,
+        "address": "0x180adcf30",
+        "forwarder": null
+      },
+      {
+        "name": "ctlOverclockGpuVoltageOffsetGet",
+        "ordinal": 78,
+        "address": "0x180adce10",
+        "forwarder": null
+      },
+      {
+        "name": "ctlOverclockGpuVoltageOffsetSet",
+        "ordinal": 79,
+        "address": "0x180adce70",
+        "forwarder": null
+      },
+      {
+        "name": "ctlOverclockPowerLimitGet",
+        "ordinal": 80,
+        "address": "0x180add120",
+        "forwarder": null
+      },
+      {
+        "name": "ctlOverclockPowerLimitSet",
+        "ordinal": 81,
+        "address": "0x180add180",
+        "forwarder": null
+      },
+      {
+        "name": "ctlOverclockResetToDefault",
+        "ordinal": 82,
+        "address": "0x180add300",
+        "forwarder": null
+      },
+      {
+        "name": "ctlOverclockTemperatureLimitGet",
+        "ordinal": 83,
+        "address": "0x180add1e0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlOverclockTemperatureLimitSet",
+        "ordinal": 84,
+        "address": "0x180add240",
+        "forwarder": null
+      },
+      {
+        "name": "ctlOverclockVramFrequencyOffsetGet",
+        "ordinal": 85,
+        "address": "0x180adcfa0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlOverclockVramFrequencyOffsetSet",
+        "ordinal": 86,
+        "address": "0x180add000",
+        "forwarder": null
+      },
+      {
+        "name": "ctlOverclockVramVoltageOffsetGet",
+        "ordinal": 87,
+        "address": "0x180add060",
+        "forwarder": null
+      },
+      {
+        "name": "ctlOverclockVramVoltageOffsetSet",
+        "ordinal": 88,
+        "address": "0x180add0c0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlOverclockWaiverSet",
+        "ordinal": 89,
+        "address": "0x180adcd10",
+        "forwarder": null
+      },
+      {
+        "name": "ctlPanelDescriptorAccess",
+        "ordinal": 90,
+        "address": "0x180adb870",
+        "forwarder": null
+      },
+      {
+        "name": "ctlPciGetProperties",
+        "ordinal": 91,
+        "address": "0x180add340",
+        "forwarder": null
+      },
+      {
+        "name": "ctlPciGetState",
+        "ordinal": 92,
+        "address": "0x180add3a0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlPixelTransformationGetConfig",
+        "ordinal": 93,
+        "address": "0x180adb7b0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlPixelTransformationSetConfig",
+        "ordinal": 94,
+        "address": "0x180adb810",
+        "forwarder": null
+      },
+      {
+        "name": "ctlPowerGetEnergyCounter",
+        "ordinal": 95,
+        "address": "0x180add4d0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlPowerGetLimits",
+        "ordinal": 96,
+        "address": "0x180add530",
+        "forwarder": null
+      },
+      {
+        "name": "ctlPowerGetProperties",
+        "ordinal": 97,
+        "address": "0x180add470",
+        "forwarder": null
+      },
+      {
+        "name": "ctlPowerSetLimits",
+        "ordinal": 98,
+        "address": "0x180add590",
+        "forwarder": null
+      },
+      {
+        "name": "ctlPowerTelemetryGet",
+        "ordinal": 99,
+        "address": "0x180add2a0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlReservedCall",
+        "ordinal": 100,
+        "address": "0x180adaf40",
+        "forwarder": null
+      },
+      {
+        "name": "ctlSetBrightnessSetting",
+        "ordinal": 101,
+        "address": "0x180adb6f0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlSetCurrentScaling",
+        "ordinal": 102,
+        "address": "0x180adba50",
+        "forwarder": null
+      },
+      {
+        "name": "ctlSetCurrentSharpness",
+        "ordinal": 103,
+        "address": "0x180adb450",
+        "forwarder": null
+      },
+      {
+        "name": "ctlSetIntelArcSyncProfile",
+        "ordinal": 104,
+        "address": "0x180adbdc0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlSetLACEConfig",
+        "ordinal": 105,
+        "address": "0x180adbb10",
+        "forwarder": null
+      },
+      {
+        "name": "ctlSetPowerOptimizationSetting",
+        "ordinal": 106,
+        "address": "0x180adb690",
+        "forwarder": null
+      },
+      {
+        "name": "ctlSetRuntimePath",
+        "ordinal": 107,
+        "address": "0x180adae80",
+        "forwarder": null
+      },
+      {
+        "name": "ctlSoftwarePSR",
+        "ordinal": 108,
+        "address": "0x180adbb70",
+        "forwarder": null
+      },
+      {
+        "name": "ctlSwitchMux",
+        "ordinal": 109,
+        "address": "0x180adbd00",
+        "forwarder": null
+      },
+      {
+        "name": "ctlTemperatureGetProperties",
+        "ordinal": 110,
+        "address": "0x180add660",
+        "forwarder": null
+      },
+      {
+        "name": "ctlTemperatureGetState",
+        "ordinal": 111,
+        "address": "0x180add6c0",
+        "forwarder": null
+      },
+      {
+        "name": "ctlUnlinkDisplayAdapters",
+        "ordinal": 112,
+        "address": "0x180adc070",
+        "forwarder": null
+      },
+      {
+        "name": "ctlWaitForPropertyChange",
+        "ordinal": 113,
+        "address": "0x180adaee0",
+        "forwarder": null
+      }
+    ],
+    "coverage": {
+      "status": "complete",
+      "reason": null,
+      "examined_entries": 113,
+      "exports": 113
+    },
+    "issues": [],
+    "limitations": [
+      "Rows reproduce the PE export directory; they do not establish that an export is reachable, safe to call or loaded at runtime.",
+      "Forwarded exports resolve in another DLL, which is not opened; ordinal-only exports have no name in this image."
+    ]
+  },
+  "confidence": "observed",
+  "authority": "shipped-artifact",
+  "environment": null,
+  "limitations": [
+    "Rows reproduce the PE export directory; they do not establish that an export is reachable, safe to call or loaded at runtime.",
+    "Forwarded exports resolve in another DLL, which is not opened; ordinal-only exports have no name in this image."
+  ],
+  "relationship_coverage": null,
+  "locations": [
+    {
+      "kind": "artifact-path",
+      "path": "/home/ubuntu/rea_uuyc/dist/exe/$_38_/streamer.dll"
+    }
+  ],
+  "evidence_links": []
+}

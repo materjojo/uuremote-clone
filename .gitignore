@@ -3,3 +3,10 @@ build/
 *.xcuserstate
 .DS_Store
 .swiftpm/
+native/official/runtime/macos/libstreamer.dylib
+native/official/runtime/windows/streamer.dll
+platforms/android/.gradle/
+platforms/android/app/.cxx/
+platforms/windows/gvpb.dll
+**/bin/
+**/obj/
