@@ -52,14 +52,23 @@ Windows 的 GameViewerServer.exe 内嵌了 **完整的 FileDescriptorProto**，�
 
 | 能力 | macOS | Android | Windows |
 |---|---|---|---|
-| 协议（178 消息） | Swift 手写核心 + GvSchema | protobuf-javalite 生成并编译进 APK | Google.Protobuf 生成并编译 |
+| 协议（179 消息） | Swift 手写核心 + GvSchema | protobuf-javalite 生成并编译进 APK | Google.Protobuf 生成并编译 |
 | KCP + FEC | Swift 实现 | 待接 core | 待接 core |
-| WebRTC | 已实现 | PeerConnection + 三个同名 DataChannel 已实现 | 未接 |
-| 采集 | SCK 已实现 | MediaProjection 已实现 | 未实现 |
-| 硬编 | VT 已实现 | MediaCodec H.264 surface 输入已实现 | 未实现 |
-| 渲染 | Metal 已实现 | 未实现 | 未实现 |
-| 输入 | CGEvent 已实现 | 未实现 | 未实现 |
-| UI | 主流程 | 设备列表骨架 | 设备列表骨架 |
+| WebRTC | 已实现 | PeerConnection + 三个同名 DataChannel | SIPSorcery RTCPeerConnection + 三个同名 DataChannel |
+| 采集 | SCK 已实现 | MediaProjection + VirtualDisplay | GDI CopyFromScreen（DXGI/WGC 待接） |
+| 硬编/硬解 | VideoToolbox 已实现 | MediaCodec H.264 surface 输入 | FFmpeg D3D11VA/NVENC（需 FFmpeg shared 运行时） |
+| 渲染 | Metal 已实现 | SurfaceViewRenderer 已实现 | WriteableBitmap 已实现 |
+| 输入 | CGEvent 已实现 | Accessibility 手势已实现 | SendInput（鼠标/键盘）已实现 |
+| UI | 主流程 | 设备列表 + 远控骨架 | 设备列表 + 远控工具条/画面/状态栏 |
 
-三端 UI 与业务逻辑尚未达到 1:1；安装包内是编译后的机器码，逐行还原需要持续反编译，不是单次会话能完成的。
-当前仓库提供的是：权威协议、跨平台核心、可编译的三端骨架，以及 macOS 端较完整的实现。
+### 仍与官方不一致的部分（如实说明）
+
+- **采集**：Windows 用 GDI，官方用 DXGI/WGC；Android 用 MediaProjection（与官方一致）。
+- **硬编**：Windows/Android 用 FFmpeg/MediaCodec 实现 H.264 功能等价；官方 Windows 走 MF/NVENC 私有 streamer.dll，Android 走 MediaCodec。H.265/10bit HDR 尚未在三端全部打通。
+- **传输增强**：KCP + RS-FEC 仅在 macOS 接好；Android/Windows 仍待接 core。
+- **UI**：三端均为结构还原（设备列表、远控工具条、画面、状态栏），未逐像素对齐官方；安装包只有机器码，逐页还原需持续反编译。
+- **运行时依赖**：Windows FFmpeg 编码需目标机安装 FFmpeg shared DLL（LGPL）；官方为自带 streamer.dll。
+- **信令 JSON 内层**：字段名按 WebRTC 通用约定与二进制 Codable 键推断，未经真实抓包验证。
+
+三端已实现的能力均通过 GitHub Actions 编译验证（core×3 + macos-app + windows-app + android-app）。
+安装包内是编译后的机器码，逐行/逐像素复刻需要持续反编译，不是单次会话能完成的。
