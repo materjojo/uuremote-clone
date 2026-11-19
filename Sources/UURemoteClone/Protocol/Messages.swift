@@ -312,9 +312,13 @@ public struct GvMessage {
     public var payload: Data
 
     public init(seq: Int64, timestamp: Int64, payloadField: GvPayloadField, payload: Data) {
+        self.init(seq: seq, timestamp: timestamp, payloadField: payloadField.rawValue, payload: payload)
+    }
+
+    public init(seq: Int64, timestamp: Int64, payloadField: Int, payload: Data) {
         self.seq = seq
         self.timestamp = timestamp
-        self.payloadField = payloadField.rawValue
+        self.payloadField = payloadField
         self.payload = payload
     }
 
