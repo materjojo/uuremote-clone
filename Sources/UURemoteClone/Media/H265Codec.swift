@@ -145,18 +145,18 @@ final class H265Encoder {
         var nalLength: Int32 = 0
         var sets: [Data] = []
         CMVideoFormatDescriptionGetHEVCParameterSetAtIndex(format, parameterSetIndex: 0,
-                                                           parameterSetCount: &count,
-                                                           nalUnitHeaderLengthOut: &nalLength,
                                                            parameterSetPointerOut: nil,
-                                                           parameterSetSizeOut: nil)
+                                                           parameterSetSizeOut: nil,
+                                                           parameterSetCountOut: &count,
+                                                           nalUnitHeaderLengthOut: &nalLength)
         for i in 0..<count {
             var ptr: UnsafePointer<UInt8>?
             var size = 0
             let st = CMVideoFormatDescriptionGetHEVCParameterSetAtIndex(format, parameterSetIndex: i,
-                                                                        parameterSetCount: nil,
-                                                                        nalUnitHeaderLengthOut: nil,
                                                                         parameterSetPointerOut: &ptr,
-                                                                        parameterSetSizeOut: &size)
+                                                                        parameterSetSizeOut: &size,
+                                                                        parameterSetCountOut: nil,
+                                                                        nalUnitHeaderLengthOut: nil)
             if st == noErr, let p = ptr, size > 0 {
                 sets.append(Data(bytes: p, count: size))
             }
@@ -257,7 +257,7 @@ final class H265Decoder {
         var status: OSStatus = -1
         flat.withUnsafeBufferPointer { buffer in
             guard let base = buffer.baseAddress else { return }
-            var ptrs: [UnsafePointer<UInt8>?] = offsets.map { base + $0 }
+            var ptrs: [UnsafePointer<UInt8>] = offsets.map { base + $0 }
             var szs = sizes
             ptrs.withUnsafeMutableBufferPointer { p in
                 szs.withUnsafeMutableBufferPointer { s in

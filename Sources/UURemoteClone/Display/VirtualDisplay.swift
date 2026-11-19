@@ -87,11 +87,11 @@ final class CGDisplayStreamCapturer {
     func start(displayID: CGDirectDisplayID, width: Int, height: Int, fps: Int,
                onBuffer: @escaping (CVPixelBuffer) -> Void) -> Bool {
         var config: [String: Any] = [
-            CGDisplayStream.frameRateKey as String: fps,
-            CGDisplayStream.preserveAspectRatioKey as String: true,
-            CGDisplayStream.showCursorKey as String: true
+            kCGDisplayStreamFrameRateKey as String: fps,
+            kCGDisplayStreamPreserveAspectRatioKey as String: true,
+            kCGDisplayStreamShowCursorKey as String: true
         ]
-        config[CGDisplayStream.minimumFrameTimeKey as String] = Double(fps)
+        config[kCGDisplayStreamMinimumFrameTimeKey as String] = Double(fps)
         guard let stream = CGDisplayStream(dispatchQueueDisplay: displayID,
                                            outputWidth: width, outputHeight: height,
                                            pixelFormat: Int32(kCVPixelFormatType_32BGRA),
@@ -99,9 +99,9 @@ final class CGDisplayStreamCapturer {
                                            queue: queue,
                                            handler: { _, _, surface, _ in
             guard let surface else { return }
-            var pb: CVPixelBuffer?
-            CVPixelBufferCreateWithIOSurface(kCFAllocatorDefault, surface, nil, &pb)
-            if let pb { onBuffer(pb) }
+            var out: Unmanaged<CVPixelBuffer>?
+            CVPixelBufferCreateWithIOSurface(kCFAllocatorDefault, surface, nil, &out)
+            if let pb = out?.takeRetainedValue() { onBuffer(pb) }
         }) else { return false }
         self.stream = stream
         return stream.start() == .success
