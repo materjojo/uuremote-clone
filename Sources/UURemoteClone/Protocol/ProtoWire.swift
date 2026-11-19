@@ -71,6 +71,31 @@ public struct ProtoWriter {
         varint(UInt64(value.count))
         data.append(value)
     }
+
+    // MARK: 原样写入（DynamicMessage 用）
+
+    public mutating func rawVarint(field: Int, value: UInt64) {
+        tag(field, 0)
+        varint(value)
+    }
+
+    public mutating func rawFixed64(field: Int, value: UInt64) {
+        tag(field, 1)
+        var v = value.littleEndian
+        withUnsafeBytes(of: &v) { data.append(contentsOf: $0) }
+    }
+
+    public mutating func rawBytes(field: Int, value: Data) {
+        tag(field, 2)
+        varint(UInt64(value.count))
+        data.append(value)
+    }
+
+    public mutating func rawFixed32(field: Int, value: UInt32) {
+        tag(field, 5)
+        var v = value.littleEndian
+        withUnsafeBytes(of: &v) { data.append(contentsOf: $0) }
+    }
 }
 
 public enum ProtoError: Error { case truncated, badWireType, badUTF8 }

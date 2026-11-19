@@ -50,6 +50,11 @@ final class H265Encoder {
     private var session: VTCompressionSession?
     private(set) var width = 0
     private(set) var height = 0
+    private(set) var usingHardware = false
+    private(set) var currentBitrate = 0
+    private var configuredFps = 60
+    private var frameCount = 0
+    private var controller: EncoderRateController?
     var onFrame: ((Data, Bool) -> Void)?
     var onParameterSets: ((Data) -> Void)?
 
@@ -77,7 +82,23 @@ final class H265Encoder {
         VTSessionSetProperty(session, key: kVTCompressionPropertyKey_ProfileLevel, value: kVTProfileLevel_HEVC_Main_AutoLevel)
         VTSessionSetProperty(session, key: kVTCompressionPropertyKey_AverageBitRate, value: bitrate as CFNumber)
         VTSessionSetProperty(session, key: kVTCompressionPropertyKey_MaxKeyFrameInterval, value: (fps * 2) as CFNumber)
+        VTSessionSetProperty(session, key: kVTCompressionPropertyKey_MaxKeyFrameIntervalDuration, value: 2 as CFNumber)
         VTSessionSetProperty(session, key: kVTCompressionPropertyKey_ExpectedFrameRate, value: fps as CFNumber)
+        VTSessionSetProperty(session, key: kVTCompressionPropertyKey_AllowOpenGOP, value: kCFBooleanTrue)
+        VTSessionSetProperty(session, key: kVTCompressionPropertyKey_AllowTemporalCompression, value: kCFBooleanTrue)
+        VTSessionSetProperty(session, key: kVTCompressionPropertyKey_PrioritizeEncodingSpeedOverQuality, value: kCFBooleanTrue)
+        VTSessionSetProperty(session, key: kVTCompressionPropertyKey_MaxFrameDelayCount, value: 0 as CFNumber)
+        applyBitrate(bitrate)
+
+        var property: CFTypeRef?
+        let hwKey = "UsingHardwareAcceleratedVideoEncoder" as CFString
+        if VTSessionCopyProperty(session, key: hwKey, allocator: kCFAllocatorDefault, propertyValueOut: &property) == noErr {
+            usingHardware = (property as? Bool) ?? ((property as? NSNumber)?.boolValue ?? false)
+        }
+
+        configuredFps = fps
+        controller = EncoderRateController(startBps: bitrate, maxBps: bitrate * 2, minBps: max(bitrate / 4, 800_000))
+        currentBitrate = bitrate
 
         VTCompressionSessionPrepareToEncodeFrames(session)
         self.session = session
@@ -91,8 +112,25 @@ final class H265Encoder {
         session = nil
     }
 
+    func setBitrate(_ bps: Int) {
+        guard let session, bps != currentBitrate else { return }
+        currentBitrate = bps
+        applyBitrate(bps)
+    }
+
+    private func applyBitrate(_ bps: Int) {
+        guard let session else { return }
+        VTSessionSetProperty(session, key: kVTCompressionPropertyKey_AverageBitRate, value: bps as CFNumber)
+        let limits: [NSNumber] = [NSNumber(value: bps / 8), NSNumber(value: 1.0)]
+        VTSessionSetProperty(session, key: kVTCompressionPropertyKey_DataRateLimits, value: limits as CFArray)
+    }
+
     func encode(_ pixelBuffer: CVPixelBuffer, pts: CMTime, forceKey: Bool = false) {
         guard let session else { return }
+        frameCount += 1
+        if let controller, let next = controller.tick(frameCount: frameCount, configuredFps: configuredFps) {
+            setBitrate(next)
+        }
         var flags: VTEncodeInfoFlags = []
         let props: CFDictionary? = forceKey
             ? [kVTEncodeFrameOptionKey_ForceKeyFrame: true] as CFDictionary

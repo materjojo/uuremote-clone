@@ -33,6 +33,13 @@ final class APIClient {
         return room
     }
 
+    func wakeOnLANInfo(deviceID: String) async throws -> WakeOnLANInfo? {
+        if useMock { return WakeOnLANInfo(mac: "AA:BB:CC:DD:EE:FF", macAddress: nil, ip: nil, port: 9) }
+        let data = try await post("/api/v1/device/wake_on_lan/info", body: ["device_id": deviceID])
+        let env = try JSONDecoder().decode(APIEnvelope<WakeOnLANInfo>.self, from: data)
+        return env.data
+    }
+
     private func post(_ path: String, body: [String: Any]) async throws -> Data {
         var req = URLRequest(url: baseURL.appendingPathComponent(path))
         req.httpMethod = "POST"

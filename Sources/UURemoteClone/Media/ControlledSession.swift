@@ -9,6 +9,7 @@ final class ControlledSession: NSObject, ObservableObject {
     @Published private(set) var running = false
     @Published private(set) var lastError: String?
     @Published private(set) var virtualDisplayActive = false
+    @Published private(set) var hardwareEncode = false
 
     var codec: GvCodecType = .h265
     var fps: Int = 60
@@ -83,6 +84,7 @@ final class ControlledSession: NSObject, ObservableObject {
             }
             let bitrate = max(1_500_000, min(self.bitrate, width * height * 6))
             _ = encoder.prepare(width: width, height: height, fps: fps, bitrate: bitrate)
+            hardwareEncode = encoder.usingHardware
 
             if let display {
                 var config = ScreenCapturer.Config()

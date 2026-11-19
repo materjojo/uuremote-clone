@@ -72,6 +72,7 @@ struct DeviceGridView: View {
     @EnvironmentObject private var app: AppState
     @Environment(\.openWindow) private var openWindow
     @State private var hovered: String?
+    @State private var notice: String?
 
     private let columns = [GridItem(.adaptive(minimum: 260, maximum: 340), spacing: 16)]
 
@@ -94,7 +95,8 @@ struct DeviceGridView: View {
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 16) {
                         ForEach(app.devices) { device in
-                            DeviceCard(device: device, hovered: hovered == device.id)
+                            DeviceCard(device: device, hovered: hovered == device.id,
+                                       onWake: { wake(device) })
                                 .onHover { hovered = $0 ? device.id : nil }
                                 .onTapGesture {
                                     app.connect(device)
@@ -108,12 +110,41 @@ struct DeviceGridView: View {
         }
         .padding(24)
         .background(Color(red: 0.07, green: 0.075, blue: 0.09))
+        .overlay(alignment: .bottom) {
+            if let notice {
+                Text(notice)
+                    .font(.system(size: 12))
+                    .padding(.horizontal, 14).padding(.vertical, 8)
+                    .background(Color.black.opacity(0.75))
+                    .clipShape(Capsule())
+                    .padding(.bottom, 20)
+            }
+        }
+    }
+
+    private func wake(_ device: DeviceInfo) {
+        Task {
+            do {
+                let info = try await APIClient.shared.wakeOnLANInfo(deviceID: device.deviceID)
+                guard let mac = info?.usableMAC else {
+                    await MainActor.run { notice = "未获取到该设备的 MAC 地址" }
+                    return
+                }
+                let ok = WakeOnLAN.send(mac: mac,
+                                        broadcast: info?.ip ?? "255.255.255.255",
+                                        ports: [UInt16(info?.port ?? 9), 7])
+                await MainActor.run { notice = ok ? "已发送唤醒魔术包" : "魔术包发送失败" }
+            } catch {
+                await MainActor.run { notice = error.localizedDescription }
+            }
+        }
     }
 }
 
 struct DeviceCard: View {
     let device: DeviceInfo
     let hovered: Bool
+    var onWake: (() -> Void)? = nil
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
@@ -144,9 +175,16 @@ struct DeviceCard: View {
                         .clipShape(Capsule())
                 }
                 Spacer()
-                Text(L10n.connect)
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundStyle(device.online ? Theme.accent : Theme.textSecondary)
+                if !device.online, device.supportWOL == true, let onWake {
+                    Button("远程开机", action: onWake)
+                        .buttonStyle(.plain)
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundStyle(Theme.accent)
+                } else {
+                    Text(L10n.connect)
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundStyle(device.online ? Theme.accent : Theme.textSecondary)
+                }
             }
         }
         .padding(16)

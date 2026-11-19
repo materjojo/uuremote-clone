@@ -235,6 +235,7 @@ final class VideoRenderView: NSView, RTCVideoRenderer {
     private let displayLayer = AVSampleBufferDisplayLayer()
     private var formatDescription: CMVideoFormatDescription?
     private var currentSize = CGSize.zero
+    private var metal: MetalVideoView?
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
@@ -242,7 +243,17 @@ final class VideoRenderView: NSView, RTCVideoRenderer {
         layer?.backgroundColor = NSColor.black.cgColor
         displayLayer.videoGravity = .resizeAspect
         layer?.addSublayer(displayLayer)
+
+        let metal = MetalVideoView(frame: bounds)
+        metal.autoresizingMask = [.width, .height]
+        addSubview(metal)
+        self.metal = metal
         VideoFrameBus.shared.sink = self
+    }
+
+    override func layout() {
+        super.layout()
+        metal?.frame = bounds
     }
 
     deinit {
@@ -263,10 +274,16 @@ final class VideoRenderView: NSView, RTCVideoRenderer {
 
     func renderFrame(_ frame: RTCVideoFrame?) {
         guard let frame, let buffer = frame.buffer as? RTCCVPixelBuffer else { return }
-        display(buffer.pixelBuffer, pts: CMTime(value: frame.timeStampNs, timescale: 1_000_000_000))
+        let pb = buffer.pixelBuffer
+        let pts = CMTime(value: frame.timeStampNs, timescale: 1_000_000_000)
+        DispatchQueue.main.async { self.display(pb, pts: pts) }
     }
 
     func display(_ pixelBuffer: CVPixelBuffer, pts: CMTime) {
+        if let metal {
+            metal.display(pixelBuffer)
+            return
+        }
         let size = CVImageBufferGetEncodedSize(pixelBuffer)
         if formatDescription == nil || size != currentSize {
             var fd: CMVideoFormatDescription?
