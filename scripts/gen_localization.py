@@ -41,8 +41,8 @@ def main():
         if not name or name[0].isdigit():
             name = '_' + name
         return name
-    for lang, table in (('zh-rCN', zh), ('en', en)):
-        d = os.path.join(ROOT, 'platforms', 'android', 'app', 'src', 'main', 'res', f'values-{lang}')
+    for lang, table in (('', en), ('zh-rCN', zh), ('en', en)):
+        d = os.path.join(ROOT, 'platforms', 'android', 'app', 'src', 'main', 'res', ('values' if lang == '' else f'values-{lang}'))
         os.makedirs(d, exist_ok=True)
         seen = set()
         with open(os.path.join(d, 'strings.xml'), 'w', encoding='utf-8') as f:
