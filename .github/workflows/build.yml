@@ -47,8 +47,15 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
+      - name: Build shared core (gvpb.dll)
+        run: |
+          cmake -S core -B core/build -DCMAKE_BUILD_TYPE=Release
+          cmake --build core/build --config Release --target gvpb_shared
       - name: Build WPF app
-        run: dotnet build platforms/windows/UURemoteClone.Windows.csproj -c Release
+        run: |
+          $dll = Get-ChildItem -Recurse core/build -Filter gvpb.dll | Select-Object -First 1
+          if ($dll) { Copy-Item $dll.FullName platforms/windows/ -Force }
+          dotnet build platforms/windows/UURemoteClone.Windows.csproj -c Release
 
   android-app:
     runs-on: ubuntu-latest
