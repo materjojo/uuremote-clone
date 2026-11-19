@@ -1,6 +1,7 @@
 import SwiftUI
 import WebRTC
 import AppKit
+import AVFoundation
 
 struct RemoteWindowView: View {
     @EnvironmentObject private var app: AppState
@@ -183,26 +184,23 @@ struct VideoCanvas: NSViewRepresentable {
 
     func makeCoordinator() -> Coordinator { Coordinator() }
 
-    func makeNSView(context: Context) -> RTCMTLNSVideoView {
-        let view = RTCMTLNSVideoView(frame: .zero)
-        view.wantsLayer = true
-        view.layer?.backgroundColor = NSColor.black.cgColor
-        return view
+    func makeNSView(context: Context) -> VideoRenderView {
+        VideoRenderView(frame: .zero)
     }
 
-    func updateNSView(_ nsView: RTCMTLNSVideoView, context: Context) {
+    func updateNSView(_ nsView: VideoRenderView, context: Context) {
         context.coordinator.attach(track, to: nsView)
     }
 
-    static func dismantleNSView(_ nsView: RTCMTLNSVideoView, coordinator: Coordinator) {
+    static func dismantleNSView(_ nsView: VideoRenderView, coordinator: Coordinator) {
         coordinator.detach()
     }
 
     final class Coordinator {
         private weak var current: RTCVideoTrack?
-        private weak var renderer: RTCMTLNSVideoView?
+        private weak var renderer: VideoRenderView?
 
-        func attach(_ track: RTCVideoTrack?, to view: RTCMTLNSVideoView) {
+        func attach(_ track: RTCVideoTrack?, to view: VideoRenderView) {
             guard let track else { return }
             if current === track, renderer === view { return }
             detach()
@@ -216,5 +214,66 @@ struct VideoCanvas: NSViewRepresentable {
             current = nil
             renderer = nil
         }
+    }
+}
+
+/// 自绘渲染视图：RTCCVPixelBuffer -> CMSampleBuffer -> AVSampleBufferDisplayLayer
+/// （stasel/WebRTC 的 macOS 构建不含 RTCMTLNSVideoView）
+final class VideoRenderView: NSView, RTCVideoRenderer {
+    private let displayLayer = AVSampleBufferDisplayLayer()
+    private var formatDescription: CMVideoFormatDescription?
+    private var currentSize = CGSize.zero
+
+    override init(frame frameRect: NSRect) {
+        super.init(frame: frameRect)
+        wantsLayer = true
+        layer?.backgroundColor = NSColor.black.cgColor
+        displayLayer.videoGravity = .resizeAspect
+        layer?.addSublayer(displayLayer)
+    }
+
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+
+    override func layout() {
+        super.layout()
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        displayLayer.frame = bounds
+        CATransaction.commit()
+    }
+
+    func setSize(_ size: CGSize) {}
+
+    func renderFrame(_ frame: RTCVideoFrame?) {
+        guard let frame, let buffer = frame.buffer as? RTCCVPixelBuffer else { return }
+        let pixelBuffer = buffer.pixelBuffer
+        let size = CVImageBufferGetEncodedSize(pixelBuffer)
+
+        if formatDescription == nil || size != currentSize {
+            var fd: CMVideoFormatDescription?
+            let status = CMVideoFormatDescriptionCreateForImageBuffer(
+                allocator: kCFAllocatorDefault,
+                imageBuffer: pixelBuffer,
+                formatDescriptionOut: &fd)
+            guard status == noErr, let fd else { return }
+            formatDescription = fd
+            currentSize = size
+        }
+        guard let fd = formatDescription else { return }
+
+        var timing = CMSampleTimingInfo(
+            duration: .invalid,
+            presentationTimeStamp: CMTime(value: frame.timeStampNs, timescale: 1_000_000_000),
+            decodeTimeStamp: .invalid)
+        var sample: CMSampleBuffer?
+        let status = CMSampleBufferCreateReadyWithImageBuffer(
+            allocator: kCFAllocatorDefault,
+            imageBuffer: pixelBuffer,
+            formatDescription: fd,
+            sampleTiming: &timing,
+            sampleBufferOut: &sample)
+        guard status == noErr, let sample else { return }
+        if displayLayer.status == .failed { displayLayer.flush() }
+        displayLayer.enqueue(sample)
     }
 }
