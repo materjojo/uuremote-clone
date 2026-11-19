@@ -52,3 +52,13 @@ LoginRoom/Connect/StartVideoRender/…/SwitchIceNetwork 等）。
 - **Android**：官方 `libstreamer-jni.so` 直接导出 48 个 `Java_com_remote_streamer_*`，复制 .so + 同名 Java 类即可直调（零逆向成本）。
 - **Windows**：`DllImport("streamer.dll", EntryPoint = "#2")` 调工厂 + 自定义回调结构体 + vtable 指针调用，可实现"直接用官方 DLL"（需运行时放官方 streamer.dll）。
 - **macOS**：把官方 dylib 放进 bundle，`dlopen`/链接后调 `ExchangeControllerInterface`，Swift 侧实现回调结构体；渲染可直接用导出的 `MetalView` ObjC 类。
+
+## 7. Android model 字段核对结论
+
+libstreamer-jni.so / libstreamer.so 对字段名做了字符串保护（明文中仅 chromaSampling/width/height 可见），
+无法从 .so 静态交叉核对。但 JNI 契约的权威来源就是官方 Java 类本身（jadx 反编译
+com/remote/streamer/model/*）：AndroidStreamerControlled/Controller 的 native 方法签名
+（CreateRoom(StreamerRoomConfig)→long 等）与 model 字段（VideoCaptureConfig 15 字段，
+含 screenSourceType/videoTrackIndex）均直接取自官方反编译产物——契约一致性由定义保证。
+运行时验证需真机：加载官方 .so 后调用 Initialize/CreateRoom 即可确认（UnsatisfiedLinkError
+即为签名不符）。
