@@ -21,4 +21,28 @@ public final class Gvpb {
     }
 
     private static native int nativeMessageCount();
+    private static native String nativeSchemaName(String message, int field);
+    private static native int nativeFieldNumber(String message, String name);
+    private static native byte[] nativeEncodeVarint(int field, long value);
+    private static native byte[] nativeEncodeString(int field, String value);
+
+    public static String schemaName(String message, int field) {
+        if (!loaded) return null;
+        return nativeSchemaName(message, field);
+    }
+
+    public static int fieldNumber(String message, String name) {
+        if (!loaded) return -1;
+        return nativeFieldNumber(message, name);
+    }
+
+    public static byte[] encodeVarint(int field, long value) {
+        if (!loaded) return new byte[0];
+        return nativeEncodeVarint(field, value);
+    }
+
+    public static byte[] encodeString(int field, String value) {
+        if (!loaded) return new byte[0];
+        return nativeEncodeString(field, value);
+    }
 }
