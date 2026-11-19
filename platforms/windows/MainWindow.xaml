@@ -1,6 +1,7 @@
 <Window x:Class="UURemoteClone.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:UURemoteClone"
         Title="UU远程" Height="720" Width="1100"
         Background="{StaticResource Bg}" WindowStartupLocation="CenterScreen">
     <Grid>
@@ -9,6 +10,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+        <!-- 侧边栏 -->
         <StackPanel Grid.Column="0" Background="#0E0F11">
             <TextBlock Text="网易UU远程" Foreground="White" FontSize="16" FontWeight="SemiBold"
                        Margin="20,22,20,26"/>
@@ -18,10 +20,11 @@
             <TextBlock Text="设置" Foreground="{StaticResource Muted}" Margin="20,6"/>
         </StackPanel>
 
-        <DockPanel Grid.Column="1" Margin="24">
+        <!-- 设备视图 -->
+        <DockPanel Grid.Column="1" x:Name="DeviceView" Margin="24">
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,18">
                 <TextBlock Text="我的设备" Foreground="White" FontSize="22" FontWeight="SemiBold"/>
-                <TextBlock Text="   （Windows 端骨架，协议由 core/gvpb 提供）"
+                <TextBlock Text="   （协议由官方 FileDescriptorProto 还原，云设备已剔除）"
                            Foreground="{StaticResource Muted}" VerticalAlignment="Bottom"/>
             </StackPanel>
             <ListBox x:Name="DeviceList" Background="Transparent" BorderThickness="0">
@@ -46,5 +49,36 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </DockPanel>
+
+        <!-- 远控视图 -->
+        <Grid Grid.Column="1" x:Name="RemoteView" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Background="#202226" Padding="8,6" Margin="8,8,8,0" CornerRadius="8">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="显示屏" Foreground="White" Background="Transparent" BorderThickness="0" Padding="10,4"/>
+                    <Button Content="全屏" Foreground="White" Background="Transparent" BorderThickness="0" Padding="10,4" Click="FullScreen_Click"/>
+                    <Button Content="窗口设置" Foreground="White" Background="Transparent" BorderThickness="0" Padding="10,4"/>
+                    <Button Content="画质" Foreground="White" Background="Transparent" BorderThickness="0" Padding="10,4"/>
+                    <Button Content="鼠标" Foreground="White" Background="Transparent" BorderThickness="0" Padding="10,4"/>
+                    <Button Content="键盘" Foreground="White" Background="Transparent" BorderThickness="0" Padding="10,4"/>
+                    <Button Content="文件传输" Foreground="White" Background="Transparent" BorderThickness="0" Padding="10,4"/>
+                    <Button Content="断开" Foreground="{StaticResource Accent}" Background="Transparent"
+                            BorderThickness="0" Padding="10,4" Click="Disconnect_Click"/>
+                </StackPanel>
+            </Border>
+
+            <local:RemoteVideoControl x:Name="VideoCanvas" Grid.Row="1" Margin="8"
+                                       MouseLeftButtonDown="Video_MouseDown"
+                                       MouseLeftButtonUp="Video_MouseUp"
+                                       MouseMove="Video_MouseMove"/>
+
+            <TextBlock x:Name="StatusText" Grid.Row="2" Text="未连接" Foreground="{StaticResource Muted}"
+                       Margin="12,2,12,8" FontSize="11"/>
+        </Grid>
     </Grid>
 </Window>
