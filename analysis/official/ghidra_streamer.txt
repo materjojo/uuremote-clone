@@ -1,0 +1,3160 @@
+=== ENTRY POINTS (114) ===
+180e39408  tls_callback_0
+180e399ec  tls_callback_1
+180a2a780  ExchangeControlledInterface
+180a2a6f0  ExchangeControllerInterface
+180adb570  ctlAUXAccess
+180adb060  ctlCheckDriverVersion
+180adae10  ctlClose
+180adbe20  ctlEdidManagement
+180adc300  ctlEngineGetActivity
+180adc2a0  ctlEngineGetProperties
+180adc230  ctlEnumEngineGroups
+180adc360  ctlEnumFans
+180adc600  ctlEnumFrequencyDomains
+180adc8c0  ctlEnumLeds
+180adcb20  ctlEnumMemoryModules
+180add400  ctlEnumPowerDomains
+180add5f0  ctlEnumTemperatureSensors
+180adb0b0  ctlEnumerateDevices
+180adb120  ctlEnumerateDisplayOutputs
+180adb190  ctlEnumerateI2CPinPairs
+180adbc30  ctlEnumerateMuxDevices
+180adc430  ctlFanGetConfig
+180adc3d0  ctlFanGetProperties
+180adc590  ctlFanGetState
+180adc490  ctlFanSetDefaultMode
+180adc4d0  ctlFanSetFixedSpeedMode
+180adc530  ctlFanSetSpeedTableMode
+180adc6d0  ctlFrequencyGetAvailableClocks
+180adc670  ctlFrequencyGetProperties
+180adc740  ctlFrequencyGetRange
+180adc800  ctlFrequencyGetState
+180adc860  ctlFrequencyGetThrottleTime
+180adc7a0  ctlFrequencySetRange
+180adb2c0  ctlGetAdaperDisplayEncoderProperties
+180adb750  ctlGetBrightnessSetting
+180adb9f0  ctlGetCurrentScaling
+180adb3f0  ctlGetCurrentSharpness
+180adb200  ctlGetDeviceProperties
+180adb260  ctlGetDisplayProperties
+180adbbd0  ctlGetIntelArcSyncInfoForMonitor
+180adbd60  ctlGetIntelArcSyncProfile
+180adbab0  ctlGetLACEConfig
+180adc0b0  ctlGetLinkedDisplayAdapters
+180adbca0  ctlGetMuxProperties
+180adb5d0  ctlGetPowerOptimizationCaps
+180adb630  ctlGetPowerOptimizationSetting
+180adb000  ctlGetSet3DFeature
+180adbee0  ctlGetSetCombinedDisplay
+180adbe80  ctlGetSetCustomMode
+180adbf40  ctlGetSetDisplayGenlock
+180adc1d0  ctlGetSetDisplaySettings
+180adc110  ctlGetSetDynamicContrastEnhancement
+180adb930  ctlGetSetRetroScaling
+180adcac0  ctlGetSetVideoProcessingFeature
+180adc170  ctlGetSetWireFormat
+180adb390  ctlGetSharpnessCaps
+180adafa0  ctlGetSupported3DCapabilities
+180adb8d0  ctlGetSupportedRetroScalingCapability
+180adb990  ctlGetSupportedScalingCapability
+180adca60  ctlGetSupportedVideoProcessingCapabilities
+180adbfb0  ctlGetVblankTimestamp
+180adb320  ctlGetZeDevice
+180adb4b0  ctlI2CAccess
+180adb510  ctlI2CAccessOnPinPair
+180adacd0  ctlInit
+180adc930  ctlLedGetProperties
+180adc990  ctlLedGetState
+180adc9f0  ctlLedSetState
+180adc010  ctlLinkDisplayAdapters
+180adcc50  ctlMemoryGetBandwidth
+180adcb90  ctlMemoryGetProperties
+180adcbf0  ctlMemoryGetState
+180adccb0  ctlOverclockGetProperties
+180adcd50  ctlOverclockGpuFrequencyOffsetGet
+180adcdb0  ctlOverclockGpuFrequencyOffsetSet
+180adced0  ctlOverclockGpuLockGet
+180adcf30  ctlOverclockGpuLockSet
+180adce10  ctlOverclockGpuVoltageOffsetGet
+180adce70  ctlOverclockGpuVoltageOffsetSet
+180add120  ctlOverclockPowerLimitGet
+180add180  ctlOverclockPowerLimitSet
+180add300  ctlOverclockResetToDefault
+180add1e0  ctlOverclockTemperatureLimitGet
+180add240  ctlOverclockTemperatureLimitSet
+180adcfa0  ctlOverclockVramFrequencyOffsetGet
+180add000  ctlOverclockVramFrequencyOffsetSet
+180add060  ctlOverclockVramVoltageOffsetGet
+180add0c0  ctlOverclockVramVoltageOffsetSet
+180adcd10  ctlOverclockWaiverSet
+180adb870  ctlPanelDescriptorAccess
+180add340  ctlPciGetProperties
+180add3a0  ctlPciGetState
+180adb7b0  ctlPixelTransformationGetConfig
+180adb810  ctlPixelTransformationSetConfig
+180add4d0  ctlPowerGetEnergyCounter
+180add530  ctlPowerGetLimits
+180add470  ctlPowerGetProperties
+180add590  ctlPowerSetLimits
+180add2a0  ctlPowerTelemetryGet
+180adaf40  ctlReservedCall
+180adb6f0  ctlSetBrightnessSetting
+180adba50  ctlSetCurrentScaling
+180adb450  ctlSetCurrentSharpness
+180adbdc0  ctlSetIntelArcSyncProfile
+180adbb10  ctlSetLACEConfig
+180adb690  ctlSetPowerOptimizationSetting
+180adae80  ctlSetRuntimePath
+180adbb70  ctlSoftwarePSR
+180adbd00  ctlSwitchMux
+180add660  ctlTemperatureGetProperties
+180add6c0  ctlTemperatureGetState
+180adc070  ctlUnlinkDisplayAdapters
+180adaee0  ctlWaitForPropertyChange
+180e39e40  entry
+
+=== DECOMPILE tls_callback_0 @ 180e39408 ===
+
+void tls_callback_0(undefined8 param_1,int param_2)
+
+{
+  longlong lVar1;
+  longlong *plVar2;
+  
+  if ((param_2 == 2) &&
+     (lVar1 = *(longlong *)((longlong)ThreadLocalStoragePointer + (ulonglong)_tls_index * 8),
+     *(char *)(lVar1 + 0x30) != '\x01')) {
+    *(undefined1 *)(lVar1 + 0x30) = 1;
+    for (plVar2 = &DAT_180f8b428; plVar2 != &DAT_180f8b428; plVar2 = plVar2 + 1) {
+      if (*plVar2 != 0) {
+        (*(code *)PTR__guard_dispatch_icall_180f88da8)();
+      }
+    }
+  }
+  return;
+}
+
+
+
+=== DECOMPILE tls_callback_1 @ 180e399ec ===
+
+void tls_callback_1(undefined8 param_1,int param_2)
+
+{
+  longlong lVar1;
+  int *piVar2;
+  int iVar3;
+  longlong *plVar4;
+  int *piVar5;
+  
+  if ((param_2 == 3) || (param_2 == 0)) {
+    lVar1 = *(longlong *)((longlong)ThreadLocalStoragePointer + (ulonglong)_tls_index * 8);
+    piVar5 = *(int **)(lVar1 + 0x40);
+    if (*(int **)(lVar1 + 0x40) != (int *)0x0) {
+      while( true ) {
+        iVar3 = *piVar5 + -1;
+        if (-1 < iVar3) {
+          plVar4 = (longlong *)(piVar5 + ((longlong)iVar3 + 2) * 2);
+          do {
+            if (*plVar4 != 0) {
+              (*(code *)PTR__guard_dispatch_icall_180f88da8)();
+            }
+            plVar4 = plVar4 + -1;
+            iVar3 = iVar3 + -1;
+          } while (-1 < iVar3);
+        }
+        piVar2 = *(int **)(piVar5 + 2);
+        if (piVar2 == (int *)0x0) break;
+        FUN_180e40c7c(piVar5);
+        *(int **)(lVar1 + 0x40) = piVar2;
+        piVar5 = piVar2;
+      }
+      *(undefined8 *)(lVar1 + 0x40) = 0;
+    }
+  }
+  return;
+}
+
+
+
+=== DECOMPILE ExchangeControlledInterface @ 180a2a780 ===
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+undefined ** ExchangeControlledInterface(undefined8 param_1)
+
+{
+  undefined8 *puVar1;
+  undefined1 local_88 [136];
+  
+                    /* 0xa2a780  2  ExchangeControlledInterface */
+  puVar1 = (undefined8 *)FUN_180d16c90(local_88,param_1);
+  _DAT_18143f160 = *puVar1;
+  _DAT_18143f168 = puVar1[1];
+  _DAT_18143f170 = puVar1[2];
+  _DAT_18143f178 = puVar1[3];
+  DAT_18143f180 = puVar1[4];
+  DAT_18143f188 = puVar1[5];
+  DAT_18143f190 = puVar1[6];
+  DAT_18143f198 = puVar1[7];
+  DAT_18143f1a0 = puVar1[8];
+  DAT_18143f1a8 = puVar1[9];
+  DAT_18143f1b0 = puVar1[10];
+  DAT_18143f1b8 = puVar1[0xb];
+  DAT_18143f1c0 = puVar1[0xc];
+  DAT_18143f1c8 = puVar1[0xd];
+  DAT_18143f1d0 = puVar1[0xe];
+  _DAT_18143f1d8 = puVar1[0xf];
+  return &PTR_FUN_1812e5dd0;
+}
+
+
+
+=== DECOMPILE ExchangeControllerInterface @ 180a2a6f0 ===
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+undefined ** ExchangeControllerInterface(undefined8 param_1)
+
+{
+  undefined8 *puVar1;
+  undefined1 local_98 [152];
+  
+                    /* 0xa2a6f0  3  ExchangeControllerInterface */
+  puVar1 = (undefined8 *)FUN_180d162d0(local_98,param_1);
+  DAT_18143f1e0 = *puVar1;
+  uRam000000018143f1e8 = puVar1[1];
+  DAT_18143f1f0 = puVar1[2];
+  _DAT_18143f1f8 = puVar1[3];
+  _DAT_18143f200 = puVar1[4];
+  _DAT_18143f208 = puVar1[5];
+  _DAT_18143f210 = puVar1[6];
+  DAT_18143f218 = puVar1[7];
+  DAT_18143f220 = puVar1[8];
+  DAT_18143f228 = puVar1[9];
+  _DAT_18143f230 = puVar1[10];
+  DAT_18143f238 = puVar1[0xb];
+  DAT_18143f240 = puVar1[0xc];
+  DAT_18143f248 = puVar1[0xd];
+  DAT_18143f250 = puVar1[0xe];
+  DAT_18143f258 = puVar1[0xf];
+  DAT_18143f260 = puVar1[0x10];
+  _DAT_18143f268 = puVar1[0x11];
+  return &PTR_FUN_1812e5e90;
+}
+
+
+
+=== DECOMPILE ctlAUXAccess @ 180adb570 ===
+
+INT_PTR ctlAUXAccess(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadb570  5  ctlAUXAccess */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlAUXAccess");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adb5ae. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlCheckDriverVersion @ 180adb060 ===
+
+INT_PTR ctlCheckDriverVersion(undefined8 param_1,uint param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadb060  6  ctlCheckDriverVersion */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlCheckDriverVersion");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adb09c. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,(ulonglong)param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlClose @ 180adae10 ===
+
+ulonglong ctlClose(undefined8 param_1)
+
+{
+  FARPROC pFVar1;
+  ulonglong uVar2;
+  ulonglong uVar3;
+  
+                    /* 0xadae10  7  ctlClose */
+  uVar3 = 0x40000001;
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    pFVar1 = GetProcAddress(DAT_18143f140,"ctlClose");
+    if (pFVar1 != (FARPROC)0x0) {
+      uVar2 = (*pFVar1)(param_1);
+      uVar3 = uVar2 & 0xffffffff;
+      if (((int)uVar2 == 0) && (DAT_18143f140 != (HMODULE)0x0)) {
+        FreeLibrary(DAT_18143f140);
+        DAT_18143f140 = (HMODULE)0x0;
+      }
+    }
+  }
+  DAT_18143f148 = 0;
+  return uVar3;
+}
+
+
+
+=== DECOMPILE ctlEdidManagement @ 180adbe20 ===
+
+INT_PTR ctlEdidManagement(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadbe20  8  ctlEdidManagement */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlEdidManagement");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adbe5e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlEngineGetActivity @ 180adc300 ===
+
+INT_PTR ctlEngineGetActivity(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadc300  9  ctlEngineGetActivity */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlEngineGetActivity");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adc33e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlEngineGetProperties @ 180adc2a0 ===
+
+INT_PTR ctlEngineGetProperties(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadc2a0  10  ctlEngineGetProperties */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlEngineGetProperties");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adc2de. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlEnumEngineGroups @ 180adc230 ===
+
+INT_PTR ctlEnumEngineGroups(undefined8 param_1,undefined8 param_2,undefined8 param_3)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadc230  11  ctlEnumEngineGroups */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlEnumEngineGroups");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adc27e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2,param_3);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlEnumFans @ 180adc360 ===
+
+INT_PTR ctlEnumFans(undefined8 param_1,undefined8 param_2,undefined8 param_3)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadc360  12  ctlEnumFans */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlEnumFans");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adc3ae. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2,param_3);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlEnumFrequencyDomains @ 180adc600 ===
+
+INT_PTR ctlEnumFrequencyDomains(undefined8 param_1,undefined8 param_2,undefined8 param_3)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadc600  13  ctlEnumFrequencyDomains */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlEnumFrequencyDomains");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adc64e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2,param_3);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlEnumLeds @ 180adc8c0 ===
+
+INT_PTR ctlEnumLeds(undefined8 param_1,undefined8 param_2,undefined8 param_3)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadc8c0  14  ctlEnumLeds */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlEnumLeds");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adc90e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2,param_3);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlEnumMemoryModules @ 180adcb20 ===
+
+INT_PTR ctlEnumMemoryModules(undefined8 param_1,undefined8 param_2,undefined8 param_3)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadcb20  15  ctlEnumMemoryModules */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlEnumMemoryModules");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adcb6e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2,param_3);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlEnumPowerDomains @ 180add400 ===
+
+INT_PTR ctlEnumPowerDomains(undefined8 param_1,undefined8 param_2,undefined8 param_3)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadd400  16  ctlEnumPowerDomains */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlEnumPowerDomains");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180add44e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2,param_3);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlEnumTemperatureSensors @ 180add5f0 ===
+
+INT_PTR ctlEnumTemperatureSensors(undefined8 param_1,undefined8 param_2,undefined8 param_3)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadd5f0  17  ctlEnumTemperatureSensors */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlEnumTemperatureSensors");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180add63e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2,param_3);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlEnumerateDevices @ 180adb0b0 ===
+
+INT_PTR ctlEnumerateDevices(undefined8 param_1,undefined8 param_2,undefined8 param_3)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadb0b0  18  ctlEnumerateDevices */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlEnumerateDevices");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adb0fe. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2,param_3);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlEnumerateDisplayOutputs @ 180adb120 ===
+
+INT_PTR ctlEnumerateDisplayOutputs(undefined8 param_1,undefined8 param_2,undefined8 param_3)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadb120  19  ctlEnumerateDisplayOutputs */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlEnumerateDisplayOutputs");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adb16e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2,param_3);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlEnumerateI2CPinPairs @ 180adb190 ===
+
+INT_PTR ctlEnumerateI2CPinPairs(undefined8 param_1,undefined8 param_2,undefined8 param_3)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadb190  20  ctlEnumerateI2CPinPairs */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlEnumerateI2CPinPairs");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adb1de. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2,param_3);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlEnumerateMuxDevices @ 180adbc30 ===
+
+INT_PTR ctlEnumerateMuxDevices(undefined8 param_1,undefined8 param_2,undefined8 param_3)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadbc30  21  ctlEnumerateMuxDevices */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlEnumerateMuxDevices");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adbc7e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2,param_3);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlFanGetConfig @ 180adc430 ===
+
+INT_PTR ctlFanGetConfig(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadc430  22  ctlFanGetConfig */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlFanGetConfig");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adc46e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlFanGetProperties @ 180adc3d0 ===
+
+INT_PTR ctlFanGetProperties(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadc3d0  23  ctlFanGetProperties */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlFanGetProperties");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adc40e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlFanGetState @ 180adc590 ===
+
+INT_PTR ctlFanGetState(undefined8 param_1,uint param_2,undefined8 param_3)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadc590  24  ctlFanGetState */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlFanGetState");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adc5dc. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,(ulonglong)param_2,param_3);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlFanSetDefaultMode @ 180adc490 ===
+
+INT_PTR ctlFanSetDefaultMode(undefined8 param_1)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadc490  25  ctlFanSetDefaultMode */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlFanSetDefaultMode");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adc4bf. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlFanSetFixedSpeedMode @ 180adc4d0 ===
+
+INT_PTR ctlFanSetFixedSpeedMode(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadc4d0  26  ctlFanSetFixedSpeedMode */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlFanSetFixedSpeedMode");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adc50e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlFanSetSpeedTableMode @ 180adc530 ===
+
+INT_PTR ctlFanSetSpeedTableMode(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadc530  27  ctlFanSetSpeedTableMode */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlFanSetSpeedTableMode");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adc56e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlFrequencyGetAvailableClocks @ 180adc6d0 ===
+
+INT_PTR ctlFrequencyGetAvailableClocks(undefined8 param_1,undefined8 param_2,undefined8 param_3)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadc6d0  28  ctlFrequencyGetAvailableClocks */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlFrequencyGetAvailableClocks");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adc71e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2,param_3);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlFrequencyGetProperties @ 180adc670 ===
+
+INT_PTR ctlFrequencyGetProperties(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadc670  29  ctlFrequencyGetProperties */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlFrequencyGetProperties");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adc6ae. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlFrequencyGetRange @ 180adc740 ===
+
+INT_PTR ctlFrequencyGetRange(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadc740  30  ctlFrequencyGetRange */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlFrequencyGetRange");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adc77e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlFrequencyGetState @ 180adc800 ===
+
+INT_PTR ctlFrequencyGetState(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadc800  31  ctlFrequencyGetState */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlFrequencyGetState");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adc83e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlFrequencyGetThrottleTime @ 180adc860 ===
+
+INT_PTR ctlFrequencyGetThrottleTime(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadc860  32  ctlFrequencyGetThrottleTime */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlFrequencyGetThrottleTime");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adc89e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlFrequencySetRange @ 180adc7a0 ===
+
+INT_PTR ctlFrequencySetRange(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadc7a0  33  ctlFrequencySetRange */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlFrequencySetRange");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adc7de. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetAdaperDisplayEncoderProperties @ 180adb2c0 ===
+
+INT_PTR ctlGetAdaperDisplayEncoderProperties(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadb2c0  34  ctlGetAdaperDisplayEncoderProperties */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlGetAdaperDisplayEncoderProperties");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adb2fe. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetBrightnessSetting @ 180adb750 ===
+
+INT_PTR ctlGetBrightnessSetting(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadb750  35  ctlGetBrightnessSetting */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlGetBrightnessSetting");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adb78e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetCurrentScaling @ 180adb9f0 ===
+
+INT_PTR ctlGetCurrentScaling(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadb9f0  36  ctlGetCurrentScaling */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlGetCurrentScaling");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adba2e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetCurrentSharpness @ 180adb3f0 ===
+
+INT_PTR ctlGetCurrentSharpness(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadb3f0  37  ctlGetCurrentSharpness */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlGetCurrentSharpness");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adb42e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetDeviceProperties @ 180adb200 ===
+
+INT_PTR ctlGetDeviceProperties(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadb200  38  ctlGetDeviceProperties */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlGetDeviceProperties");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adb23e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetDisplayProperties @ 180adb260 ===
+
+INT_PTR ctlGetDisplayProperties(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadb260  39  ctlGetDisplayProperties */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlGetDisplayProperties");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adb29e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetIntelArcSyncInfoForMonitor @ 180adbbd0 ===
+
+INT_PTR ctlGetIntelArcSyncInfoForMonitor(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadbbd0  40  ctlGetIntelArcSyncInfoForMonitor */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlGetIntelArcSyncInfoForMonitor");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adbc0e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetIntelArcSyncProfile @ 180adbd60 ===
+
+INT_PTR ctlGetIntelArcSyncProfile(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadbd60  41  ctlGetIntelArcSyncProfile */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlGetIntelArcSyncProfile");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adbd9e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetLACEConfig @ 180adbab0 ===
+
+INT_PTR ctlGetLACEConfig(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadbab0  42  ctlGetLACEConfig */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlGetLACEConfig");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adbaee. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetLinkedDisplayAdapters @ 180adc0b0 ===
+
+INT_PTR ctlGetLinkedDisplayAdapters(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadc0b0  43  ctlGetLinkedDisplayAdapters */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlGetLinkedDisplayAdapters");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adc0ee. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetMuxProperties @ 180adbca0 ===
+
+INT_PTR ctlGetMuxProperties(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadbca0  44  ctlGetMuxProperties */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlGetMuxProperties");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adbcde. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetPowerOptimizationCaps @ 180adb5d0 ===
+
+INT_PTR ctlGetPowerOptimizationCaps(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadb5d0  45  ctlGetPowerOptimizationCaps */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlGetPowerOptimizationCaps");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adb60e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetPowerOptimizationSetting @ 180adb630 ===
+
+INT_PTR ctlGetPowerOptimizationSetting(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadb630  46  ctlGetPowerOptimizationSetting */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlGetPowerOptimizationSetting");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adb66e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetSet3DFeature @ 180adb000 ===
+
+INT_PTR ctlGetSet3DFeature(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadb000  47  ctlGetSet3DFeature */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlGetSet3DFeature");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adb03e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetSetCombinedDisplay @ 180adbee0 ===
+
+INT_PTR ctlGetSetCombinedDisplay(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadbee0  48  ctlGetSetCombinedDisplay */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlGetSetCombinedDisplay");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adbf1e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetSetCustomMode @ 180adbe80 ===
+
+INT_PTR ctlGetSetCustomMode(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadbe80  49  ctlGetSetCustomMode */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlGetSetCustomMode");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adbebe. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetSetDisplayGenlock @ 180adbf40 ===
+
+INT_PTR ctlGetSetDisplayGenlock
+                  (undefined8 param_1,undefined8 param_2,uint param_3,undefined8 param_4)
+
+{
+  FARPROC pFVar1;
+  INT_PTR IVar2;
+  
+                    /* 0xadbf40  50  ctlGetSetDisplayGenlock */
+  if ((DAT_18143f140 != (HMODULE)0x0) &&
+     (pFVar1 = GetProcAddress(DAT_18143f140,"ctlGetSetDisplayGenlock"), pFVar1 != (FARPROC)0x0)) {
+    IVar2 = (*pFVar1)(param_1,param_2,(ulonglong)param_3,param_4);
+    return IVar2;
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetSetDisplaySettings @ 180adc1d0 ===
+
+INT_PTR ctlGetSetDisplaySettings(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadc1d0  51  ctlGetSetDisplaySettings */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlGetSetDisplaySettings");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adc20e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetSetDynamicContrastEnhancement @ 180adc110 ===
+
+INT_PTR ctlGetSetDynamicContrastEnhancement(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadc110  52  ctlGetSetDynamicContrastEnhancement */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlGetSetDynamicContrastEnhancement");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adc14e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetSetRetroScaling @ 180adb930 ===
+
+INT_PTR ctlGetSetRetroScaling(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadb930  53  ctlGetSetRetroScaling */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlGetSetRetroScaling");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adb96e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetSetVideoProcessingFeature @ 180adcac0 ===
+
+INT_PTR ctlGetSetVideoProcessingFeature(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadcac0  54  ctlGetSetVideoProcessingFeature */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlGetSetVideoProcessingFeature");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adcafe. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetSetWireFormat @ 180adc170 ===
+
+INT_PTR ctlGetSetWireFormat(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadc170  55  ctlGetSetWireFormat */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlGetSetWireFormat");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adc1ae. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetSharpnessCaps @ 180adb390 ===
+
+INT_PTR ctlGetSharpnessCaps(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadb390  56  ctlGetSharpnessCaps */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlGetSharpnessCaps");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adb3ce. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetSupported3DCapabilities @ 180adafa0 ===
+
+INT_PTR ctlGetSupported3DCapabilities(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadafa0  57  ctlGetSupported3DCapabilities */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlGetSupported3DCapabilities");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adafde. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetSupportedRetroScalingCapability @ 180adb8d0 ===
+
+INT_PTR ctlGetSupportedRetroScalingCapability(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadb8d0  58  ctlGetSupportedRetroScalingCapability */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlGetSupportedRetroScalingCapability");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adb90e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetSupportedScalingCapability @ 180adb990 ===
+
+INT_PTR ctlGetSupportedScalingCapability(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadb990  59  ctlGetSupportedScalingCapability */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlGetSupportedScalingCapability");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adb9ce. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetSupportedVideoProcessingCapabilities @ 180adca60 ===
+
+INT_PTR ctlGetSupportedVideoProcessingCapabilities(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadca60  60  ctlGetSupportedVideoProcessingCapabilities */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE =
+         GetProcAddress(DAT_18143f140,"ctlGetSupportedVideoProcessingCapabilities");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adca9e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetVblankTimestamp @ 180adbfb0 ===
+
+INT_PTR ctlGetVblankTimestamp(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadbfb0  61  ctlGetVblankTimestamp */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlGetVblankTimestamp");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adbfee. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlGetZeDevice @ 180adb320 ===
+
+INT_PTR ctlGetZeDevice(undefined8 param_1,undefined8 param_2,undefined8 param_3)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadb320  62  ctlGetZeDevice */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlGetZeDevice");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adb36e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2,param_3);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlI2CAccess @ 180adb4b0 ===
+
+INT_PTR ctlI2CAccess(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadb4b0  63  ctlI2CAccess */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlI2CAccess");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adb4ee. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlI2CAccessOnPinPair @ 180adb510 ===
+
+INT_PTR ctlI2CAccessOnPinPair(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadb510  64  ctlI2CAccessOnPinPair */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlI2CAccessOnPinPair");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adb54e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlInit @ 180adacd0 ===
+
+/* WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie */
+
+void ctlInit(longlong param_1,undefined8 param_2)
+
+{
+  HMODULE hModule;
+  FARPROC pFVar1;
+  undefined1 auStack_448 [32];
+  WCHAR local_428 [512];
+  ulonglong local_28;
+  
+                    /* 0xadacd0  65  ctlInit */
+  hModule = DAT_18143f140;
+  local_28 = DAT_1812df780 ^ (ulonglong)auStack_448;
+  if (DAT_18143f140 != (HMODULE)0x0) goto LAB_180adadbd;
+  FUN_180f6a640(local_428,0,0x400);
+  if ((DAT_18143f148 == 0) || (*(longlong *)(DAT_18143f148 + 0x18) == 0)) {
+    if (*(ushort *)(param_1 + 10) < 2) {
+      FUN_180adac00(local_428,0x200,L"%s.dll",L"ControlLib");
+      goto LAB_180adad75;
+    }
+  }
+  else {
+    FUN_180e51584(local_428,0x200,*(longlong *)(DAT_18143f148 + 0x18),0x1ff);
+LAB_180adad75:
+    hModule = LoadLibraryExW(local_428,(HANDLE)0x0,0x800);
+    DAT_18143f140 = hModule;
+    if ((hModule != (HMODULE)0x0) && (DAT_18143f148 != 0)) {
+      ctlSetRuntimePath();
+      hModule = DAT_18143f140;
+    }
+  }
+  if (hModule == (HMODULE)0x0) {
+  }
+LAB_180adadbd:
+  pFVar1 = GetProcAddress(hModule,"ctlInit");
+  if (pFVar1 != (FARPROC)0x0) {
+    (*pFVar1)(param_1,param_2);
+  }
+}
+
+
+
+=== DECOMPILE ctlLedGetProperties @ 180adc930 ===
+
+INT_PTR ctlLedGetProperties(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadc930  66  ctlLedGetProperties */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlLedGetProperties");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adc96e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlLedGetState @ 180adc990 ===
+
+INT_PTR ctlLedGetState(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadc990  67  ctlLedGetState */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlLedGetState");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adc9ce. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlLedSetState @ 180adc9f0 ===
+
+INT_PTR ctlLedSetState(undefined8 param_1,undefined8 param_2,uint param_3)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadc9f0  68  ctlLedSetState */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlLedSetState");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adca3e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2,(ulonglong)param_3);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlLinkDisplayAdapters @ 180adc010 ===
+
+INT_PTR ctlLinkDisplayAdapters(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadc010  69  ctlLinkDisplayAdapters */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlLinkDisplayAdapters");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adc04e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlMemoryGetBandwidth @ 180adcc50 ===
+
+INT_PTR ctlMemoryGetBandwidth(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadcc50  70  ctlMemoryGetBandwidth */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlMemoryGetBandwidth");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adcc8e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlMemoryGetProperties @ 180adcb90 ===
+
+INT_PTR ctlMemoryGetProperties(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadcb90  71  ctlMemoryGetProperties */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlMemoryGetProperties");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adcbce. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlMemoryGetState @ 180adcbf0 ===
+
+INT_PTR ctlMemoryGetState(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadcbf0  72  ctlMemoryGetState */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlMemoryGetState");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adcc2e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlOverclockGetProperties @ 180adccb0 ===
+
+INT_PTR ctlOverclockGetProperties(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadccb0  73  ctlOverclockGetProperties */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlOverclockGetProperties");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adccee. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlOverclockGpuFrequencyOffsetGet @ 180adcd50 ===
+
+INT_PTR ctlOverclockGpuFrequencyOffsetGet(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadcd50  74  ctlOverclockGpuFrequencyOffsetGet */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlOverclockGpuFrequencyOffsetGet");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adcd8e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlOverclockGpuFrequencyOffsetSet @ 180adcdb0 ===
+
+INT_PTR ctlOverclockGpuFrequencyOffsetSet(undefined8 param_1,undefined4 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadcdb0  75  ctlOverclockGpuFrequencyOffsetSet */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlOverclockGpuFrequencyOffsetSet");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adcdef. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlOverclockGpuLockGet @ 180adced0 ===
+
+INT_PTR ctlOverclockGpuLockGet(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadced0  76  ctlOverclockGpuLockGet */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlOverclockGpuLockGet");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adcf0e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlOverclockGpuLockSet @ 180adcf30 ===
+
+INT_PTR ctlOverclockGpuLockSet(undefined8 param_1,undefined4 *param_2)
+
+{
+  FARPROC pFVar1;
+  INT_PTR IVar2;
+  undefined4 local_28;
+  undefined4 uStack_24;
+  undefined4 uStack_20;
+  undefined4 uStack_1c;
+  undefined8 local_18;
+  
+                    /* 0xadcf30  77  ctlOverclockGpuLockSet */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    pFVar1 = GetProcAddress(DAT_18143f140,"ctlOverclockGpuLockSet");
+    if (pFVar1 != (FARPROC)0x0) {
+      local_28 = *param_2;
+      uStack_24 = param_2[1];
+      uStack_20 = param_2[2];
+      uStack_1c = param_2[3];
+      local_18 = *(undefined8 *)(param_2 + 4);
+      IVar2 = (*pFVar1)(param_1,&local_28);
+      return IVar2;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlOverclockGpuVoltageOffsetGet @ 180adce10 ===
+
+INT_PTR ctlOverclockGpuVoltageOffsetGet(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadce10  78  ctlOverclockGpuVoltageOffsetGet */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlOverclockGpuVoltageOffsetGet");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adce4e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlOverclockGpuVoltageOffsetSet @ 180adce70 ===
+
+INT_PTR ctlOverclockGpuVoltageOffsetSet(undefined8 param_1,undefined4 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadce70  79  ctlOverclockGpuVoltageOffsetSet */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlOverclockGpuVoltageOffsetSet");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adceaf. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlOverclockPowerLimitGet @ 180add120 ===
+
+INT_PTR ctlOverclockPowerLimitGet(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadd120  80  ctlOverclockPowerLimitGet */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlOverclockPowerLimitGet");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180add15e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlOverclockPowerLimitSet @ 180add180 ===
+
+INT_PTR ctlOverclockPowerLimitSet(undefined8 param_1,undefined4 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadd180  81  ctlOverclockPowerLimitSet */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlOverclockPowerLimitSet");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180add1bf. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlOverclockResetToDefault @ 180add300 ===
+
+INT_PTR ctlOverclockResetToDefault(undefined8 param_1)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadd300  82  ctlOverclockResetToDefault */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlOverclockResetToDefault");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180add32f. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlOverclockTemperatureLimitGet @ 180add1e0 ===
+
+INT_PTR ctlOverclockTemperatureLimitGet(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadd1e0  83  ctlOverclockTemperatureLimitGet */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlOverclockTemperatureLimitGet");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180add21e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlOverclockTemperatureLimitSet @ 180add240 ===
+
+INT_PTR ctlOverclockTemperatureLimitSet(undefined8 param_1,undefined4 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadd240  84  ctlOverclockTemperatureLimitSet */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlOverclockTemperatureLimitSet");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180add27f. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlOverclockVramFrequencyOffsetGet @ 180adcfa0 ===
+
+INT_PTR ctlOverclockVramFrequencyOffsetGet(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadcfa0  85  ctlOverclockVramFrequencyOffsetGet */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlOverclockVramFrequencyOffsetGet");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adcfde. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlOverclockVramFrequencyOffsetSet @ 180add000 ===
+
+INT_PTR ctlOverclockVramFrequencyOffsetSet(undefined8 param_1,undefined4 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadd000  86  ctlOverclockVramFrequencyOffsetSet */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlOverclockVramFrequencyOffsetSet");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180add03f. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlOverclockVramVoltageOffsetGet @ 180add060 ===
+
+INT_PTR ctlOverclockVramVoltageOffsetGet(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadd060  87  ctlOverclockVramVoltageOffsetGet */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlOverclockVramVoltageOffsetGet");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180add09e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlOverclockVramVoltageOffsetSet @ 180add0c0 ===
+
+INT_PTR ctlOverclockVramVoltageOffsetSet(undefined8 param_1,undefined4 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadd0c0  88  ctlOverclockVramVoltageOffsetSet */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlOverclockVramVoltageOffsetSet");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180add0ff. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlOverclockWaiverSet @ 180adcd10 ===
+
+INT_PTR ctlOverclockWaiverSet(undefined8 param_1)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadcd10  89  ctlOverclockWaiverSet */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlOverclockWaiverSet");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adcd3f. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlPanelDescriptorAccess @ 180adb870 ===
+
+INT_PTR ctlPanelDescriptorAccess(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadb870  90  ctlPanelDescriptorAccess */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlPanelDescriptorAccess");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adb8ae. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlPciGetProperties @ 180add340 ===
+
+INT_PTR ctlPciGetProperties(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadd340  91  ctlPciGetProperties */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlPciGetProperties");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180add37e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlPciGetState @ 180add3a0 ===
+
+INT_PTR ctlPciGetState(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadd3a0  92  ctlPciGetState */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlPciGetState");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180add3de. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlPixelTransformationGetConfig @ 180adb7b0 ===
+
+INT_PTR ctlPixelTransformationGetConfig(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadb7b0  93  ctlPixelTransformationGetConfig */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlPixelTransformationGetConfig");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adb7ee. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlPixelTransformationSetConfig @ 180adb810 ===
+
+INT_PTR ctlPixelTransformationSetConfig(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadb810  94  ctlPixelTransformationSetConfig */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlPixelTransformationSetConfig");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adb84e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlPowerGetEnergyCounter @ 180add4d0 ===
+
+INT_PTR ctlPowerGetEnergyCounter(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadd4d0  95  ctlPowerGetEnergyCounter */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlPowerGetEnergyCounter");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180add50e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlPowerGetLimits @ 180add530 ===
+
+INT_PTR ctlPowerGetLimits(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadd530  96  ctlPowerGetLimits */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlPowerGetLimits");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180add56e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlPowerGetProperties @ 180add470 ===
+
+INT_PTR ctlPowerGetProperties(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadd470  97  ctlPowerGetProperties */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlPowerGetProperties");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180add4ae. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlPowerSetLimits @ 180add590 ===
+
+INT_PTR ctlPowerSetLimits(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadd590  98  ctlPowerSetLimits */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlPowerSetLimits");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180add5ce. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlPowerTelemetryGet @ 180add2a0 ===
+
+INT_PTR ctlPowerTelemetryGet(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadd2a0  99  ctlPowerTelemetryGet */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlPowerTelemetryGet");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180add2de. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlReservedCall @ 180adaf40 ===
+
+INT_PTR ctlReservedCall(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadaf40  100  ctlReservedCall */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlReservedCall");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adaf7e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlSetBrightnessSetting @ 180adb6f0 ===
+
+INT_PTR ctlSetBrightnessSetting(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadb6f0  101  ctlSetBrightnessSetting */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlSetBrightnessSetting");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adb72e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlSetCurrentScaling @ 180adba50 ===
+
+INT_PTR ctlSetCurrentScaling(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadba50  102  ctlSetCurrentScaling */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlSetCurrentScaling");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adba8e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlSetCurrentSharpness @ 180adb450 ===
+
+INT_PTR ctlSetCurrentSharpness(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadb450  103  ctlSetCurrentSharpness */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlSetCurrentSharpness");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adb48e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlSetIntelArcSyncProfile @ 180adbdc0 ===
+
+INT_PTR ctlSetIntelArcSyncProfile(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadbdc0  104  ctlSetIntelArcSyncProfile */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlSetIntelArcSyncProfile");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adbdfe. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlSetLACEConfig @ 180adbb10 ===
+
+INT_PTR ctlSetLACEConfig(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadbb10  105  ctlSetLACEConfig */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlSetLACEConfig");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adbb4e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlSetPowerOptimizationSetting @ 180adb690 ===
+
+INT_PTR ctlSetPowerOptimizationSetting(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadb690  106  ctlSetPowerOptimizationSetting */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlSetPowerOptimizationSetting");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adb6ce. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlSetRuntimePath @ 180adae80 ===
+
+INT_PTR ctlSetRuntimePath(longlong param_1)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadae80  107  ctlSetRuntimePath */
+  if (DAT_18143f140 == (HMODULE)0x0) {
+    if (*(longlong *)(param_1 + 0x18) != 0) {
+      DAT_18143f148 = param_1;
+      return 0;
+    }
+  }
+  else {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlSetRuntimePath");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adaeaf. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlSoftwarePSR @ 180adbb70 ===
+
+INT_PTR ctlSoftwarePSR(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadbb70  108  ctlSoftwarePSR */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlSoftwarePSR");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adbbae. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlSwitchMux @ 180adbd00 ===
+
+INT_PTR ctlSwitchMux(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadbd00  109  ctlSwitchMux */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlSwitchMux");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adbd3e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlTemperatureGetProperties @ 180add660 ===
+
+INT_PTR ctlTemperatureGetProperties(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadd660  110  ctlTemperatureGetProperties */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlTemperatureGetProperties");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180add69e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlTemperatureGetState @ 180add6c0 ===
+
+INT_PTR ctlTemperatureGetState(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadd6c0  111  ctlTemperatureGetState */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlTemperatureGetState");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180add6fe. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlUnlinkDisplayAdapters @ 180adc070 ===
+
+INT_PTR ctlUnlinkDisplayAdapters(undefined8 param_1)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadc070  112  ctlUnlinkDisplayAdapters */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlUnlinkDisplayAdapters");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adc09f. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE ctlWaitForPropertyChange @ 180adaee0 ===
+
+INT_PTR ctlWaitForPropertyChange(undefined8 param_1,undefined8 param_2)
+
+{
+  FARPROC UNRECOVERED_JUMPTABLE;
+  INT_PTR IVar1;
+  
+                    /* 0xadaee0  113  ctlWaitForPropertyChange */
+  if (DAT_18143f140 != (HMODULE)0x0) {
+    UNRECOVERED_JUMPTABLE = GetProcAddress(DAT_18143f140,"ctlWaitForPropertyChange");
+    if (UNRECOVERED_JUMPTABLE != (FARPROC)0x0) {
+                    /* WARNING: Could not recover jumptable at 0x000180adaf1e. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      IVar1 = (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+      return IVar1;
+    }
+  }
+  return 0x40000001;
+}
+
+
+
+=== DECOMPILE entry @ 180e39e40 ===
+
+void entry(undefined8 param_1,int param_2,undefined8 param_3)
+
+{
+  if (param_2 == 1) {
+    __security_init_cookie();
+  }
+  FUN_180e39d18(param_1,param_2,param_3);
+  return;
+}
+
+
+
+=== NAMED FUNCS ===
+1800fec36  FUN_1800fec36  size=93
+1800fec93  FUN_1800fec93  size=208
+18013bfec  FUN_18013bfec  size=38
+1801fec5f  FUN_1801fec5f  size=175
+180246fec  FUN_180246fec  size=122
+180264fec  FUN_180264fec  size=120
+18029cfec  FUN_18029cfec  size=9
+1804fec86  FUN_1804fec86  size=311
+18050afec  FUN_18050afec  size=28
+18050cfec  FUN_18050cfec  size=156
+180845fec  FUN_180845fec  size=217
+1808cfece  FUN_1808cfece  size=318
+1809fec73  FUN_1809fec73  size=190
+180afec10  FUN_180afec10  size=518
+180b5fec0  FUN_180b5fec0  size=247
+180b6fec0  FUN_180b6fec0  size=361
+180bfec50  FUN_180bfec50  size=308
+180c5fec0  FUN_180c5fec0  size=468
+180d2fec0  FUN_180d2fec0  size=4
+180e2fec0  FUN_180e2fec0  size=310
+180e33604  __std_fs_create_directory  size=120
+180e393fc  BCryptCreateHash  size=6
+180e395fc  __scrt_acquire_startup_lock  size=57
+180e398c8  __scrt_release_startup_lock  size=36
+180e3c62c  _CreateFrameInfo  size=58
+180e62d60  __acrt_lowio_create_handle_array  size=165
+180e64a20  __dcrt_get_or_create_narrow_environment_nolock  size=59
+180e64a5c  __dcrt_get_or_create_wide_environment_nolock  size=59
+
+=== STRING XREFS ===
+180f8cec0, -> Key type: 1=AT_KEYEXCHANGE (default), 2=AT_SIGNATURE
+180f99738, -> ipsec Internet Key Exchange
+180092355,18009235c, -> dataChannelIdentifier
+180092450,180092457, -> protocolKcpBytesSent
+18009246b,180092472, -> protocolKcpBytesReceived
+180092486,18009248d, -> protocolKcpRsfecBytesSent
+1800924a1,1800924a8, -> protocolKcpRsfecBytesReceived
+1800924bc,1800924c3, -> protocolKcpRecvValid
+1800924d7,1800924de, -> protocolKcpResendValid
+1800924f2,1800924f9, -> protocolKcpFecValid
+180092543,18009254a, -> delayRecordKcpNum
+18035e55f,180b63c93,180b82ef3, -> candidate-pair
+180092c7c,180092c83, -> localCandidateId
+180092c9f,180092ca6, -> remoteCandidateId
+180093408, -> abstract-ice-candidate
+180093751,180093758, -> candidateType
+18035e56f,180b63d61,180b6e9f1, -> local-candidate
+18035e57f,180b63eef,180b6ea31, -> remote-candidate
+180094b5d,180094b64, -> dataChannelsOpened
+180094b76,180094b7d, -> dataChannelsClosed
+18009d69d,18009d6a4, -> selectedCandidatePairId
+18009d7bc,18009d7c3, -> selectedCandidatePairChanges
+1800a2869, -> Regather candidates on failed networks
+1800a387f, -> candidates != nullptr
+1800a6d42,1800a5c22, -> : Gathered candidate: 
+1800a6db2,1800a5c94, -> Discarding candidate because port is already done gathering.
+1800a5dc0, -> send candidate type: 
+1800a5e01, -> Discarding candidate because it doesn't match filter.
+1800a6f61,1800a601f, -> : Port completed gathering candidates.
+1800a7027,1800a60ed, -> : Port encountered error while gathering candidates.
+1800a4067, -> All candidates gathered for pooled session.
+1800a4107, -> All candidates gathered for 
+1800a2c66,1800a2c6d, ->  candidates
+1800a6ee5, -> OnCandidateErrorForPunch, do nothing
+1800a7973, -> AllocationSequence: UDPPort will be handling the STUN candidate generation.
+1800fae90, -> webrtc-datachannel
+1800f9541,1800f9548,1800f9691, -> candidate
+1800fc916, -> :<candidate-str>
+1800fccf7, -> Unsupported candidate type.
+1800fd51f, -> Invalid TCP candidate type.
+1800fd54a, -> Invalid non-TCP candidate
+1800f762f,1800f644e, -> webrtc-datachannel
+1800f7a98,1800f7aa7,180101eb7, -> x-uuremote-mix-kcp
+180110a3b, -> : A new connection was created on an existing remote address. New remote candidate: 
+180113314,18011331b, -> . Number of candidates created: 
+180114aa6, -> Trying to change candidate pool size after pool was frozen.
+18014818a,180148193,1801481a8, -> Call::CreateRsFecReceiveStream
+18014834e,180148357,18014836c, -> Call::DestroyRsFecReceiveStream
+18015bd3f,18015bd4e,18015b428, -> WebRTC-RsFecEnabled
+18015d8f9, -> RSFEC effective max-k cannot change after the first valid send codec: old=
+180162222, -> Multiple RSFEC streams in local SDP, but our implementation only supports a single RSFEC stream. Will not enable RSFEC f
+18015ca8e, -> Duplicate RSFEC codec: ignoring PT=
+18102d6e0, -> kRsFec
+180169f65,180169f71, -> WebRTC-RsFecMaxK
+18015bf3f,18015bf4e,18015b620, -> WebRTC-RsFecRtxAsSource
+180178462,18017846b,180178481, -> PeerConnection::CreateDataChannel
+180178d77,180178d9c, -> Can't change candidate pool size after calling SetLocalDescription.
+180179795,18017979e,1801797b3, -> PeerConnection::RemoveIceCandidates
+18017aedb, -> [FecOnTcp] Selected candidate pair changed: local=[
+18017b1c1, -> IPv6 candidates on Wi-Fi are disabled.
+18017b1fe, -> TCP candidates are disabled.
+18017b23e, -> Do not gather candidates on high-cost networks
+18017b27e, -> Disable candidates on link-local network interfaces.
+18017c05c, -> OnTransportControllerCandidatesGathered: content name 
+18017c2b8, -> OnTransportControllerCandidatesRemoved: empty content name in candidate 
+18017d4e7,18017d546, -> WebRTC.PeerConnection.CandidatePairType_TCP
+18017d53a,18017d546, -> WebRTC.PeerConnection.CandidatePairType_UDP
+18017f69e,18017f6a5, ->  signalCandidateFilterChanged is_empty_before=
+1801930fc,180195dbc, -> windows cpu not support avx2 or bmi2 cannot use kcp
+18019d597, -> Our RSFEC implementation only supports protecting a single media streams. This session has multiple media streams howeve
+18019d666, -> WebRTC-RsFecEnabled trial is not on; not allocating RSFEC SSRC.
+1801a1ed1,1801a1ed8, -> , use_candidate=
+1801a67b8, -> : Updating local candidate type to srflx.
+1801a6985, -> : Updating local candidate type to prflx.
+1801ed8d3,1801ed8df,1801edafa, -> ..\..\call\rsfec_receive_stream_impl.cc
+1801edb17, -> RsFecReceiveStreamImpl: 
+1801ed926, -> Invalid RsFec payload type given. This RsFecReceiveStream will therefore be useless.
+1801ed955, -> Invalid RsFec SSRC given. This RsFecReceiveStream will therefore be useless.
+1801ed984, -> No protected media SSRC supplied. This RsFecReceiveStream will therefore be useless.
+1801ed8f0, -> The supplied RsFecConfig contained multiple protected media streams, but our implementation currently only supports prot
+1801fe2b6, -> remote_rsfec_max_k
+1801fe33b, -> remote_rsfec_rtx_as_source
+180202380,18020238f, -> , rsfec: {payload_type: 
+1802035cc, -> P2PTransportChannel::P2PTransportChannel connect SignalCandidateFilterChanged this=
+1802042ff, -> start to disconnect SignalCandidateFilterChanged, this=
+180206f04, -> surface_ice_candidates_on_ice_transport_type_changed is ineffective since we do not gather continually.
+180207910, -> Ping interval of candidate pairs is shorter when ICE is strongly connected than that when ICE is weakly connected
+180207990, -> Ping interval of backup candidate pairs is shorter than that of general candidate pairs when ICE is strongly connected
+1802079c4, -> Ping interval of stable and writable candidate pairs is shorter than that of general candidate pairs when ICE is strongl
+180207b79, -> Cannot gather candidates because ICE parameters are empty ufrag: 
+1802085f4, -> Connection already exists for peer reflexive candidate: 
+1802086f6,1802086fd, ->  candidate: 
+18020907e, -> Dropping ICE candidate with hostname address (no AsyncResolverFactory)
+180209015, -> Asynchronously resolving ICE candidate hostname 
+180209136, -> Dropping a remote candidate because its ufrag 
+180209257, -> A remote candidate arrives with an unknown ufrag: 
+180209679, -> Failed to resolve ICE candidate hostname 
+18020984b, -> ICE candidate hostname 
+18020976a, -> Resolved ICE candidate hostname 
+180209b02, -> Removed remote candidate 
+180208e37, -> Attempt to change a remote candidate. Existing remote candidate: 
+180208e24,180208e2b, -> New remote candidate: 
+180209d71, -> Pruning candidate from old generation: 
+180209e23, -> Duplicate candidate: 
+18020f9fa, -> remote_stun_candidate.address:
+18021243e, -> fatal error on GetStunCandidateGroupPairPriority, unknown stun can group pair
+18020deb4, -> no candidate group pair found, either side maybe none NAT, skip punching
+18021978e, -> candidate has address of zero
+18021987f, -> candidate has port below 1024, but not 80 or 443
+180219851, -> candidate has port of 80 or 443 with private IP address
+18023bb93,18023bb9c,18023bbb1, -> SdpOfferAnswerHandler::AddIceCandidate
+18023bc00, -> AddIceCandidate: PeerConnection is closed.
+18023bce8, -> AddIceCandidate: ICE candidates can't be added without any remote session description.
+18023bd23, -> AddIceCandidate: Candidate is null.
+18023bd5e, -> AddIceCandidate: Candidate cannot be used.
+18023bd92, -> AddIceCandidate: Not ready to use candidate.
+18023c4cf,18023c4d8,18023c4ed, -> SdpOfferAnswerHandler::RemoveIceCandidates
+18023c537, -> RemoveIceCandidates: PeerConnection is closed.
+18023c6cc, -> RemoveIceCandidates: ICE candidates can't be removed without any remote session description.
+18023c6fb, -> RemoveIceCandidates: candidates are empty.
+18023c5f9, -> RemoveIceCandidates: Failed to remove candidates. Requested 
+18023c677, -> RemoveIceCandidates: Error when removing remote candidates: 
+18023229b,1802322a4,1802322b9, -> SdpOfferAnswerHandler::UpdateTransceiversAndDataChannels
+18023d1c4,18023d1cb, ->  mix_kcp=
+18023d1b4,18023d1bb, ->  test_mix_kcp1=
+18023d19b,18023d1a2, ->  test_mix_kcp2=
+18023d18a,18023d191, ->  kcp_version=
+18023394c, -> UseCandidatesInRemoteDescription: Not ready to use candidate.
+18023c046, -> Invalid candidate: 
+18023bf06, -> ReadyToUseRemoteCandidate: Invalid candidate. 
+180240465, -> Fail to SetupQuicDataChannelTransport_n for mid: 
+1802350a5, -> Description contains invalid candidates.
+18023be22,18023be2e, -> WebRTC.PeerConnection.AddIceCandidate
+ -> AddIceCandidate failed because the session was shut down
+ -> Error processing ICE candidate
+180256d77, -> Not adding candidate because the JsepTransport doesn't exist. Ignore it.
+180256fa6, -> Not removing candidate because it does not have a transport name set: 
+1802570bd, -> Not removing candidate because the JsepTransport doesn't exist.
+180261591, -> DisconnectDataChannel called when sctp_transport_ is NULL.
+1802629d2, -> Failed to create DataChannel from the OPEN message.
+18037e3b4,180263415,180262b42, -> Created SctpDataChannel for label: 
+18037e31f,18026338a,1802634ac, -> Created QuicDataChannel for label: 
+18026355a, -> create DataChannelWrapper for label: 
+180264031, -> DisconnectQuicDataChannel called when sctp_transport_ is NULL.
+180275171, -> RSFEC enabled but no RSFEC SSRC given; disabling FEC.
+1802751ae, -> RSFEC enabled but no protected media SSRC given; disabling FEC.
+1802750b1, -> RsFecConfig contained multiple protected media streams, but Phase 1 only supports a single stream; disabling FEC.
+180278cad, -> External FEC (FlexFEC or RSFEC) and ULPFEC both configured. Disabling ULPFEC.
+181066c00, -> DPX (Digital Picture Exchange) image
+1802ad4aa, -> Invalid number of merging MVP candidates: %d.
+
+180355ace,180355ada,180355b12, -> ..\..\modules\rtp_rtcp\source\rsfec_receiver.cc
+1803546ca, -> RSFEC receiver configured max-k=
+180354893, -> Dropping RTX-recovered RSFEC source because RRID normalization failed.
+18035494b, -> Big gap in RSFEC source seq numbers; resetting recent_media_ + blocks_.
+180354a7c, -> Oversized RSFEC media packet (size=
+180354e07, -> Malformed RSFEC header
+180354e43, -> RSFEC protected_ssrc mismatch: 
+180354dd5, -> RSFEC k=
+180354eff, -> RSFEC repair payload truncated: header_size=
+180354fb3, -> RSFEC block 
+180355b2f, -> RSFEC mask contains more bits than k
+180355afb, -> RSFEC mask popcount 
+180355853,18035585a, ->  from RSFEC block_id=
+18035bca9, -> remote candidate generation maybe changed
+18035bcfd, -> new candidate pairs created from a new local candidate
+18035bd19, -> new candidate pairs created from a new remote candidate
+18035bd35, -> a new candidate pair created from an unknown remote address
+18035bd7d, -> candidate pair state changed
+18035bd96, -> selected candidate pair destroyed
+181089d98, -> localcandidate
+181089da0, -> remotecandidate
+181089d70, -> googCandidatePair
+181089db0, -> datachannel
+18036e723, ->  is not ready to use the remote candidate because the local or remote description is not set.
+18036e797, -> Candidate has an unknown component: 
+18037932d, -> Failed to initialize the SCTP data channel due to invalid DataChannelInit.
+18037a67e,18037cec4, -> DataChannel received unexpected CONTROL message, sid = 
+18037a4c2,18037cd08, -> DataChannel received OPEN_ACK message, sid = 
+18037a6c2,18037cf08, -> DataChannel failed to parse OPEN_ACK message, sid = 
+18037a4f7,18037cd3d, -> DataChannel received DATA message, sid = 
+180379e72,18037c6e5, -> Sending data as ordered for unordered DataChannel because the OPEN_ACK message has not been received.
+180379fc7,18037c818, -> Closing the DataChannel due to a failure to send data, send_result = 
+18037ab12,18037d3e2, -> Closing the DataChannel due to a failure to send the CONTROL message, send_result = 
+18037bddd, -> Failed to initialize the QUIC data channel due to invalid DataChannelInit.
+18038e58a,18038e591, ->  fec_suppress_candidate_ms=
+18038e517,18038e51e, ->  fec_resume_candidate_ms=
+180393e1c,180393e2b,1803939d1, -> ..\..\modules\rtp_rtcp\source\rsfec_sender.cc
+1803939ee, -> RSFEC sender configured max-k=
+180393e5d, -> RsFec: source packet too large (
+18039408e, -> RSFEC window too large: k=
+18039417b, -> RSFEC seq span 
+180394465,18039446c, ->  bytes with RSFEC overhead is larger than 
+180394b99, -> RSFEC: generated 
+18052b0ce,18052b0da,18052b301, -> ..\..\media\sctp\dckcp_transport.cc
+180529f23, -> DcKcpTransport
+18052a0f2, -> create kcp transport 
+18052a191, -> release kcp transport 
+18052a255, -> release kcp transport end
+18052a4b9,18052a4c0, ->  KcpWriteLog=
+18052a5e0, -> ->Start kcp local=
+18052a5a8,18052a5af, -> , kcp_version=
+18052a598,18052a59f, -> , enable_mix_kcp=
+18052a7d1, -> kcp fec task_queue_factory_=
+18052a7e4,18052a7f3, -> KcpRsFecWorker
+18052aac0,18052aac7, ->  kcp mss=
+18052ac50,18052ac59,18052ac6e, -> DcKcpTransport::SendPacket
+18052b36c, -> kcp i think this is a surprice
+18052b0eb, -> kcp ikcp_parse_recover_info failed ret=
+18052c772, -> kcp fec ikcp_packet_bzero_change_info_for_dup_and_send failed, buff_len=
+18052c7c9, -> kcp fec ikcp_encode_fec_data failed, buff_len=
+18052c88f, -> kcp fec ikcp_encode_fec_data failed, ret=
+18052c991, -> kcp fec generator need decrease fast ack << need_decrease_fast_ack_after=
+18052cdec, -> kcp fec recv parase fec error use_len=
+18052d05f, -> kcp_sn=
+18052cfde, -> kcp FEC recovered packet SN mismatch: 
+180736373, -> input psh from fec: sn=%lu ts=%lu una=%lu kcp->ts=%lu kcp->una=%lu
+1807363c6, -> input psh from fec dup: sn=%lu ts=%lu una=%lu kcp->ts=%lu kcp->una=%lu
+180736a60, -> kcp resend sn= %lu xmit=%lu wait=%ld rto=%lu una=%lu segment->fastack=%lu
+180736b1d, -> kcp resend sn= %lu xmit=%lu segment->fastack=%lu
+180737910,18073791c,1807379d3, -> ..\..\media\sctp\dckcp_fec_generator.cc
+1807379f0, -> DcKcpFecGenerator::UpdateNetWorkInfo ignored invalid loss_ratio=
+18073796f, -> DcKcpFecGenerator, SetFecParam change_fec_network_state loss_ratio_=
+ ->  dkcp fec gen find error 
+180738270, -> start_kcp_sn=
+1807383e0,1807383e7, -> , start_kcp_sn=
+1807399ec,1807399fb,180739ac4, -> ..\..\media\sctp\dckcp_fec_receiver.cc
+18073a056,18073a065,18073a186, -> , start_kcp_sn: 
+18073a081,18073a088,18073a17d, -> , kcp_sn_bitmask: 0b
+1807395f6, -> Failed to find kcp_sn 
+180e7ecb3, -> SSLv3/TLS read server key exchange
+180e7ecf4, -> SSLv3/TLS write client key exchange
+180e7ed76, -> SSLv3/TLS write key exchange
+180e7edb7, -> SSLv3/TLS read client key exchange
+ -> unknown key exchange type
+ -> construct_key_exchange_tbs
+ -> ssl_log_rsa_client_key_exchange
+ -> tls_client_key_exchange_post_work
+ -> tls_construct_client_key_exchange
+ -> tls_construct_server_key_exchange
+ -> tls_post_process_client_key_exchange
+ -> tls_process_client_key_exchange
+ -> tls_process_key_exchange
+180f00a38, -> LoaderCtxVPL::BuildListOfCandidateLibs
+180b2a23c,180b2a3f4,180af0e01, -> candidate
+180a5fa2a,180a5fa3e,180a5fbca, -> [session:{}] is invalid when the SendControlData is called
+180a35830,180a31fd2,180a31fd9, -> WebRTC-FrameLatency/Enabled/WebRTC-Pacer-FastRetransmissions/Enabled/WebRTC-Paced-Sender-02/Enabled/WebRTC-VideoCaptureI
+180f3c38f,180f3c396,180f3c3b1, -> [session:{}] [ice:{}] [a:{}] [i:{}] add candidate failed error_code:{}
+180f3124a,180f31251,180f3126c, -> [session:{}] [ice:{}] StreamerDataChannelEventLoop cancelled
+180f30dd0,180f30dd7,180f30df2, -> [session:{}] [ice:{}] StreamerDataChannelEventLoop, AsyncWaitStreamerData failed, err:{}
+180f30fdb,180f30fe2,180f31086, -> [session:{}] [ice:{}] StreamerDataChannelEventLoop, failed to parse json: {}
+180f3a652,180f3a659,180f3a674, -> [session:{}] [ice:{}] send candidates finish
+180f39dbd,180f39dc4,180f39ddf, -> [session:{}] [ice:{}] start send candidates
+180f39f04,180f39f0b,180f39f26, -> [session:{}] [ice:{}] [a:{}] [i:{}] candidate collect ended or canceled
+180f3a105,180f3a10c,180f3a127, -> [session:{}] [ice:{}] [a:{}] [i:{}] candidate has no value, skip
+180f3a4ca,180f3a4d1,180f3a4ec, -> [session:{}] [ice:{}] [a:{}] [i:{}] failed to send candidate 
+180afee66,180afee75,180b03376, -> send_candidates
+180afeebe,180afeecd,180b03397, -> send_offer
+180aff4a9,180aff4b0,180affa09, -> [session:{}] [ice:{}] peer connection exchanging candidate
+180b03c9e,180b03cb1,180b011be, -> [session:{}] [ice:{}] add candidate failed because of type {}
+180f35484,180f3548b,180f354a6, -> [session:{}] [ice:{}] [a:{}] [i:{}] generate new candidate current generate count {}
+180b0385b,180b03867,180b00d7b, -> [session:{}] [ice:{}] [a:{}] [i:{}] drop this candidate because no sdp {}
+180b039cb,180b039de,180b00eeb, -> [session:{}] [ice:{}] candidate is empty
+180b03b60,180b03b75,180b01080, -> [session:{}] [ice:{}] [a:{}] [i:{}]  receive new candidate current candidate count {}
+180b0b1fd,180b0b209,180b08a6d, -> [session:{}] [ice:{}] [a:{}] [i:{}] add ice candidate error :{} detail:{}
+180b0ab1a,180b0ab21,180b0838a, -> [session:{}] [ice:{}] [a:{}] [i:{}] Failed to create candidate :{},{}
+180b0ae63,180b0ae6e,180b086d3, -> [session:{}] [ice:{}] [a:{}] [i:{}]  add ice candidate {}
+180b29852, -> Signal connection received kCandidate type but candidate is empty
+180b65c9c,180b65ca8,180b85565, -> [session:{}] no selected_candidate_pair found
+180b883f2,180b883f9,180b6b322, -> [session:{}] [ice:{}] [a:{}] [i:{}] new candidate from sdp_mid:{} sdp_mline_index:{} type:{} address:{}
+180b880e1,180b880e8,180b6b011, -> [session:{}] [ice:{}] [a:{}] [i:{}] candidate to string error {}
+180b875a1,180b875a8,180b6a4d1, -> [session:{}] [ice:{}] [a:{}] [i:{}] OnIceCandidateError address:{}  port:{} url:{}  error_code:{} error_ms:{}
+180b86c10,180b86c28,180b69b40, -> [session:{}] [ice:{}] [a:{}] [i:{}] OnIceSelectedCandidatePairChanged : {} local: {}, remote: {}
+180b89538,180b8953f,180b6c468, -> [session:{}] [ice:{}] [a:{}] [i:{}] candidate collect finished
+180b78df2,180b91932, -> bmsg_push
+180b82d2a,180b82d3c,180b83647, -> just find error m_last_sent_bytes={} datachannel_bytes_sent={} m_last_real_sent_bytes={} datachannel_sctp_bytes_sent={}
+180b98452,180b98459, -> Unknown DataChannel state: 
+180c148cb,180c148e0, -> nvenc all initialization candidates failed: {}
+180c2cee1,180c2cee8, -> NVENC {} input frame attachment failed; candidate will be cleaned up by session
+180c2cdd0,180c2cdd7, -> NVENC {} converter rejected registered input texture; candidate will be cleaned up by session
+180c30eb8,180c30ebf, -> amf candidate selected config {} path {}
+180c34e1b,180c34e2f, -> qsv {} HEVC initialization rejected LowPower, trying next input candidate
+180d0855a,180d08569, -> best_remote_candidate_group
+180d0857d,180d0858c, -> remote_stun_candidate_select_delta
+180d084f1,180d08500, -> local_stun_candidate_groups
+180d08514,180d08523, -> remote_stun_candidate_groups
+180d08537,180d08546, -> best_local_candidate_group
+180d1209e,180d120a8,180d09400, -> candidate_type
+180d0972d,180d0973c, -> dc_pro_kcp_resend_valid_recv
+180d09750,180d0975f, -> dc_pro_kcp_rsfec_valid_recv
+180d096a1,180d096b0, -> dc_msg_bytes_proto_kcp_recv
+180d096c4,180d096d3, -> dc_pro_kcp_rsfec_send_bytes
+180d096e7,180d096f6, -> dc_pro_kcp_rsfec_recv_bytes
+180d0970a,180d09719, -> dc_pro_kcp_valid_recv
+180d0967e,180d0968d, -> dc_msg_bytes_proto_kcp_sent
+180d09567,180d09576, -> selected_candidate_pair_changes
+180d16d0a,180d16d19, -> ControlledCallback.OnReceiveControlData
+180d16bc0,180d16bd3, -> ControllerCallback.OnReceiveDataChannel
+180d165d3,180d165e2, -> ControllerCallback.OnReceiveControlData
+180d17534,180d17547, -> ControlledCallback.OnReceiveDataChannel
+180d18916, -> add candidate failed
+180d188ec, -> ice candidate failed
+180d1886e, -> candidate to sdp failed
+180d188c2, -> create candidate failed
+180d18b25, -> generate candidate failed
+180d18b11, -> receive candidate failed
+180d18d12, -> state: exchanging candidate
+1812cdfd0, -> ExchangeControlledInterface
+1812cdfd4, -> ExchangeControllerInterface
+ -> .?AV<lambda_0>@?0??MaybeObfuscateAddress@Port@cricket@@AEAA_NPEAVCandidate@3@Vstring_view@absl@@_N@Z@
+ -> .?AV<lambda_20>@?0??AddIceCandidate@PeerConnection@webrtc@@UEAAXV?$unique_ptr@VIceCandidateInterface@webrtc@@U?$default_
+ -> .?AV<lambda_0>@?0???0Connection@cricket@@IEAA@V?$WeakPtr@VPort@cricket@@@rtc@@_KAEBVCandidate@2@@Z@
+ -> .?AV<lambda_8>@?0??ResolveHostnameCandidate@P2PTransportChannel@cricket@@QEAAXAEBVCandidate@3@@Z@
+ -> .?AV<lambda_0>@?0???0DcKcpTransport@webrtc@@QEAA@PEAVThread@rtc@@PEAVPacketTransportInternal@4@PEAVClock@2@V?$function@$
+ -> .?AV<lambda_1>@?0???0DcKcpTransport@webrtc@@QEAA@PEAVThread@rtc@@PEAVPacketTransportInternal@4@PEAVClock@2@V?$function@$
+ -> .?AV<lambda_2>@?0???R<lambda_4>@?0??Start@DcKcpTransport@webrtc@@QEAA_NHHH_NE@Z@QEBA?A?<auto>@@XZ@
+ -> .?AV<lambda_1>@?0???R<lambda_4>@?0??Start@DcKcpTransport@webrtc@@QEAA_NHHH_NE@Z@QEBA?A?<auto>@@XZ@
+ -> .?AV<lambda_0>@?0??TryToRecoverPackets@DcKcpFecReceiver@webrtc@@IEAA_NI@Z@
+ -> .?AV<lambda_1>@?1??StreamerDataChannelEventLoop@ControlledSession@streamer@@QEAA?AV?$awaitable@Verror_code@std@@Vany_io_
+ -> .?AV<lambda_1>@?1??AddCandidate@?$PeerConnectionImpl@VControlledPeerConnection@pc@streamer@@@pc@streamer@@QEAA?AVerror_c
+ -> .?AV<lambda_1>@?1??AddCandidate@?$PeerConnectionImpl@VControllerPeerConnection@pc@streamer@@@pc@streamer@@QEAA?AVerror_c
