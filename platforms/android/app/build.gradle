@@ -34,7 +34,12 @@ android {
 
 }
 
+configurations {
+    protocArtifact
+}
+
 dependencies {
+    protocArtifact 'com.google.protobuf:protoc:3.25.3:linux-x86_64@exe'
     implementation 'com.google.protobuf:protobuf-javalite:3.25.3'
     implementation 'io.github.webrtc-sdk:android:125.6422.07'
 }
