@@ -1,0 +1,171 @@
+syntax = "proto3";
+package gv_pb;
+
+// 本文件由二进制元数据还原：字段名与字段编号与官方 4.48.1 完全一致。
+// 标量宽度按语义推断（同 wire type 下 int32/int64/bool/enum 互通）。
+
+enum FPS { unknown = 0; fps30 = 1; fps60 = 2; fps90 = 3; fps144 = 4; }
+enum ClientType { clientUnspecified = 0; clientIos = 1; clientAndroid = 2; clientWindows = 3; clientMac = 4; }
+enum VideoQuality { unknown = 0; fast = 1; general = 2; hd = 3; bluray = 4; auto = 5; custom = 6; }
+enum CodecType { unknown = 0; h264 = 1; h265 = 2; }
+enum CaptureMode { unknown = 0; desktop = 1; window = 2; mumu = 3; hook = 4; global = 5; }
+enum ScreenType { physics = 0; virtual = 1; super = 2; }
+enum ChooseResolutionType { chooseTypeUnknown = 0; chooseTypeDefault = 1; chooseTypeFollowLocal = 2; chooseTypeFollowRemote = 3; chooseTypeResolution = 4; }
+enum ChromaFormat { unknown = 0; chromaFormat420 = 1; chromaFormat422 = 2; chromaFormat444 = 3; chromaFormat400 = 4; }
+enum ControlConnectType { unknown = 0; normal = 1; assistance = 2; }
+enum TouchEventType { TOUCH_POINT_UNDEFINED = 0; TOUCH_POINT_START = 1; TOUCH_POINT_MOVE = 2; TOUCH_POINT_END = 3; TOUCH_POINT_CANCEL = 4; }
+
+message Message {
+  int64 seq = 1;
+  int64 timestamp = 2;
+  oneof payload {
+    SimpleAction simple_action = 3;
+    LaunchApp launch_app = 4;
+    ShowApp show_app = 5;
+    MumuOperate mumu_operate = 6;
+    ScreenSources screens = 7;
+    CaptureChange capture_change = 8;
+    CaptureConfig capture_config = 9;
+    RomMessage rom_message = 10;
+    SendToRom send_to_rom = 11;
+    ReportError report_error = 12;
+    SystemMetrics system_metrics = 13;
+    ReportQosStats report_qos_stats = 14;
+    SystemStateChange system_state_change = 15;
+    QuerySystemState query_system_state = 16;
+    ClipboardChange clipboard_change = 17;
+    CodecNegotiation codec_negotiation = 18;
+    CaptureConfigResponse capture_config_response = 19;
+    InputEvent input_event = 20;
+    RpcRequest rpc_request = 21;
+    RpcResponse rpc_response = 22;
+    ActiveWindowChange active_window_change = 23;
+    CaptureSettingSync capture_setting_sync = 25;
+    RemoteDownloadPath remote_download_path = 26;
+    PortMappingFrame port_mapping_frame = 27;
+    TerminalSessionChanged terminal_session_changed = 28;
+  }
+}
+
+message ConnectOptions {
+  CaptureMode capture_type = 1;
+  int32 type_value = 2;
+  CaptureParams capture_params = 3;
+  repeated DecoderCap decoder_cap_list = 4;
+  bool force_virtual_display = 5;
+  repeated VirtualDisplayMode virtual_display_modes = 6;
+  VirtualDisplayInitResolution virtual_display_init_resolution = 7;
+  ClientType client_type = 8;
+  string device_id = 9;
+  ControlConnectType control_connect_type = 10;
+  FeatureFlag feature_flag = 11;
+  string client_version = 12;
+  string entitlement_data = 13;
+  int64 current_server_time = 14;
+}
+
+message CaptureParams {
+  int32 fps = 1;
+  VideoQuality video_quality = 2;
+  bool cursor_capture = 3;
+  ChooseResolutionType choose_resolution_type = 4;
+  Resolution local_resolution = 5;
+  Resolution choose_resolution = 6;
+  ChromaFormat chroma_format = 7;
+  int32 max_custom_bitrate = 8;
+  bool enable_hdr = 9;
+  bool auto_frame_quality = 10;
+  int32 fpsCount = 11;
+}
+
+message DecoderCap { int32 fps = 1; CodecType codec_type = 2; int32 resolution_width = 3; int32 resolution_height = 4; ChromaFormat chroma_format = 5; }
+message EncoderCap { CaptureMode capture_mode = 1; int32 fps = 2; CodecType corec_type = 3; int32 resolution_width = 4; int32 resolution_height = 5; }
+message CodecNegotiation { repeated EncoderCap encoder_cap_list = 1; }
+
+message TouchEvent { TouchEventType event_type = 1; repeated TouchEventPoint touch_points = 2; }
+message TouchEventPoint { int32 id = 1; float x = 2; float y = 3; float radius_x = 4; float radius_y = 5; float angle = 6; float pressure = 7; }
+message InputEvent { TouchEvent touch_event = 1; }
+
+message Resolution { int32 width = 1; int32 height = 2; }
+message Screen {
+  int32 id = 1; int32 fps = 2;
+  repeated Resolution resolutions = 3; Resolution current_resolution = 4;
+  ScreenType screen_type = 5; Resolution init_resolution = 6;
+  bool is_primary_screen = 7; double dpr = 8; DpiScale dpi_scale = 9;
+  string display_name = 10; ChooseResolutionType resolution_type = 11;
+  int32 video_track_index = 12; int32 builtin_screen_type = 13;
+}
+message ScreenSources { repeated Screen screens = 1; int32 current_screen_id = 2; }
+message DpiScale { double scale = 1; }
+
+message CaptureSettingRequest {
+  int32 fps = 1; VideoQuality frame_quality = 2; bool cursor_capture = 3;
+  int32 screen_id = 4; int32 resolution_width = 5; int32 resolution_height = 6;
+  ChromaFormat chorma_format = 7; int32 max_custom_bitrate = 8; int32 dpi_scale = 9;
+  ChooseResolutionType resolution_type = 10; bool enable_hdr = 11;
+  VideoQuality auto_frame_quality = 12; CodecType codec_type = 13;
+  int32 max_scale_width = 14; int32 max_scale_height = 15;
+  int32 resolution_pixel_width = 16; int32 resolution_pixel_height = 17; int32 fpsCount = 18;
+}
+message CaptureSettingResponse { repeated Error errors = 1; }
+message Error { int32 code = 1; string msg = 2; }
+
+message SystemStateChange {
+  oneof which {
+    SdState sd_state = 1;
+    CursorShape cursor_shape = 2;
+    PermissionState permission_state = 3;
+    RemoteAssistFileTransferState remote_assist_file_transfer_state = 4;
+    PrivateScreenState private_screen_state = 5;
+    ClientUiReadyState client_ui_ready_state = 6;
+  }
+}
+message CursorShape {
+  int32 pos_x = 1; int32 pos_y = 2; int32 width = 3; int32 height = 4;
+  bytes byte_value = 5; int32 cursor_type = 6;
+  double coordinate_x_scale = 7; double coordinate_y_scale = 8; int32 screen_id = 9;
+}
+
+message FeatureFlag {
+  int32 ff_capture_setting = 1;
+  int32 ff_simple_action = 2;
+  int32 ff_system_metrics = 3;
+  int32 ff_private_screen = 4;
+  int32 ff_update_acquire = 5;
+  int32 ff_file_transfer_ftp = 6;
+  int32 ff_file_transfer_ftp2 = 7;
+  int32 ff_clipboard = 8;
+  int32 ff_qos_stat = 9;
+  int32 ff_mumu_control = 10;
+  int32 ff_virtual_mouse_device = 11;
+}
+
+message ClipboardChange { int32 format = 1; bytes data = 2; }
+message ReportError { int32 code = 1; string message = 2; }
+message SimpleAction { int32 action = 1; }
+message LaunchApp { string path = 1; }
+message ShowApp { string app_id = 1; }
+message MumuOperate { int32 op = 1; }
+message CaptureChange { int32 change_type = 1; }
+message CaptureConfig { CaptureParams params = 1; }
+message CaptureConfigResponse { repeated Error errors = 1; }
+message RomMessage { bytes byte_value = 1; }
+message SendToRom { bytes data = 1; }
+message SystemMetrics { repeated Metric metrics = 1; }
+message Metric { string key = 1; double value = 2; }
+message ReportQosStats { int32 video_quality = 1; int32 fps = 2; }
+message QuerySystemState { int32 query = 1; }
+message ActiveWindowChange { int32 screen_id = 1; }
+message CaptureSettingSync { int32 fps = 1; int32 frame_quality = 2; int32 chroma_format = 3; int32 resolution_type = 4; }
+message RemoteDownloadPath { string path = 1; }
+message PortMappingFrame { bytes payload = 1; }
+message TerminalSessionChanged { int32 session_id = 1; }
+message RpcRequest { int64 request_id = 1; bytes body = 2; }
+message RpcResponse { int64 request_id = 1; bytes body = 2; }
+message VirtualDisplayMode { int32 width = 1; int32 height = 2; int32 refresh = 3; }
+message VirtualDisplayInitResolution { int32 width = 1; int32 height = 2; }
+message SdState { int32 state = 1; }
+message PermissionState { int32 state = 1; }
+message RemoteAssistFileTransferState { int32 state = 1; }
+message PrivateScreenState { int32 state = 1; }
+message ClientUiReadyState { int32 state = 1; }

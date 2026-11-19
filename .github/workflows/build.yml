@@ -1,0 +1,31 @@
+name: build
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  macos:
+    runs-on: macos-14
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Swift version
+        run: swift --version
+
+      - name: Resolve
+        run: swift package resolve
+
+      - name: Build
+        run: swift build -c release
+
+      - name: Package .app
+        run: bash scripts/make_app.sh
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: UURemoteClone-app
+          path: build/UURemoteClone.app
+          if-no-files-found: error
