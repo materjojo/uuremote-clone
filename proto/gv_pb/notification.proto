@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package gv_pb;
 
+import "defines.proto";
+
 message SecureDesktopState {
   bool is_locked = 1;
   bool is_sas_shown = 2;

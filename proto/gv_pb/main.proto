@@ -2,6 +2,14 @@ syntax = "proto3";
 
 package gv_pb;
 
+import "general.proto";
+import "mumu.proto";
+import "notification.proto";
+import "connect.proto";
+import "input_event.proto";
+import "rpc_main.proto";
+import "port_mapping.proto";
+
 message Message {
   int64 seq = 1;
   int64 timestamp = 2;

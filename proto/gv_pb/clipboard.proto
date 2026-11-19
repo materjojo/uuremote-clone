@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package gv_pb;
 
+import "defines.proto";
+
 message ClipboardFormat {
   uint32 id = 1;
   string name = 2;

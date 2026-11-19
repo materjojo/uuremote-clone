@@ -2,6 +2,11 @@ syntax = "proto3";
 
 package gv_pb;
 
+import "rpc_message.proto";
+import "rpc_file_transfer.proto";
+import "clipboard.proto";
+import "draw.proto";
+
 message RequestHeader {
   int64 request_id = 1;
 }

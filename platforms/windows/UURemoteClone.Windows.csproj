@@ -7,4 +7,13 @@
     <AssemblyName>UURemoteClone</AssemblyName>
     <RootNamespace>UURemoteClone</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.25.3" />
+    <PackageReference Include="Grpc.Tools" Version="2.62.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="..\..\proto\gv_pb\*.proto" ProtoRoot="..\..\proto\gv_pb" GrpcServices="None" />
+  </ItemGroup>
 </Project>

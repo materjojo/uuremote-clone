@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package gv_pb;
 
+import "defines.proto";
+
 message CaptureSettingRequest {
   FPS fps = 1;
   VideoQuality frame_quality = 2;

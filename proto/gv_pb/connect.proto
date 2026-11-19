@@ -2,6 +2,9 @@ syntax = "proto3";
 
 package gv_pb;
 
+import "defines.proto";
+import "feature_flag.proto";
+
 message CaptureParams {
   FPS fps = 1;
   VideoQuality video_quality = 2;
