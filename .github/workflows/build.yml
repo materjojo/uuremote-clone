@@ -2,92 +2,154 @@ name: build
 
 on:
   push:
+    branches: [master]
+    paths:
+      - '.github/workflows/build.yml'
+      - '.gitattributes'
+      - 'Package.swift'
+      - 'Package.resolved'
+      - 'Sources/**'
+      - 'Tests/**'
+      - 'core/**'
+      - 'proto/**'
+      - 'native/official/**'
+      - 'platforms/**'
+      - 'scripts/**'
+      - 'analysis/official/gv-pb-descriptors.json'
+      - 'analysis/official/android/**'
   workflow_dispatch:
+    inputs:
+      target:
+        description: Build only the selected target
+        type: choice
+        default: all
+        options: [all, core, macos, windows, android]
 
 permissions:
   contents: read
 
-concurrency:
-  group: build-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
-  core:
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-    runs-on: ${{ matrix.os }}
-    timeout-minutes: 20
+  plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      core: ${{ steps.select.outputs.core }}
+      macos: ${{ steps.select.outputs.macos }}
+      windows: ${{ steps.select.outputs.windows }}
+      android: ${{ steps.select.outputs.android }}
     steps:
       - uses: actions/checkout@v4
-      - name: Restore exact supplied desktop libraries
-        run: python scripts/restore_official_runtime.py
-      - name: Verify installer-member identities and generated tables
+        with:
+          fetch-depth: 2
+      - name: Select affected platforms
+        id: select
+        run: python scripts/ci_plan.py --event "$GITHUB_EVENT_PATH"
+      - name: Check selection boundaries, generated sources and recovered evidence
         run: |
-          python scripts/verify_official_runtime.py
+          python scripts/test_ci_plan.py
           python scripts/gen_protocol_schema.py --check
           python scripts/verify_android_abi.py --check-evidence
-      - name: Configure
-        run: cmake -S core -B core/build -DCMAKE_BUILD_TYPE=Release
-      - name: Build
-        run: cmake --build core/build --config Release
-      - name: Test (assertions enabled in Release)
-        run: ctest --test-dir core/build --output-on-failure -C Release
-      - name: Probe supplied macOS library through shared ABI
-        if: runner.os == 'macOS'
-        run: python scripts/verify_official_runtime.py --bridge core/build/libgvpb.dylib --output build/native-runtime-macos.json
-      - name: Probe supplied Windows library through shared ABI
-        if: runner.os == 'Windows'
-        run: python scripts/verify_official_runtime.py --bridge core/build/Release/gvpb.dll --output build/native-runtime-windows.json
-      - uses: actions/upload-artifact@v4
-        if: runner.os != 'Linux'
-        with:
-          name: Native-ABI-${{ matrix.os }}
-          path: build/native-runtime-*.json
-          if-no-files-found: error
 
-  macos-app:
-    runs-on: macos-latest
-    timeout-minutes: 40
+  core:
+    needs: plan
+    if: needs.plan.outputs.core == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: core-${{ github.ref }}
+      cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4
-      - name: Restore exact supplied desktop libraries
-        run: python scripts/restore_official_runtime.py
-      - name: Resolve
-        run: swift package resolve
-      - name: Build
-        run: swift build -c release
-      - name: Test Swift binding against the supplied dylib
+      - name: Build and test portable core (assertions enabled in Release)
+        run: |
+          cmake -S core -B core/build -DCMAKE_BUILD_TYPE=Release
+          cmake --build core/build --parallel 2
+          ctest --test-dir core/build --output-on-failure -C Release
+
+  macos-app:
+    needs: plan
+    if: needs.plan.outputs.macos == 'true'
+    runs-on: macos-latest
+    timeout-minutes: 30
+    concurrency:
+      group: macos-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore and verify only the macOS runtime
+        run: |
+          python scripts/restore_official_runtime.py --platform macos
+          python scripts/verify_official_runtime.py --platform macos
+      - name: Cache downloaded Swift dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            .build/artifacts
+            .build/checkouts
+            .build/repositories
+          key: spm-downloads-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('Package.swift', 'Package.resolved') }}
+      - name: Build and test Swift binding against the supplied dylib
         env:
           UU_OFFICIAL_LIBRARY: ${{ github.workspace }}/native/official/runtime/macos/libstreamer.dylib
-        run: swift test -c release
-      - name: Package .app and preserve executable permissions
+        run: |
+          swift test -c release
+          if [ ! -x .build/release/UURemoteClone ]; then
+            swift build -c release --product UURemoteClone
+          fi
+      - name: Check C ABI when shared native code changed
+        if: needs.plan.outputs.core == 'true'
+        run: |
+          cmake -S core -B core/build -DCMAKE_BUILD_TYPE=Release
+          cmake --build core/build --parallel 3
+          ctest --test-dir core/build --output-on-failure -C Release
+          python scripts/verify_official_runtime.py --platform macos --bridge core/build/libgvpb.dylib --output build/native-runtime-macos.json
+      - name: Package .app and verify original runtime bytes
         run: |
           bash scripts/make_app.sh
           ditto -c -k --sequesterRsrc --keepParent build/UURemoteClone.app build/UURemoteClone-macos.zip
           python scripts/verify_desktop_package.py macos build/UURemoteClone-macos.zip
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: UURemoteClone-macos
           path: build/UURemoteClone-macos.zip
+          retention-days: 7
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: needs.plan.outputs.core == 'true'
+        with:
+          name: Native-ABI-macos
+          path: build/native-runtime-macos.json
+          retention-days: 7
           if-no-files-found: error
 
   windows-app:
+    needs: plan
+    if: needs.plan.outputs.windows == 'true'
     runs-on: windows-latest
-    timeout-minutes: 30
+    timeout-minutes: 25
+    concurrency:
+      group: windows-${{ github.ref }}
+      cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4
-      - name: Restore exact supplied desktop libraries
-        run: python scripts/restore_official_runtime.py
+      - name: Restore and verify only the Windows runtime
+        run: |
+          python scripts/restore_official_runtime.py --platform windows
+          python scripts/verify_official_runtime.py --platform windows
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
-      - name: Build shared core and official ABI (gvpb.dll)
+      - uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('platforms/windows/*.csproj', 'Tests/WindowsOfficialSmoke/*.csproj') }}
+          restore-keys: nuget-${{ runner.os }}-
+      - name: Build shared core once for tests and application
         run: |
           cmake -S core -B core/build -DCMAKE_BUILD_TYPE=Release
-          cmake --build core/build --config Release --target gvpb_shared
+          cmake --build core/build --config Release --parallel 2
+          ctest --test-dir core/build --output-on-failure -C Release
+          python scripts/verify_official_runtime.py --platform windows --bridge core/build/Release/gvpb.dll --output build/native-runtime-windows.json
           Copy-Item core/build/Release/gvpb.dll platforms/windows/gvpb.dll -Force
       - name: Test managed binding against the supplied DLL
         run: dotnet run --project Tests/WindowsOfficialSmoke -c Release -- core/build/Release native/official/runtime/windows/streamer.dll
@@ -95,39 +157,47 @@ jobs:
         run: dotnet publish platforms/windows/UURemoteClone.Windows.csproj -c Release -r win-x64 --self-contained true -o build/windows
       - name: Verify package and archive
         run: |
-          foreach ($name in @("UURemoteClone.exe", "gvpb.dll", "streamer.dll", "streamer-config.json")) {
-            if (!(Test-Path "build/windows/$name")) { throw "Missing package member: $name" }
-          }
           Compress-Archive -Path build/windows/* -DestinationPath build/UURemoteClone-windows-x64.zip
           python scripts/verify_desktop_package.py windows build/UURemoteClone-windows-x64.zip
       - uses: actions/upload-artifact@v4
         with:
           name: UURemoteClone-windows-x64
           path: build/UURemoteClone-windows-x64.zip
+          retention-days: 7
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Native-ABI-windows
+          path: build/native-runtime-windows.json
+          retention-days: 7
           if-no-files-found: error
 
   android-app:
+    needs: plan
+    if: needs.plan.outputs.android == 'true'
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 30
+    concurrency:
+      group: android-${{ github.ref }}
+      cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4
-      - name: Restore exact supplied desktop libraries
-        run: python scripts/restore_official_runtime.py
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
-      - uses: gradle/actions/setup-gradle@v3
+      - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.7'
       - name: Build ARM64 APK
         run: gradle -p platforms/android assembleDebug --no-daemon
-      - name: Check compiled JNI contracts against original APK DEX
+      - name: Check all compiled glue against original APK DEX
         run: python scripts/verify_android_abi.py --classes platforms/android/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes
-      - name: Check native libraries and config inside APK
+      - name: Check original native libraries and config inside APK
         run: python scripts/verify_android_package.py platforms/android/app/build/outputs/apk/debug/app-debug.apk
       - uses: actions/upload-artifact@v4
         with:
           name: UURemoteClone-android-arm64-debug
           path: platforms/android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 7
           if-no-files-found: error

@@ -26,19 +26,23 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--bridge', type=Path)
     parser.add_argument('--output', type=Path)
+    parser.add_argument('--platform', choices=['macos', 'windows', 'android'])
     args = parser.parse_args()
     manifest = json.loads((ROOT / 'native/official/manifest.json').read_text())
-    for item in manifest['files']:
+    files = [item for item in manifest['files'] if args.platform is None or item['platform'] == args.platform]
+    for item in files:
         path = ROOT / item['path']
         if path.stat().st_size != item['bytes'] or sha256(path) != item['sha256']:
             raise SystemExit('Installer member identity mismatch: ' + str(path))
-    print(f'PASS: {len(manifest["files"])} retained native/config files match their recorded SHA-256.')
+    print(f'PASS: {len(files)} retained native/config files match their recorded SHA-256.')
     if args.bridge is None:
         return
     host = {'Darwin': 'macos', 'Windows': 'windows'}.get(platform.system())
     if host is None:
         raise SystemExit('Runtime probe requires macOS/Windows; identity-only verification is available everywhere')
-    item = next(x for x in manifest['files'] if x['platform'] == host and 'member' in x)
+    if args.platform is not None and args.platform != host:
+        raise SystemExit('Runtime probe platform must match the host')
+    item = next(x for x in files if x['platform'] == host and 'member' in x)
     library_path = (ROOT / item['path']).resolve()
     bridge_path = args.bridge.resolve()
     bridge = ctypes.CDLL(str(bridge_path))

@@ -42,9 +42,11 @@ def pack():
     INDEX.write_text(json.dumps({'encoding': 'concatenated-gzip-chunks', 'files': records}, indent=2) + '\n')
 
 
-def restore():
+def restore(platform=None):
     manifest = {item['path']: item for item in json.loads((ROOT / 'native/official/manifest.json').read_text())['files']}
     for record in json.loads(INDEX.read_text())['files']:
+        if platform and not record['output'].startswith(f'native/official/runtime/{platform}/'):
+            continue
         expected = manifest[record['output']]
         if record['sha256'] != expected['sha256'] or record['bytes'] != expected['bytes']:
             raise SystemExit('Chunk index does not match installer identity')
@@ -66,5 +68,8 @@ def restore():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--pack', action='store_true', help='Analyst operation on supplied original files')
+    parser.add_argument('--platform', choices=['macos', 'windows'], help='Restore only the selected CI platform')
     args = parser.parse_args()
-    pack() if args.pack else restore()
+    if args.pack and args.platform:
+        parser.error('--platform applies only to restoration')
+    pack() if args.pack else restore(args.platform)

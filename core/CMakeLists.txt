@@ -12,12 +12,17 @@ set(GVPB_SOURCES
     ../native/official/official_streamer_abi.cpp
 )
 
+# Compile the common sources once; both libraries consume the same object files.
+add_library(gvpb_objects OBJECT ${GVPB_SOURCES})
+target_include_directories(gvpb_objects PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_CURRENT_SOURCE_DIR}/../native/official/include)
+set_target_properties(gvpb_objects PROPERTIES POSITION_INDEPENDENT_CODE ON)
+
 # 静态库：三端单测与可执行文件链接
-add_library(gvpb STATIC ${GVPB_SOURCES})
+add_library(gvpb STATIC $<TARGET_OBJECTS:gvpb_objects>)
 target_include_directories(gvpb PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_CURRENT_SOURCE_DIR}/../native/official/include)
 
 # 共享库：给 Windows P/Invoke（gvpb.dll）与 Android JNI（libgvpb.so）共用同一实现
-add_library(gvpb_shared SHARED ${GVPB_SOURCES})
+add_library(gvpb_shared SHARED $<TARGET_OBJECTS:gvpb_objects>)
 target_include_directories(gvpb_shared PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_CURRENT_SOURCE_DIR}/../native/official/include)
 set_target_properties(gvpb_shared PROPERTIES OUTPUT_NAME gvpb WINDOWS_EXPORT_ALL_SYMBOLS ON)
 if(WIN32)

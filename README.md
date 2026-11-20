@@ -1,6 +1,6 @@
 # UURemoteClone — 4.48.1 安装包研究与复刻工程
 
-同一个私有仓库维护 macOS、Windows、Android。当前是**研究中的实现，尚未达到三端功能与 UI 和原版完全一致**。不能用 Actions 编译成功替代互操作、采集、编解码或 UI 的验收。
+同一个公开仓库维护 macOS、Windows、Android。当前是**研究中的实现，尚未达到三端功能与 UI 和原版完全一致**。不能用 Actions 编译成功替代互操作、采集、编解码或 UI 的验收。
 
 原始样本：macOS 4.48.1 build 633、Windows 4.48.1.5606、Android 4.48.1 versionCode 448001。原包已提取并进行静态分析；二进制和配置身份保存在 [native/official/manifest.json](native/official/manifest.json)。应用不提供云设备入口；完整协议 schema 和原版通用媒体库仍保留历史云设备字段/代码，尚未完成库内部的剥离。
 
@@ -28,7 +28,7 @@ macOS 包为当前 runner 的架构，未声明 universal 或 notarized；Androi
 
 Actions 执行共享 C++ Release 测试（断言明确启用）、桌面真实库的 C ABI 冒烟测试、Swift / C# 调用检查、Android 编译后 JNI 原型比较和 APK 内原版文件哈希比较。Android 真机 native 执行、官方服务会话、三端互控、硬编硬解路径以及逐页面/逐像素 UI 尚未完成验证。
 
-本轮 [Actions 44643846778](https://github.com/materjojo/uuremote-clone/actions/runs/44643846778) 的全部 6 个任务因账号付款/支出上限，在 runner 启动前被拒绝；没有产生编译、测试结果或新应用产物。需恢复账号的 Actions 额度/付款后重跑，不能据此判断代码已编译通过。
+之前的私有仓库运行 [Actions 44643846778](https://github.com/materjojo/uuremote-clone/actions/runs/44643846778) 因计费限制，在 runner 启动前被拒绝。现已按用户要求转为公开仓库，使用免费的标准托管 runner。工作流按变更路径选择平台，文档不触发编译，支持手动选择单个平台；构建结果仍以对应 Actions 运行和产物为准。详见 [CI 管理](docs/12-ci.md)。
 
 本地允许进行只读分析、源码/生成文件检查；`scripts/verify_official_runtime.py` 不带 `--bridge` 时仅核对保留文件身份，不编译或执行原版库。`scripts/gen_protocol_schema.py --check` 仅检查生成的源码。
 

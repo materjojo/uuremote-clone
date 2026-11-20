@@ -1,6 +1,6 @@
 # 本轮续做检查表
 
-基线提交：76a53616831cb19e3a66c44f3387840b58afcefc。沿用 materjojo/uuremote-clone 私有仓库。所有编译只在 GitHub Actions。
+基线提交：76a53616831cb19e3a66c44f3387840b58afcefc。沿用 materjojo/uuremote-clone 仓库。用户已明确授权转为公开仓库，以使用标准托管 runner 的免费计算。所有编译仍只在 GitHub Actions。
 
 | 用户要求 | 当前证据/实现 | 验收状态 |
 |---|---|---|
@@ -10,7 +10,7 @@
 | 三端所有非云设备功能 | 登录、服务端房间、媒体、文件、终端等尚未全链路接通 | 未完成 |
 | 各端 UI 与对应原版一致 | 原版 Android 为 Compose、Windows 为 Qt、macOS 为 Swift；当前 UI 是占位重建 | 未完成 |
 | 去除云设备 | 当前应用未提供云设备入口；原版库保留通用代码，不代表已做代码级剥离 | 部分完成 |
-| 一个私有仓库 | 已有且已确认 isPrivate=true | 已完成 |
+| 一个仓库（用户更新为公开） | 原仓库已按用户明确授权转为 public，不另建仓库 | 已完成 |
 | 只在 Actions 编译、提供三端产物 | 已配置三端打包/上传、Release 断言、桌面库实际加载和 Android descriptor/包装检查；首轮全部任务在 runner 启动前因账号付款/支出上限被拒绝 | 受外部计费阻塞，未运行 |
 | 仅在原包可证明相同处共享 | protobuf schema 可共享；平台 callback 长度不同，不能盲用 Windows 布局 | 部分完成 |
 
@@ -39,7 +39,7 @@
 
 > The job was not started because recent account payments have failed or your spending limit needs to be increased. Please check the 'Billing & plans' section in your settings
 
-完整 run/check annotations 保存于 [0733e90-blocked.json](../analysis/ci/0733e90-blocked.json)。仓库也没有已注册的 self-hosted runner。必须由账号侧恢复 Actions 额度/付款后重跑；没有改变仓库私密性，也没有在本地绕过“只在 Actions 编译”的限制。
+完整 run/check annotations 保存于 [0733e90-blocked.json](../analysis/ci/0733e90-blocked.json)。仓库也没有已注册的 self-hosted runner。此后用户明确授权将现有仓库转为 public，已通过 API 确认 private=false；改用公开仓库的标准托管 runner，并管理按平台触发的构建。仍未在本地绕过“只在 Actions 编译”的限制。
 
 ## 边界
 
