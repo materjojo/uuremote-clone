@@ -29,9 +29,10 @@ public class StreamerSession {
     private final Handler main = new Handler(Looper.getMainLooper());
     private PeerConnection peer;
     private DataChannel control, binary, file;
-    private boolean remoteReady, closed, overlayScheduled, overlayEnabled;
+    private boolean remoteReady, overlayScheduled, overlayEnabled;
+    private volatile boolean closed;
     private final List<IceCandidate> pending = new ArrayList<>(), overlay = new ArrayList<>();
-    private ScreenCapturerAndroid capturer;
+    private VideoCapturer capturer;
     private SurfaceTextureHelper texture;
     private VideoSource source;
     private VideoTrack localTrack;
@@ -85,6 +86,7 @@ public class StreamerSession {
         bind(peer.createDataChannel("FILE_DATA_CHANNEL", init));
         peer.createOffer(new Observer() {
             @Override public void onCreateSuccess(SessionDescription sdp) {
+                if (closed) return;
                 peer.setLocalDescription(new Observer() { @Override public void onSetSuccess() {
                     main.post(() -> { if (!closed) listener.onOffer(sdp.description); });
                 } }, sdp);
@@ -93,16 +95,21 @@ public class StreamerSession {
     }
     /** Call only after MediaProjection consent and the foreground service started. */
     public void prepareHost(Context context, Intent consent, int width, int height) {
+        prepareHost(context, new ScreenCapturerAndroid(consent, new MediaProjection.Callback() {
+            @Override public void onStop() { main.post(() -> { if (!closed) listener.onError("屏幕共享已停止"); }); }
+        }), width, height);
+    }
+    /** Capture abstraction also permits synthetic frames in a real native peer test. */
+    public void prepareHost(Context context, VideoCapturer input, int width, int height) {
         createPeer(true);
+        capturer = input;
         texture = SurfaceTextureHelper.create("UU-screen-capture", egl.getEglBaseContext());
-        capturer = new ScreenCapturerAndroid(consent, new MediaProjection.Callback() {
-            @Override public void onStop() { main.post(() -> listener.onError("屏幕共享已停止")); }
-        });
-        source = factory.createVideoSource(true);
+        source = factory.createVideoSource(input.isScreencast());
         capturer.initialize(texture, context.getApplicationContext(), source.getCapturerObserver());
         localTrack = factory.createVideoTrack("screen0", source);
         peer.addTrack(localTrack, Arrays.asList("screen"));
-        capturer.startCapture(width, height, 30);
+        try { capturer.startCapture(width, height, 30); }
+        catch (InterruptedException e) { Thread.currentThread().interrupt(); throw new IllegalStateException(e); }
     }
     public void handleOffer(String text) {
         peer.setRemoteDescription(new Observer() { @Override public void onSetSuccess() {
@@ -110,6 +117,7 @@ public class StreamerSession {
                 if (closed) return;
                 ready();
                 peer.createAnswer(new Observer() { @Override public void onCreateSuccess(SessionDescription sdp) {
+                    if (closed) return;
                     peer.setLocalDescription(new Observer() { @Override public void onSetSuccess() {
                         main.post(() -> { if (!closed) listener.onAnswer(sdp.description); });
                     } }, sdp);
