@@ -32,7 +32,11 @@ static class Program
         using var encoder = new WindowsVideoPipeline(false, args[0]);
         using var decoder = new WindowsVideoPipeline(false, args[0]);
         controller.VideoFrame += decoder.DecodeH264;
-        decoder.FrameDecoded += (bytes, w, h) => { if (w == 64 && h == 64 && bytes.Length == 64 * 64 * 4) decoded.TrySetResult(); };
+        decoder.FrameDecoded += (bytes, w, h) => {
+            if (w == 64 && h == 64 && bytes.Length == 64 * 64 * 4 &&
+                Math.Abs(bytes[0] - 40) < 12 && Math.Abs(bytes[1] - 120) < 12 && Math.Abs(bytes[2] - 200) < 12 && bytes[3] == 255)
+                decoded.TrySetResult();
+        };
         encoder.FrameEncoded += host.SendVideo;
         await controller.StartAsControllerAsync();
         var answer = await host.HandleOfferAsync(await offer.Task.WaitAsync(TimeSpan.FromSeconds(10)));

@@ -49,14 +49,25 @@ public sealed class WindowsVideoPipeline : IDisposable
     public void DecodeH264(byte[] annexB)
     {
         if (!_initialised) return;
-        foreach (var frame in _decoder.DecodeVideo(annexB, VideoPixelFormatsEnum.Bgra, VideoCodecsEnum.H264))
+        // FFmpegVideoEncoder 8.0.12 ignores its requested output format and
+        // returns RGB24. Preserve RawImage.Stride, including row padding.
+        foreach (var frame in _decoder.DecodeVideoFaster(annexB, VideoPixelFormatsEnum.Rgb, VideoCodecsEnum.H264))
         {
-            if (frame is VideoSample sample && sample.Sample != null)
-                FrameDecoded?.Invoke(sample.Sample, (int)sample.Width, (int)sample.Height);
+            int width = frame.Width, height = frame.Height;
+            if (width <= 0 || height <= 0 || frame.Stride < width * 3) continue;
+            var rgb = new byte[checked(frame.Stride * height)];
+            System.Runtime.InteropServices.Marshal.Copy(frame.Sample, rgb, 0, rgb.Length);
+            var bgra = new byte[checked(width * height * 4)];
+            for (int y = 0; y < height; y++) for (int x = 0; x < width; x++) {
+                int source = y * frame.Stride + x * 3, target = (y * width + x) * 4;
+                bgra[target] = rgb[source + 2]; bgra[target + 1] = rgb[source + 1];
+                bgra[target + 2] = rgb[source]; bgra[target + 3] = 255;
+            }
+            FrameDecoded?.Invoke(bgra, width, height);
         }
     }
 
-    /// <summary>被控端：GDI 采集 -> 编码 -> 送 WebRTC DataChannel</summary>
+    /// <summary>被控端：GDI 采集 -> 编码 -> 送 WebRTC RTP</summary>
     public void AttachCapture(ScreenCapture capture, Action<byte[]> sendEncoded)
     {
         capture.FrameReady += (bgra, w, h) =>
