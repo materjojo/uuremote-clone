@@ -108,8 +108,7 @@ public class StreamerSession {
         capturer.initialize(texture, context.getApplicationContext(), source.getCapturerObserver());
         localTrack = factory.createVideoTrack("screen0", source);
         peer.addTrack(localTrack, Arrays.asList("screen"));
-        try { capturer.startCapture(width, height, 30); }
-        catch (InterruptedException e) { Thread.currentThread().interrupt(); throw new IllegalStateException(e); }
+        capturer.startCapture(width, height, 30);
     }
     public void handleOffer(String text) {
         peer.setRemoteDescription(new Observer() { @Override public void onSetSuccess() {

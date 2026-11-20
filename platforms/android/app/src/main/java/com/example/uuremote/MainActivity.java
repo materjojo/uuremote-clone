@@ -54,7 +54,7 @@ public class MainActivity extends Activity {
     private boolean hostMode, connecting;
     private PeerAPI hostApi;
     private String pendingId;
-    private long sequence;
+    private long sequence, sessionGeneration;
     private int tab;
     private float touchX, touchY;
     private long touchStart;
@@ -159,14 +159,14 @@ public class MainActivity extends Activity {
     }
     private void saveDevices() { try { store.save(devices); } catch (Exception e) { toast(e.getMessage()); } }
     private void connect(PeerAPI.Invitation value) {
-        disconnect(); connecting = true; showRemote("等待 " + value.name + " 确认连接…");
+        disconnect(); connecting = true; long generation = sessionGeneration; showRemote("等待 " + value.name + " 确认连接…");
         network.execute(() -> {
             try {
                 PeerAPI api = new PeerAPI(value.server);
                 JSONObject result = api.request("/v1/connect", null, PeerAPI.description().put("target", value.id).put("key", value.key));
                 String id = result.getString("id"), token = result.getString("token");
-                main.post(() -> { if (connecting && !destroyed) bindMailbox(api, id, token, false); });
-            } catch (Exception e) { main.post(() -> { disconnect(); toast("连接失败：" + e.getMessage()); }); }
+                main.post(() -> { if (connecting && !destroyed && generation == sessionGeneration) bindMailbox(api, id, token, false); });
+            } catch (Exception e) { main.post(() -> { if (generation == sessionGeneration && !destroyed) { disconnect(); toast("连接失败：" + e.getMessage()); } }); }
         });
     }
     private void showRemote(String status) {
@@ -219,9 +219,11 @@ public class MainActivity extends Activity {
         clipboard = new ClipboardSync(this, data -> { if (session != null) session.sendControl(data); }); clipboard.start();
     }
     private void bindMailbox(PeerAPI api, String id, String token, boolean host) {
+        long generation = sessionGeneration;
         mailbox = new PeerAPI.Mailbox(api, id, token, new PeerAPI.Mailbox.Listener() {
-            @Override public void onError(String error) { disconnect(); toast(error); }
+            @Override public void onError(String error) { if (generation == sessionGeneration && !destroyed) { disconnect(); toast(error); } }
             @Override public void onSignal(String type, JSONObject data) {
+                if (generation != sessionGeneration || destroyed) return;
                 try {
                     switch (type) {
                         case "accepted": createSession(false); showRemote("正在建立直连…"); session.start(); break;
@@ -289,6 +291,7 @@ public class MainActivity extends Activity {
     }
     private void stopReceiving() { receiving = false; if (hostMode) disconnect(); if (!destroyed) selectPage(1); }
     private void disconnect() {
+        sessionGeneration++;
         connecting = false;
         if (mailbox != null) { PeerAPI.Mailbox box = mailbox; box.send("close", null); main.postDelayed(box::close, 600); mailbox = null; }
         if (clipboard != null) { clipboard.stop(); clipboard = null; }
