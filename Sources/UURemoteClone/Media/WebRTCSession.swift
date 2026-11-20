@@ -228,9 +228,11 @@ extension WebRTCSession: RTCPeerConnectionDelegate {
     func peerConnection(_ peerConnection: RTCPeerConnection, didRemove candidates: [RTCIceCandidate]) {}
 
     func peerConnection(_ peerConnection: RTCPeerConnection, didOpen dataChannel: RTCDataChannel) {
+        // Install the observer before returning to WebRTC: the peer may send
+        // its first control packet as soon as the channel opens.
+        dataChannel.delegate = self
         DispatchQueue.main.async {
             guard !self.closed else { return }
-            dataChannel.delegate = self
             switch dataChannel.label {
             case "CONTROL_DATA_CHANNEL": self.controlChannel = dataChannel
             case "BINARY_DATA_CHANNEL": self.binaryChannel = dataChannel
