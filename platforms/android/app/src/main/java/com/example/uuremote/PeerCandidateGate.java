@@ -25,14 +25,21 @@ final class PeerCandidateGate {
     void submit(IceCandidate value) {
         if (closed || !seen.add(value.sdpMid + ":" + value.sdpMLineIndex + ":" + value.sdp)) return;
         int stage = stage(value.sdp);
-        if (stage == 0 || released.contains(stage)) { emit.accept(value); return; }
+        if (stage == 0) { emit.accept(value); return; }
+        if (released.contains(stage)) {
+            if (!connected.getAsBoolean()) emit.accept(value);
+            return;
+        }
         if (!queued.containsKey(stage)) {
             queued.put(stage, new ArrayList<>());
             main.postDelayed(() -> {
                 if (closed) return;
                 released.add(stage);
                 List<IceCandidate> values = queued.remove(stage);
-                if (!connected.getAsBoolean() && values != null) for (IceCandidate item : values) emit.accept(item);
+                if (values != null) for (IceCandidate item : values) {
+                    if (closed || connected.getAsBoolean()) break;
+                    emit.accept(item);
+                }
             }, stage == 1 ? 1200 : 8000);
         }
         queued.get(stage).add(value);

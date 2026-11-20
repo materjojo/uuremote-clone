@@ -27,12 +27,12 @@ internal sealed class PeerCandidateGate : IDisposable
     }
     public void Submit(RTCIceCandidateInit value)
     {
-        bool immediate;
         lock (_gate) {
             if (_stop.IsCancellationRequested || !_seen.Add($"{value.sdpMid}:{value.sdpMLineIndex}:{value.candidate}")) return;
             int stage = Stage(value.candidate);
-            immediate = stage == 0 || _released.Contains(stage);
-            if (!immediate) {
+            if (stage == 0 || _released.Contains(stage)) {
+                if (stage == 0 || !_connected()) _emit(value);
+            } else {
                 if (!_queued.TryGetValue(stage, out var values)) {
                     values = new(); _queued[stage] = values;
                     _ = Release(stage);
@@ -40,18 +40,19 @@ internal sealed class PeerCandidateGate : IDisposable
                 values.Add(value);
             }
         }
-        if (immediate) _emit(value);
     }
     private async Task Release(int stage)
     {
         try {
             await Task.Delay(stage == 1 ? 1200 : 8000, _stop.Token);
-            List<RTCIceCandidateInit> values;
             lock (_gate) {
+                if (_stop.IsCancellationRequested || !_queued.Remove(stage, out var values)) return;
                 _released.Add(stage);
-                values = _queued[stage]; _queued.Remove(stage);
+                foreach (var value in values) {
+                    if (_stop.IsCancellationRequested || _connected()) break;
+                    _emit(value);
+                }
             }
-            if (!_stop.IsCancellationRequested && !_connected()) foreach (var value in values) _emit(value);
         } catch (OperationCanceledException) { }
     }
     public string SignalSdp(string sdp)
@@ -72,5 +73,5 @@ internal sealed class PeerCandidateGate : IDisposable
         }
         return string.Join("\r\n", output) + "\r\n";
     }
-    public void Dispose() { _stop.Cancel(); lock (_gate) _queued.Clear(); }
+    public void Dispose() { lock (_gate) { _stop.Cancel(); _queued.Clear(); } }
 }

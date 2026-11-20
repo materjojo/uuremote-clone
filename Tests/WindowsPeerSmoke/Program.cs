@@ -28,6 +28,7 @@ static class Program
             var value = await staged.Task.WaitAsync(TimeSpan.FromSeconds(3));
             if (value.sdpMid != "screen" || value.sdpMLineIndex != 1) throw new Exception("Candidate media identity lost");
         }
+        await CheckOverlayLifecycle();
         var hostEvents = new Listener();
         var controllerEvents = new Listener();
         using var host = new StreamerSession(hostEvents, true);
@@ -70,6 +71,49 @@ static class Program
         Console.WriteLine("PASS independent Windows peer: real ICE/DTLS, bidirectional SCTP control, H264 encode/RTP/decode, pairing for all three platforms.");
         Console.WriteLine("Synthetic video on one runner; not physical screen, hardware or UI parity validation.");
     }
+    static async Task CheckOverlayLifecycle()
+    {
+        var watch = System.Diagnostics.Stopwatch.StartNew();
+        var released = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var stopped = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var sent = new int[4];
+        int connected = 0;
+        string? error = null;
+        using var fallback = new PeerCandidateGate(c => {
+            if (watch.ElapsedMilliseconds < 7800) error = "Overlay emitted before 8 second grace";
+            if (System.Threading.Interlocked.Increment(ref sent[0]) == 2) released.TrySetResult();
+        }, () => System.Threading.Volatile.Read(ref connected) != 0);
+        using var closed = new PeerCandidateGate(c => System.Threading.Interlocked.Increment(ref sent[2]), () => false);
+        PeerCandidateGate? closedDuringSend = null;
+        using var closing = new PeerCandidateGate(c => {
+            System.Threading.Interlocked.Increment(ref sent[3]); closedDuringSend!.Dispose(); stopped.TrySetResult();
+        }, () => false);
+        closedDuringSend = closing;
+        // The connected gate transitions to connected after candidates were queued.
+        int onlyConnectedGate = 0;
+        using var suppressed = new PeerCandidateGate(c => System.Threading.Interlocked.Increment(ref sent[1]),
+            () => System.Threading.Volatile.Read(ref onlyConnectedGate) != 0);
+        var gates = new[] { fallback, suppressed, closed, closing };
+        foreach (var gate in gates) {
+            foreach (string ip in new[] { "100.64.0.2", "fd7a:115c:a1e0::2" }) {
+                var candidate = new RTCIceCandidateInit { candidate = $"candidate:1 1 udp 1 {ip} 9 typ host", sdpMid = "control", sdpMLineIndex = 0 };
+                gate.Submit(candidate); gate.Submit(candidate);
+            }
+        }
+        System.Threading.Volatile.Write(ref onlyConnectedGate, 1);
+        closed.Dispose();
+        if (sent[0] != 0) throw new Exception("Overlay did not wait for grace");
+        await Task.WhenAll(released.Task, stopped.Task).WaitAsync(TimeSpan.FromSeconds(11));
+        await Task.Delay(100);
+        System.Threading.Volatile.Write(ref connected, 1);
+        foreach (var gate in gates) gate.Submit(new RTCIceCandidateInit {
+            candidate = "candidate:late 1 udp 1 100.64.0.3 9 typ host", sdpMid = "control", sdpMLineIndex = 0
+        });
+        if (error != null || sent[0] != 2 || sent[1] != 0 || sent[2] != 0 || sent[3] != 1)
+            throw new Exception(error ?? $"Candidate lifecycle leaked: {string.Join(',', sent)}");
+        Console.WriteLine("PASS candidate grace: overlay fallback waits 8 seconds; deduplication, connected suppression and close during release.");
+    }
+
     sealed class Listener : StreamerSession.IListener
     {
         public Action<string>? Offer;

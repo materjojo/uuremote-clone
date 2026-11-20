@@ -84,6 +84,49 @@ public class PeerMediaTest {
         finally { InstrumentationRegistry.getInstrumentation().runOnMainSync(() -> gate[0].close()); }
     }
 
+    @Test public void overlayWaitsAndStopsAfterConnectionOrClose() throws Exception {
+        PeerCandidateGate[] gates = new PeerCandidateGate[4];
+        CountDownLatch released = new CountDownLatch(2);
+        AtomicReference<String> error = new AtomicReference<>();
+        boolean[] connected = {false, false};
+        int[] sent = new int[4];
+        long start = System.nanoTime();
+        InstrumentationRegistry.getInstrumentation().runOnMainSync(() -> {
+            gates[0] = new PeerCandidateGate(c -> {
+                if (System.nanoTime() - start < TimeUnit.MILLISECONDS.toNanos(7800)) error.set("Overlay emitted before 8 second grace");
+                sent[0]++; released.countDown();
+            }, () -> connected[0]);
+            gates[1] = new PeerCandidateGate(c -> sent[1]++, () -> connected[1]);
+            gates[2] = new PeerCandidateGate(c -> sent[2]++, () -> false);
+            gates[3] = new PeerCandidateGate(c -> { sent[3]++; gates[3].close(); }, () -> false);
+            for (PeerCandidateGate gate : gates) {
+                for (String ip : new String[]{"100.64.0.2", "fd7a:115c:a1e0::2"}) {
+                    IceCandidate c = new IceCandidate("control", 0, "candidate:1 1 udp 1 " + ip + " 9 typ host");
+                    gate.submit(c); gate.submit(c);
+                }
+            }
+            connected[1] = true;
+            gates[2].close();
+            assertEquals(0, sent[0]);
+        });
+        try {
+            assertTrue("Both overlay candidates must be released after grace", released.await(11, TimeUnit.SECONDS));
+            CountDownLatch drained = new CountDownLatch(1);
+            new Handler(Looper.getMainLooper()).postDelayed(drained::countDown, 100);
+            assertTrue(drained.await(1, TimeUnit.SECONDS));
+            InstrumentationRegistry.getInstrumentation().runOnMainSync(() -> {
+                assertArrayEquals(new int[]{2, 0, 0, 1}, sent);
+                connected[0] = true;
+                IceCandidate late = new IceCandidate("control", 0, "candidate:late 1 udp 1 100.64.0.3 9 typ host");
+                for (PeerCandidateGate gate : gates) gate.submit(late);
+                assertArrayEquals(new int[]{2, 0, 0, 1}, sent);
+            });
+            assertNull(error.get());
+        } finally {
+            InstrumentationRegistry.getInstrumentation().runOnMainSync(() -> { for (PeerCandidateGate gate : gates) gate.close(); });
+        }
+    }
+
     private static final class SyntheticCapture implements VideoCapturer {
         private final Handler main = new Handler(Looper.getMainLooper());
         private CapturerObserver observer;

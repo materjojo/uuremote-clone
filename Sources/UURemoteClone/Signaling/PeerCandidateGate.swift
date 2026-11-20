@@ -16,14 +16,21 @@ final class PeerCandidateGate {
     func submit(_ value: RTCIceCandidate) {
         guard !closed, seen.insert("\(value.sdpMid ?? ""):\(value.sdpMLineIndex):\(value.sdp)").inserted else { return }
         let stage = PeerNetwork.candidateStage(value.sdp)
-        if stage == 0 || released.contains(stage) { emit?(value); return }
+        if stage == 0 { emit?(value); return }
+        if released.contains(stage) {
+            if connected?() != true { emit?(value) }
+            return
+        }
         queued[stage, default: []].append(value)
         guard scheduled.insert(stage).inserted else { return }
         let timer = DispatchWorkItem { [weak self] in
             guard let self, !self.closed else { return }
             self.released.insert(stage)
             let values = self.queued.removeValue(forKey: stage) ?? []
-            if self.connected?() != true { values.forEach { self.emit?($0) } }
+            for value in values {
+                guard !self.closed, self.connected?() != true else { break }
+                self.emit?(value)
+            }
         }
         timers.append(timer)
         DispatchQueue.main.asyncAfter(deadline: .now() + (stage == 1 ? 1.2 : 8), execute: timer)
