@@ -63,6 +63,27 @@ public class PeerMediaTest {
         }
     }
 
+    @Test public void embeddedSdpUsesTheSameCandidatePolicy() throws Exception {
+        CountDownLatch ipv4 = new CountDownLatch(1);
+        AtomicReference<String> error = new AtomicReference<>();
+        PeerCandidateGate[] gate = new PeerCandidateGate[1];
+        java.util.List<IceCandidate> immediate = new java.util.ArrayList<>();
+        InstrumentationRegistry.getInstrumentation().runOnMainSync(() -> {
+            gate[0] = new PeerCandidateGate(c -> {
+                if (c.sdp.contains("192.168.")) {
+                    if (!c.sdpMid.equals("screen") || c.sdpMLineIndex != 1) error.set("Media identity lost");
+                    ipv4.countDown();
+                } else if (StreamerSession.isOverlay(c.sdp)) error.set("Overlay leaked early");
+                else immediate.add(c);
+            }, () -> false);
+            String filtered = gate[0].signalSdp("v=0\r\nm=application 9 UDP/DTLS/SCTP webrtc-datachannel\r\na=mid:control\r\na=candidate:1 1 udp 1 2001:db8::1 9 typ host\r\nm=video 9 UDP/TLS/RTP/SAVPF 96\r\na=mid:screen\r\na=candidate:2 1 udp 1 192.168.1.2 9 typ host\r\na=candidate:3 1 udp 1 100.64.0.2 9 typ host\r\na=end-of-candidates\r\n");
+            assertFalse(filtered.contains("a=candidate:")); assertFalse(filtered.contains("a=end-of-candidates"));
+            assertEquals(1, immediate.size()); assertEquals(1, ipv4.getCount());
+        });
+        try { assertTrue(ipv4.await(3, TimeUnit.SECONDS)); assertNull(error.get()); }
+        finally { InstrumentationRegistry.getInstrumentation().runOnMainSync(() -> gate[0].close()); }
+    }
+
     private static final class SyntheticCapture implements VideoCapturer {
         private final Handler main = new Handler(Looper.getMainLooper());
         private CapturerObserver observer;

@@ -156,6 +156,13 @@ final class PeerMailbox {
 /// after a grace interval; Tailscale must already be installed and connected.
 enum PeerNetwork {
     static let stun = ["stun:stun.cloudflare.com:3478", "stun:stun.l.google.com:19302"]
+    /// Native IPv6 first, native IPv4/mDNS after 1.2s, installed overlay after 8s.
+    static func candidateStage(_ candidate: String) -> Int {
+        if isOverlay(candidate) { return 2 }
+        let fields = candidate.split(separator: " ")
+        return fields.count > 4 && fields[4].contains(":") ? 0 : 1
+    }
+
     static func isOverlay(_ candidate: String) -> Bool {
         let fields = candidate.split(separator: " ")
         guard fields.count > 4 else { return false }

@@ -15,6 +15,19 @@ static class Program
             var stored = System.Text.Json.JsonSerializer.Serialize(peer, PeerInvitation.Json);
             if (stored.Contains("\"code\"")) throw new Exception("Calculated code must be omitted from invitation JSON");
         }
+        var staged = new TaskCompletionSource<RTCIceCandidateInit>(TaskCreationOptions.RunContinuationsAsynchronously);
+        int early = 0;
+        using (var gate = new PeerCandidateGate(c => {
+            if (c.candidate.Contains("192.168.")) staged.TrySetResult(c);
+            else if (StreamerSession.IsOverlay(c.candidate)) throw new Exception("Overlay released before grace");
+            else System.Threading.Interlocked.Increment(ref early);
+        }, () => false)) {
+            var filtered = gate.SignalSdp("v=0\r\nm=application 9 UDP/DTLS/SCTP webrtc-datachannel\r\na=mid:control\r\na=candidate:1 1 udp 1 2001:db8::1 9 typ host\r\nm=video 9 UDP/TLS/RTP/SAVPF 96\r\na=mid:screen\r\na=candidate:2 1 udp 1 192.168.1.2 9 typ host\r\na=candidate:3 1 udp 1 100.64.0.2 9 typ host\r\na=end-of-candidates\r\n");
+            if (filtered.Contains("a=candidate:") || filtered.Contains("a=end-of-candidates") || early != 1 || staged.Task.IsCompleted)
+                throw new Exception("SDP bypassed candidate staging");
+            var value = await staged.Task.WaitAsync(TimeSpan.FromSeconds(3));
+            if (value.sdpMid != "screen" || value.sdpMLineIndex != 1) throw new Exception("Candidate media identity lost");
+        }
         var hostEvents = new Listener();
         var controllerEvents = new Listener();
         using var host = new StreamerSession(hostEvents, true);

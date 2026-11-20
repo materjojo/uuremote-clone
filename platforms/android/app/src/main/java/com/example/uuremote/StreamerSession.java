@@ -29,9 +29,10 @@ public class StreamerSession {
     private final Handler main = new Handler(Looper.getMainLooper());
     private PeerConnection peer;
     private DataChannel control, binary, file;
-    private boolean remoteReady, overlayScheduled, overlayEnabled;
+    private boolean remoteReady;
     private volatile boolean closed;
-    private final List<IceCandidate> pending = new ArrayList<>(), overlay = new ArrayList<>();
+    private final List<IceCandidate> pending = new ArrayList<>();
+    private final PeerCandidateGate candidateGate;
     private VideoCapturer capturer;
     private SurfaceTextureHelper texture;
     private VideoSource source;
@@ -39,6 +40,9 @@ public class StreamerSession {
 
     public StreamerSession(Context context, Listener listener) {
         this.listener = listener;
+        candidateGate = new PeerCandidateGate(listener::onCandidate, () -> peer != null &&
+                (peer.iceConnectionState() == PeerConnection.IceConnectionState.CONNECTED ||
+                 peer.iceConnectionState() == PeerConnection.IceConnectionState.COMPLETED));
         PeerConnectionFactory.initialize(PeerConnectionFactory.InitializationOptions.builder(context.getApplicationContext()).createInitializationOptions());
         factory = PeerConnectionFactory.builder()
                 .setVideoEncoderFactory(new DefaultVideoEncoderFactory(egl.getEglBaseContext(), true, true))
@@ -88,7 +92,7 @@ public class StreamerSession {
             @Override public void onCreateSuccess(SessionDescription sdp) {
                 if (closed) return;
                 peer.setLocalDescription(new Observer() { @Override public void onSetSuccess() {
-                    main.post(() -> { if (!closed) listener.onOffer(sdp.description); });
+                    main.post(() -> { if (!closed) listener.onOffer(candidateGate.signalSdp(sdp.description)); });
                 } }, sdp);
             }
         }, new MediaConstraints());
@@ -118,7 +122,7 @@ public class StreamerSession {
                 peer.createAnswer(new Observer() { @Override public void onCreateSuccess(SessionDescription sdp) {
                     if (closed) return;
                     peer.setLocalDescription(new Observer() { @Override public void onSetSuccess() {
-                        main.post(() -> { if (!closed) listener.onAnswer(sdp.description); });
+                        main.post(() -> { if (!closed) listener.onAnswer(candidateGate.signalSdp(sdp.description)); });
                     } }, sdp);
                 } }, new MediaConstraints());
             });
@@ -137,22 +141,7 @@ public class StreamerSession {
         try { return ip.length == 4 && Integer.parseInt(ip[0]) == 100 && Integer.parseInt(ip[1]) >= 64 && Integer.parseInt(ip[1]) <= 127; }
         catch (NumberFormatException e) { return false; }
     }
-    private void emitCandidate(IceCandidate c) {
-        if (closed) return;
-        if (isOverlay(c.sdp) && !overlayEnabled) {
-            overlay.add(c);
-            if (!overlayScheduled) {
-                overlayScheduled = true;
-                main.postDelayed(() -> {
-                    if (closed || peer.iceConnectionState() == PeerConnection.IceConnectionState.CONNECTED ||
-                            peer.iceConnectionState() == PeerConnection.IceConnectionState.COMPLETED) return;
-                    overlayEnabled = true;
-                    for (IceCandidate candidate : overlay) listener.onCandidate(candidate);
-                    overlay.clear();
-                }, 8000);
-            }
-        } else listener.onCandidate(c);
-    }
+    private void emitCandidate(IceCandidate c) { if (!closed) candidateGate.submit(c); }
     private void bind(DataChannel channel) {
         if (channel == null || closed) return;
         if (channel.label().equals("CONTROL_DATA_CHANNEL")) control = channel;
@@ -174,6 +163,7 @@ public class StreamerSession {
     }
     public void stop() {
         if (closed) return; closed = true;
+        candidateGate.close();
         main.removeCallbacksAndMessages(null);
         if (capturer != null) { try { capturer.stopCapture(); } catch (Exception ignored) { } capturer.dispose(); }
         if (localTrack != null) localTrack.dispose();

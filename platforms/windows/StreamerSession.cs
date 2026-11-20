@@ -25,9 +25,9 @@ public sealed class StreamerSession : IDisposable
     private readonly IListener _listener;
     private readonly RTCPeerConnection _peer;
     private readonly object _gate = new();
-    private readonly List<RTCIceCandidateInit> _pending = new(), _overlay = new();
-    private readonly CancellationTokenSource _stop = new();
-    private bool _remoteReady, _overlayReleased, _overlayScheduled;
+    private readonly List<RTCIceCandidateInit> _pending = new();
+    private readonly PeerCandidateGate _candidateGate;
+    private bool _remoteReady;
     private RTCDataChannel? _control, _binary, _file;
     public event Action<byte[]>? VideoFrame;
     public event Action<string>? Error;
@@ -43,6 +43,8 @@ public sealed class StreamerSession : IDisposable
             X_ICEIncludeAllInterfaceAddresses = true,
             X_UseRtpFeedbackProfile = true
         });
+        _candidateGate = new PeerCandidateGate(_listener.OnCandidate,
+            () => _peer.connectionState == RTCPeerConnectionState.connected);
         var formats = new List<VideoFormat> {
             new(VideoCodecsEnum.H264, 96, 90000, "level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42e01f")
         };
@@ -52,13 +54,7 @@ public sealed class StreamerSession : IDisposable
             if (candidate == null) return;
             var value = new RTCIceCandidateInit { candidate = candidate.candidate,
                 sdpMid = candidate.sdpMid, sdpMLineIndex = candidate.sdpMLineIndex };
-            bool hold;
-            lock (_gate) {
-                hold = IsOverlay(value.candidate) && !_overlayReleased;
-                if (hold) _overlay.Add(value);
-                if (!_overlayScheduled) { _overlayScheduled = true; _ = ReleaseOverlay(); }
-            }
-            if (!hold) _listener.OnCandidate(value);
+            _candidateGate.Submit(value);
         };
         _peer.onconnectionstatechange += state => _listener.OnState(state);
         _peer.ondatachannel += Bind;
@@ -72,25 +68,13 @@ public sealed class StreamerSession : IDisposable
         return bytes.Length == 4 ? bytes[0] == 100 && bytes[1] >= 64 && bytes[1] <= 127
             : ip.ToString().StartsWith("fd7a:115c:a1e0:", StringComparison.OrdinalIgnoreCase);
     }
-    private async Task ReleaseOverlay()
-    {
-        try {
-            await Task.Delay(8000, _stop.Token);
-            lock (_gate) {
-                _overlayReleased = true;
-                foreach (var candidate in _overlay) _listener.OnCandidate(candidate);
-                _overlay.Clear();
-            }
-        } catch (OperationCanceledException) { }
-    }
-
     public async Task StartAsControllerAsync()
     {
         foreach (var label in new[] { ControlLabel, BinaryLabel, FileLabel })
             Bind(await _peer.createDataChannel(label, new RTCDataChannelInit { ordered = true }));
         var offer = _peer.createOffer();
         await _peer.setLocalDescription(offer);
-        _listener.OnOffer(offer.sdp);
+        _listener.OnOffer(_candidateGate.SignalSdp(offer.sdp));
     }
 
     private void Bind(RTCDataChannel channel)
@@ -118,7 +102,7 @@ public sealed class StreamerSession : IDisposable
         SetRemote(RTCSdpType.offer, sdp);
         var answer = _peer.createAnswer();
         await _peer.setLocalDescription(answer);
-        return answer.sdp;
+        return _candidateGate.SignalSdp(answer.sdp);
     }
     public void HandleAnswer(string sdp) => SetRemote(RTCSdpType.answer, sdp);
     public void AddCandidate(string candidate, string sdpMid, int sdpMLineIndex)
@@ -135,7 +119,7 @@ public sealed class StreamerSession : IDisposable
     public void SendFile(byte[] data) { if (_file?.readyState == RTCDataChannelState.open) _file.send(data); }
     public void Dispose()
     {
-        _stop.Cancel();
+        _candidateGate.Dispose();
         _control?.close(); _binary?.close(); _file?.close();
         _peer.close();
     }

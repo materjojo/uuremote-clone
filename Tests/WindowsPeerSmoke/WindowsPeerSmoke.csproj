@@ -11,6 +11,7 @@
     <PackageReference Include="SIPSorcery" Version="10.0.17" />
     <PackageReference Include="SIPSorceryMedia.FFmpeg" Version="10.0.17" />
     <Compile Include="../../platforms/windows/PeerAPI.cs" Link="PeerAPI.cs" />
+    <Compile Include="../../platforms/windows/PeerCandidateGate.cs" Link="PeerCandidateGate.cs" />
     <Compile Include="../../platforms/windows/StreamerSession.cs" Link="StreamerSession.cs" />
     <Compile Include="../../platforms/windows/ScreenCapture.cs" Link="ScreenCapture.cs" />
     <Compile Include="../../platforms/windows/WindowsVideoPipeline.cs" Link="WindowsVideoPipeline.cs" />

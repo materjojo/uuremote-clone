@@ -40,9 +40,7 @@ final class WebRTCSession: NSObject {
     private var closed = false
     private static let sslInitialized: Void = { _ = RTCInitializeSSL() }()
     private var pendingCandidates: [RTCIceCandidate] = []
-    private var overlayCandidates: [RTCIceCandidate] = []
-    private var overlayEnabled = false
-    private var overlayTimer: DispatchWorkItem?
+    private let candidateGate = PeerCandidateGate()
     var onError: ((String) -> Void)?
 
     private let constraints = RTCMediaConstraints(
@@ -60,6 +58,13 @@ final class WebRTCSession: NSObject {
         let decoder = RTCDefaultVideoDecoderFactory()
         self.factory = RTCPeerConnectionFactory(encoderFactory: encoder, decoderFactory: decoder)
         super.init()
+        candidateGate.emit = { [weak self] value in
+            guard let self, !self.closed else { return }
+            self.delegate?.webRTC(self, didGenerate: value)
+        }
+        candidateGate.connected = { [weak self] in
+            self?.peerConnection?.iceConnectionState == .connected || self?.peerConnection?.iceConnectionState == .completed
+        }
         setup(iceServers: iceServers)
     }
 
@@ -99,7 +104,7 @@ final class WebRTCSession: NSObject {
             guard let sdp else { self.onError?(error?.localizedDescription ?? "SDP offer failed"); return }
             pc.setLocalDescription(sdp) { error in
                 if let error { self.onError?(error.localizedDescription); return }
-                DispatchQueue.main.async { if !self.closed { self.delegate?.webRTC(self, didCreateOffer: sdp.sdp) } }
+                DispatchQueue.main.async { if !self.closed { self.delegate?.webRTC(self, didCreateOffer: self.candidateGate.signalSDP(sdp.sdp)) } }
             }
         }
     }
@@ -133,7 +138,7 @@ final class WebRTCSession: NSObject {
                     guard let answer else { self.onError?(error?.localizedDescription ?? "SDP answer failed"); return }
                     pc.setLocalDescription(answer) { error in
                         if let error { self.onError?(error.localizedDescription); return }
-                        DispatchQueue.main.async { if !self.closed { self.delegate?.webRTC(self, didCreateAnswer: answer.sdp) } }
+                        DispatchQueue.main.async { if !self.closed { self.delegate?.webRTC(self, didCreateAnswer: self.candidateGate.signalSDP(answer.sdp)) } }
                     }
                 }
             }
@@ -161,13 +166,11 @@ final class WebRTCSession: NSObject {
 
     func close() {
         closed = true
-        overlayTimer?.cancel()
-        overlayTimer = nil
+        candidateGate.close()
         delegate = nil
         peerConnection?.close()
         peerConnection = nil
         pendingCandidates.removeAll()
-        overlayCandidates.removeAll()
     }
 
     // MARK: - 数据
@@ -218,20 +221,7 @@ extension WebRTCSession: RTCPeerConnectionDelegate {
     func peerConnection(_ peerConnection: RTCPeerConnection, didGenerate candidate: RTCIceCandidate) {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
-            if PeerNetwork.isOverlay(candidate.sdp) && !self.overlayEnabled {
-                self.overlayCandidates.append(candidate)
-                if self.overlayTimer == nil {
-                    let timer = DispatchWorkItem { [weak self] in
-                        guard let self, let pc = self.peerConnection else { return }
-                        if pc.iceConnectionState == .connected || pc.iceConnectionState == .completed { return }
-                        self.overlayEnabled = true
-                        self.overlayCandidates.forEach { self.delegate?.webRTC(self, didGenerate: $0) }
-                        self.overlayCandidates.removeAll()
-                    }
-                    self.overlayTimer = timer
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 8, execute: timer)
-                }
-            } else { self.delegate?.webRTC(self, didGenerate: candidate) }
+            self.candidateGate.submit(candidate)
         }
     }
 
