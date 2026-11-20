@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
-import java.io.File;
-import java.io.FileOutputStream;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -40,11 +38,14 @@ public class HomeTest {
             });
             Bitmap image = instrumentation.getUiAutomation().takeScreenshot();
             assertNotNull("Emulator UI screenshot", image);
-            File dir = activity.getExternalFilesDir("evidence");
-            assertNotNull(dir); assertTrue(dir.exists() || dir.mkdirs());
-            try (FileOutputStream out = new FileOutputStream(new File(dir, "home-empty.png"))) {
-                assertTrue(image.compress(Bitmap.CompressFormat.PNG, 100, out));
-            } finally { image.recycle(); }
+            image.recycle();
+            // AGP uninstalls the app after tests, removing its external-files
+            // directory. Capture with the shell into shared Downloads instead.
+            try (android.os.ParcelFileDescriptor result = instrumentation.getUiAutomation()
+                    .executeShellCommand("screencap -p /sdcard/Download/uuremote-home-empty.png");
+                 java.io.FileInputStream stream = new java.io.FileInputStream(result.getFileDescriptor())) {
+                byte[] block = new byte[1024]; while (stream.read(block) >= 0) { }
+            }
         } finally { instrumentation.runOnMainSync(activity::finish); }
     }
     @Test public void invitationsAcceptAllSupportedPlatforms() throws Exception {

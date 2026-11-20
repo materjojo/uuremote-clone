@@ -30,7 +30,7 @@ jobs:
           script: |
             gradle -p platforms/android -PuuTestAbi=x86_64 connectedDebugAndroidTest --no-daemon
             mkdir -p build/android-evidence
-            adb pull /sdcard/Android/data/com.example.uuremote/files/evidence/ build/android-evidence/
+            adb pull /sdcard/Download/uuremote-home-empty.png build/android-evidence/home-empty.png
       - uses: actions/upload-artifact@v4
         if: always()
         with:
