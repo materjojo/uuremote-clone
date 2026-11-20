@@ -1,0 +1,147 @@
+{
+  "evidence_id": "ev_f5e674cbc8c404505b41460043d633f4c0bff4b039949022e1cbbd9526d4783f",
+  "subject": {
+    "name": "uuyc_4.48.1.apk",
+    "digest": {
+      "sha256": "19252db1dd384f25db000b334e6f77616b9dfa26b2e416ce5383038e973e219f"
+    },
+    "local_path": "/home/ubuntu/rea_uuyc/dist/uuyc_4.48.1.apk",
+    "format": "apk",
+    "architecture": null
+  },
+  "provider": {
+    "id": "jadx",
+    "name": "JADX headless",
+    "version": "0.7.1"
+  },
+  "analysis_profile": null,
+  "predicate_type": "rea.analysis",
+  "operation": "inspect_android_method",
+  "parameters": {
+    "path": "/home/ubuntu/rea_uuyc/dist/uuyc_4.48.1.apk",
+    "class_name": "rf.m",
+    "method_name": "e"
+  },
+  "raw_result": {
+    "server": {
+      "name": "rea-jadx-bridge",
+      "version": "7"
+    },
+    "bridge_sha256": "e5044a8312dd0731f53af3f095508b3e5cff54df6b971c95d4305e2f39b4fa30",
+    "jar_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+    "loaded": {
+      "state": "LOADED",
+      "apk_path": "/tmp/rea-android-NlBm9L/target.apk",
+      "class_count": 14640,
+      "resource_count": 2146,
+      "threads": 1,
+      "resources": "full"
+    },
+    "calls": [
+      {
+        "operation": "rea_jvm_status",
+        "input": {},
+        "response": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"engine_reported_version\":\"0.7.1\",\"available_processors\":2,\"java_version\":\"21.0.12.1\",\"max_heap_bytes\":515899392,\"metadata_scope\":\"parsed_members\"}"
+            }
+          ],
+          "isError": false
+        }
+      },
+      {
+        "operation": "load_apk",
+        "input": {
+          "path": "/tmp/rea-android-NlBm9L/target.apk",
+          "threads": 1,
+          "resources": "full"
+        },
+        "response": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"state\":\"LOADED\",\"apk_path\":\"/tmp/rea-android-NlBm9L/target.apk\",\"class_count\":14640,\"raw_class_count\":14640,\"resource_count\":2146,\"load_duration_ms\":14081,\"decompile_timeout_ms\":90000,\"threads\":1,\"code_cache_size\":64,\"resources\":\"full\"}"
+            }
+          ],
+          "isError": false
+        }
+      },
+      {
+        "operation": "get_class_summary",
+        "input": {
+          "class_name": "rf.m"
+        },
+        "response": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"inner_classes\":[],\"methods\":[{\"dex_descriptor\":\"()V\",\"is_constructor\":false,\"name\":\"\\u003cclinit\\u003e\",\"def_pos\":0,\"signature\":\"\\u003cclinit\\u003e(): void\"},{\"dex_descriptor\":\"([B)V\",\"is_constructor\":true,\"name\":\"\\u003cinit\\u003e\",\"def_pos\":0,\"signature\":\"\\u003cinit\\u003e(byte[]): void\"},{\"dex_descriptor\":\"(Lrf/m;)I\",\"is_constructor\":false,\"name\":\"a\",\"def_pos\":0,\"signature\":\"a(rf.m): int\"},{\"dex_descriptor\":\"(I[BII)V\",\"is_constructor\":false,\"name\":\"b\",\"def_pos\":0,\"signature\":\"b(int, byte[], int, int): void\"},{\"dex_descriptor\":\"(Ljava/lang/String;)Lrf/m;\",\"is_constructor\":false,\"name\":\"c\",\"def_pos\":0,\"signature\":\"c(java.lang.String): rf.m\"},{\"dex_descriptor\":\"(Ljava/lang/Object;)I\",\"is_constructor\":false,\"name\":\"compareTo\",\"def_pos\":0,\"signature\":\"compareTo(java.lang.Object): int\"},{\"dex_descriptor\":\"()I\",\"is_constructor\":false,\"name\":\"d\",\"def_pos\":0,\"signature\":\"d(): int\"},{\"dex_descriptor\":\"()Ljava/lang/String;\",\"is_constructor\":false,\"name\":\"e\",\"def_pos\":0,\"signature\":\"e(): java.lang.String\"},{\"dex_descriptor\":\"(Ljava/lang/Object;)Z\",\"is_constructor\":false,\"name\":\"equals\",\"def_pos\":0,\"signature\":\"equals(java.lang.Object): boolean\"},{\"dex_descriptor\":\"([BI)I\",\"is_constructor\":false,\"name\":\"f\",\"def_pos\":0,\"signature\":\"f(byte[], int): int\"},{\"dex_descriptor\":\"(Lrf/m;Lrf/m;)I\",\"is_constructor\":false,\"name\":\"g\",\"def_pos\":0,\"signature\":\"g(rf.m, rf.m): int\"},{\"dex_descriptor\":\"()[B\",\"is_constructor\":false,\"name\":\"h\",\"def_pos\":0,\"signature\":\"h(): byte[]\"},{\"dex_descriptor\":\"()I\",\"is_constructor\":false,\"name\":\"hashCode\",\"def_pos\":0,\"signature\":\"hashCode(): int\"},{\"dex_descriptor\":\"(I)B\",\"is_constructor\":false,\"name\":\"i\",\"def_pos\":0,\"signature\":\"i(int): byte\"},{\"dex_descriptor\":\"([B)I\",\"is_constructor\":false,\"name\":\"j\",\"def_pos\":0,\"signature\":\"j(byte[]): int\"},{\"dex_descriptor\":\"(Lrf/m;Lrf/m;)I\",\"is_constructor\":false,\"name\":\"k\",\"def_pos\":0,\"signature\":\"k(rf.m, rf.m): int\"},{\"dex_descriptor\":\"(IILrf/m;)Z\",\"is_constructor\":false,\"name\":\"l\",\"def_pos\":0,\"signature\":\"l(int, int, rf.m): boolean\"},{\"dex_descriptor\":\"(I[BII)Z\",\"is_constructor\":false,\"name\":\"m\",\"def_pos\":0,\"signature\":\"m(int, byte[], int, int): boolean\"},{\"dex_descriptor\":\"()I\",\"is_constructor\":false,\"name\":\"n\",\"def_pos\":0,\"signature\":\"n(): int\"},{\"dex_descriptor\":\"(II)Lrf/m;\",\"is_constructor\":false,\"name\":\"o\",\"def_pos\":0,\"signature\":\"o(int, int): rf.m\"},{\"dex_descriptor\":\"(IIILrf/m;)Lrf/m;\",\"is_constructor\":false,\"name\":\"p\",\"def_pos\":0,\"signature\":\"p(int, int, int, rf.m): rf.m\"},{\"dex_descriptor\":\"()Lrf/m;\",\"is_constructor\":false,\"name\":\"q\",\"def_pos\":0,\"signature\":\"q(): rf.m\"},{\"dex_descriptor\":\"()[B\",\"is_constructor\":false,\"name\":\"r\",\"def_pos\":0,\"signature\":\"r(): byte[]\"},{\"dex_descriptor\":\"(Ljava/io/ObjectInputStream;)V\",\"is_constructor\":false,\"name\":\"readObject\",\"def_pos\":0,\"signature\":\"readObject(java.io.ObjectInputStream): void\"},{\"dex_descriptor\":\"()Ljava/lang/String;\",\"is_constructor\":false,\"name\":\"s\",\"def_pos\":0,\"signature\":\"s(): java.lang.String\"},{\"dex_descriptor\":\"(Lrf/j;I)V\",\"is_constructor\":false,\"name\":\"t\",\"def_pos\":0,\"signature\":\"t(rf.j, int): void\"},{\"dex_descriptor\":\"()Ljava/lang/String;\",\"is_constructor\":false,\"name\":\"toString\",\"def_pos\":0,\"signature\":\"toString(): java.lang.String\"},{\"dex_descriptor\":\"(Ljava/io/ObjectOutputStream;)V\",\"is_constructor\":false,\"name\":\"writeObject\",\"def_pos\":0,\"signature\":\"writeObject(java.io.ObjectOutputStream): void\"}],\"fields\":[{\"name\":\"f42894d\",\"def_pos\":0,\"type\":\"rf.m\"},{\"name\":\"f42895a\",\"def_pos\":0,\"type\":\"byte[]\"},{\"name\":\"f42896b\",\"def_pos\":0,\"type\":\"int\"},{\"name\":\"f42897c\",\"def_pos\":0,\"type\":\"java.lang.String\"},{\"name\":\"serialVersionUID\",\"def_pos\":0,\"type\":\"long\"}],\"raw_name\":\"rf.m\",\"method_count\":28,\"full_name\":\"rf.m\",\"field_count\":5,\"name\":\"m\",\"inner_class_count\":0}"
+            }
+          ],
+          "isError": false
+        }
+      },
+      {
+        "operation": "get_method_body",
+        "input": {
+          "class_name": "rf.m",
+          "method_name": "e",
+          "overload_index": 0,
+          "smali_fallback": true
+        },
+        "response": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"markers\":[],\"body\":\"    public String e() {\\n        byte[] bArr \\u003d this.f42895a;\\n        char[] cArr \\u003d new char[bArr.length * 2];\\n        int i10 \\u003d 0;\\n        for (byte b4 : bArr) {\\n            int i11 \\u003d i10 + 1;\\n            char[] cArr2 \\u003d sf.b.f43222a;\\n            cArr[i10] \\u003d cArr2[(b4 \\u003e\\u003e 4) \\u0026 15];\\n            i10 +\\u003d 2;\\n            cArr[i11] \\u003d cArr2[b4 \\u0026 15];\\n        }\\n        return new String(cArr);\\n    }\",\"mode\":\"java\",\"class_name\":\"rf.m\",\"dex_descriptor\":\"()Ljava/lang/String;\",\"overload_count\":1,\"method_name\":\"e\",\"overload_index\":0,\"full_name\":\"rf.m.e\",\"fell_back\":false}"
+            }
+          ],
+          "isError": false
+        }
+      }
+    ]
+  },
+  "normalized_result": {
+    "engine": {
+      "name": "jadx-headless-mcp",
+      "version": "0.7.1",
+      "artifact_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+      "source_revision": "5844800a486d2248fa949b74c9896285f5b54de2",
+      "worker_count": 1,
+      "heap_limit_mib": 492
+    },
+    "class_name": "rf.m",
+    "method": {
+      "name": "e",
+      "reported_signature": "e(): java.lang.String",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()Ljava/lang/String;"
+    },
+    "overload_count": 1,
+    "representation": "java",
+    "body_status": "available",
+    "fell_back": false,
+    "markers": [],
+    "source": {
+      "status": "complete",
+      "text": "    public String e() {\n        byte[] bArr = this.f42895a;\n        char[] cArr = new char[bArr.length * 2];\n        int i10 = 0;\n        for (byte b4 : bArr) {\n            int i11 = i10 + 1;\n            char[] cArr2 = sf.b.f43222a;\n            cArr[i10] = cArr2[(b4 >> 4) & 15];\n            i10 += 2;\n            cArr[i11] = cArr2[b4 & 15];\n        }\n        return new String(cArr);\n    }",
+      "reported_total_bytes": null
+    }
+  },
+  "confidence": "derived",
+  "authority": "shipped-artifact",
+  "environment": null,
+  "limitations": [
+    "Static decompiler observations do not establish runtime behavior; the APK is never executed.",
+    "Method signatures use provider display types; DEX prototypes come from frozen JADX metadata. Display names may be aliases, and overload indices are local to this engine and artifact.",
+    "Class inventories use parsed metadata before code generation, including synthetic members that may be omitted from decompiled source. Source positions remain unknown.",
+    "Incoming reference totals count JADX using nodes. Direct invoke entries within a using method report raw DEX code-unit offsets and method indexes, but coverage is limited to those nodes and directly matched invokes; it does not establish every possible dynamic or reflective call site.",
+    "Manifest summaries are parsed once by REA's bridge from the exact root AndroidManifest.xml resource, using namespace-aware XML attributes; decoded XML is retained. APK signatures, split APKs, native libraries and Android runtime capture are not verified by this provider."
+  ],
+  "relationship_coverage": null,
+  "locations": [],
+  "evidence_links": []
+}

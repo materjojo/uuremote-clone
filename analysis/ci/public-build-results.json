@@ -1,0 +1,621 @@
+{
+  "source": "GitHub REST Actions run/jobs/artifacts endpoints and job logs; compiled execution was exclusively in GitHub Actions",
+  "runs": [
+    {
+      "id": 44648328290,
+      "url": "https://github.com/materjojo/uuremote-clone/actions/runs/44648328290",
+      "commit": "2f65722ddd59085075f27973e3748a77f8cfbb1a",
+      "status": "completed",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "id": 135996552060,
+          "name": "plan",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-11-20T00:45:09Z",
+          "completed_at": "2026-11-20T00:45:17Z",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Select affected platforms",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Check selection boundaries, generated sources and recovered evidence",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Post Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 135996627134,
+          "name": "android-app",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-11-20T00:45:19Z",
+          "completed_at": "2026-11-20T00:47:08Z",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Run actions/setup-java@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Run gradle/actions/setup-gradle@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Build ARM64 APK",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Check all compiled glue against original APK DEX",
+              "conclusion": "failure"
+            },
+            {
+              "number": 7,
+              "name": "Check original native libraries and config inside APK",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 8,
+              "name": "Run actions/upload-artifact@v4",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 14,
+              "name": "Post Run gradle/actions/setup-gradle@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Post Run actions/setup-java@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 16,
+              "name": "Post Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 17,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 135996627146,
+          "name": "core",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-11-20T00:45:19Z",
+          "completed_at": "2026-11-20T00:45:33Z",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Build and test portable core (assertions enabled in Release)",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Post Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 135996627195,
+          "name": "windows-app",
+          "status": "completed",
+          "conclusion": "failure",
+          "started_at": "2026-11-20T00:45:19Z",
+          "completed_at": "2026-11-20T00:46:55Z",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Restore and verify only the Windows runtime",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Run actions/setup-dotnet@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Run actions/cache@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Build shared core once for tests and application",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Test managed binding against the supplied DLL",
+              "conclusion": "failure"
+            },
+            {
+              "number": 8,
+              "name": "Publish WPF app with native runtime",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 9,
+              "name": "Verify package and archive",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 10,
+              "name": "Run actions/upload-artifact@v4",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 11,
+              "name": "Run actions/upload-artifact@v4",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 20,
+              "name": "Post Run actions/cache@v4",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 21,
+              "name": "Post Run actions/setup-dotnet@v4",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 22,
+              "name": "Post Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 23,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 135996627330,
+          "name": "macos-app",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-11-20T00:45:19Z",
+          "completed_at": "2026-11-20T00:46:37Z",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Restore and verify only the macOS runtime",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Cache downloaded Swift dependencies",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Build and test Swift binding against the supplied dylib",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Check C ABI when shared native code changed",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Package .app and verify original runtime bytes",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Run actions/upload-artifact@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Run actions/upload-artifact@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 17,
+              "name": "Post Cache downloaded Swift dependencies",
+              "conclusion": "success"
+            },
+            {
+              "number": 18,
+              "name": "Post Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 19,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 14588739025,
+          "name": "UURemoteClone-macos",
+          "size_in_bytes": 23347512,
+          "digest": "sha256:1d06761ba2b96df4a4d156f9e894f6d1eeb642596f37024cd180308e6185c44f",
+          "expired": false,
+          "expires_at": "2026-11-27T00:46:31Z",
+          "url": "https://github.com/materjojo/uuremote-clone/actions/runs/44648328290/artifacts/14588739025"
+        },
+        {
+          "id": 14588359645,
+          "name": "Native-ABI-macos",
+          "size_in_bytes": 499,
+          "digest": "sha256:fd5232ef8e59a2ff09fe81f3fb30157948743e190f61d5ca6eb60eb98ccf6ccf",
+          "expired": false,
+          "expires_at": "2026-11-27T00:46:33Z",
+          "url": "https://github.com/materjojo/uuremote-clone/actions/runs/44648328290/artifacts/14588359645"
+        }
+      ]
+    },
+    {
+      "id": 44649504313,
+      "url": "https://github.com/materjojo/uuremote-clone/actions/runs/44649504313",
+      "commit": "2903d80495b13da604ccaee0234df77b8026dc26",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 136000541805,
+          "name": "plan",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-11-20T00:54:04Z",
+          "completed_at": "2026-11-20T00:54:13Z",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Select affected platforms",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Check selection boundaries, generated sources and recovered evidence",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Post Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 136000623659,
+          "name": "windows-app",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-11-20T00:54:14Z",
+          "completed_at": "2026-11-20T00:56:25Z",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Restore and verify only the Windows runtime",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Run actions/setup-dotnet@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Run actions/cache@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Build shared core once for tests and application",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Test managed binding against the supplied DLL",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Publish WPF app with native runtime",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Verify package and archive",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Run actions/upload-artifact@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Run actions/upload-artifact@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 20,
+              "name": "Post Run actions/cache@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Post Run actions/setup-dotnet@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 22,
+              "name": "Post Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 23,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 136000623674,
+          "name": "android-app",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-11-20T00:54:15Z",
+          "completed_at": "2026-11-20T00:55:54Z",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Run actions/setup-java@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Run gradle/actions/setup-gradle@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Build ARM64 APK",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Check all compiled glue against original APK DEX",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Check original native libraries and config inside APK",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Run actions/upload-artifact@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Post Run gradle/actions/setup-gradle@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Post Run actions/setup-java@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 16,
+              "name": "Post Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 17,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 136000625089,
+          "name": "core",
+          "status": "completed",
+          "conclusion": "skipped",
+          "started_at": "2026-11-20T00:54:13Z",
+          "completed_at": "2026-11-20T00:54:13Z",
+          "steps": []
+        },
+        {
+          "id": 136000626037,
+          "name": "macos-app",
+          "status": "completed",
+          "conclusion": "skipped",
+          "started_at": "2026-11-20T00:54:13Z",
+          "completed_at": "2026-11-20T00:54:13Z",
+          "steps": []
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 14590645695,
+          "name": "UURemoteClone-windows-x64",
+          "size_in_bytes": 87793141,
+          "digest": "sha256:63be32c64564c3b98cb06d753657aeea9ab9494e0042196ed99e6bf74b2bea42",
+          "expired": false,
+          "expires_at": "2026-11-27T00:56:13Z",
+          "url": "https://github.com/materjojo/uuremote-clone/actions/runs/44649504313/artifacts/14590645695"
+        },
+        {
+          "id": 14590126793,
+          "name": "Native-ABI-windows",
+          "size_in_bytes": 510,
+          "digest": "sha256:c5270df1686d8cf7bda0e0801cfbcb091dfa67e4069ec2670048f41928b4e291",
+          "expired": false,
+          "expires_at": "2026-11-27T00:56:17Z",
+          "url": "https://github.com/materjojo/uuremote-clone/actions/runs/44649504313/artifacts/14590126793"
+        },
+        {
+          "id": 14589844845,
+          "name": "UURemoteClone-android-arm64-debug",
+          "size_in_bytes": 14591763,
+          "digest": "sha256:c9a015bb990f23ac7eaca693b2d7eb99429f7f402820620a149c9f8b1bb2a4b4",
+          "expired": false,
+          "expires_at": "2026-11-27T00:55:33Z",
+          "url": "https://github.com/materjojo/uuremote-clone/actions/runs/44649504313/artifacts/14589844845"
+        }
+      ]
+    }
+  ],
+  "verification_log_excerpts": [
+    "macos-app\tRestore and verify only the macOS runtime\t2026-11-20T00:45:23.6144170Z PASS: 2 retained native/config files match their recorded SHA-256.",
+    "macos-app\tBuild and test Swift binding against the supplied dylib\t2026-11-20T00:46:20.8976650Z \t Executed 3 tests, with 0 failures (0 unexpected) in 0.020 (0.020) seconds",
+    "macos-app\tBuild and test Swift binding against the supplied dylib\t2026-11-20T00:46:20.8977480Z \t Executed 3 tests, with 0 failures (0 unexpected) in 0.020 (0.020) seconds",
+    "macos-app\tBuild and test Swift binding against the supplied dylib\t2026-11-20T00:46:20.8977770Z Test Suite 'All tests' passed at 2026-11-20 00:46:20.833.",
+    "macos-app\tBuild and test Swift binding against the supplied dylib\t2026-11-20T00:46:20.8978050Z \t Executed 3 tests, with 0 failures (0 unexpected) in 0.020 (0.024) seconds",
+    "macos-app\tCheck C ABI when shared native code changed\t2026-11-20T00:46:28.2370610Z 100% tests passed out of 1",
+    "macos-app\tCheck C ABI when shared native code changed\t2026-11-20T00:46:28.3093070Z PASS: 2 retained native/config files match their recorded SHA-256.",
+    "macos-app\tCheck C ABI when shared native code changed\t2026-11-20T00:46:28.3093970Z PASS: actual supplied macos controller library returned V4.14.2",
+    "macos-app\tCheck C ABI when shared native code changed\t2026-11-20T00:46:28.3094730Z PASS: actual supplied macos controlled library returned V4.14.2",
+    "macos-app\tPackage .app and verify original runtime bytes\t2026-11-20T00:46:31.4987440Z PASS packaged original library/config: UURemoteClone.app/Contents/Frameworks/libstreamer.dylib",
+    "macos-app\tPackage .app and verify original runtime bytes\t2026-11-20T00:46:31.4988830Z PASS packaged original library/config: UURemoteClone.app/Contents/Resources/streamer-config.json",
+    "windows-app\tRestore and verify only the Windows runtime\t2026-11-20T00:45:32.4635287Z PASS: 2 retained native/config files match their recorded SHA-256.",
+    "windows-app\tBuild shared core once for tests and application\t2026-11-20T00:46:38.3596204Z 100% tests passed out of 1",
+    "windows-app\tBuild shared core once for tests and application\t2026-11-20T00:46:38.5730542Z PASS: 2 retained native/config files match their recorded SHA-256.",
+    "windows-app\tBuild shared core once for tests and application\t2026-11-20T00:46:38.5731429Z PASS: actual supplied windows controller library returned V4.14.2",
+    "windows-app\tBuild shared core once for tests and application\t2026-11-20T00:46:38.5732111Z PASS: actual supplied windows controlled library returned V4.14.2",
+    "windows-app\tTest managed binding against the supplied DLL\t2026-11-20T00:46:51.2913335Z ##[error]D:\\a\\uuremote-clone\\uuremote-clone\\platforms\\windows\\OfficialStreamer.cs(21,51): error CS1501: No overload for method 'Close' takes 1 arguments [D:\\a\\uuremote-clone\\uuremote-clone\\Tests\\WindowsOfficialSmoke\\WindowsOfficialSmoke.csproj]",
+    "plan\tCheck selection boundaries, generated sources and recovered evidence\t2026-11-20T00:54:09.9672212Z PASS: all 22 recovered classes have matching original APK evidence and source hashes.",
+    "windows-app\tRestore and verify only the Windows runtime\t2026-11-20T00:54:26.1051816Z PASS: 2 retained native/config files match their recorded SHA-256.",
+    "windows-app\tBuild shared core once for tests and application\t2026-11-20T00:55:17.5950058Z 100% tests passed out of 1",
+    "windows-app\tBuild shared core once for tests and application\t2026-11-20T00:55:17.7726918Z PASS: 2 retained native/config files match their recorded SHA-256.",
+    "windows-app\tBuild shared core once for tests and application\t2026-11-20T00:55:17.7727610Z PASS: actual supplied windows controller library returned V4.14.2",
+    "windows-app\tBuild shared core once for tests and application\t2026-11-20T00:55:17.7728097Z PASS: actual supplied windows controlled library returned V4.14.2",
+    "windows-app\tTest managed binding against the supplied DLL\t2026-11-20T00:55:30.1751864Z PASS managed P/Invoke: Controller V4.14.2",
+    "windows-app\tTest managed binding against the supplied DLL\t2026-11-20T00:55:30.1817924Z PASS managed P/Invoke: Controlled V4.14.2",
+    "windows-app\tVerify package and archive\t2026-11-20T00:56:13.4644376Z PASS packaged original library/config: streamer.dll",
+    "windows-app\tVerify package and archive\t2026-11-20T00:56:13.4645039Z PASS packaged original library/config: streamer-config.json",
+    "android-app\tBuild ARM64 APK\t2026-11-20T00:55:29.7137399Z > Task :app:testDebugUnitTest",
+    "android-app\tCheck all compiled glue against original APK DEX\t2026-11-20T00:55:33.7260412Z PASS: 237 compiled method descriptors and 24 encoded constants across 22 classes.",
+    "android-app\tCheck original native libraries and config inside APK\t2026-11-20T00:55:33.7935787Z PASS original APK member identity: assets/streamer/streamer-config.json",
+    "android-app\tCheck original native libraries and config inside APK\t2026-11-20T00:55:33.7936534Z PASS original APK member identity: lib/arm64-v8a/libstreamer-jni.so",
+    "android-app\tCheck original native libraries and config inside APK\t2026-11-20T00:55:33.7937114Z PASS original APK member identity: lib/arm64-v8a/libstreamer.so",
+    "android-app\tCheck original native libraries and config inside APK\t2026-11-20T00:55:33.7937686Z PASS original APK member identity: lib/arm64-v8a/libc++_shared.so"
+  ],
+  "scope": "Compilation, fake-backend Android JVM lifecycle, retained runtime identity, factory/version and managed binding checks. No live login, media, physical capture, hardware codec, UI parity or cross-device interoperability assertion."
+}

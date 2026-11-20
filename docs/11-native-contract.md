@@ -38,7 +38,7 @@
 - [verify_android_abi.py](../scripts/verify_android_abi.py) 用 `javap -s -p -constants` 对照冻结的原 DEX 记录，现覆盖恢复清单内全部 22 个类的原有方法（包含 helper 构造器）、实例/static 和 native 修饰，以及 DEX 明确编码的整型常量。仅排除已记录的 Kotlin mask 构造器、静态初始化代码，并显式检查 finalize → shutdown 的包装改名。`--check-evidence` 检查 22 个类均有原包证据且恢复源码哈希一致。它不能验证实现语义、class-loader、设备 API 或硬件路径。
 - APK 检查逐一对比保留的三个 `.so` 和 config；打包明确不 strip 这三份原版库，防止 CI 悄悄改变二进制身份。
 
-Android 当前仍缺少 ARM64 真机/模拟器的 native 初始化与会话验证；没有把“Java 编译通过”写成 JNI 运行成功。
+[OfficialControllerSession](../platforms/android/app/src/main/java/com/example/uuremote/official/OfficialControllerSession.java) 现在包装原版控制端初始化、房间/连接提交、音视频轨道、各通道原始字节和清理。它限制同一进程一个 engine owner，使用系统时区，不额外封装控制消息，不以 Connect 提交成功表示连接完成；Finalize 失败时禁止再次抢占未知的全局 native 状态。Android 构建会先执行 JVM 生命周期/转发测试，后端为替身，不加载 ARM64 库。当前演示 UI 仍用实验性 StreamerSession；此层还缺认证/房间层接入，以及 ARM64 真机/模拟器的 native 初始化与会话验证，没有把“Java 测试通过”写成 JNI 运行成功。
 
 ## Android 原版会话与控制消息的进一步核对
 
@@ -49,6 +49,14 @@ Android 当前仍缺少 ARM64 真机/模拟器的 native 初始化与会话验�
 - `Bb.J3.g` 编码 `Bb.K3` 的 seq=1、timestamp=2 和 payload 3..28；input_event=20。这与 Windows `Message` descriptor 的 tag 对应。[REA ev_e276d615a7d9416c49bebece132cbdb0ab68f50c6dc880e443784b67c7ea19e3](../analysis/official/android/message-encode.json)。这里未逐项恢复所有嵌套消息的语义和 Android 类型布局。
 - `ControllerService.sendText` 会构造 `{"action":"text_input","content":...}`，按 UTF-8 传入 **sendControlData**。[REA ev_f04ab977044e66d0dd7bdcfbdd5ce29952949a7ad28968f5a658bb8c55ec6ec5](../analysis/official/android/controller-send-text.json)。因此控制通道既有 protobuf，也有 JSON 消息；不能把所有文本输入都重新封装为猜测的 protobuf 或 KCP/FEC 帧。
 
+## Android HTTP 认证前提的进一步定位
+
+已保存原 APK 的 [请求协程](../analysis/official/android/http-request-coroutine.json)、[公共头](../analysis/official/android/http-common-headers.json)、[头排序器](../analysis/official/android/http-header-comparator.json) 和 [签名结果编码](../analysis/official/android/http-signature-hex.json)。四项均为完整 Java 反编译输出，没有运行网络请求：
+
+- 公共请求头包括 X-Param-CHN / OPR / PKGN / PLAT / REL / VC / ABI、client-id / device-id / user-id、OAID / TS / CNT / LANG；版本号为 Android 的 448001。空值在请求协程中被过滤，部分请求增加 X-Param-Nonce。
+- 请求协程对头名按 Locale.ROOT 转小写后排序，只把 x-param- 前缀项拼成 `key=value`、用 `&` 连接；再与方法、请求路径/查询字串和原 body 串拼接，交给 `com.remote.nrdsign.a.a`，其结果经 `rf.m.e()` 的逐 nibble 字符编码放进 X-Param-SIGN。
+- Authorization 的 Bearer token 在计算上述签名后附加。这说明 Android 接口不能只靠静态端点和一个 Bearer 头就算已接通。签名调用内部、服务端响应检查、真实登录与房间获取尚未恢复/验证；也未把这些 Android 头参数直接套给 macOS/Windows。
+
 ## 协议表更正
 
 原始 Windows descriptors 包含 178 个顶层消息，另有 `MumuSetting.MapKeyValueEntry`，合计 179。旧 C++ 表遗漏了 `ScreenResolution` 和该嵌套消息（177）；旧 Swift 表仅有 160 条。两张表现从 [同一份冻结记录](../analysis/official/gv-pb-descriptors.json) 生成，并检查可复现性。保留完整 wire schema 不等于应用提供历史云设备业务。
@@ -57,6 +65,8 @@ Android 当前仍缺少 ARM64 真机/模拟器的 native 初始化与会话验�
 
 工作流构建三端、运行启用断言的 C++ Release 测试，在 macOS / Windows runner 加载原版库查询两种角色版本，并分别经过 Swift 和 C# 绑定。报告含平台、架构、原库和 bridge 的哈希；APK 增加编译原型和包装身份检查；桌面 ZIP 也核对原版库/config 的完整 SHA-256，并检查 macOS 执行权限。具体结果以对应 Actions 运行及 artifacts 为准，源代码中的测试本身不构成已通过的结果。
 
-首轮 `0733e90` 对应 [Actions 44643846778](https://github.com/materjojo/uuremote-clone/actions/runs/44643846778) 因账号付款/支出上限，全部 job 在 runner 启动前被拒绝；上述编译和运行检查**均未执行**。[原始状态记录](../analysis/ci/0733e90-blocked.json)。
+历史私有仓库首轮 `0733e90` 对应 [Actions 44643846778](https://github.com/materjojo/uuremote-clone/actions/runs/44643846778) 因账号付款/支出上限，全部 job 在 runner 启动前被拒绝。[原始状态记录](../analysis/ci/0733e90-blocked.json)。
+
+公开后已实际通过：`2f65722` 的 macOS Swift 3 项测试、C ABI 两角色与打包，`2903d80` 的 Windows C ABI / C# 两角色与打包，以及 Android JVM 测试、237 个方法 descriptor / 24 个常量与 APK 身份检查。桌面四次角色探测均返回 V4.14.2，native status=0。原生报告见 [macOS](../analysis/ci/2f65722-macos-native.json) / [Windows](../analysis/ci/2903d80-windows-native.json)，job/step/artifact 与验证日志摘要见 [public-build-results.json](../analysis/ci/public-build-results.json)。后一次推送没有改动 macOS 或共享实现，因此只构建 Windows/Android，没有额外重建已通过的平台。
 
 工厂/版本入口通过也不能证明登录、真实信令、媒体轨道、音视频、输入注入、文件传输、终端或 UI 一致。物理采集、硬件编码器与解码器、三端互控和无云业务仍需单独验收。

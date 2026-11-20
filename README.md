@@ -8,7 +8,7 @@
 
 - [proto/gv_pb/](proto/gv_pb/)：Windows 内嵌 descriptor 恢复的 14 个 proto、178 个顶层消息及 1 个嵌套消息。C++ 和 Swift 字段表从同一份恢复记录生成，现均覆盖 179 条。
 - [native/official/](native/official/)：从给定安装包保留的原版桌面 streamer 库、各端独立配置、共享 C ABI 检查层。该层目前只开放经过核对的工厂和版本查询，**不是完整媒体会话实现**。
-- [Android JNI glue](platforms/android/app/src/main/java/com/remote/streamer/)：恢复的实例 native 方法、配置 getter、回调分发、Surface / MediaProjection / VirtualDisplay 辅助类；静态契约由原 APK 的 DEX 原型对照检查。
+- [Android JNI glue](platforms/android/app/src/main/java/com/remote/streamer/)：恢复的实例 native 方法、配置 getter、回调分发、Surface / MediaProjection / VirtualDisplay 辅助类；编译后的 237 个方法 descriptor、24 个常量已通过原 APK 对照。[官方控制端会话封装](platforms/android/app/src/main/java/com/example/uuremote/official/OfficialControllerSession.java) 增加引擎单一所有者、房间/轨道生命周期、原始字节转发和故障清理；JVM 测试使用替身后端，尚未接替演示 UI，也未证明 Android native 运行成功。
 - 三端应用已有独立 UI 和实验性媒体/控制代码。登录、真实房间、官方媒体核心接入、音频、文件/终端业务、UI 对齐等尚未全链路完成。详见 [本轮验收表](docs/10-continuation-audit.md)。
 
 ## 构建与下载
@@ -22,11 +22,19 @@
 | UURemoteClone-android-arm64-debug | ARM64 调试 APK，含原版三个 `.so`、配置与共享协议核心 |
 | Native-ABI-* | 对安装包内真实媒体库执行工厂/版本查询的结果及 SHA-256 |
 
-macOS 包为当前 runner 的架构，未声明 universal 或 notarized；Android 为调试签名，Windows 尚未做安装器/发行签名。上述产物不能视作已通过端到端验收的正式版本。
+本轮已通过的下载与验证：
+
+| 平台 | 已构建提交 | 下载 |
+|---|---|---|
+| macOS ARM64 | `2f65722`；后续该端输入未变化 | [应用 ZIP](https://github.com/materjojo/uuremote-clone/actions/runs/44648328290/artifacts/14588739025) |
+| Windows x64 | `2903d80` | [应用 ZIP](https://github.com/materjojo/uuremote-clone/actions/runs/44649504313/artifacts/14590645695) |
+| Android ARM64 | `2903d80` | [调试 APK](https://github.com/materjojo/uuremote-clone/actions/runs/44649504313/artifacts/14589844845) |
+
+产物保留 7 天，过期后手动选择对应平台重建。macOS 包为当前 runner 的架构，未声明 universal 或 notarized；Android 为调试签名，Windows 尚未做安装器/发行签名。上述产物不能视作已通过端到端验收的正式版本。
 
 ## 验证范围
 
-Actions 执行共享 C++ Release 测试（断言明确启用）、桌面真实库的 C ABI 冒烟测试、Swift / C# 调用检查、Android 编译后 JNI 原型比较和 APK 内原版文件哈希比较。Android 真机 native 执行、官方服务会话、三端互控、硬编硬解路径以及逐页面/逐像素 UI 尚未完成验证。
+已在 Actions 通过共享 C++ Release 测试（断言明确启用）、桌面真实库的 C ABI 冒烟测试、Swift / C# 调用检查、Android JVM 生命周期测试、编译后 JNI 原型比较和 APK/桌面 ZIP 内原版文件哈希比较。两端真实桌面库的控制端和被控端均返回 `V4.14.2`。运行和产物记录见 [public-build-results.json](analysis/ci/public-build-results.json)。Android 真机 native 执行、官方服务会话、三端互控、硬编硬解路径以及逐页面/逐像素 UI 尚未完成验证。
 
 之前的私有仓库运行 [Actions 44643846778](https://github.com/materjojo/uuremote-clone/actions/runs/44643846778) 因计费限制，在 runner 启动前被拒绝。现已按用户要求转为公开仓库，使用免费的标准托管 runner。工作流按变更路径选择平台，文档不触发编译，支持手动选择单个平台；构建结果仍以对应 Actions 运行和产物为准。详见 [CI 管理](docs/12-ci.md)。
 

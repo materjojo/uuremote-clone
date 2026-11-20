@@ -1,0 +1,130 @@
+{
+  "evidence_id": "ev_168b1e8334932ab12510ac7229750585ad298cc294ad3924734553a59ba68ab6",
+  "subject": {
+    "name": "uuyc_4.48.1.apk",
+    "digest": {
+      "sha256": "19252db1dd384f25db000b334e6f77616b9dfa26b2e416ce5383038e973e219f"
+    },
+    "local_path": "/home/ubuntu/rea_uuyc/dist/uuyc_4.48.1.apk",
+    "format": "apk",
+    "architecture": null
+  },
+  "provider": {
+    "id": "jadx",
+    "name": "JADX headless",
+    "version": "0.7.1"
+  },
+  "analysis_profile": null,
+  "predicate_type": "rea.analysis",
+  "operation": "inspect_android_method",
+  "parameters": {
+    "path": "/home/ubuntu/rea_uuyc/dist/uuyc_4.48.1.apk",
+    "class_name": "Ea.A",
+    "method_name": "a"
+  },
+  "raw_result": {
+    "server": {
+      "name": "rea-jadx-bridge",
+      "version": "7"
+    },
+    "bridge_sha256": "e5044a8312dd0731f53af3f095508b3e5cff54df6b971c95d4305e2f39b4fa30",
+    "jar_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+    "loaded": {
+      "state": "LOADED",
+      "apk_path": "/tmp/rea-android-RxsEgA/target.apk",
+      "class_count": 14640,
+      "resource_count": 2146,
+      "threads": 1,
+      "resources": "full"
+    },
+    "calls": [
+      {
+        "operation": "rea_jvm_status",
+        "input": {},
+        "response": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"metadata_scope\":\"parsed_members\",\"max_heap_bytes\":515899392,\"java_version\":\"21.0.12.1\",\"available_processors\":2,\"engine_reported_version\":\"0.7.1\"}"
+            }
+          ],
+          "isError": false
+        }
+      },
+      {
+        "operation": "get_class_summary",
+        "input": {
+          "class_name": "Ea.A"
+        },
+        "response": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"inner_class_count\":0,\"name\":\"A\",\"field_count\":0,\"full_name\":\"Ea.A\",\"method_count\":2,\"raw_name\":\"Ea.A\",\"fields\":[],\"methods\":[{\"signature\":\"\\u003cclinit\\u003e(): void\",\"def_pos\":0,\"name\":\"\\u003cclinit\\u003e\",\"is_constructor\":false,\"dex_descriptor\":\"()V\"},{\"signature\":\"a(): Xd.e\",\"def_pos\":0,\"name\":\"a\",\"is_constructor\":false,\"dex_descriptor\":\"()LXd/e;\"}],\"inner_classes\":[]}"
+            }
+          ],
+          "isError": false
+        }
+      },
+      {
+        "operation": "get_method_body",
+        "input": {
+          "class_name": "Ea.A",
+          "method_name": "a",
+          "overload_index": 0,
+          "smali_fallback": true
+        },
+        "response": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"fell_back\":false,\"full_name\":\"Ea.A.a\",\"overload_index\":0,\"method_name\":\"a\",\"overload_count\":1,\"dex_descriptor\":\"()LXd/e;\",\"class_name\":\"Ea.A\",\"mode\":\"java\",\"body\":\"    public static Xd.e a() {\\n        Xd.e eVar \\u003d new Xd.e();\\n        String str \\u003d (String) G9.h.f7441c.getValue();\\n        Vd.p pVar \\u003d G9.c.f7422a;\\n        eVar.put(\\\"X-Param-CHN\\\", (String) pVar.getValue());\\n        eVar.put(\\\"X-Param-OPR\\\", str);\\n        eVar.put(\\\"X-Param-PKGN\\\", G9.c.f7425d);\\n        eVar.put(\\\"X-Param-PLAT\\\", String.valueOf(G9.h.f7439a));\\n        eVar.put(\\\"X-Param-REL\\\", \\\"prod\\\");\\n        eVar.put(\\\"X-Param-VC\\\", String.valueOf(448001));\\n        if (le.k.a((String) pVar.getValue(), \\\"netease.douyin_cpa_dev\\\")) {\\n        }\\n        eVar.put(\\\"X-Param-ABI\\\", G9.h.f7442d);\\n        String strA \\u003d N9.j.a();\\n        if (ue.n.t0(strA)) {\\n            strA \\u003d null;\\n        }\\n        if (strA \\u003d\\u003d null) {\\n            strA \\u003d \\\"\\\";\\n        }\\n        eVar.put(\\\"X-Param-client-id\\\", strA);\\n        String strB \\u003d N9.j.b();\\n        if (ue.n.t0(strB)) {\\n            strB \\u003d null;\\n        }\\n        if (strB \\u003d\\u003d null) {\\n            strB \\u003d \\\"\\\";\\n        }\\n        eVar.put(\\\"X-Param-device-id\\\", strB);\\n        s8.a aVar \\u003d Gf.a.f7616b;\\n        if (aVar \\u003d\\u003d null) {\\n            throw new IllegalStateException(\\\"KoinApplication has not been started\\\");\\n        }\\n        String strB2 \\u003d ((J8.d) ((Pf.a) aVar.f43020d).f11154d.c(null, null, le.w.a(J8.d.class))).b();\\n        String str2 \\u003d ue.n.t0(strB2) ? null : strB2;\\n        eVar.put(\\\"X-Param-user-id\\\", str2 !\\u003d null ? str2 : \\\"\\\");\\n        eVar.put(\\\"X-Param-OAID\\\", N9.j.c());\\n        eVar.put(\\\"X-Param-TS\\\", String.valueOf(Ja.a.I(ve.f.f44771a.c()).a()));\\n        String language \\u003d Locale.getDefault().getLanguage();\\n        le.k.d(language, \\\"getLanguage(...)\\\");\\n        String country \\u003d Locale.getDefault().getCountry();\\n        le.k.d(country, \\\"getCountry(...)\\\");\\n        for (Map.Entry entry : Wd.z.K(new Vd.k(\\\"X-Param-CNT\\\", country), new Vd.k(\\\"X-Param-LANG\\\", A0.b.A(language, Constants.ACCEPT_TIME_SEPARATOR_SERVER, country))).entrySet()) {\\n            eVar.put(entry.getKey(), entry.getValue());\\n        }\\n        return eVar.b();\\n    }\",\"markers\":[]}"
+            }
+          ],
+          "isError": false
+        }
+      }
+    ]
+  },
+  "normalized_result": {
+    "engine": {
+      "name": "jadx-headless-mcp",
+      "version": "0.7.1",
+      "artifact_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+      "source_revision": "5844800a486d2248fa949b74c9896285f5b54de2",
+      "worker_count": 1,
+      "heap_limit_mib": 492
+    },
+    "class_name": "Ea.A",
+    "method": {
+      "name": "a",
+      "reported_signature": "a(): Xd.e",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "()LXd/e;"
+    },
+    "overload_count": 1,
+    "representation": "java",
+    "body_status": "available",
+    "fell_back": false,
+    "markers": [],
+    "source": {
+      "status": "complete",
+      "text": "    public static Xd.e a() {\n        Xd.e eVar = new Xd.e();\n        String str = (String) G9.h.f7441c.getValue();\n        Vd.p pVar = G9.c.f7422a;\n        eVar.put(\"X-Param-CHN\", (String) pVar.getValue());\n        eVar.put(\"X-Param-OPR\", str);\n        eVar.put(\"X-Param-PKGN\", G9.c.f7425d);\n        eVar.put(\"X-Param-PLAT\", String.valueOf(G9.h.f7439a));\n        eVar.put(\"X-Param-REL\", \"prod\");\n        eVar.put(\"X-Param-VC\", String.valueOf(448001));\n        if (le.k.a((String) pVar.getValue(), \"netease.douyin_cpa_dev\")) {\n        }\n        eVar.put(\"X-Param-ABI\", G9.h.f7442d);\n        String strA = N9.j.a();\n        if (ue.n.t0(strA)) {\n            strA = null;\n        }\n        if (strA == null) {\n            strA = \"\";\n        }\n        eVar.put(\"X-Param-client-id\", strA);\n        String strB = N9.j.b();\n        if (ue.n.t0(strB)) {\n            strB = null;\n        }\n        if (strB == null) {\n            strB = \"\";\n        }\n        eVar.put(\"X-Param-device-id\", strB);\n        s8.a aVar = Gf.a.f7616b;\n        if (aVar == null) {\n            throw new IllegalStateException(\"KoinApplication has not been started\");\n        }\n        String strB2 = ((J8.d) ((Pf.a) aVar.f43020d).f11154d.c(null, null, le.w.a(J8.d.class))).b();\n        String str2 = ue.n.t0(strB2) ? null : strB2;\n        eVar.put(\"X-Param-user-id\", str2 != null ? str2 : \"\");\n        eVar.put(\"X-Param-OAID\", N9.j.c());\n        eVar.put(\"X-Param-TS\", String.valueOf(Ja.a.I(ve.f.f44771a.c()).a()));\n        String language = Locale.getDefault().getLanguage();\n        le.k.d(language, \"getLanguage(...)\");\n        String country = Locale.getDefault().getCountry();\n        le.k.d(country, \"getCountry(...)\");\n        for (Map.Entry entry : Wd.z.K(new Vd.k(\"X-Param-CNT\", country), new Vd.k(\"X-Param-LANG\", A0.b.A(language, Constants.ACCEPT_TIME_SEPARATOR_SERVER, country))).entrySet()) {\n            eVar.put(entry.getKey(), entry.getValue());\n        }\n        return eVar.b();\n    }",
+      "reported_total_bytes": null
+    }
+  },
+  "confidence": "derived",
+  "authority": "shipped-artifact",
+  "environment": null,
+  "limitations": [
+    "Static decompiler observations do not establish runtime behavior; the APK is never executed.",
+    "Method signatures use provider display types; DEX prototypes come from frozen JADX metadata. Display names may be aliases, and overload indices are local to this engine and artifact.",
+    "Class inventories use parsed metadata before code generation, including synthetic members that may be omitted from decompiled source. Source positions remain unknown.",
+    "Incoming reference totals count JADX using nodes. Direct invoke entries within a using method report raw DEX code-unit offsets and method indexes, but coverage is limited to those nodes and directly matched invokes; it does not establish every possible dynamic or reflective call site.",
+    "Manifest summaries are parsed once by REA's bridge from the exact root AndroidManifest.xml resource, using namespace-aware XML attributes; decoded XML is retained. APK signatures, split APKs, native libraries and Android runtime capture are not verified by this provider."
+  ],
+  "relationship_coverage": null,
+  "locations": [],
+  "evidence_links": []
+}

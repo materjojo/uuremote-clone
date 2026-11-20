@@ -1,0 +1,23 @@
+{
+  "platform": "Windows",
+  "machine": "AMD64",
+  "library_sha256": "ac351cf4e1d489e0b6e1a3df5cdf8aed96348876f7e2c7fcf7162fe59e1bb1c4",
+  "bridge_sha256": "e3f6af6f98a28d3ba4fde14de53a6fa9939b262365ccd3baa6b4364a0251b19a",
+  "protobuf_schema_messages": 179,
+  "observations": [
+    {
+      "role": "controller",
+      "version": "V4.14.2",
+      "native_return": 0
+    },
+    {
+      "role": "controlled",
+      "version": "V4.14.2",
+      "native_return": 0
+    }
+  ],
+  "scope": "factory + bounded version copy only; not media, signaling, UI or interoperability validation",
+  "commit": "2903d80495b13da604ccaee0234df77b8026dc26",
+  "run_url": "https://github.com/materjojo/uuremote-clone/actions/runs/44649504313",
+  "artifact_id": 14590126793
+}
