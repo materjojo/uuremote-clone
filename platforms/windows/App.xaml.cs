@@ -25,9 +25,10 @@ public partial class App : Application
         Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new Action(() => {
             try {
                 window.UpdateLayout();
-                var bitmap = new RenderTargetBitmap((int)window.ActualWidth, (int)window.ActualHeight,
+                var content = (FrameworkElement)window.Content;
+                var bitmap = new RenderTargetBitmap((int)Math.Ceiling(content.ActualWidth), (int)Math.Ceiling(content.ActualHeight),
                     96, 96, PixelFormats.Pbgra32);
-                bitmap.Render(window);
+                bitmap.Render(content);
                 var encoder = new PngBitmapEncoder();
                 encoder.Frames.Add(BitmapFrame.Create(bitmap));
                 string path = Path.GetFullPath(e.Args[1]);

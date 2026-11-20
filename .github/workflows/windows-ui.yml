@@ -1,6 +1,9 @@
 name: Windows published UI capture
 
 on:
+  workflow_run:
+    workflows: [build]
+    types: [completed]
   workflow_dispatch:
     inputs:
       build_run:
@@ -14,19 +17,31 @@ permissions:
 
 jobs:
   published-ui:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
     runs-on: windows-latest
     timeout-minutes: 8
+    env:
+      BUILD_RUN: ${{ github.event.workflow_run.id || inputs.build_run }}
+      GH_TOKEN: ${{ github.token }}
     steps:
+      - name: Find the Windows package in the completed build
+        id: source
+        shell: pwsh
+        run: |
+          $artifacts = gh api "repos/$env:GITHUB_REPOSITORY/actions/runs/$env:BUILD_RUN/artifacts" | ConvertFrom-Json
+          if ($LASTEXITCODE -ne 0) { throw 'Cannot inspect source build' }
+          $found = @($artifacts.artifacts | Where-Object { $_.name -eq 'UURemoteClone-windows-x64' -and !$_.expired }).Count -gt 0
+          "found=$($found.ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
+          if (!$found -and '${{ github.event_name }}' -eq 'workflow_dispatch') { throw 'No unexpired Windows package in the selected run' }
       - uses: actions/download-artifact@v4
+        if: steps.source.outputs.found == 'true'
         with:
           name: UURemoteClone-windows-x64
-          run-id: ${{ inputs.build_run }}
+          run-id: ${{ env.BUILD_RUN }}
           github-token: ${{ github.token }}
           path: build/package
       - name: Run the packaged application's home window
-        env:
-          BUILD_RUN: ${{ inputs.build_run }}
-          GH_TOKEN: ${{ github.token }}
+        if: steps.source.outputs.found == 'true'
         shell: pwsh
         run: |
           Expand-Archive build/package/UURemoteClone-windows-x64.zip build/app
@@ -36,13 +51,13 @@ jobs:
           $process.Refresh()
           Write-Host "Published app exit code: $($process.ExitCode); image exists: $(Test-Path $image)"
           if (Test-Path ($image + '.error.txt')) { Get-Content ($image + '.error.txt') }
-          if (!(Test-Path $image)) {
+          if ($process.ExitCode -ne 0 -or !(Test-Path $image)) {
             Get-WinEvent -FilterHashtable @{ LogName='Application'; StartTime=(Get-Date).AddMinutes(-3) } -MaxEvents 8 -ErrorAction SilentlyContinue | Format-List ProviderName,Message
             throw 'Published UI capture failed'
           }
           gh api "repos/$env:GITHUB_REPOSITORY/actions/runs/$env:BUILD_RUN" --jq '{id,head_sha,html_url}' > build/source-run.json
       - uses: actions/upload-artifact@v4
-        if: always()
+        if: always() && steps.source.outputs.found == 'true'
         with:
           name: Windows-published-home
           path: |
