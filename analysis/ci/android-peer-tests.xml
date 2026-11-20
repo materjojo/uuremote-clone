@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuite name="com.example.uuremote.HomeTest" tests="5" failures="0" errors="0" skipped="0" time="11.412" timestamp="2026-11-20T03:54:25" hostname="localhost">
+  <properties>
+    <property name="device" value="emulator-5554 - 11" />
+    <property name="flavor" value="" />
+    <property name="project" value=":app" />
+  </properties>
+  <testcase name="firstLaunchShowsRealEmptyDeviceList" classname="com.example.uuremote.HomeTest" time="0.934" />
+  <testcase name="invitationsAcceptAllSupportedPlatforms" classname="com.example.uuremote.HomeTest" time="0.007" />
+  <testcase name="overlayWaitsAndStopsAfterConnectionOrClose" classname="com.example.uuremote.PeerMediaTest" time="8.097" />
+  <testcase name="embeddedSdpUsesTheSameCandidatePolicy" classname="com.example.uuremote.PeerMediaTest" time="1.207" />
+  <testcase name="realVideoAndControl" classname="com.example.uuremote.PeerMediaTest" time="0.429" />
+</testsuite>

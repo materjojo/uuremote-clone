@@ -1,0 +1,912 @@
+{
+  "source": "GitHub REST Actions run/jobs/artifacts endpoints, run logs, downloaded instrumentation XML and PNG bytes. Application compilation and compiled tests ran exclusively in GitHub Actions.",
+  "recorded_at": "2026-11-20T04:01:17.308314+00:00",
+  "runs": [
+    {
+      "id": 44657324091,
+      "url": "https://github.com/materjojo/uuremote-clone/actions/runs/44657324091",
+      "workflow": "peer-service",
+      "commit": "af5493b141a71c402c7ef757f21b25cc71238a86",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-11-20T01:57:28Z",
+      "updated_at": "2026-11-20T01:57:46Z",
+      "jobs": [
+        {
+          "id": 136026651722,
+          "name": "signaling-and-transport",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-11-20T01:57:30Z",
+          "completed_at": "2026-11-20T01:57:46Z",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Run actions/setup-python@v5",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Run pip install -r server/requirements.txt aiortc==1.14.0",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Consent, authorization, retries and real ICE media transport",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Post Run actions/setup-python@v5",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "id": 44670463306,
+      "url": "https://github.com/materjojo/uuremote-clone/actions/runs/44670463306",
+      "workflow": "build",
+      "commit": "eacc0e82cf048f9ba55b979fe1f4754e4cb67d37",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-11-20T03:50:57Z",
+      "updated_at": "2026-11-20T03:53:45Z",
+      "jobs": [
+        {
+          "id": 136069906556,
+          "name": "plan",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-11-20T03:50:59Z",
+          "completed_at": "2026-11-20T03:51:05Z",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Select affected platforms",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Check selection boundaries, generated sources and recovered evidence",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 136069948309,
+          "name": "windows-app",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-11-20T03:51:07Z",
+          "completed_at": "2026-11-20T03:53:38Z",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Restore and verify only the Windows runtime",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Run actions/setup-dotnet@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Run actions/cache@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Build shared core once for tests and application",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Test managed binding against the supplied DLL",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Publish WPF app with native runtime",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Verify package and archive",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Run actions/upload-artifact@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Run actions/upload-artifact@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 20,
+              "name": "Post Run actions/cache@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Post Run actions/setup-dotnet@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 22,
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 23,
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 136069948383,
+          "name": "macos-app",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-11-20T03:51:07Z",
+          "completed_at": "2026-11-20T03:53:44Z",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Restore and verify only the macOS runtime",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Cache downloaded Swift dependencies",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Build and test Swift binding against the supplied dylib",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Check C ABI when shared native code changed",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 7,
+              "name": "Package .app and verify original runtime bytes",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Run actions/upload-artifact@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Run actions/upload-artifact@v4",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 17,
+              "name": "Post Cache downloaded Swift dependencies",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 18,
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 19,
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 136069948389,
+          "name": "android-app",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-11-20T03:51:07Z",
+          "completed_at": "2026-11-20T03:52:39Z",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Run actions/setup-java@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Run gradle/actions/setup-gradle@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Build ARM64 APK",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Check all compiled glue against original APK DEX",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Check original native libraries and config inside APK",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Run actions/upload-artifact@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Post Run gradle/actions/setup-gradle@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Post Run actions/setup-java@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 16,
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 17,
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 136069949757,
+          "name": "core",
+          "status": "completed",
+          "conclusion": "skipped",
+          "started_at": "2026-11-20T03:51:05Z",
+          "completed_at": "2026-11-20T03:51:05Z",
+          "steps": []
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 14600510228,
+          "name": "UURemoteClone-macos",
+          "size_in_bytes": 23444691,
+          "expired": false,
+          "created_at": "2026-11-20T03:53:37Z",
+          "expires_at": "2026-11-27T03:53:34Z",
+          "digest": "sha256:ab5b8ab07e65fe9052f77d8e1ad785d9a31adf858a455d2e0b7ab2d443fb99ab"
+        },
+        {
+          "id": 14600320303,
+          "name": "UURemoteClone-android-arm64-debug",
+          "size_in_bytes": 14659553,
+          "expired": false,
+          "created_at": "2026-11-20T03:52:24Z",
+          "expires_at": "2026-11-27T03:52:21Z",
+          "digest": "sha256:bebebe5688ee611cf08cfee8f2956a8901e039dd72e68d74aa97a2c8bf09cf48"
+        },
+        {
+          "id": 14600215563,
+          "name": "Native-ABI-windows",
+          "size_in_bytes": 511,
+          "expired": false,
+          "created_at": "2026-11-20T03:53:34Z",
+          "expires_at": "2026-11-27T03:53:33Z",
+          "digest": "sha256:97004ef08932053c6e213e44733ee84ae7dd1ec43b938b5326a4c89e86d6b3b4"
+        },
+        {
+          "id": 14599816433,
+          "name": "UURemoteClone-windows-x64",
+          "size_in_bytes": 185893726,
+          "expired": false,
+          "created_at": "2026-11-20T03:53:33Z",
+          "expires_at": "2026-11-27T03:53:27Z",
+          "digest": "sha256:9e2154d8061a5f78ed28d3f3d40c66a763bcf0b54c454b3d91119ac9ad25761c"
+        }
+      ]
+    },
+    {
+      "id": 44670528149,
+      "url": "https://github.com/materjojo/uuremote-clone/actions/runs/44670528149",
+      "workflow": "Android native peer transport",
+      "commit": "eacc0e82cf048f9ba55b979fe1f4754e4cb67d37",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-11-20T03:51:34Z",
+      "updated_at": "2026-11-20T03:54:41Z",
+      "jobs": [
+        {
+          "id": 136070123472,
+          "name": "native-peer",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-11-20T03:51:37Z",
+          "completed_at": "2026-11-20T03:54:41Z",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Run actions/setup-java@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Run gradle/actions/setup-gradle@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Enable KVM for Android emulator",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Run reactivecircus/android-emulator-runner@v2",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Run actions/upload-artifact@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Post Run gradle/actions/setup-gradle@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Post Run actions/setup-java@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 14599711776,
+          "name": "Android-native-peer-results",
+          "size_in_bytes": 57604,
+          "expired": false,
+          "created_at": "2026-11-20T03:54:28Z",
+          "expires_at": "2026-11-27T03:54:27Z",
+          "digest": "sha256:449c5546e4536bc6f3ac461498cceb3f8259f524328fe2accec55cd7232f80b5"
+        }
+      ]
+    },
+    {
+      "id": 44670938942,
+      "url": "https://github.com/materjojo/uuremote-clone/actions/runs/44670938942",
+      "workflow": "build",
+      "commit": "c0264f9f00db23899dc46ed521360f8c6085dce6",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-11-20T03:55:23Z",
+      "updated_at": "2026-11-20T03:58:41Z",
+      "jobs": [
+        {
+          "id": 136071461826,
+          "name": "plan",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-11-20T03:55:25Z",
+          "completed_at": "2026-11-20T03:55:29Z",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Select affected platforms",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Check selection boundaries, generated sources and recovered evidence",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 136071500168,
+          "name": "windows-app",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-11-20T03:55:33Z",
+          "completed_at": "2026-11-20T03:58:41Z",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Restore and verify only the Windows runtime",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Run actions/setup-dotnet@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Run actions/cache@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Build shared core once for tests and application",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Test managed binding against the supplied DLL",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Publish WPF app with native runtime",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Verify package and archive",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Run actions/upload-artifact@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Run actions/upload-artifact@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 20,
+              "name": "Post Run actions/cache@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Post Run actions/setup-dotnet@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 22,
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 23,
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 136071501721,
+          "name": "core",
+          "status": "completed",
+          "conclusion": "skipped",
+          "started_at": "2026-11-20T03:55:30Z",
+          "completed_at": "2026-11-20T03:55:30Z",
+          "steps": []
+        },
+        {
+          "id": 136071502156,
+          "name": "android-app",
+          "status": "completed",
+          "conclusion": "skipped",
+          "started_at": "2026-11-20T03:55:30Z",
+          "completed_at": "2026-11-20T03:55:30Z",
+          "steps": []
+        },
+        {
+          "id": 136071502518,
+          "name": "macos-app",
+          "status": "completed",
+          "conclusion": "skipped",
+          "started_at": "2026-11-20T03:55:30Z",
+          "completed_at": "2026-11-20T03:55:30Z",
+          "steps": []
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 14600625981,
+          "name": "UURemoteClone-windows-x64",
+          "size_in_bytes": 185893577,
+          "expired": false,
+          "created_at": "2026-11-20T03:58:34Z",
+          "expires_at": "2026-11-27T03:58:27Z",
+          "digest": "sha256:afd2954de7956ddef5c91897d8fe5c9fee1c8262d04e488faf756182228fecf9"
+        },
+        {
+          "id": 14600501087,
+          "name": "Native-ABI-windows",
+          "size_in_bytes": 511,
+          "expired": false,
+          "created_at": "2026-11-20T03:58:36Z",
+          "expires_at": "2026-11-27T03:58:35Z",
+          "digest": "sha256:eb598aad2c7476f5651a990eff15c73b0eff7e863bee47340283dd1fda269d91"
+        }
+      ]
+    },
+    {
+      "id": 44671290067,
+      "url": "https://github.com/materjojo/uuremote-clone/actions/runs/44671290067",
+      "workflow": "Windows published UI capture",
+      "commit": "c0264f9f00db23899dc46ed521360f8c6085dce6",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-11-20T03:58:44Z",
+      "updated_at": "2026-11-20T03:59:04Z",
+      "jobs": [
+        {
+          "id": 136072622953,
+          "name": "published-ui",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-11-20T03:58:46Z",
+          "completed_at": "2026-11-20T03:59:03Z",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Find the Windows package in the completed build",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Run actions/download-artifact@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Run the packaged application's home window",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Run actions/upload-artifact@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 14600580992,
+          "name": "Windows-published-home",
+          "size_in_bytes": 31182,
+          "expired": false,
+          "created_at": "2026-11-20T03:59:02Z",
+          "expires_at": "2026-11-27T03:59:01Z",
+          "digest": "sha256:3cb3668f7a086fa3b7b6bb4db7315e9d7668c185bdb587b0c1e00e64fcb58311"
+        }
+      ]
+    }
+  ],
+  "compiled_check_log_excerpts": {
+    "run_id": 44670463306,
+    "lines": [
+      "windows-app\tPublish WPF app with native runtime\t2026-11-20T03:53:14.9414761Z   PASS candidate grace: overlay fallback waits 8 seconds; deduplication, connected suppression and close during release.",
+      "windows-app\tPublish WPF app with native runtime\t2026-11-20T03:53:16.8909844Z   PASS independent Windows peer: real ICE/DTLS, bidirectional SCTP control, H264 encode/RTP/decode, pairing for all three platforms.",
+      "windows-app\tVerify package and archive\t2026-11-20T03:53:27.3002674Z PASS packaged original library/config: streamer.dll",
+      "windows-app\tVerify package and archive\t2026-11-20T03:53:27.3003320Z PASS packaged original library/config: streamer-config.json",
+      "macos-app\tBuild and test Swift binding against the supplied dylib\t2026-11-20T03:53:25.8305920Z Test Case '-[OfficialStreamerTests.PeerCandidateTests testOverlayWaitsAndStopsAfterConnectionOrClose]' started.",
+      "macos-app\tBuild and test Swift binding against the supplied dylib\t2026-11-20T03:53:25.8307220Z Test Case '-[OfficialStreamerTests.PeerCandidateTests testOverlayWaitsAndStopsAfterConnectionOrClose]' passed (8.132 seconds).",
+      "macos-app\tBuild and test Swift binding against the supplied dylib\t2026-11-20T03:53:25.8340170Z \t Executed 10 tests, with 0 failures (0 unexpected) in 11.433 (11.437) seconds",
+      "macos-app\tBuild and test Swift binding against the supplied dylib\t2026-11-20T03:53:25.8341000Z \t Executed 10 tests, with 0 failures (0 unexpected) in 11.433 (11.446) seconds",
+      "macos-app\tPackage .app and verify original runtime bytes\t2026-11-20T03:53:33.7532480Z PASS packaged original library/config: UURemoteClone.app/Contents/Frameworks/libstreamer.dylib",
+      "macos-app\tPackage .app and verify original runtime bytes\t2026-11-20T03:53:33.7533820Z PASS packaged original library/config: UURemoteClone.app/Contents/Resources/streamer-config.json",
+      "android-app\tCheck all compiled glue against original APK DEX\t2026-11-20T03:52:21.4189969Z PASS: 237 compiled method descriptors and 24 encoded constants across 22 classes.",
+      "android-app\tCheck original native libraries and config inside APK\t2026-11-20T03:52:21.4821972Z PASS original APK member identity: assets/streamer/streamer-config.json",
+      "android-app\tCheck original native libraries and config inside APK\t2026-11-20T03:52:21.4822949Z PASS original APK member identity: lib/arm64-v8a/libstreamer-jni.so",
+      "android-app\tCheck original native libraries and config inside APK\t2026-11-20T03:52:21.4823712Z PASS original APK member identity: lib/arm64-v8a/libstreamer.so",
+      "android-app\tCheck original native libraries and config inside APK\t2026-11-20T03:52:21.4824686Z PASS original APK member identity: lib/arm64-v8a/libc++_shared.so"
+    ]
+  },
+  "android_instrumentation": {
+    "run_id": 44670528149,
+    "artifact_member": "platforms/android/app/build/outputs/androidTest-results/connected/debug/TEST-emulator-5554 - 11-_app-.xml",
+    "tests": "5",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "11.412",
+    "timestamp": "2026-11-20T03:54:25",
+    "device": "Android 11 x86_64 emulator",
+    "cases": [
+      {
+        "name": "firstLaunchShowsRealEmptyDeviceList",
+        "classname": "com.example.uuremote.HomeTest",
+        "time": "0.934"
+      },
+      {
+        "name": "invitationsAcceptAllSupportedPlatforms",
+        "classname": "com.example.uuremote.HomeTest",
+        "time": "0.007"
+      },
+      {
+        "name": "overlayWaitsAndStopsAfterConnectionOrClose",
+        "classname": "com.example.uuremote.PeerMediaTest",
+        "time": "8.097"
+      },
+      {
+        "name": "embeddedSdpUsesTheSameCandidatePolicy",
+        "classname": "com.example.uuremote.PeerMediaTest",
+        "time": "1.207"
+      },
+      {
+        "name": "realVideoAndControl",
+        "classname": "com.example.uuremote.PeerMediaTest",
+        "time": "0.429"
+      }
+    ],
+    "retained_report": "analysis/ci/android-peer-tests.xml",
+    "report_sha256": "86fd70397aab9a37b3eeb18af675f72663929bb9c4c24b0bc71467a447718db0"
+  },
+  "screenshots": [
+    {
+      "path": "analysis/ci/screenshots/android-home-empty.png",
+      "workflow_run": 44670528149,
+      "source_build_run": null,
+      "artifact_member": "build/android-evidence/home-empty.png",
+      "width": 320,
+      "height": 640,
+      "sha256": "3067a6cded0b7723c97a34fd728e8d3525aff0c79f019cd32fb51c163b1a49b1"
+    },
+    {
+      "path": "analysis/ci/screenshots/windows-home-empty.png",
+      "workflow_run": 44671290067,
+      "source_build_run": 44670938942,
+      "artifact_member": "windows-home.png",
+      "width": 1028,
+      "height": 681,
+      "sha256": "2e9fea09a72bff15ec6b4ca8ad1d5790506adf950e7ecba7df72eba04a5ffc79"
+    }
+  ],
+  "limitations": [
+    "Native independent peer tests use synthetic video and two endpoints on the same runner/emulator. They do not establish physical mixed-platform sessions, public NAT traversal or hardware codec selection.",
+    "The x86_64 emulator runs the independent WebRTC backend, not the retained original ARM64 streamer shared libraries. ARM64 packaging and JNI descriptor checks are separate.",
+    "Windows PNG is produced from the actual published MainWindow visual tree through --capture-ui. It records the client area without native window chrome, and is not a full desktop screen grab.",
+    "Screenshots show clone empty homes with no fixture devices; they do not establish original UI geometry or pixel parity.",
+    "Original-media engine sessions, audio, files, terminal, physical permissions/revocation and all nine platform pairings remain unverified or incomplete. Factory/version checks do not prove those features.",
+    "Artifacts expire after seven days. expired is the status at recorded_at, not a promise of continued availability."
+  ],
+  "windows_ui_source_build": {
+    "head_sha": "c0264f9f00db23899dc46ed521360f8c6085dce6",
+    "html_url": "https://github.com/materjojo/uuremote-clone/actions/runs/44670938942",
+    "id": 44670938942
+  }
+}

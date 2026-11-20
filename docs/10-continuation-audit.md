@@ -7,11 +7,11 @@
 | 三个给定安装包深入分析 | 已保存原包与提取树；继续核对实际 JNI / C ABI | 部分完成 |
 | 官方采集、硬编硬解、加速、通信路径 | 两端原版库工厂/版本及 Swift/C# 绑定已在 runner 验证；Android 增加受测生命周期封装；主流程、采集/编解码仍未接通验收 | 未完成 |
 | 原版协议 | Windows descriptor 能证明 schema；信令与业务调用仍需逐条跟踪 | 部分完成 |
-| 三端所有非云设备功能 | 登录、服务端房间、媒体、文件、终端等尚未全链路接通 | 未完成 |
-| 各端 UI 与对应原版一致 | 原版 Android 为 Compose、Windows 为 Qt、macOS 为 Swift；当前 UI 是占位重建 | 未完成 |
+| 三端所有非云设备功能 | 独立配对、同意、RTP 视频和控制已有实现及回环证据，不依赖网易登录；音频、文件、终端和完整输入仍未接通 | 未完成 |
+| 各端 UI 与对应原版一致 | Android、Windows 已复用指定原包非云图片并取得真实克隆首页截图；其余布局仍为重建，缺同条件原版运行对照 | 未完成 |
 | 去除云设备 | 当前应用未提供云设备入口；原版库保留通用代码，不代表已做代码级剥离 | 部分完成 |
 | 一个仓库（用户更新为公开） | 原仓库已按用户明确授权转为 public，不另建仓库 | 已完成 |
-| 只在 Actions 编译、提供三端产物 | 公开后 macOS、Windows、Android 均编译/打包并产出下载；桌面原库/绑定、Android descriptor/包装/JVM 检查已通过；增量修复只运行 Windows/Android | 此构建要求已完成，端到端验收另计 |
+| 只在 Actions 编译、提供三端产物 | macOS、Windows、Android 已编译/打包并产出下载；原库身份、绑定和独立路径媒体测试有各自运行记录，按变更选择平台 | 此构建要求已完成，端到端验收另计 |
 | 仅在原包可证明相同处共享 | protobuf schema 可共享；平台 callback 长度不同，不能盲用 Windows 布局 | 部分完成 |
 
 ## 本轮已观察到的缺陷
@@ -50,3 +50,14 @@
 ## 边界
 
 Ghidra 对 macOS 13MB dylib 的默认自动分析在 330 秒触发 provider_timeout，未产生完整伪代码。保留此覆盖缺口；使用有文件哈希和地址的 ARM64 静态反汇编核对工厂/版本函数，不把它称作完整反编译。当前 Linux 主机不能运行 macOS/Windows UI，原包没有提供登录凭据、真实会话流量和物理采集设备，CI 冒烟测试也不能证明端到端或逐像素一致。
+
+## 独立路径的最新结果
+
+独立路径已经有可复核的 runner 级媒体和界面证据，但仍与原版官方会话分开计数：
+
+- macOS build run `44670463306` 在提交 `eacc0e8` 通过 10 项 Swift 测试；候选策略、实际原生 WebRTC 视频/控制和原版库 wrapper 测试均通过。此前的 SCTP 首包竞争已通过在回调入口先安装 data-channel delegate 修正。新增 8 秒等待测试覆盖两种 overlay 地址、去重、连接后抑制迟到候选，以及关闭时中断候选批次。
+- Windows build run `44670463306` 通过真实 ICE/DTLS、双向 SCTP、合成 H.264 编码/RTP/解码、三平台配对码回环与 8 秒 overlay/连接/关闭检查。发布包已通过自动启动真实 WPF `MainWindow` 并生成截图；具体源构建与截图运行绑定在机器记录中。该截图证明启动和渲染路径，不证明原版几何或像素一致。
+- Android run `44670528149` 在 Android 11 x86_64 模拟器通过 5 项测试：真实空首页、macOS/Windows/Android 配对码回环、内嵌 SDP 候选策略、8 秒 overlay/连接/关闭检查、合成视频和控制。它没有执行发行 APK 的 ARM64 原版媒体 `.so`。
+- 机器可核对的 artifact ID、截图 SHA-256 和覆盖限制在 [latest-independent-results.json](../analysis/ci/latest-independent-results.json)。[独立设备与连接说明](13-independent-peers.md) 记录服务部署、配对、权限、候选披露、Tailscale 和当前未接入业务。
+
+这些结果仍不覆盖物理混合平台互控、不同 NAT 的公网打洞、硬件编解码选择、音频、文件传输、终端、原版服务房间或逐页面 UI 对照。

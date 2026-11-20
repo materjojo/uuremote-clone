@@ -1,0 +1,2 @@
+# Frozen runner reports are hashed as downloaded, including line endings.
+*.xml -text whitespace=cr-at-eol

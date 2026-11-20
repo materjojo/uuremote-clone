@@ -8,8 +8,8 @@
 
 - [proto/gv_pb/](proto/gv_pb/)：Windows 内嵌 descriptor 恢复的 14 个 proto、178 个顶层消息及 1 个嵌套消息。C++ 和 Swift 字段表从同一份恢复记录生成，现均覆盖 179 条。
 - [native/official/](native/official/)：从给定安装包保留的原版桌面 streamer 库、各端独立配置、共享 C ABI 检查层。该层目前只开放经过核对的工厂和版本查询，**不是完整媒体会话实现**。
-- [Android JNI glue](platforms/android/app/src/main/java/com/remote/streamer/)：恢复的实例 native 方法、配置 getter、回调分发、Surface / MediaProjection / VirtualDisplay 辅助类；编译后的 237 个方法 descriptor、24 个常量已通过原 APK 对照。[官方控制端会话封装](platforms/android/app/src/main/java/com/example/uuremote/official/OfficialControllerSession.java) 增加引擎单一所有者、房间/轨道生命周期、原始字节转发和故障清理；JVM 测试使用替身后端，尚未接替演示 UI，也未证明 Android native 运行成功。
-- 三端应用已有独立 UI 和实验性媒体/控制代码。登录、真实房间、官方媒体核心接入、音频、文件/终端业务、UI 对齐等尚未全链路完成。详见 [本轮验收表](docs/10-continuation-audit.md)。
+- [Android JNI glue](platforms/android/app/src/main/java/com/remote/streamer/)：恢复的实例 native 方法、配置 getter、回调分发、Surface / MediaProjection / VirtualDisplay 辅助类；编译后的 237 个方法 descriptor、24 个常量已通过原 APK 对照。[官方控制端会话封装](platforms/android/app/src/main/java/com/example/uuremote/official/OfficialControllerSession.java) 增加引擎单一所有者、房间/轨道生命周期、原始字节转发和故障清理；JVM 测试使用替身后端，尚未接入普通应用流程，也未证明原版 Android native 会话运行成功。
+- 三端普通应用支持自建服务配对、每次同意、屏幕共享和控制；设备列表从空状态开始。独立 WebRTC 的真实 ICE/DTLS、双向 SCTP 和合成 RTP 视频已在各端 runner/模拟器测试。普通流程不要求网易业务服务器，但原版媒体核心、音频、文件/终端业务和 UI 对齐仍未完成。独立服务部署、配对和连接次序见 [使用说明](docs/13-independent-peers.md)，证据边界见 [验收表](docs/10-continuation-audit.md)。
 
 ## 构建与下载
 
@@ -26,19 +26,19 @@
 
 | 平台 | 已构建提交 | 下载 |
 |---|---|---|
-| macOS ARM64 | `2f65722`；后续该端输入未变化 | [应用 ZIP](https://github.com/materjojo/uuremote-clone/actions/runs/44648328290/artifacts/14588739025) |
-| Windows x64 | `2903d80` | [应用 ZIP](https://github.com/materjojo/uuremote-clone/actions/runs/44649504313/artifacts/14590645695) |
-| Android ARM64 | `2903d80` | [调试 APK](https://github.com/materjojo/uuremote-clone/actions/runs/44649504313/artifacts/14589844845) |
+| macOS ARM64 | `eacc0e8` | [应用 ZIP](https://github.com/materjojo/uuremote-clone/actions/runs/44670463306/artifacts/14600510228) |
+| Windows x64 | `c0264f9` | [应用 ZIP](https://github.com/materjojo/uuremote-clone/actions/runs/44670938942/artifacts/14600625981) |
+| Android ARM64 | `eacc0e8` | [调试 APK](https://github.com/materjojo/uuremote-clone/actions/runs/44670463306/artifacts/14600320303) |
 
 产物保留 7 天，过期后手动选择对应平台重建。macOS 包为当前 runner 的架构，未声明 universal 或 notarized；Android 为调试签名，Windows 尚未做安装器/发行签名。上述产物不能视作已通过端到端验收的正式版本。
 
 ## 验证范围
 
-已在 Actions 通过共享 C++ Release 测试（断言明确启用）、桌面真实库的 C ABI 冒烟测试、Swift / C# 调用检查、Android JVM 生命周期测试、编译后 JNI 原型比较和 APK/桌面 ZIP 内原版文件哈希比较。两端真实桌面库的控制端和被控端均返回 `V4.14.2`。运行和产物记录见 [public-build-results.json](analysis/ci/public-build-results.json)。Android 真机 native 执行、官方服务会话、三端互控、硬编硬解路径以及逐页面/逐像素 UI 尚未完成验证。
+已在 Actions 通过共享 C++ Release 测试（断言明确启用）、桌面真实库的 C ABI 冒烟测试、Swift / C# 调用检查、Android JVM 生命周期测试、编译后 JNI 原型比较和 APK/桌面 ZIP 内原版文件哈希比较。两端真实桌面库的控制端和被控端均返回 `V4.14.2`。初期原版 ABI 运行和产物记录见 [public-build-results.json](analysis/ci/public-build-results.json)。独立路径的新运行中 macOS 10 项 Swift 测试、Android 5 项模拟器测试以及 Windows H.264/控制和候选生命周期检查通过，包括实际 8 秒 overlay 宽限与关闭中断。Windows 发布包真实首页和 Android 空首页的 [截图](analysis/ci/screenshots/) 与 [机器记录](analysis/ci/latest-independent-results.json) 已保存。Android 原版 native 真机执行、官方服务会话、物理混合互控、硬编硬解路径以及逐页面/逐像素 UI 尚未完成验证。
 
 之前的私有仓库运行 [Actions 44643846778](https://github.com/materjojo/uuremote-clone/actions/runs/44643846778) 因计费限制，在 runner 启动前被拒绝。现已按用户要求转为公开仓库，使用免费的标准托管 runner。工作流按变更路径选择平台，文档不触发编译，支持手动选择单个平台；构建结果仍以对应 Actions 运行和产物为准。详见 [CI 管理](docs/12-ci.md)。
 
-本地允许进行只读分析、源码/生成文件检查；`scripts/verify_official_runtime.py` 不带 `--bridge` 时仅核对保留文件身份，不编译或执行原版库。`scripts/gen_protocol_schema.py --check` 仅检查生成的源码。
+本地允许进行只读分析、源码/生成文件检查；`scripts/verify_official_runtime.py` 不带 `--bridge` 时仅核对保留文件身份，不编译或执行原版库。`scripts/gen_protocol_schema.py --check` 仅检查生成的源码。上述独立路径的运行、截图哈希和边界记录见 [latest-independent-results.json](analysis/ci/latest-independent-results.json)。
 
 ## 逆向记录
 
