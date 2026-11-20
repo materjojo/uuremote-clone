@@ -183,7 +183,19 @@ public class MainActivity extends Activity {
                 return true;
             });
         } else stage.addView(new View(this), new LinearLayout.LayoutParams(-1, 0, 1));
-        stage.addView(button("断开连接", v -> disconnect())); setContentView(stage);
+        LinearLayout actions = new LinearLayout(this);
+        actions.addView(button("发送文本", v -> {
+            EditText input = new EditText(this); input.setHint("输入要发送的文本");
+            new AlertDialog.Builder(this).setTitle("发送文本到远程设备").setView(input).setNegativeButton("取消", null)
+                    .setPositiveButton("发送", (d, which) -> {
+                        try {
+                            byte[] bytes = new JSONObject().put("action", "text_input").put("content", input.getText().toString())
+                                    .toString().getBytes(java.nio.charset.StandardCharsets.UTF_8);
+                            if (bytes.length <= 65536 && session != null) session.sendControl(bytes);
+                        } catch (Exception e) { toast(e.getMessage()); }
+                    }).show();
+        }));
+        actions.addView(button("断开连接", v -> disconnect())); stage.addView(actions); setContentView(stage);
     }
     private void createSession(boolean host) {
         hostMode = host;
@@ -201,6 +213,15 @@ public class MainActivity extends Activity {
             }
             @Override public void onError(String error) { disconnect(); toast(error); }
             @Override public void onControl(byte[] data) {
+                if (hostMode && data.length > 0 && data[0] == '{') {
+                    try {
+                        if (data.length <= 65536 && RemoteInputService.get() != null) {
+                            JSONObject value = new JSONObject(new String(data, java.nio.charset.StandardCharsets.UTF_8));
+                            if (value.optString("action").equals("text_input")) RemoteInputService.get().typeText(value.getString("content"));
+                        }
+                    } catch (Exception ignored) { }
+                    return;
+                }
                 if (clipboard != null) clipboard.apply(data);
                 if (!hostMode || RemoteInputService.get() == null) return;
                 try {

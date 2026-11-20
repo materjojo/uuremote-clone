@@ -7,23 +7,27 @@ import CoreGraphics
 struct RemoteInputView: NSViewRepresentable {
     var onTouch: (GvTouchEvent) -> Void
     var onScroll: ((Float, Float) -> Void)? = nil
+    var remoteSize: CGSize = .zero
 
     func makeNSView(context: Context) -> InputNSView {
         let v = InputNSView()
         v.onTouch = onTouch
         v.onScroll = onScroll
+        v.remoteSize = remoteSize
         return v
     }
 
     func updateNSView(_ nsView: InputNSView, context: Context) {
         nsView.onTouch = onTouch
         nsView.onScroll = onScroll
+        nsView.remoteSize = remoteSize
     }
 }
 
 final class InputNSView: NSView {
     var onTouch: ((GvTouchEvent) -> Void)?
     var onScroll: ((Float, Float) -> Void)?
+    var remoteSize: CGSize = .zero
 
     override var acceptsFirstResponder: Bool { true }
     override func becomeFirstResponder() -> Bool { true }
@@ -42,8 +46,13 @@ final class InputNSView: NSView {
 
     private func emit(_ type: GvTouchEventType, _ event: NSEvent) {
         let p = convert(event.locationInWindow, from: nil)
-        let x = Float(p.x / max(bounds.width, 1))
-        let y = Float(1 - p.y / max(bounds.height, 1))
+        guard remoteSize.width > 0, remoteSize.height > 0 else { return }
+        let scale = min(bounds.width / remoteSize.width, bounds.height / remoteSize.height)
+        let width = remoteSize.width * scale, height = remoteSize.height * scale
+        guard width > 0, height > 0 else { return }
+        let x = Float((p.x - (bounds.width - width) / 2) / width)
+        let y = Float(1 - (p.y - (bounds.height - height) / 2) / height)
+        guard x >= 0, x <= 1, y >= 0, y <= 1 else { return }
         onTouch?(GvTouchEvent(type: type, points: [GvTouchPoint(id: 0, x: x, y: y)]))
     }
 }
@@ -52,27 +61,37 @@ final class InputNSView: NSView {
 
 final class InputInjector {
     private var lastPoint: CGPoint?
-    private var screenSize: CGSize = .zero
+    private var screenBounds: CGRect = .zero
+    private var pressed = false
 
-    func updateScreenSize(_ size: CGSize) { screenSize = size }
+    func updateScreenSize(_ size: CGSize) { screenBounds = CGRect(origin: .zero, size: size) }
+    func updateScreenBounds(_ bounds: CGRect) { screenBounds = bounds }
 
     func handle(_ touch: GvTouchEvent) {
-        guard let p = touch.points.first, screenSize.width > 0 else { return }
-        let point = CGPoint(x: CGFloat(p.x) * screenSize.width,
-                            y: CGFloat(p.y) * screenSize.height)
+        guard let p = touch.points.first, p.x.isFinite, p.y.isFinite, screenBounds.width > 0 else { return }
+        let point = CGPoint(x: screenBounds.minX + CGFloat(max(0, min(1, p.x))) * screenBounds.width,
+                            y: screenBounds.minY + CGFloat(max(0, min(1, p.y))) * screenBounds.height)
         switch touch.type {
         case .start:
             move(to: point)
             post(.leftMouseDown, at: point, button: .left)
+            pressed = true
         case .move:
-            move(to: point)
+            post(pressed ? .leftMouseDragged : .mouseMoved, at: point, button: .left)
+            lastPoint = point
         case .end:
             post(.leftMouseUp, at: point, button: .left)
+            pressed = false
         case .cancel:
-            break
+            cancel()
         case .undefined:
             break
         }
+    }
+
+    func cancel() {
+        if pressed, let point = lastPoint { post(.leftMouseUp, at: point, button: .left) }
+        pressed = false
     }
 
     private func move(to point: CGPoint) {

@@ -212,6 +212,22 @@ public partial class MainWindow : Window, StreamerSession.IListener, ClipboardSy
             _ => ""
         };
     }
+    private void SendText_Click(object sender, RoutedEventArgs e)
+    {
+        if (_session == null || _hostMode) return;
+        var dialog = new Window { Title = "发送文本到远程设备", Width = 420, Height = 230, Owner = this,
+            WindowStartupLocation = WindowStartupLocation.CenterOwner };
+        var panel = new StackPanel { Margin = new Thickness(18) };
+        var input = new TextBox { AcceptsReturn = true, Height = 100, TextWrapping = TextWrapping.Wrap, MaxLength = 16384 };
+        var send = new Button { Content = "发送", Margin = new Thickness(0, 12, 0, 0) };
+        send.Click += (_, _) => {
+            if (!string.IsNullOrEmpty(input.Text)) _session?.SendControl(System.Text.Encoding.UTF8.GetBytes(
+                JsonSerializer.Serialize(new { action = "text_input", content = input.Text })));
+            dialog.Close();
+        };
+        panel.Children.Add(input); panel.Children.Add(send); dialog.Content = panel; dialog.ShowDialog();
+    }
+
     private void FullScreen_Click(object sender, RoutedEventArgs e) => WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
     public void OnOffer(string sdp) => _mailbox?.Send("offer", new { sdp });
     public void OnCandidate(RTCIceCandidateInit candidate) => _mailbox?.Send("candidate", candidate);
@@ -227,21 +243,29 @@ public partial class MainWindow : Window, StreamerSession.IListener, ClipboardSy
     public void OnControl(byte[] data)
     {
         try {
+            if (_hostMode && data.Length > 0 && data[0] == '{') {
+                if (data.Length > 65536) return;
+                using var json = JsonDocument.Parse(data);
+                if (json.RootElement.TryGetProperty("action", out var action) && action.GetString() == "text_input" &&
+                    json.RootElement.TryGetProperty("content", out var content) && content.ValueKind == JsonValueKind.String)
+                    InputInjector.TypeText(content.GetString()!);
+                return;
+            }
             var message = Message.Parser.ParseFrom(data);
             if (message.ClipboardChange != null) { Dispatcher.BeginInvoke(new Action(() => _clipboard?.Apply(data))); return; }
             if (_hostMode && message.InputEvent?.TouchEvent is { } touch) {
                 foreach (var p in touch.TouchPoints) InputInjector.HandleTouch((GvTouchEventType)(int)touch.EventType, p.X, p.Y, checked((int)p.Id));
             }
         } catch (InvalidProtocolBufferException) { }
+        catch (JsonException) { }
     }
-    private float NormX(double x) => (float)Math.Clamp(x / Math.Max(1, VideoCanvas.ActualWidth), 0, 1);
-    private float NormY(double y) => (float)Math.Clamp(y / Math.Max(1, VideoCanvas.ActualHeight), 0, 1);
     private void SendTouch(int eventType, MouseEventArgs e)
     {
         if (_session == null || _hostMode) return;
         var pos = e.GetPosition(VideoCanvas);
+        if (!VideoCanvas.TryNormalize(pos, out float nx, out float ny)) return;
         var touch = new TouchEvent { EventType = (TouchEvent.Types.TouchEventType)eventType };
-        touch.TouchPoints.Add(new TouchEventPoint { Id = 0, X = NormX(pos.X), Y = NormY(pos.Y) });
+        touch.TouchPoints.Add(new TouchEventPoint { Id = 0, X = nx, Y = ny });
         _session.SendControl(new Message { Seq = ++_seq, Timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
             InputEvent = new InputEvent { TouchEvent = touch } }.ToByteArray());
     }

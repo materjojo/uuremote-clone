@@ -78,6 +78,7 @@ final class ControlledSession: NSObject, ObservableObject {
 
             screenSize = CGSize(width: width, height: height)
             injector.updateScreenSize(screenSize)
+            if let display { injector.updateScreenBounds(CGDisplayBounds(display.displayID)) }
             encoder.onFrame = { [weak self] annex, key in
                 guard let self else { return }
                 if let rtc = self.rtc {
@@ -136,7 +137,10 @@ final class ControlledSession: NSObject, ObservableObject {
     }
 
     func stop() async {
-        await MainActor.run { self.clipboardTimer?.invalidate(); self.clipboardTimer = nil; self.controlReady = false }
+        await MainActor.run {
+            self.clipboardTimer?.invalidate(); self.clipboardTimer = nil; self.controlReady = false
+            self.injector.cancel()
+        }
         await capturer.stop()
         cgCapturer.stop()
         encoder.invalidate()
@@ -189,6 +193,14 @@ extension ControlledSession: WebRTCSessionDelegate {
     func webRTC(_ session: WebRTCSession, didOpenControl channel: RTCDataChannel) { controlReady = true }
 
     func webRTC(_ session: WebRTCSession, didReceiveControl data: Data) {
+        if data.first == 123 {
+            if data.count <= 65536,
+               let object = (try? JSONSerialization.jsonObject(with: data)) as? [String: Any],
+               object["action"] as? String == "text_input", let text = object["content"] as? String {
+                injector.type(text: text)
+            }
+            return
+        }
         guard let message = GvMessage.decode(data) else { return }
         if message.payloadKind == .clipboardChange {
             if let value = ClipboardManager.decodeAndApply(message.payload, onPasteboard: { value in

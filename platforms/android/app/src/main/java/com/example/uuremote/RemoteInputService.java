@@ -39,6 +39,24 @@ public class RemoteInputService extends AccessibilityService {
         dispatchGesture(gesture, null, null);
     }
 
+    public void typeText(String value) {
+        android.view.accessibility.AccessibilityNodeInfo root = getRootInActiveWindow();
+        if (root == null) return;
+        android.view.accessibility.AccessibilityNodeInfo node = root.findFocus(android.view.accessibility.AccessibilityNodeInfo.FOCUS_INPUT);
+        if (node == null || !node.isEditable()) return;
+        String current = node.getText() == null ? "" : node.getText().toString();
+        int start = node.getTextSelectionStart(), end = node.getTextSelectionEnd();
+        if (start < 0 || end < start || end > current.length()) start = end = current.length();
+        String next = current.substring(0, start) + value + current.substring(end);
+        android.os.Bundle args = new android.os.Bundle();
+        args.putCharSequence(android.view.accessibility.AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE, next);
+        if (node.performAction(android.view.accessibility.AccessibilityNodeInfo.ACTION_SET_TEXT, args)) {
+            args.clear(); args.putInt(android.view.accessibility.AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_START_INT, start + value.length());
+            args.putInt(android.view.accessibility.AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_END_INT, start + value.length());
+            node.performAction(android.view.accessibility.AccessibilityNodeInfo.ACTION_SET_SELECTION, args);
+        }
+    }
+
     public void swipe(float x1, float y1, float x2, float y2, long durationMs) {
         int w = getResources().getDisplayMetrics().widthPixels;
         int h = getResources().getDisplayMetrics().heightPixels;

@@ -94,7 +94,7 @@
                     <Button Content="窗口设置" Foreground="White" Background="Transparent" BorderThickness="0" Padding="10,4"/>
                     <Button Content="画质" Foreground="White" Background="Transparent" BorderThickness="0" Padding="10,4"/>
                     <Button Content="鼠标" Foreground="White" Background="Transparent" BorderThickness="0" Padding="10,4"/>
-                    <Button Content="键盘" Foreground="White" Background="Transparent" BorderThickness="0" Padding="10,4"/>
+                    <Button Content="键盘" Foreground="White" Background="Transparent" BorderThickness="0" Padding="10,4" Click="SendText_Click"/>
                     <Button Content="文件传输" Foreground="White" Background="Transparent" BorderThickness="0" Padding="10,4"/>
                     <Button Content="断开" Foreground="{StaticResource Accent}" Background="Transparent"
                             BorderThickness="0" Padding="10,4" Click="Disconnect_Click"/>

@@ -39,11 +39,12 @@ struct RemoteSessionView: View {
             Color.black.ignoresSafeArea()
 
             if session.videoTrack != nil || session.phase == .connected {
-                VideoCanvas(track: session.videoTrack)
+                VideoCanvas(track: session.videoTrack, onSize: { if session.videoSize != $0 { session.videoSize = $0 } })
                     .ignoresSafeArea()
                 RemoteInputView(
                     onTouch: { touch in session.send(touch: touch) },
-                    onScroll: { _, dy in }
+                    onScroll: { _, dy in },
+                    remoteSize: session.videoSize
                 )
                 .ignoresSafeArea()
             } else {
@@ -126,7 +127,13 @@ struct RemoteSessionView: View {
             }
             .menuStyle(.borderlessButton).frame(width: 76)
 
-            toolButton("keyboard", L10n.Control.keyboard) {}
+            toolButton("keyboard", L10n.Control.keyboard) {
+                let alert = NSAlert()
+                alert.messageText = "发送文本到远程设备"
+                let input = NSTextField(frame: NSRect(x: 0, y: 0, width: 360, height: 60))
+                alert.accessoryView = input; alert.addButton(withTitle: "发送"); alert.addButton(withTitle: "取消")
+                if alert.runModal() == .alertFirstButtonReturn { session.sendText(input.stringValue) }
+            }
             toolButton("speaker.wave.2", L10n.Control.sound) {}
             toolButton("arrow.up.arrow.down", L10n.Control.fileTransfer) {}
 
@@ -181,6 +188,7 @@ struct RemoteSessionView: View {
 
 struct VideoCanvas: NSViewRepresentable {
     let track: RTCVideoTrack?
+    var onSize: ((CGSize) -> Void)? = nil
 
     func makeCoordinator() -> Coordinator { Coordinator() }
 
@@ -189,6 +197,7 @@ struct VideoCanvas: NSViewRepresentable {
     }
 
     func updateNSView(_ nsView: VideoRenderView, context: Context) {
+        nsView.onSize = onSize
         context.coordinator.attach(track, to: nsView)
     }
 
@@ -201,7 +210,7 @@ struct VideoCanvas: NSViewRepresentable {
         private weak var renderer: VideoRenderView?
 
         func attach(_ track: RTCVideoTrack?, to view: VideoRenderView) {
-            guard let track else { return }
+            guard let track else { detach(); return }
             if current === track, renderer === view { return }
             detach()
             track.add(view)
@@ -237,6 +246,7 @@ final class VideoRenderView: NSView, RTCVideoRenderer {
     private var currentSize = CGSize.zero
     private var metal: MetalVideoView?
     private let pixelConverter = VideoPixelConverter()
+    var onSize: ((CGSize) -> Void)?
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
@@ -267,7 +277,7 @@ final class VideoRenderView: NSView, RTCVideoRenderer {
         CATransaction.commit()
     }
 
-    func setSize(_ size: CGSize) {}
+    func setSize(_ size: CGSize) { DispatchQueue.main.async { self.onSize?(size) } }
 
     func renderFrame(_ frame: RTCVideoFrame?) {
         guard let frame, let pb = pixelConverter.convert(frame.buffer) else { return }
@@ -276,6 +286,7 @@ final class VideoRenderView: NSView, RTCVideoRenderer {
     }
 
     func display(_ pixelBuffer: CVPixelBuffer, pts: CMTime) {
+        onSize?(CGSize(width: CVPixelBufferGetWidth(pixelBuffer), height: CVPixelBufferGetHeight(pixelBuffer)))
         if let metal, let bgra = pixelConverter.bgra(pixelBuffer) {
             metal.display(bgra)
             return

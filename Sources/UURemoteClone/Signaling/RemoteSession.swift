@@ -22,6 +22,7 @@ final class RemoteSession: NSObject, ObservableObject {
 
     @Published private(set) var phase: Phase = .idle
     @Published private(set) var videoTrack: RTCVideoTrack?
+    @Published var videoSize: CGSize = .zero
     @Published private(set) var device: DeviceInfo?
     @Published private(set) var screenInfo: [GvScreenInfo] = []
 
@@ -98,6 +99,7 @@ final class RemoteSession: NSObject, ObservableObject {
         queued.removeAll()
         phase = .idle
         videoTrack = nil
+        videoSize = .zero
     }
 
     // MARK: - 控制消息
@@ -156,6 +158,13 @@ final class RemoteSession: NSObject, ObservableObject {
         seq += 1
         send(GvMessage(seq: seq, timestamp: Int64(Date().timeIntervalSince1970 * 1000),
                        payloadField: .captureConfig, payload: request.encode()))
+    }
+
+    /// ControllerService.sendText in the supplied APK uses UTF-8 JSON on control.
+    func sendText(_ text: String) {
+        guard controlReady, !text.isEmpty, text.utf8.count <= 65536,
+              let data = try? JSONSerialization.data(withJSONObject: ["action": "text_input", "content": text]) else { return }
+        rtc?.sendControl(data)
     }
 
     func send(touch: GvTouchEvent) {

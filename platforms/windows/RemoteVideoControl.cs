@@ -9,7 +9,7 @@ namespace UURemoteClone;
 
 /// <summary>
 /// 控制端远端画面渲染（WPF）。
-/// 解码后的 BGRA 帧拷入 WriteableBitmap 并刷新，等价官方 D3D 渲染的显示效果。
+/// 解码后的 BGRA 帧拷入 WriteableBitmap；尚未验证与原版 D3D 渲染的视觉一致性。
 /// </summary>
 public sealed class RemoteVideoControl : Image
 {
@@ -45,8 +45,19 @@ public sealed class RemoteVideoControl : Image
         });
     }
 
+    public bool TryNormalize(Point position, out float nx, out float ny)
+    {
+        nx = ny = 0;
+        if (_width <= 0 || _height <= 0 || ActualWidth <= 0 || ActualHeight <= 0) return false;
+        double scale = Math.Min(ActualWidth / _width, ActualHeight / _height);
+        double width = _width * scale, height = _height * scale;
+        nx = (float)((position.X - (ActualWidth - width) / 2) / width);
+        ny = (float)((position.Y - (ActualHeight - height) / 2) / height);
+        return nx >= 0 && nx <= 1 && ny >= 0 && ny <= 1;
+    }
+
     public void Clear()
     {
-        Dispatcher.Invoke(() => { Source = null; _bitmap = null; });
+        Dispatcher.Invoke(() => { Source = null; _bitmap = null; _width = _height = 0; });
     }
 }
