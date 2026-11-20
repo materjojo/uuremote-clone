@@ -1,0 +1,23 @@
+{
+  "platform": "Darwin",
+  "machine": "arm64",
+  "library_sha256": "ec89d21754e30ff7e6b38534130b5dfb6a5d78968b5816ccf2dbd0740c83cb03",
+  "bridge_sha256": "763bc3efe564dbe93b067aa09dee4c19e5daed86813a30fce9e45bbdfad34a5a",
+  "protobuf_schema_messages": 179,
+  "observations": [
+    {
+      "role": "controller",
+      "version": "V4.14.2",
+      "native_return": 0
+    },
+    {
+      "role": "controlled",
+      "version": "V4.14.2",
+      "native_return": 0
+    }
+  ],
+  "scope": "factory + bounded version copy only; not media, signaling, UI or interoperability validation",
+  "run_url": "https://github.com/materjojo/uuremote-clone/actions/runs/44648328290",
+  "commit": "2f65722ddd59085075f27973e3748a77f8cfbb1a",
+  "artifact_id": 14588359645
+}

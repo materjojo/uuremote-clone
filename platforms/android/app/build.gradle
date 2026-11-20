@@ -51,6 +51,7 @@ dependencies {
     protocArtifact 'com.google.protobuf:protoc:3.25.3:linux-x86_64@exe'
     implementation 'com.google.protobuf:protobuf-javalite:3.25.3'
     implementation 'io.github.webrtc-sdk:android:125.6422.07'
+    testImplementation 'junit:junit:4.13.2'
 }
 
 
@@ -71,3 +72,9 @@ tasks.register('genProtos', Exec) {
     args(protos.collect { '../../../proto/gv_pb/' + it.name })
 }
 preBuild.dependsOn 'genProtos'
+
+// Keep lifecycle tests in the Android build so adding tests does not require a
+// workflow edit that would invalidate unrelated platform builds.
+tasks.configureEach {
+    if (name == 'assembleDebug') dependsOn 'testDebugUnitTest'
+}

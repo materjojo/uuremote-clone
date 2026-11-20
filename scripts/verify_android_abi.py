@@ -18,21 +18,29 @@ EVIDENCE = ROOT / 'analysis/official/android'
 def compiled_members(classpath, name):
     output = subprocess.check_output(
         ['javap', '-classpath', str(classpath), '-p', '-s', '-constants', name], text=True)
+    return parse_javap(output, name)
+
+
+def parse_javap(output, name):
     methods, constants = {}, {}
     declaration = ''
     for line in output.splitlines():
         constant = re.match(r'\s*public static final int (\w+) = (-?\d+);', line)
         if constant:
             constants[constant[1]] = int(constant[2])
-        if '(' in line and ')' in line:
-            declaration = line.strip()
-        elif 'descriptor:' in line and declaration:
+        # Method descriptors themselves contain parentheses. Parse them before
+        # recognizing declaration lines, otherwise every method disappears.
+        if line.lstrip().startswith('descriptor:'):
+            if not declaration:
+                continue
             descriptor = line.split('descriptor:', 1)[1].strip()
             method = declaration.split('(', 1)[0].split()[-1]
             if method == name:
                 method = '<init>'
             methods[(method, descriptor)] = declaration
             declaration = ''
+        elif '(' in line and ')' in line:
+            declaration = line.strip()
     return methods, constants
 
 

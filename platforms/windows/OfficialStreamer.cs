@@ -18,7 +18,7 @@ public sealed class OfficialStreamer : IDisposable
     private sealed class LibraryHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         public LibraryHandle(IntPtr value) : base(true) => SetHandle(value);
-        protected override bool ReleaseHandle() { Close(handle); return true; }
+        protected override bool ReleaseHandle() { OfficialStreamer.Close(handle); return true; }
     }
 
     [DllImport("gvpb", EntryPoint = "uu_official_open", CallingConvention = CallingConvention.Cdecl)]
