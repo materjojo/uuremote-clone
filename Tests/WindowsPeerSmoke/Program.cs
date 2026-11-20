@@ -21,8 +21,8 @@ static class Program
         var connected = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var echo = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var decoded = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        hostEvents.Candidate = c => controller.AddCandidate(c.candidate, c.sdpMid, c.sdpMLineIndex ?? 0);
-        controllerEvents.Candidate = c => host.AddCandidate(c.candidate, c.sdpMid, c.sdpMLineIndex ?? 0);
+        hostEvents.Candidate = c => controller.AddCandidate(c.candidate, c.sdpMid, c.sdpMLineIndex);
+        controllerEvents.Candidate = c => host.AddCandidate(c.candidate, c.sdpMid, c.sdpMLineIndex);
         controllerEvents.Offer = sdp => offer.TrySetResult(sdp);
         controllerEvents.State = state => { if (state == RTCPeerConnectionState.connected) connected.TrySetResult(); };
         hostEvents.Control = bytes => { if (Encoding.UTF8.GetString(bytes) == "input") host.SendControl(Encoding.UTF8.GetBytes("ack")); };

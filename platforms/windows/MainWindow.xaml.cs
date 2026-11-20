@@ -230,7 +230,7 @@ public partial class MainWindow : Window, StreamerSession.IListener, ClipboardSy
             var message = Message.Parser.ParseFrom(data);
             if (message.ClipboardChange != null) { Dispatcher.BeginInvoke(new Action(() => _clipboard?.Apply(data))); return; }
             if (_hostMode && message.InputEvent?.TouchEvent is { } touch) {
-                foreach (var p in touch.TouchPoints) InputInjector.HandleTouch((GvTouchEventType)(int)touch.EventType, p.X, p.Y, p.Id);
+                foreach (var p in touch.TouchPoints) InputInjector.HandleTouch((GvTouchEventType)(int)touch.EventType, p.X, p.Y, checked((int)p.Id));
             }
         } catch (InvalidProtocolBufferException) { }
     }
