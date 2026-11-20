@@ -1,0 +1,180 @@
+{
+  "observation": "All jobs rejected before runner execution; no compilation or tests ran.",
+  "source": "GitHub Actions run and check-runs APIs",
+  "run": {
+    "conclusion": "failure",
+    "headSha": "0733e90b2f50ffb855a44654eb761cef83cc5f36",
+    "jobs": [
+      {
+        "completedAt": "2026-11-20T00:11:38Z",
+        "conclusion": "failure",
+        "databaseId": 135981334901,
+        "name": "macos-app",
+        "startedAt": "2026-11-20T00:11:36Z",
+        "status": "completed",
+        "steps": [],
+        "url": "https://github.com/materjojo/uuremote-clone/actions/runs/44643846778/job/135981334901",
+        "annotations": [
+          {
+            "path": ".github",
+            "blob_href": "https://github.com/materjojo/uuremote-clone/blob/0733e90b2f50ffb855a44654eb761cef83cc5f36/.github",
+            "start_line": 1,
+            "start_column": null,
+            "end_line": 1,
+            "end_column": null,
+            "annotation_level": "failure",
+            "title": "",
+            "message": "The job was not started because recent account payments have failed or your spending limit needs to be increased. Please check the 'Billing & plans' section in your settings",
+            "raw_details": ""
+          },
+          {
+            "path": ".github",
+            "blob_href": "https://github.com/materjojo/uuremote-clone/blob/0733e90b2f50ffb855a44654eb761cef83cc5f36/.github",
+            "start_line": 1,
+            "start_column": null,
+            "end_line": 1,
+            "end_column": null,
+            "annotation_level": "notice",
+            "title": "",
+            "message": "Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.",
+            "raw_details": ""
+          }
+        ]
+      },
+      {
+        "completedAt": "2026-11-20T00:11:38Z",
+        "conclusion": "failure",
+        "databaseId": 135981335212,
+        "name": "core (ubuntu-latest)",
+        "startedAt": "2026-11-20T00:11:36Z",
+        "status": "completed",
+        "steps": [],
+        "url": "https://github.com/materjojo/uuremote-clone/actions/runs/44643846778/job/135981335212",
+        "annotations": [
+          {
+            "path": ".github",
+            "blob_href": "https://github.com/materjojo/uuremote-clone/blob/0733e90b2f50ffb855a44654eb761cef83cc5f36/.github",
+            "start_line": 1,
+            "start_column": null,
+            "end_line": 1,
+            "end_column": null,
+            "annotation_level": "failure",
+            "title": "",
+            "message": "The job was not started because recent account payments have failed or your spending limit needs to be increased. Please check the 'Billing & plans' section in your settings",
+            "raw_details": ""
+          }
+        ]
+      },
+      {
+        "completedAt": "2026-11-20T00:11:38Z",
+        "conclusion": "failure",
+        "databaseId": 135981335237,
+        "name": "core (windows-latest)",
+        "startedAt": "2026-11-20T00:11:36Z",
+        "status": "completed",
+        "steps": [],
+        "url": "https://github.com/materjojo/uuremote-clone/actions/runs/44643846778/job/135981335237",
+        "annotations": [
+          {
+            "path": ".github",
+            "blob_href": "https://github.com/materjojo/uuremote-clone/blob/0733e90b2f50ffb855a44654eb761cef83cc5f36/.github",
+            "start_line": 1,
+            "start_column": null,
+            "end_line": 1,
+            "end_column": null,
+            "annotation_level": "failure",
+            "title": "",
+            "message": "The job was not started because recent account payments have failed or your spending limit needs to be increased. Please check the 'Billing & plans' section in your settings",
+            "raw_details": ""
+          }
+        ]
+      },
+      {
+        "completedAt": "2026-11-20T00:11:38Z",
+        "conclusion": "failure",
+        "databaseId": 135981335349,
+        "name": "core (macos-latest)",
+        "startedAt": "2026-11-20T00:11:36Z",
+        "status": "completed",
+        "steps": [],
+        "url": "https://github.com/materjojo/uuremote-clone/actions/runs/44643846778/job/135981335349",
+        "annotations": [
+          {
+            "path": ".github",
+            "blob_href": "https://github.com/materjojo/uuremote-clone/blob/0733e90b2f50ffb855a44654eb761cef83cc5f36/.github",
+            "start_line": 1,
+            "start_column": null,
+            "end_line": 1,
+            "end_column": null,
+            "annotation_level": "failure",
+            "title": "",
+            "message": "The job was not started because recent account payments have failed or your spending limit needs to be increased. Please check the 'Billing & plans' section in your settings",
+            "raw_details": ""
+          },
+          {
+            "path": ".github",
+            "blob_href": "https://github.com/materjojo/uuremote-clone/blob/0733e90b2f50ffb855a44654eb761cef83cc5f36/.github",
+            "start_line": 1,
+            "start_column": null,
+            "end_line": 1,
+            "end_column": null,
+            "annotation_level": "notice",
+            "title": "",
+            "message": "Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times.",
+            "raw_details": ""
+          }
+        ]
+      },
+      {
+        "completedAt": "2026-11-20T00:11:38Z",
+        "conclusion": "failure",
+        "databaseId": 135981335364,
+        "name": "android-app",
+        "startedAt": "2026-11-20T00:11:36Z",
+        "status": "completed",
+        "steps": [],
+        "url": "https://github.com/materjojo/uuremote-clone/actions/runs/44643846778/job/135981335364",
+        "annotations": [
+          {
+            "path": ".github",
+            "blob_href": "https://github.com/materjojo/uuremote-clone/blob/0733e90b2f50ffb855a44654eb761cef83cc5f36/.github",
+            "start_line": 1,
+            "start_column": null,
+            "end_line": 1,
+            "end_column": null,
+            "annotation_level": "failure",
+            "title": "",
+            "message": "The job was not started because recent account payments have failed or your spending limit needs to be increased. Please check the 'Billing & plans' section in your settings",
+            "raw_details": ""
+          }
+        ]
+      },
+      {
+        "completedAt": "2026-11-20T00:11:38Z",
+        "conclusion": "failure",
+        "databaseId": 135981335497,
+        "name": "windows-app",
+        "startedAt": "2026-11-20T00:11:36Z",
+        "status": "completed",
+        "steps": [],
+        "url": "https://github.com/materjojo/uuremote-clone/actions/runs/44643846778/job/135981335497",
+        "annotations": [
+          {
+            "path": ".github",
+            "blob_href": "https://github.com/materjojo/uuremote-clone/blob/0733e90b2f50ffb855a44654eb761cef83cc5f36/.github",
+            "start_line": 1,
+            "start_column": null,
+            "end_line": 1,
+            "end_column": null,
+            "annotation_level": "failure",
+            "title": "",
+            "message": "The job was not started because recent account payments have failed or your spending limit needs to be increased. Please check the 'Billing & plans' section in your settings",
+            "raw_details": ""
+          }
+        ]
+      }
+    ],
+    "status": "completed",
+    "url": "https://github.com/materjojo/uuremote-clone/actions/runs/44643846778"
+  }
+}

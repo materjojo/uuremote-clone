@@ -35,10 +35,19 @@
 - `GetConnectionStats(long): int`；`CheckAlive(): int`。不得改为输出 String、无意义的 byte[] 或 boolean。
 - JNI 依赖配置的 getter、继承回调、同名 Surface / MediaProjection / VirtualDisplay 辅助类。仅恢复字段名不足以证明兼容。
 - 恢复了 22 个类，去除依赖 Kotlin 编译器的合成构造器/DefaultImpls；delegate 默认实现保留方法 descriptor，空检查改用 Java API。Java 无法覆盖 `Object.finalize(): void` 为 `int`，因此只把非 native 包装方法 `finalize(): int` 改名为 `shutdown(): int`；`Finalize(): int` native 名字不变。
-- [verify_android_abi.py](../scripts/verify_android_abi.py) 用 `javap -s -p` 对照冻结的原 DEX 记录：native 方法的名称、参数、返回值、static 修饰，以及库使用的 getter/回调和 helper 原型。它不能验证实现语义、class-loader、设备 API 或硬件路径。
+- [verify_android_abi.py](../scripts/verify_android_abi.py) 用 `javap -s -p -constants` 对照冻结的原 DEX 记录，现覆盖恢复清单内全部 22 个类的原有方法（包含 helper 构造器）、实例/static 和 native 修饰，以及 DEX 明确编码的整型常量。仅排除已记录的 Kotlin mask 构造器、静态初始化代码，并显式检查 finalize → shutdown 的包装改名。`--check-evidence` 检查 22 个类均有原包证据且恢复源码哈希一致。它不能验证实现语义、class-loader、设备 API 或硬件路径。
 - APK 检查逐一对比保留的三个 `.so` 和 config；打包明确不 strip 这三份原版库，防止 CI 悄悄改变二进制身份。
 
 Android 当前仍缺少 ARM64 真机/模拟器的 native 初始化与会话验证；没有把“Java 编译通过”写成 JNI 运行成功。
+
+## Android 原版会话与控制消息的进一步核对
+
+以下均是指定 APK 方法的静态观察，尚未执行真实会话；不能把 Android 的服务端接口自动套给另外两端。
+
+- `ControllerService.createConnection` 把 `Bb.W0` 编码成 protobuf，再调用 `connect(handle, bytes, appControlId, timezone)`。[REA ev_f0a9cead1bd2925600246124968d61d6071a1d4e617a41a632c2390fbe452c8d](../analysis/official/android/controller-create-connection.json)。第四项取 `Le.B.a().f9378a.getId()`；追踪 `Le.B.a()` 可见它来自 `ZoneId.systemDefault()`，**不是设备 ID**。[REA ev_14f4ec2f5ec06d9510ce33fc516558e40f10b1ac48e2b62e45fb62e920e38aee](../analysis/official/android/timezone-default.json)。
+- `Bb.W0.toString` 明确把该类标为 `ConnectOptions` 并保留 14 个字段名；`Bb.T0.g` 是字段 1..14 的编码入口。逐项核对与 Windows descriptor 中的 `ConnectOptions` 相符，包括设备 ID=9、client_type=8、current_server_time=14。见 [字段名 Evidence](../analysis/official/android/connect-options-names.json)、[编码 Evidence](../analysis/official/android/connect-options-encode.json)。这支持共用这一消息的 wire 定义，不能外推所有会话状态或媒体对象布局相同。
+- `Bb.J3.g` 编码 `Bb.K3` 的 seq=1、timestamp=2 和 payload 3..28；input_event=20。这与 Windows `Message` descriptor 的 tag 对应。[REA ev_e276d615a7d9416c49bebece132cbdb0ab68f50c6dc880e443784b67c7ea19e3](../analysis/official/android/message-encode.json)。这里未逐项恢复所有嵌套消息的语义和 Android 类型布局。
+- `ControllerService.sendText` 会构造 `{"action":"text_input","content":...}`，按 UTF-8 传入 **sendControlData**。[REA ev_f04ab977044e66d0dd7bdcfbdd5ce29952949a7ad28968f5a658bb8c55ec6ec5](../analysis/official/android/controller-send-text.json)。因此控制通道既有 protobuf，也有 JSON 消息；不能把所有文本输入都重新封装为猜测的 protobuf 或 KCP/FEC 帧。
 
 ## 协议表更正
 
@@ -46,6 +55,8 @@ Android 当前仍缺少 ARM64 真机/模拟器的 native 初始化与会话验�
 
 ## Actions 验证与覆盖边界
 
-工作流构建三端、运行启用断言的 C++ Release 测试，在 macOS / Windows runner 加载原版库查询两种角色版本，并分别经过 Swift 和 C# 绑定。报告含平台、架构、原库和 bridge 的哈希；APK 增加编译原型和包装身份检查。具体结果以对应 Actions 运行及 artifacts 为准，源代码中的测试本身不构成已通过的结果。
+工作流构建三端、运行启用断言的 C++ Release 测试，在 macOS / Windows runner 加载原版库查询两种角色版本，并分别经过 Swift 和 C# 绑定。报告含平台、架构、原库和 bridge 的哈希；APK 增加编译原型和包装身份检查；桌面 ZIP 也核对原版库/config 的完整 SHA-256，并检查 macOS 执行权限。具体结果以对应 Actions 运行及 artifacts 为准，源代码中的测试本身不构成已通过的结果。
+
+首轮 `0733e90` 对应 [Actions 44643846778](https://github.com/materjojo/uuremote-clone/actions/runs/44643846778) 因账号付款/支出上限，全部 job 在 runner 启动前被拒绝；上述编译和运行检查**均未执行**。[原始状态记录](../analysis/ci/0733e90-blocked.json)。
 
 工厂/版本入口通过也不能证明登录、真实信令、媒体轨道、音视频、输入注入、文件传输、终端或 UI 一致。物理采集、硬件编码器与解码器、三端互控和无云业务仍需单独验收。

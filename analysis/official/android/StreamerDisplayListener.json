@@ -1,5 +1,5 @@
 {
-  "evidence_id": "ev_8040e5765b022b7cbbd98df1b616aa96e3fb48abb0e5bbffcae7bbeb4a306d6a",
+  "evidence_id": "ev_f0d74b61af8a8bdd73570dbbb619b0e679129361bb2a2d055f49eed64b40ac43",
   "subject": {
     "name": "uuyc_4.48.1.apk",
     "digest": {
@@ -30,7 +30,7 @@
     "jar_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
     "loaded": {
       "state": "LOADED",
-      "apk_path": "/tmp/rea-android-x9aWiq/target.apk",
+      "apk_path": "/tmp/rea-android-h2MuQe/target.apk",
       "class_count": 14640,
       "resource_count": 2146,
       "threads": 1,
@@ -44,7 +44,24 @@
           "content": [
             {
               "type": "text",
-              "text": "{\"metadata_scope\":\"parsed_members\",\"engine_reported_version\":\"0.7.1\",\"available_processors\":2,\"java_version\":\"21.0.12.1\",\"max_heap_bytes\":515899392}"
+              "text": "{\"java_version\":\"21.0.12.1\",\"available_processors\":2,\"engine_reported_version\":\"0.7.1\",\"metadata_scope\":\"parsed_members\",\"max_heap_bytes\":515899392}"
+            }
+          ],
+          "isError": false
+        }
+      },
+      {
+        "operation": "load_apk",
+        "input": {
+          "path": "/tmp/rea-android-h2MuQe/target.apk",
+          "threads": 1,
+          "resources": "full"
+        },
+        "response": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"state\":\"LOADED\",\"apk_path\":\"/tmp/rea-android-h2MuQe/target.apk\",\"class_count\":14640,\"raw_class_count\":14640,\"resource_count\":2146,\"load_duration_ms\":14180,\"decompile_timeout_ms\":90000,\"threads\":1,\"code_cache_size\":64,\"resources\":\"full\"}"
             }
           ],
           "isError": false
@@ -60,7 +77,7 @@
           "content": [
             {
               "type": "text",
-              "text": "{\"inner_class_count\":0,\"inner_classes\":[],\"methods\":[{\"signature\":\"\\u003cinit\\u003e(android.content.Context, long, int): void\",\"dex_descriptor\":\"(Landroid/content/Context;JI)V\",\"is_constructor\":true,\"name\":\"\\u003cinit\\u003e\",\"def_pos\":0},{\"signature\":\"clearNativeListener(): void\",\"dex_descriptor\":\"()V\",\"is_constructor\":false,\"name\":\"clearNativeListener\",\"def_pos\":0},{\"signature\":\"nativeOnDisplayChanged(long, int, int, int, int): void\",\"dex_descriptor\":\"(JIIII)V\",\"is_constructor\":false,\"name\":\"nativeOnDisplayChanged\",\"def_pos\":0},{\"signature\":\"notifyDisplayChanged(int): void\",\"dex_descriptor\":\"(I)V\",\"is_constructor\":false,\"name\":\"notifyDisplayChanged\",\"def_pos\":0},{\"signature\":\"onDisplayAdded(int): void\",\"dex_descriptor\":\"(I)V\",\"is_constructor\":false,\"name\":\"onDisplayAdded\",\"def_pos\":0},{\"signature\":\"onDisplayChanged(int): void\",\"dex_descriptor\":\"(I)V\",\"is_constructor\":false,\"name\":\"onDisplayChanged\",\"def_pos\":0},{\"signature\":\"onDisplayRemoved(int): void\",\"dex_descriptor\":\"(I)V\",\"is_constructor\":false,\"name\":\"onDisplayRemoved\",\"def_pos\":0}],\"fields\":[{\"name\":\"displayManager\",\"def_pos\":0,\"type\":\"android.hardware.display.DisplayManager\"},{\"name\":\"nativeListener\",\"def_pos\":0,\"type\":\"long\"},{\"name\":\"targetDisplayId\",\"def_pos\":0,\"type\":\"int\"}],\"raw_name\":\"com.remote.streamer.StreamerDisplayListener\",\"method_count\":7,\"full_name\":\"com.remote.streamer.StreamerDisplayListener\",\"field_count\":3,\"name\":\"StreamerDisplayListener\"}"
+              "text": "{\"method_count\":7,\"raw_name\":\"com.remote.streamer.StreamerDisplayListener\",\"fields\":[{\"def_pos\":0,\"name\":\"displayManager\",\"type\":\"android.hardware.display.DisplayManager\"},{\"def_pos\":0,\"name\":\"nativeListener\",\"type\":\"long\"},{\"def_pos\":0,\"name\":\"targetDisplayId\",\"type\":\"int\"}],\"methods\":[{\"name\":\"\\u003cinit\\u003e\",\"is_constructor\":true,\"dex_descriptor\":\"(Landroid/content/Context;JI)V\",\"signature\":\"\\u003cinit\\u003e(android.content.Context, long, int): void\",\"def_pos\":0},{\"name\":\"clearNativeListener\",\"is_constructor\":false,\"dex_descriptor\":\"()V\",\"signature\":\"clearNativeListener(): void\",\"def_pos\":0},{\"name\":\"nativeOnDisplayChanged\",\"is_constructor\":false,\"dex_descriptor\":\"(JIIII)V\",\"signature\":\"nativeOnDisplayChanged(long, int, int, int, int): void\",\"def_pos\":0},{\"name\":\"notifyDisplayChanged\",\"is_constructor\":false,\"dex_descriptor\":\"(I)V\",\"signature\":\"notifyDisplayChanged(int): void\",\"def_pos\":0},{\"name\":\"onDisplayAdded\",\"is_constructor\":false,\"dex_descriptor\":\"(I)V\",\"signature\":\"onDisplayAdded(int): void\",\"def_pos\":0},{\"name\":\"onDisplayChanged\",\"is_constructor\":false,\"dex_descriptor\":\"(I)V\",\"signature\":\"onDisplayChanged(int): void\",\"def_pos\":0},{\"name\":\"onDisplayRemoved\",\"is_constructor\":false,\"dex_descriptor\":\"(I)V\",\"signature\":\"onDisplayRemoved(int): void\",\"def_pos\":0}],\"inner_classes\":[],\"inner_class_count\":0,\"name\":\"StreamerDisplayListener\",\"field_count\":3,\"full_name\":\"com.remote.streamer.StreamerDisplayListener\"}"
             }
           ],
           "isError": false

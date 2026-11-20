@@ -28,6 +28,8 @@ macOS 包为当前 runner 的架构，未声明 universal 或 notarized；Androi
 
 Actions 执行共享 C++ Release 测试（断言明确启用）、桌面真实库的 C ABI 冒烟测试、Swift / C# 调用检查、Android 编译后 JNI 原型比较和 APK 内原版文件哈希比较。Android 真机 native 执行、官方服务会话、三端互控、硬编硬解路径以及逐页面/逐像素 UI 尚未完成验证。
 
+本轮 [Actions 44643846778](https://github.com/materjojo/uuremote-clone/actions/runs/44643846778) 的全部 6 个任务因账号付款/支出上限，在 runner 启动前被拒绝；没有产生编译、测试结果或新应用产物。需恢复账号的 Actions 额度/付款后重跑，不能据此判断代码已编译通过。
+
 本地允许进行只读分析、源码/生成文件检查；`scripts/verify_official_runtime.py` 不带 `--bridge` 时仅核对保留文件身份，不编译或执行原版库。`scripts/gen_protocol_schema.py --check` 仅检查生成的源码。
 
 ## 逆向记录

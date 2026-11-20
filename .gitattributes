@@ -4,3 +4,5 @@ native/official/runtime-chunks/** -text
 native/official/runtime/windows/streamer-config.json whitespace=cr-at-eol
 platforms/android/app/src/main/assets/streamer/** -text
 platforms/android/app/src/main/jniLibs/** -text
+# Recovery manifest hashes the generated glue, including its LF line endings.
+platforms/android/app/src/main/java/com/remote/streamer/** text eol=lf

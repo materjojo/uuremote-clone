@@ -11,7 +11,7 @@
 | 各端 UI 与对应原版一致 | 原版 Android 为 Compose、Windows 为 Qt、macOS 为 Swift；当前 UI 是占位重建 | 未完成 |
 | 去除云设备 | 当前应用未提供云设备入口；原版库保留通用代码，不代表已做代码级剥离 | 部分完成 |
 | 一个私有仓库 | 已有且已确认 isPrivate=true | 已完成 |
-| 只在 Actions 编译、提供三端产物 | 已配置三端打包/上传、Release 断言、桌面库实际加载和 Android descriptor/包装检查；结果待对应 Actions 运行 | 已配置，待 CI |
+| 只在 Actions 编译、提供三端产物 | 已配置三端打包/上传、Release 断言、桌面库实际加载和 Android descriptor/包装检查；首轮全部任务在 runner 启动前因账号付款/支出上限被拒绝 | 受外部计费阻塞，未运行 |
 | 仅在原包可证明相同处共享 | protobuf schema 可共享；平台 callback 长度不同，不能盲用 Windows 布局 | 部分完成 |
 
 ## 本轮已观察到的缺陷
@@ -32,6 +32,14 @@
 - C++ / Swift 字段表统一为完整 179 条消息；补齐 `ScreenResolution` 和嵌套 map entry。Release 测试启用断言，并修正原先没有把生成的 parity 装入恢复数组的测试数据错误。
 - macOS 缺少信令端点时明确失败；实验 KCP/FEC 包装默认关闭，断开时清理 timer/transport。
 - 清理 Windows 与 Android 三套语言资源中各 244 条云设备/云硬盘关联文案；移除应用里“硬编已启用”“弱网已启用”等没有运行证据的提示。完整协议和原版媒体库中的历史代码仍保留，未声称库级剥离完成。
+
+## 本轮 CI 实际结果
+
+[Actions 44643846778](https://github.com/materjojo/uuremote-clone/actions/runs/44643846778)，提交 `0733e90b2f50ffb855a44654eb761cef83cc5f36`：6 个 job 全部在 runner 启动前拒绝，steps 均为空，没有编译、测试日志或新的应用产物。GitHub 的原文是：
+
+> The job was not started because recent account payments have failed or your spending limit needs to be increased. Please check the 'Billing & plans' section in your settings
+
+完整 run/check annotations 保存于 [0733e90-blocked.json](../analysis/ci/0733e90-blocked.json)。仓库也没有已注册的 self-hosted runner。必须由账号侧恢复 Actions 额度/付款后重跑；没有改变仓库私密性，也没有在本地绕过“只在 Actions 编译”的限制。
 
 ## 边界
 

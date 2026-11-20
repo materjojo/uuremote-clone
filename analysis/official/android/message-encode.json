@@ -1,0 +1,147 @@
+{
+  "evidence_id": "ev_e276d615a7d9416c49bebece132cbdb0ab68f50c6dc880e443784b67c7ea19e3",
+  "subject": {
+    "name": "uuyc_4.48.1.apk",
+    "digest": {
+      "sha256": "19252db1dd384f25db000b334e6f77616b9dfa26b2e416ce5383038e973e219f"
+    },
+    "local_path": "/home/ubuntu/rea_uuyc/dist/uuyc_4.48.1.apk",
+    "format": "apk",
+    "architecture": null
+  },
+  "provider": {
+    "id": "jadx",
+    "name": "JADX headless",
+    "version": "0.7.1"
+  },
+  "analysis_profile": null,
+  "predicate_type": "rea.analysis",
+  "operation": "inspect_android_method",
+  "parameters": {
+    "path": "/home/ubuntu/rea_uuyc/dist/uuyc_4.48.1.apk",
+    "class_name": "Bb.J3",
+    "method_name": "g"
+  },
+  "raw_result": {
+    "server": {
+      "name": "rea-jadx-bridge",
+      "version": "7"
+    },
+    "bridge_sha256": "e5044a8312dd0731f53af3f095508b3e5cff54df6b971c95d4305e2f39b4fa30",
+    "jar_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+    "loaded": {
+      "state": "LOADED",
+      "apk_path": "/tmp/rea-android-OOzgqa/target.apk",
+      "class_count": 14640,
+      "resource_count": 2146,
+      "threads": 1,
+      "resources": "full"
+    },
+    "calls": [
+      {
+        "operation": "rea_jvm_status",
+        "input": {},
+        "response": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"available_processors\":2,\"engine_reported_version\":\"0.7.1\",\"metadata_scope\":\"parsed_members\",\"max_heap_bytes\":515899392,\"java_version\":\"21.0.12.1\"}"
+            }
+          ],
+          "isError": false
+        }
+      },
+      {
+        "operation": "load_apk",
+        "input": {
+          "path": "/tmp/rea-android-OOzgqa/target.apk",
+          "threads": 1,
+          "resources": "full"
+        },
+        "response": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"state\":\"LOADED\",\"apk_path\":\"/tmp/rea-android-OOzgqa/target.apk\",\"class_count\":14640,\"raw_class_count\":14640,\"resource_count\":2146,\"load_duration_ms\":13998,\"decompile_timeout_ms\":90000,\"threads\":1,\"code_cache_size\":64,\"resources\":\"full\"}"
+            }
+          ],
+          "isError": false
+        }
+      },
+      {
+        "operation": "get_class_summary",
+        "input": {
+          "class_name": "Bb.J3"
+        },
+        "response": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"raw_name\":\"Bb.J3\",\"fields\":[],\"methods\":[{\"name\":\"d\",\"is_constructor\":false,\"dex_descriptor\":\"(LI4/c;)Ljava/lang/Object;\",\"signature\":\"d(I4.c): java.lang.Object\",\"def_pos\":0},{\"name\":\"f\",\"is_constructor\":false,\"dex_descriptor\":\"(LDd/p;Ljava/lang/Object;)V\",\"signature\":\"f(Dd.p, java.lang.Object): void\",\"def_pos\":0},{\"name\":\"g\",\"is_constructor\":false,\"dex_descriptor\":\"(LI4/d;Ljava/lang/Object;)V\",\"signature\":\"g(I4.d, java.lang.Object): void\",\"def_pos\":0},{\"name\":\"j\",\"is_constructor\":false,\"dex_descriptor\":\"(Ljava/lang/Object;)I\",\"signature\":\"j(java.lang.Object): int\",\"def_pos\":0}],\"inner_classes\":[],\"inner_class_count\":0,\"name\":\"J3\",\"field_count\":0,\"full_name\":\"Bb.J3\",\"method_count\":4}"
+            }
+          ],
+          "isError": false
+        }
+      },
+      {
+        "operation": "get_method_body",
+        "input": {
+          "class_name": "Bb.J3",
+          "method_name": "g",
+          "overload_index": 0,
+          "smali_fallback": true
+        },
+        "response": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"overload_index\":0,\"method_name\":\"g\",\"overload_count\":1,\"dex_descriptor\":\"(LI4/d;Ljava/lang/Object;)V\",\"class_name\":\"Bb.J3\",\"mode\":\"java\",\"body\":\"    @Override // Dd.n\\n    public final void g(I4.d dVar, Object obj) {\\n        K3 k10 \\u003d (K3) obj;\\n        le.k.e(dVar, \\\"writer\\\");\\n        le.k.e(k10, \\\"value\\\");\\n        long j \\u003d k10.f2507d;\\n        Dd.d dVar2 \\u003d Dd.n.k;\\n        if (j !\\u003d 0) {\\n            dVar2.i(dVar, 1, Long.valueOf(j));\\n        }\\n        long j10 \\u003d k10.f2508e;\\n        if (j10 !\\u003d 0) {\\n            dVar2.i(dVar, 2, Long.valueOf(j10));\\n        }\\n        y6.f3430i.i(dVar, 3, k10.f2509f);\\n        G3.f2423i.i(dVar, 4, k10.f2510g);\\n        u6.f3324h.i(dVar, 5, k10.f2511h);\\n        a4.j.i(dVar, 6, k10.f2512i);\\n        W5.f2808f.i(dVar, 7, k10.j);\\n        n.f3151g.i(dVar, 8, k10.k);\\n        v.f3331l.i(dVar, 9, k10.f2513l);\\n        K5.f2535h.i(dVar, 10, k10.f2514m);\\n        i6.f3053g.i(dVar, 11, k10.f2515n);\\n        y5.f3425h.i(dVar, 12, k10.f2516o);\\n        G6.f2436h.i(dVar, 13, k10.f2517p);\\n        A5.f2299l.i(dVar, 14, k10.f2518q);\\n        K6.j.i(dVar, 15, k10.f2519r);\\n        S4.f2718e.i(dVar, 16, k10.f2520s);\\n        Y.f2821g.i(dVar, 17, k10.f2521t);\\n        Q0.f2663e.i(dVar, 18, k10.f2522u);\\n        x.f3399h.i(dVar, 19, k10.f2523v);\\n        C3.f2342e.i(dVar, 20, k10.f2524w);\\n        M5.f2563H.i(dVar, 21, k10.f2525x);\\n        O5.f2620D.i(dVar, 22, k10.f2526y);\\n        h.f3012e.i(dVar, 23, k10.z);\\n        I3.f2466i.i(dVar, 24, k10.f2502A);\\n        H.f2441o.i(dVar, 25, k10.f2503B);\\n        m5.f3145e.i(dVar, 26, k10.f2504C);\\n        C4.f2344i.i(dVar, 27, k10.f2505D);\\n        O6.f2644d.i(dVar, 28, k10.f2506E);\\n        dVar.D(k10.b());\\n    }\",\"markers\":[],\"fell_back\":false,\"full_name\":\"Bb.J3.g\"}"
+            }
+          ],
+          "isError": false
+        }
+      }
+    ]
+  },
+  "normalized_result": {
+    "engine": {
+      "name": "jadx-headless-mcp",
+      "version": "0.7.1",
+      "artifact_sha256": "6e5eacf500b64292bfb73c49797c1958f6ee44646e43e868039ae7feb573ff75",
+      "source_revision": "5844800a486d2248fa949b74c9896285f5b54de2",
+      "worker_count": 1,
+      "heap_limit_mib": 492
+    },
+    "class_name": "Bb.J3",
+    "method": {
+      "name": "g",
+      "reported_signature": "g(I4.d, java.lang.Object): void",
+      "overload_index": 0,
+      "is_constructor": false,
+      "dex_descriptor": "(LI4/d;Ljava/lang/Object;)V"
+    },
+    "overload_count": 1,
+    "representation": "java",
+    "body_status": "available",
+    "fell_back": false,
+    "markers": [],
+    "source": {
+      "status": "complete",
+      "text": "    @Override // Dd.n\n    public final void g(I4.d dVar, Object obj) {\n        K3 k10 = (K3) obj;\n        le.k.e(dVar, \"writer\");\n        le.k.e(k10, \"value\");\n        long j = k10.f2507d;\n        Dd.d dVar2 = Dd.n.k;\n        if (j != 0) {\n            dVar2.i(dVar, 1, Long.valueOf(j));\n        }\n        long j10 = k10.f2508e;\n        if (j10 != 0) {\n            dVar2.i(dVar, 2, Long.valueOf(j10));\n        }\n        y6.f3430i.i(dVar, 3, k10.f2509f);\n        G3.f2423i.i(dVar, 4, k10.f2510g);\n        u6.f3324h.i(dVar, 5, k10.f2511h);\n        a4.j.i(dVar, 6, k10.f2512i);\n        W5.f2808f.i(dVar, 7, k10.j);\n        n.f3151g.i(dVar, 8, k10.k);\n        v.f3331l.i(dVar, 9, k10.f2513l);\n        K5.f2535h.i(dVar, 10, k10.f2514m);\n        i6.f3053g.i(dVar, 11, k10.f2515n);\n        y5.f3425h.i(dVar, 12, k10.f2516o);\n        G6.f2436h.i(dVar, 13, k10.f2517p);\n        A5.f2299l.i(dVar, 14, k10.f2518q);\n        K6.j.i(dVar, 15, k10.f2519r);\n        S4.f2718e.i(dVar, 16, k10.f2520s);\n        Y.f2821g.i(dVar, 17, k10.f2521t);\n        Q0.f2663e.i(dVar, 18, k10.f2522u);\n        x.f3399h.i(dVar, 19, k10.f2523v);\n        C3.f2342e.i(dVar, 20, k10.f2524w);\n        M5.f2563H.i(dVar, 21, k10.f2525x);\n        O5.f2620D.i(dVar, 22, k10.f2526y);\n        h.f3012e.i(dVar, 23, k10.z);\n        I3.f2466i.i(dVar, 24, k10.f2502A);\n        H.f2441o.i(dVar, 25, k10.f2503B);\n        m5.f3145e.i(dVar, 26, k10.f2504C);\n        C4.f2344i.i(dVar, 27, k10.f2505D);\n        O6.f2644d.i(dVar, 28, k10.f2506E);\n        dVar.D(k10.b());\n    }",
+      "reported_total_bytes": null
+    }
+  },
+  "confidence": "derived",
+  "authority": "shipped-artifact",
+  "environment": null,
+  "limitations": [
+    "Static decompiler observations do not establish runtime behavior; the APK is never executed.",
+    "Method signatures use provider display types; DEX prototypes come from frozen JADX metadata. Display names may be aliases, and overload indices are local to this engine and artifact.",
+    "Class inventories use parsed metadata before code generation, including synthetic members that may be omitted from decompiled source. Source positions remain unknown.",
+    "Incoming reference totals count JADX using nodes. Direct invoke entries within a using method report raw DEX code-unit offsets and method indexes, but coverage is limited to those nodes and directly matched invokes; it does not establish every possible dynamic or reflective call site.",
+    "Manifest summaries are parsed once by REA's bridge from the exact root AndroidManifest.xml resource, using namespace-aware XML attributes; decoded XML is retained. APK signatures, split APKs, native libraries and Android runtime capture are not verified by this provider."
+  ],
+  "relationship_coverage": null,
+  "locations": [],
+  "evidence_links": []
+}

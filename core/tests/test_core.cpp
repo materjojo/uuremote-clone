@@ -1,5 +1,6 @@
 #include "gvpb.h"
 
+#include <algorithm>
 #include <cassert>
 #include <cstdio>
 #include <cstring>

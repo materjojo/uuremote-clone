@@ -27,6 +27,7 @@ jobs:
         run: |
           python scripts/verify_official_runtime.py
           python scripts/gen_protocol_schema.py --check
+          python scripts/verify_android_abi.py --check-evidence
       - name: Configure
         run: cmake -S core -B core/build -DCMAKE_BUILD_TYPE=Release
       - name: Build
@@ -65,6 +66,7 @@ jobs:
         run: |
           bash scripts/make_app.sh
           ditto -c -k --sequesterRsrc --keepParent build/UURemoteClone.app build/UURemoteClone-macos.zip
+          python scripts/verify_desktop_package.py macos build/UURemoteClone-macos.zip
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
@@ -97,6 +99,7 @@ jobs:
             if (!(Test-Path "build/windows/$name")) { throw "Missing package member: $name" }
           }
           Compress-Archive -Path build/windows/* -DestinationPath build/UURemoteClone-windows-x64.zip
+          python scripts/verify_desktop_package.py windows build/UURemoteClone-windows-x64.zip
       - uses: actions/upload-artifact@v4
         with:
           name: UURemoteClone-windows-x64
