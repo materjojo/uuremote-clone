@@ -236,6 +236,7 @@ final class VideoRenderView: NSView, RTCVideoRenderer {
     private var formatDescription: CMVideoFormatDescription?
     private var currentSize = CGSize.zero
     private var metal: MetalVideoView?
+    private let pixelConverter = VideoPixelConverter()
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
@@ -269,15 +270,14 @@ final class VideoRenderView: NSView, RTCVideoRenderer {
     func setSize(_ size: CGSize) {}
 
     func renderFrame(_ frame: RTCVideoFrame?) {
-        guard let frame, let buffer = frame.buffer as? RTCCVPixelBuffer else { return }
-        let pb = buffer.pixelBuffer
+        guard let frame, let pb = pixelConverter.convert(frame.buffer) else { return }
         let pts = CMTime(value: frame.timeStampNs, timescale: 1_000_000_000)
         DispatchQueue.main.async { self.display(pb, pts: pts) }
     }
 
     func display(_ pixelBuffer: CVPixelBuffer, pts: CMTime) {
-        if let metal {
-            metal.display(pixelBuffer)
+        if let metal, let bgra = pixelConverter.bgra(pixelBuffer) {
+            metal.display(bgra)
             return
         }
         let size = CVImageBufferGetEncodedSize(pixelBuffer)

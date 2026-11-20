@@ -1,4 +1,5 @@
 import Foundation
+import AppKit
 import Combine
 import CoreMedia
 import ScreenCaptureKit
@@ -25,6 +26,10 @@ final class ControlledSession: NSObject, ObservableObject {
     private let injector = InputInjector()
     private let virtualDisplay = VirtualDisplayController()
     private var screenSize: CGSize = .zero
+    private let clipboard = ClipboardManager()
+    private var clipboardTimer: Timer?
+    private var controlReady = false
+    private var seq: Int64 = 0
     private var pendingFrames: [(Data, Bool)] = []
 
     deinit { encoder.invalidate() }
@@ -82,9 +87,13 @@ final class ControlledSession: NSObject, ObservableObject {
                     if self.pendingFrames.count > 30 { self.pendingFrames.removeFirst() }
                 }
             }
-            let bitrate = max(1_500_000, min(self.bitrate, width * height * 6))
-            _ = encoder.prepare(width: width, height: height, fps: fps, bitrate: bitrate)
-            hardwareEncode = encoder.usingHardware
+            if codec == .h265 {
+                let bitrate = max(1_500_000, min(self.bitrate, width * height * 6))
+                _ = encoder.prepare(width: width, height: height, fps: fps, bitrate: bitrate)
+                hardwareEncode = encoder.usingHardware
+            }
+            // Native WebRTC owns its encoder in the RTP path; do not report
+            // properties of an unused H.265 encoder as its hardware status.
 
             if let display {
                 var config = ScreenCapturer.Config()
@@ -103,8 +112,15 @@ final class ControlledSession: NSObject, ObservableObject {
                 if !ok { throw NSError(domain: "VirtualDisplay", code: 2,
                                        userInfo: [NSLocalizedDescriptionKey: "虚拟屏采集启动失败"]) }
             }
+            await MainActor.run {
+                self.clipboardTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
+                    guard let self, self.controlReady else { return }
+                    if let data = self.clipboard.pollAndEncode(seq: &self.seq) { self.rtc?.sendControl(data) }
+                }
+            }
             running = true
         } catch {
+            await stop()
             lastError = error.localizedDescription
             running = false
         }
@@ -120,6 +136,7 @@ final class ControlledSession: NSObject, ObservableObject {
     }
 
     func stop() async {
+        await MainActor.run { self.clipboardTimer?.invalidate(); self.clipboardTimer = nil; self.controlReady = false }
         await capturer.stop()
         cgCapturer.stop()
         encoder.invalidate()
@@ -169,8 +186,16 @@ extension ControlledSession: WebRTCSessionDelegate {
         channel.requestKeyframe()
     }
 
+    func webRTC(_ session: WebRTCSession, didOpenControl channel: RTCDataChannel) { controlReady = true }
+
     func webRTC(_ session: WebRTCSession, didReceiveControl data: Data) {
         guard let message = GvMessage.decode(data) else { return }
+        if message.payloadKind == .clipboardChange {
+            if let value = ClipboardManager.decodeAndApply(message.payload, onPasteboard: { value in
+                NSPasteboard.general.clearContents(); NSPasteboard.general.setString(value, forType: .string)
+            }) { clipboard.markReceived(value) }
+            return
+        }
         guard message.payloadKind == .inputEvent else { return }
         var reader = ProtoReader(message.payload)
         guard let (field, _) = try? reader.nextField(), field == 1,

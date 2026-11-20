@@ -37,6 +37,8 @@ final class WebRTCSession: NSObject {
     private(set) var h265: H265Channel?
     private var capturer: PixelBufferCapturer?
     private var remoteReady = false
+    private var closed = false
+    private static let sslInitialized: Void = { _ = RTCInitializeSSL() }()
     private var pendingCandidates: [RTCIceCandidate] = []
     private var overlayCandidates: [RTCIceCandidate] = []
     private var overlayEnabled = false
@@ -53,7 +55,7 @@ final class WebRTCSession: NSObject {
 
     init(role: Role, iceServers: [String] = []) {
         self.role = role
-        _ = RTCInitializeSSL()
+        _ = Self.sslInitialized
         let encoder = RTCDefaultVideoEncoderFactory()
         let decoder = RTCDefaultVideoDecoderFactory()
         self.factory = RTCPeerConnectionFactory(encoderFactory: encoder, decoderFactory: decoder)
@@ -63,7 +65,6 @@ final class WebRTCSession: NSObject {
 
     deinit {
         peerConnection?.close()
-        _ = RTCCleanupSSL()
     }
 
     private func setup(iceServers: [String]) {
@@ -98,7 +99,7 @@ final class WebRTCSession: NSObject {
             guard let sdp else { self.onError?(error?.localizedDescription ?? "SDP offer failed"); return }
             pc.setLocalDescription(sdp) { error in
                 if let error { self.onError?(error.localizedDescription); return }
-                self.delegate?.webRTC(self, didCreateOffer: sdp.sdp)
+                DispatchQueue.main.async { if !self.closed { self.delegate?.webRTC(self, didCreateOffer: sdp.sdp) } }
             }
         }
     }
@@ -121,17 +122,19 @@ final class WebRTCSession: NSObject {
         pc.setRemoteDescription(desc) { [weak self] error in
             guard let self else { return }
             if let error { self.onError?(error.localizedDescription); return }
-            self.setRemoteReady()
-            if self.role == .controlled {
-                _ = self.prepareLocalVideo()
-                if let track = self.videoTrack {
-                    _ = pc.add(track, streamIds: ["stream0"])
+            DispatchQueue.main.async {
+                guard !self.closed else { return }
+                self.setRemoteReady()
+                if self.role == .controlled {
+                    _ = self.prepareLocalVideo()
+                    if let track = self.videoTrack { _ = pc.add(track, streamIds: ["stream0"]) }
                 }
-            }
-            pc.answer(for: self.constraints) { answer, _ in
-                guard let answer else { return }
-                pc.setLocalDescription(answer) { _ in
-                    self.delegate?.webRTC(self, didCreateAnswer: answer.sdp)
+                pc.answer(for: self.constraints) { answer, error in
+                    guard let answer else { self.onError?(error?.localizedDescription ?? "SDP answer failed"); return }
+                    pc.setLocalDescription(answer) { error in
+                        if let error { self.onError?(error.localizedDescription); return }
+                        DispatchQueue.main.async { if !self.closed { self.delegate?.webRTC(self, didCreateAnswer: answer.sdp) } }
+                    }
                 }
             }
         }
@@ -141,7 +144,7 @@ final class WebRTCSession: NSObject {
         guard let pc = peerConnection else { return }
         pc.setRemoteDescription(RTCSessionDescription(type: .answer, sdp: sdp)) { [weak self] error in
             if let error { self?.onError?(error.localizedDescription); return }
-            self?.setRemoteReady()
+            DispatchQueue.main.async { if self?.closed == false { self?.setRemoteReady() } }
         }
     }
 
@@ -157,6 +160,7 @@ final class WebRTCSession: NSObject {
     }
 
     func close() {
+        closed = true
         overlayTimer?.cancel()
         overlayTimer = nil
         delegate = nil
@@ -197,7 +201,7 @@ extension WebRTCSession: RTCPeerConnectionDelegate {
 
     func peerConnection(_ peerConnection: RTCPeerConnection, didAdd stream: RTCMediaStream) {
         if let track = stream.videoTracks.first {
-            delegate?.webRTC(self, didReceive: track)
+            DispatchQueue.main.async { if !self.closed { self.delegate?.webRTC(self, didReceive: track) } }
         }
     }
 
@@ -206,7 +210,7 @@ extension WebRTCSession: RTCPeerConnectionDelegate {
     func peerConnectionShouldNegotiate(_ peerConnection: RTCPeerConnection) {}
 
     func peerConnection(_ peerConnection: RTCPeerConnection, didChange newState: RTCIceConnectionState) {
-        delegate?.webRTC(self, didChange: newState)
+        DispatchQueue.main.async { if !self.closed { self.delegate?.webRTC(self, didChange: newState) } }
     }
 
     func peerConnection(_ peerConnection: RTCPeerConnection, didChange newState: RTCIceGatheringState) {}
@@ -234,19 +238,23 @@ extension WebRTCSession: RTCPeerConnectionDelegate {
     func peerConnection(_ peerConnection: RTCPeerConnection, didRemove candidates: [RTCIceCandidate]) {}
 
     func peerConnection(_ peerConnection: RTCPeerConnection, didOpen dataChannel: RTCDataChannel) {
-        dataChannel.delegate = self
-        switch dataChannel.label {
-        case "CONTROL_DATA_CHANNEL": controlChannel = dataChannel
-        case "BINARY_DATA_CHANNEL": binaryChannel = dataChannel
-        case "FILE_DATA_CHANNEL": fileChannel = dataChannel
-        case H265Channel.label: attachVideo(channel: dataChannel)
-        default: break
+        DispatchQueue.main.async {
+            guard !self.closed else { return }
+            dataChannel.delegate = self
+            switch dataChannel.label {
+            case "CONTROL_DATA_CHANNEL": self.controlChannel = dataChannel
+            case "BINARY_DATA_CHANNEL": self.binaryChannel = dataChannel
+            case "FILE_DATA_CHANNEL": self.fileChannel = dataChannel
+            case H265Channel.label: self.attachVideo(channel: dataChannel)
+            default: break
+            }
+            self.dataChannelDidChangeState(dataChannel)
         }
     }
 
     func peerConnection(_ peerConnection: RTCPeerConnection, didAdd rtpReceiver: RTCRtpReceiver, streams mediaStreams: [RTCMediaStream]) {
         if let track = rtpReceiver.track as? RTCVideoTrack {
-            delegate?.webRTC(self, didReceive: track)
+            DispatchQueue.main.async { if !self.closed { self.delegate?.webRTC(self, didReceive: track) } }
         }
     }
 }
@@ -254,13 +262,13 @@ extension WebRTCSession: RTCPeerConnectionDelegate {
 extension WebRTCSession: RTCDataChannelDelegate {
     func dataChannelDidChangeState(_ dataChannel: RTCDataChannel) {
         if dataChannel.label == "CONTROL_DATA_CHANNEL", dataChannel.readyState == .open {
-            delegate?.webRTC(self, didOpenControl: dataChannel)
+            DispatchQueue.main.async { if !self.closed { self.delegate?.webRTC(self, didOpenControl: dataChannel) } }
         }
     }
 
     func dataChannel(_ dataChannel: RTCDataChannel, didReceiveMessageWith buffer: RTCDataBuffer) {
         if dataChannel.label == "CONTROL_DATA_CHANNEL" {
-            delegate?.webRTC(self, didReceiveControl: buffer.data)
+            DispatchQueue.main.async { if !self.closed { self.delegate?.webRTC(self, didReceiveControl: buffer.data) } }
         } else if dataChannel.label == H265Channel.label {
             h265?.receive(buffer.data)
         }
