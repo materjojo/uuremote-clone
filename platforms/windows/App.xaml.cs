@@ -28,7 +28,9 @@ public partial class App : Application
                 var content = (FrameworkElement)window.Content;
                 var bitmap = new RenderTargetBitmap((int)Math.Ceiling(content.ActualWidth), (int)Math.Ceiling(content.ActualHeight),
                     96, 96, PixelFormats.Pbgra32);
-                bitmap.Render(content);
+                // Render the window so its background is included; size the
+                // bitmap to the client area to exclude the native frame.
+                bitmap.Render(window);
                 var encoder = new PngBitmapEncoder();
                 encoder.Frames.Add(BitmapFrame.Create(bitmap));
                 string path = Path.GetFullPath(e.Args[1]);
