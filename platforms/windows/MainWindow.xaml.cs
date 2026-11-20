@@ -27,7 +27,7 @@ public partial class MainWindow : Window, StreamerSession.IListener, ClipboardSy
     private PeerAPI? _sessionApi, _hostApi;
     private CancellationTokenSource? _receiving;
     private bool _hostMode;
-    private long _seq;
+    private long _seq, _generation;
 
     public MainWindow()
     {
@@ -76,6 +76,7 @@ public partial class MainWindow : Window, StreamerSession.IListener, ClipboardSy
         var device = _devices.FirstOrDefault(d => d.Id == id);
         if (device == null) return;
         Disconnect();
+        long generation = _generation;
         DeviceView.Visibility = Visibility.Collapsed;
         RemoteView.Visibility = Visibility.Visible;
         StatusText.Text = $"正在请求 {device.Name}，等待对端确认…";
@@ -83,9 +84,10 @@ public partial class MainWindow : Window, StreamerSession.IListener, ClipboardSy
             _sessionApi = new PeerAPI(device.Server);
             var result = await _sessionApi.RequestAsync("/v1/connect", body: new {
                 target = device.Id, key = device.Key, name = Environment.MachineName, platform = "windows" });
+            if (generation != _generation) return;
             var mailbox = new PeerMailbox(_sessionApi, result.GetProperty("id").GetString()!, result.GetProperty("token").GetString()!);
             BindMailbox(mailbox, false);
-        } catch (Exception ex) { StatusText.Text = "连接失败：" + ex.Message; }
+        } catch (Exception ex) { if (generation == _generation) StatusText.Text = "连接失败：" + ex.Message; }
     }
 
     private void CreateSession(bool host)
@@ -107,7 +109,7 @@ public partial class MainWindow : Window, StreamerSession.IListener, ClipboardSy
     private void BindMailbox(PeerMailbox mailbox, bool host)
     {
         _mailbox = mailbox;
-        mailbox.Error += message => Dispatcher.BeginInvoke(new Action(() => StatusText.Text = message));
+        mailbox.Error += message => Dispatcher.BeginInvoke(new Action(() => { if (_mailbox == mailbox) { Disconnect(); HostStatus.Text = message; } }));
         mailbox.Signal += (type, data) => Dispatcher.InvokeAsync(async () => {
             if (_mailbox != mailbox) return;
             try {
@@ -185,6 +187,7 @@ public partial class MainWindow : Window, StreamerSession.IListener, ClipboardSy
     private void Disconnect_Click(object sender, RoutedEventArgs e) => Disconnect();
     private void Disconnect()
     {
+        _generation++;
         _mailbox?.Send("close");
         if (_mailbox != null) _ = DisposeLater(_mailbox);
         _mailbox = null;

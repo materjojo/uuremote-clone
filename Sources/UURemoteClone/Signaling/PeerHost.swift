@@ -63,6 +63,7 @@ import Combine
             controlled.codec = .h264
             await controlled.start(display: display, fps: 30)
             guard controlled.running else { throw PeerError.message(controlled.lastError ?? "屏幕采集启动失败") }
+            guard running, !Task.isCancelled else { await controlled.stop(); box.send("close"); return }
             self.controlled = controlled
             mailbox = box
             status = "已允许 \(name) · 正在协商连接"
@@ -90,20 +91,21 @@ import Combine
         }
     }
 
-    func endSession() {
-        mailbox?.stop()
+    func endSession(notify: Bool = false) {
+        let box = mailbox
         mailbox = nil
+        if notify {
+            box?.onSignal = nil; box?.onError = nil
+            box?.send("close")
+            Task { try? await Task.sleep(nanoseconds: 500_000_000); box?.stop() }
+        } else { box?.stop() }
         if let controlled { Task { await controlled.stop() } }
         controlled = nil
         if running { status = "等待连接 · 每次连接需本机确认" }
     }
 
     func stop() {
-        mailbox?.send("close")
-        // Let the serialized close leave before cancelling the mailbox.
-        let box = mailbox
-        Task { try? await Task.sleep(nanoseconds: 500_000_000); box?.stop() }
-        endSession()
+        endSession(notify: true)
         inboxTask?.cancel()
         inboxTask = nil
         running = false

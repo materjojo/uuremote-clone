@@ -77,7 +77,9 @@ public class MainActivity extends Activity {
     private LinearLayout column() { LinearLayout v = new LinearLayout(this); v.setOrientation(LinearLayout.VERTICAL); return v; }
     private TextView text(String value, int size, int color) { TextView t = new TextView(this); t.setText(value); t.setTextSize(size); t.setTextColor(color); return t; }
     private Button button(String label, View.OnClickListener action) {
-        Button b = new Button(this); b.setText(label); b.setTextColor(BLUE); b.setAllCaps(false); b.setOnClickListener(action); return b;
+        Button b = new Button(this); b.setText(label); b.setTextColor(BLUE); b.setAllCaps(false);
+        b.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xffeef4ff));
+        b.setElevation(0); b.setOnClickListener(action); return b;
     }
     private void toast(String message) { Toast.makeText(this, message, Toast.LENGTH_LONG).show(); }
     private void card(LinearLayout v) {
