@@ -103,7 +103,7 @@ public sealed class StreamerSession : IDisposable
         else if (channel.label == FileLabel) _file = channel;
     }
 
-    private void SetRemote(SdpType type, string sdp)
+    private void SetRemote(RTCSdpType type, string sdp)
     {
         var result = _peer.setRemoteDescription(new RTCSessionDescriptionInit { type = type, sdp = sdp });
         if (result != SetDescriptionResultEnum.OK) throw new InvalidOperationException("SDP: " + result);
@@ -115,12 +115,12 @@ public sealed class StreamerSession : IDisposable
     }
     public async Task<string> HandleOfferAsync(string sdp)
     {
-        SetRemote(SdpType.offer, sdp);
+        SetRemote(RTCSdpType.offer, sdp);
         var answer = _peer.createAnswer();
         await _peer.setLocalDescription(answer);
         return answer.sdp;
     }
-    public void HandleAnswer(string sdp) => SetRemote(SdpType.answer, sdp);
+    public void HandleAnswer(string sdp) => SetRemote(RTCSdpType.answer, sdp);
     public void AddCandidate(string candidate, string sdpMid, int sdpMLineIndex)
     {
         var value = new RTCIceCandidateInit { candidate = candidate, sdpMid = sdpMid,

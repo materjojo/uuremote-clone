@@ -1,0 +1,56 @@
+{
+  "apk_sha256": "19252db1dd384f25db000b334e6f77616b9dfa26b2e416ce5383038e973e219f",
+  "scope": "Exact non-cloud artwork. Layout still requires runtime comparison; these file hashes alone do not prove pixel parity.",
+  "files": [
+    {
+      "source_member": "assets/composeRes/app/drawable/ic_home_device_normal.webp",
+      "output": "platforms/android/app/src/main/res/drawable/ui_tab_devices_normal.webp",
+      "sha256": "af59273f9a2f6a8c05c8eab6838d1da74199bc8d8ef9de2da7c5314e65eec6a9"
+    },
+    {
+      "source_member": "assets/composeRes/app/drawable/ic_home_device_selected.webp",
+      "output": "platforms/android/app/src/main/res/drawable/ui_tab_devices_selected.webp",
+      "sha256": "383307963d3b222c6f8788dccc2968ba498a7f0f11eb1c67fd8a07c5d6338a91"
+    },
+    {
+      "source_member": "assets/composeRes/app/drawable/ic_home_assist_normal.webp",
+      "output": "platforms/android/app/src/main/res/drawable/ui_tab_assist_normal.webp",
+      "sha256": "930a4ac6695af4818f8cd20f272f9bfdc9fb8ef960db4d90e7be0fec49eea4c5"
+    },
+    {
+      "source_member": "assets/composeRes/app/drawable/ic_home_assist_selected.webp",
+      "output": "platforms/android/app/src/main/res/drawable/ui_tab_assist_selected.webp",
+      "sha256": "a4fc5fa0d3e9e09fd7aaeb40df936e9b35a894903b00219e13b31332c8e14e77"
+    },
+    {
+      "source_member": "assets/composeRes/app/drawable/ic_home_mine_normal.webp",
+      "output": "platforms/android/app/src/main/res/drawable/ui_tab_mine_normal.webp",
+      "sha256": "d1a909fa1138878c264ea3a44a364dc410b3461798b89a868d73164175bbb264"
+    },
+    {
+      "source_member": "assets/composeRes/app/drawable/ic_home_mine_selected.webp",
+      "output": "platforms/android/app/src/main/res/drawable/ui_tab_mine_selected.webp",
+      "sha256": "8490c2b7b1c3eec05767f8b49faaa47cad76c5c443074e75780c6a0fe36ad165"
+    },
+    {
+      "source_member": "assets/composeRes/app/drawable/empty_device_guide_computer.webp",
+      "output": "platforms/android/app/src/main/res/drawable/ui_empty_computer.webp",
+      "sha256": "4d0f7890c8c49d44863f069253320f59dc994a5f5a9af3811f94875545a740d0"
+    },
+    {
+      "source_member": "assets/composeRes/api-device/drawable/ic_device_type_mac.png",
+      "output": "platforms/android/app/src/main/res/drawable/ui_device_mac.png",
+      "sha256": "d407cd7661754383637bb7d92f6f8cde5cb0eb2ad47929e3e2ba99d8c1760ab5"
+    },
+    {
+      "source_member": "assets/composeRes/api-device/drawable/ic_device_type_win.png",
+      "output": "platforms/android/app/src/main/res/drawable/ui_device_win.png",
+      "sha256": "56ced8e78826bac12365fcf50c944dc3a0d5f3ada2826aae0021b5521680d32a"
+    },
+    {
+      "source_member": "assets/composeRes/api-device/drawable/ic_device_type_android.png",
+      "output": "platforms/android/app/src/main/res/drawable/ui_device_android.png",
+      "sha256": "9bd8b3283c691a9e5815bf00344b20331cdc627eae27e5c6a7d69cd452c42b80"
+    }
+  ]
+}

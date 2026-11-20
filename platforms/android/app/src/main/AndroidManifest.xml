@@ -5,11 +5,14 @@
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION"/>
 
     <application
         android:label="UU远程"
         android:theme="@android:style/Theme.Material.NoActionBar"
+        android:allowBackup="false"
         android:usesCleartextTraffic="true">
+        <service android:name=".ScreenShareService" android:exported="false" android:foregroundServiceType="mediaProjection"/>
         <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
