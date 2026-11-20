@@ -1,0 +1,25 @@
+name: peer-service
+on:
+  push:
+    branches: [master]
+    paths: ['server/**', '.github/workflows/peer-service.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: peer-service-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  signaling-and-transport:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: server/requirements.txt
+      - run: pip install -r server/requirements.txt aiortc==1.14.0
+      - name: Consent, authorization, retries and real ICE media transport
+        run: python -m unittest server.test_rendezvous server.test_peer_transport -v

@@ -43,7 +43,7 @@ final class ControlledSession: NSObject, ObservableObject {
 
     func start(source: Source, privateScreen: PrivateScreenMode) async {
         do {
-            let rtc = WebRTCSession(role: .controlled)
+            let rtc = WebRTCSession(role: .controlled, iceServers: PeerNetwork.stun)
             rtc.delegate = self
             self.rtc = rtc
 
@@ -125,6 +125,8 @@ final class ControlledSession: NSObject, ObservableObject {
         encoder.invalidate()
         virtualDisplay.destroy()
         virtualDisplayActive = false
+        rtc?.close()
+        rtc = nil
         running = false
     }
 

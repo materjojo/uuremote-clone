@@ -73,6 +73,8 @@ struct DeviceGridView: View {
     @Environment(\.openWindow) private var openWindow
     @State private var hovered: String?
     @State private var notice: String?
+    @State private var adding = false
+    @State private var pairCode = ""
 
     private let columns = [GridItem(.adaptive(minimum: 260, maximum: 340), spacing: 16)]
 
@@ -82,6 +84,7 @@ struct DeviceGridView: View {
                 Text("我的设备").font(.system(size: 22, weight: .semibold))
                 Spacer()
                 Button {
+                    adding = true
                 } label: {
                     Label(L10n.addDevice, systemImage: "plus")
                 }
@@ -89,7 +92,17 @@ struct DeviceGridView: View {
                 .foregroundStyle(Theme.textSecondary)
             }
 
-            if app.isLoading {
+            PeerHostPanel(host: app.host)
+
+            if app.devices.isEmpty {
+                VStack(spacing: 12) {
+                    Image(systemName: "desktopcomputer.badge.plus").font(.system(size: 36))
+                    Text("还没有添加设备").font(.headline)
+                    Text("在另一台设备开启接收，复制配对码后添加。可以连接任意支持的平台。")
+                        .foregroundStyle(Theme.textSecondary)
+                    Button("添加设备") { adding = true }
+                }.frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else if app.isLoading {
                 ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
                 ScrollView {
@@ -98,6 +111,7 @@ struct DeviceGridView: View {
                             DeviceCard(device: device, hovered: hovered == device.id,
                                        onWake: { wake(device) })
                                 .onHover { hovered = $0 ? device.id : nil }
+                                .contextMenu { Button("移除设备") { app.removeDevice(device.deviceID) } }
                                 .onTapGesture {
                                     app.connect(device)
                                     openWindow(id: "remote")
@@ -109,6 +123,22 @@ struct DeviceGridView: View {
             Spacer()
         }
         .padding(24)
+        .sheet(isPresented: $adding) {
+            VStack(alignment: .leading, spacing: 16) {
+                Text("添加设备").font(.title2)
+                Text("粘贴对方在“接收远程连接”中生成的配对码")
+                TextEditor(text: $pairCode).frame(height: 120).font(.system(.body, design: .monospaced))
+                HStack {
+                    Button("取消") { adding = false }
+                    Spacer()
+                    Button("添加") {
+                        do { try app.addDevice(pairCode); adding = false; pairCode = "" }
+                        catch { notice = error.localizedDescription }
+                    }
+                }
+                if let notice { Text(notice).foregroundStyle(.red) }
+            }.padding(24).frame(width: 480)
+        }
         .background(Color(red: 0.07, green: 0.075, blue: 0.09))
         .overlay(alignment: .bottom) {
             if let notice {
@@ -123,21 +153,7 @@ struct DeviceGridView: View {
     }
 
     private func wake(_ device: DeviceInfo) {
-        Task {
-            do {
-                let info = try await APIClient.shared.wakeOnLANInfo(deviceID: device.deviceID)
-                guard let mac = info?.usableMAC else {
-                    await MainActor.run { notice = "未获取到该设备的 MAC 地址" }
-                    return
-                }
-                let ok = WakeOnLAN.send(mac: mac,
-                                        broadcast: info?.ip ?? "255.255.255.255",
-                                        ports: [UInt16(info?.port ?? 9), 7])
-                await MainActor.run { notice = ok ? "已发送唤醒魔术包" : "魔术包发送失败" }
-            } catch {
-                await MainActor.run { notice = error.localizedDescription }
-            }
-        }
+        notice = "请先为该设备配置局域网唤醒地址"
     }
 }
 
@@ -149,7 +165,7 @@ struct DeviceCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             HStack {
-                Image(systemName: device.platform == "mac" ? "laptopcomputer" : "pc")
+                Image(systemName: device.platform == "mac" ? "laptopcomputer" : device.platform == "android" ? "smartphone" : "pc")
                     .font(.system(size: 26))
                     .foregroundStyle(Theme.accent)
                 Spacer()
@@ -157,7 +173,7 @@ struct DeviceCard: View {
                     Circle()
                         .fill(device.online ? Theme.accent : Color.gray)
                         .frame(width: 7, height: 7)
-                    Text(device.online ? L10n.online : L10n.offline)
+                    Text("已配对")
                         .font(.system(size: 11))
                         .foregroundStyle(Theme.textSecondary)
                 }

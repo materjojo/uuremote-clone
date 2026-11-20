@@ -25,8 +25,8 @@ final class RemoteSession: NSObject, ObservableObject {
     @Published private(set) var device: DeviceInfo?
     @Published private(set) var screenInfo: [GvScreenInfo] = []
 
-    private var room: RoomInfo?
-    private var socket: SocketIOClient?
+    private var mailbox: PeerMailbox?
+    private var connectTask: Task<Void, Never>?
     private var rtc: WebRTCSession?
     private var seq: Int64 = 0
     private var controlReady = false
@@ -40,81 +40,56 @@ final class RemoteSession: NSObject, ObservableObject {
     /// 弱网增强（KCP + RS-FEC）；对端不支持时自动降级为裸 protobuf
     var useReliableTransport = false
 
-    func connect(device: DeviceInfo) {
+    func connect(device: DeviceInfo) { phase = .failed("请使用对端生成的配对码添加设备") }
+
+    func connect(peer: PeerInvitation, device: DeviceInfo) {
         self.device = device
-        phase = .creatingRoom
-        Task {
-            do {
-                let room = try await APIClient.shared.createRoom(deviceID: device.deviceID)
-                await MainActor.run { self.room = room; self.startSignaling(room) }
-            } catch {
-                await MainActor.run { self.phase = .failed(error.localizedDescription) }
-            }
-        }
-    }
-
-    private func startSignaling(_ room: RoomInfo) {
         phase = .signaling
-        let rtc = WebRTCSession(role: .controller)
-        rtc.delegate = self
-        self.rtc = rtc
-
-        guard let server = room.signalingServer ?? room.signalingList?.first,
-              let host = URL(string: server)?.host else {
-            phase = .failed("房间未返回有效信令服务器，无法建立连接")
-            return
-        }
-
-        let socket = SocketIOClient(host: host, useTLS: server.hasPrefix("wss"))
-        socket.onStateChange = { [weak self] state in
-            guard let self else { return }
-            if state == .connected {
-                socket.emit("login", [
-                    "room_id": room.roomID,
-                    "token": room.token,
-                    "device_id": room.publisherDeviceID ?? ""
+        connectTask = Task { @MainActor in
+            do {
+                let api = try PeerAPI(peer.server)
+                let result = try await api.request("/v1/connect", body: [
+                    "target": peer.id, "key": peer.key,
+                    "name": Host.current().localizedName ?? ProcessInfo.processInfo.hostName, "platform": "mac"
                 ])
-                self.rtc?.startAsController()
-            }
-        }
-        socket.onEvent = { [weak self] name, payload in
-            self?.handle(event: name, payload: payload)
-        }
-        self.socket = socket
-        socket.connect()
-        phase = .connecting
-    }
-
-    private func handle(event: String, payload: Any?) {
-        switch event {
-        case "bmsg_push", "peer_offer", "answer", "candidate":
-            guard let dict = payload as? [String: Any] else { return }
-            let type = (dict["type"] as? String) ?? event
-            let inner = (dict["data"] as? [String: Any]) ?? dict
-            switch type {
-            case "answer", "peer_answer":
-                if let sdp = inner["sdp"] as? String { rtc?.handleAnswer(sdp) }
-            case "candidate":
-                if let sdp = inner["candidate"] as? String {
-                    rtc?.handleCandidate(sdp,
-                                         sdpMLineIndex: Int32(inner["sdpMLineIndex"] as? Int ?? 0),
-                                         sdpMid: inner["sdpMid"] as? String)
+                guard !Task.isCancelled, let id = result["id"] as? String, let token = result["token"] as? String else { return }
+                let box = PeerMailbox(api: api, id: id, token: token)
+                self.mailbox = box
+                box.onSignal = { [weak self] signal in
+                    guard let self else { return }
+                    switch signal.type {
+                    case "accepted":
+                        let rtc = WebRTCSession(role: .controller, iceServers: PeerNetwork.stun)
+                        rtc.delegate = self
+                        rtc.onError = { [weak self] error in DispatchQueue.main.async { self?.phase = .failed(error) } }
+                        self.rtc = rtc
+                        self.phase = .connecting
+                        rtc.startAsController()
+                    case "answer": if let sdp = signal.data["sdp"] as? String { self.rtc?.handleAnswer(sdp) }
+                    case "candidate":
+                        if let sdp = signal.data["candidate"] as? String {
+                            self.rtc?.handleCandidate(sdp, sdpMLineIndex: Int32(signal.data["sdpMLineIndex"] as? Int ?? 0), sdpMid: signal.data["sdpMid"] as? String)
+                        }
+                    case "close": self.disconnect(); self.phase = .failed("对端已拒绝或断开连接")
+                    default: break
+                    }
                 }
-            default: break
-            }
-        case "room_info":
-            if let dict = payload as? [String: Any], let sdp = dict["sdp"] as? String {
-                rtc?.handleOffer(sdp)
-            }
-        default:
-            break
+                box.onError = { [weak self] error in self?.phase = .failed(error) }
+                box.start()
+            } catch { self.phase = .failed(error.localizedDescription) }
         }
     }
 
     func disconnect() {
-        socket?.disconnect()
-        socket = nil
-        rtc?.delegate = nil
+        connectTask?.cancel()
+        let box = mailbox
+        Task { @MainActor in
+            box?.send("close")
+            try? await Task.sleep(nanoseconds: 500_000_000)
+            box?.stop()
+        }
+        mailbox = nil
+        rtc?.close()
         rtc = nil
         reliableTimer?.invalidate()
         reliableTimer = nil
@@ -194,23 +169,17 @@ final class RemoteSession: NSObject, ObservableObject {
 
 extension RemoteSession: WebRTCSessionDelegate {
     func webRTC(_ session: WebRTCSession, didCreateOffer sdp: String) {
-        socket?.emit("send_offer", [
-            "sdp": sdp,
-            "room_id": room?.roomID ?? "",
-            "token": room?.token ?? ""
-        ])
+        Task { @MainActor in mailbox?.send("offer", ["sdp": sdp]) }
     }
 
-    func webRTC(_ session: WebRTCSession, didCreateAnswer sdp: String) {
-        socket?.emit("send_offer", ["sdp": sdp, "room_id": room?.roomID ?? ""])
-    }
+    func webRTC(_ session: WebRTCSession, didCreateAnswer sdp: String) { }
 
     func webRTC(_ session: WebRTCSession, didGenerate candidate: RTCIceCandidate) {
-        socket?.emit("send_candidates", [[
+        Task { @MainActor in mailbox?.send("candidate", [
             "candidate": candidate.sdp,
             "sdpMid": candidate.sdpMid ?? "",
             "sdpMLineIndex": Int(candidate.sdpMLineIndex)
-        ]])
+        ]) }
     }
 
     func webRTC(_ session: WebRTCSession, didChange state: RTCIceConnectionState) {

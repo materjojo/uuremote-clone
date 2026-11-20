@@ -36,6 +36,12 @@ final class WebRTCSession: NSObject {
     private(set) var videoTrack: RTCVideoTrack?
     private(set) var h265: H265Channel?
     private var capturer: PixelBufferCapturer?
+    private var remoteReady = false
+    private var pendingCandidates: [RTCIceCandidate] = []
+    private var overlayCandidates: [RTCIceCandidate] = []
+    private var overlayEnabled = false
+    private var overlayTimer: DispatchWorkItem?
+    var onError: ((String) -> Void)?
 
     private let constraints = RTCMediaConstraints(
         mandatoryConstraints: [
@@ -79,17 +85,19 @@ final class WebRTCSession: NSObject {
         controlChannel = pc.dataChannel(forLabel: "CONTROL_DATA_CHANNEL", configuration: cfg)
         controlChannel?.delegate = self
 
-        let videoCfg = RTCDataChannelConfiguration()
-        videoCfg.isOrdered = false
-        videoCfg.maxRetransmits = 0
-        if let videoChannel = pc.dataChannel(forLabel: "VIDEO_DATA_CHANNEL", configuration: videoCfg) {
-            videoChannel.delegate = self
-            attachVideo(channel: videoChannel)
+        for label in ["BINARY_DATA_CHANNEL", "FILE_DATA_CHANNEL"] {
+            let channel = pc.dataChannel(forLabel: label, configuration: cfg)
+            channel?.delegate = self
+            if label == "BINARY_DATA_CHANNEL" { binaryChannel = channel } else { fileChannel = channel }
         }
+        // Native RTP video, negotiated by both endpoints; no invented HEVC
+        // DataChannel packetization in the independent connection path.
 
         pc.offer(for: constraints) { [weak self] sdp, error in
-            guard let self, let sdp else { return }
-            pc.setLocalDescription(sdp) { _ in
+            guard let self else { return }
+            guard let sdp else { self.onError?(error?.localizedDescription ?? "SDP offer failed"); return }
+            pc.setLocalDescription(sdp) { error in
+                if let error { self.onError?(error.localizedDescription); return }
                 self.delegate?.webRTC(self, didCreateOffer: sdp.sdp)
             }
         }
@@ -111,7 +119,9 @@ final class WebRTCSession: NSObject {
         guard let pc = peerConnection else { return }
         let desc = RTCSessionDescription(type: .offer, sdp: sdp)
         pc.setRemoteDescription(desc) { [weak self] error in
-            guard let self, error == nil else { return }
+            guard let self else { return }
+            if let error { self.onError?(error.localizedDescription); return }
+            self.setRemoteReady()
             if self.role == .controlled {
                 _ = self.prepareLocalVideo()
                 if let track = self.videoTrack {
@@ -129,12 +139,31 @@ final class WebRTCSession: NSObject {
 
     func handleAnswer(_ sdp: String) {
         guard let pc = peerConnection else { return }
-        pc.setRemoteDescription(RTCSessionDescription(type: .answer, sdp: sdp)) { _ in }
+        pc.setRemoteDescription(RTCSessionDescription(type: .answer, sdp: sdp)) { [weak self] error in
+            if let error { self?.onError?(error.localizedDescription); return }
+            self?.setRemoteReady()
+        }
     }
 
     func handleCandidate(_ sdp: String, sdpMLineIndex: Int32, sdpMid: String?) {
         let candidate = RTCIceCandidate(sdp: sdp, sdpMLineIndex: sdpMLineIndex, sdpMid: sdpMid)
-        peerConnection?.add(candidate)
+        if remoteReady { peerConnection?.add(candidate) } else { pendingCandidates.append(candidate) }
+    }
+
+    private func setRemoteReady() {
+        remoteReady = true
+        pendingCandidates.forEach { peerConnection?.add($0) }
+        pendingCandidates.removeAll()
+    }
+
+    func close() {
+        overlayTimer?.cancel()
+        overlayTimer = nil
+        delegate = nil
+        peerConnection?.close()
+        peerConnection = nil
+        pendingCandidates.removeAll()
+        overlayCandidates.removeAll()
     }
 
     // MARK: - 数据
@@ -183,7 +212,23 @@ extension WebRTCSession: RTCPeerConnectionDelegate {
     func peerConnection(_ peerConnection: RTCPeerConnection, didChange newState: RTCIceGatheringState) {}
 
     func peerConnection(_ peerConnection: RTCPeerConnection, didGenerate candidate: RTCIceCandidate) {
-        delegate?.webRTC(self, didGenerate: candidate)
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            if PeerNetwork.isOverlay(candidate.sdp) && !self.overlayEnabled {
+                self.overlayCandidates.append(candidate)
+                if self.overlayTimer == nil {
+                    let timer = DispatchWorkItem { [weak self] in
+                        guard let self, let pc = self.peerConnection else { return }
+                        if pc.iceConnectionState == .connected || pc.iceConnectionState == .completed { return }
+                        self.overlayEnabled = true
+                        self.overlayCandidates.forEach { self.delegate?.webRTC(self, didGenerate: $0) }
+                        self.overlayCandidates.removeAll()
+                    }
+                    self.overlayTimer = timer
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 8, execute: timer)
+                }
+            } else { self.delegate?.webRTC(self, didGenerate: candidate) }
+        }
     }
 
     func peerConnection(_ peerConnection: RTCPeerConnection, didRemove candidates: [RTCIceCandidate]) {}
