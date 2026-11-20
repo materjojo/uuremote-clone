@@ -12,6 +12,8 @@ static class Program
             var peer = new PeerInvitation(1, "https://signal.example.org", "peer-00000000000001",
                 new string('a', 64), "自定义设备", platform);
             if (PeerInvitation.Parse(peer.Code) != peer) throw new Exception("Invitation roundtrip failed");
+            var stored = System.Text.Json.JsonSerializer.Serialize(peer, PeerInvitation.Json);
+            if (stored.Contains("\"code\"")) throw new Exception("Calculated code must be omitted from invitation JSON");
         }
         var hostEvents = new Listener();
         var controllerEvents = new Listener();

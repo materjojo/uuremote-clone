@@ -16,6 +16,7 @@ namespace UURemoteClone;
 public record PeerInvitation(int V, string Server, string Id, string Key, string Name, string Platform)
 {
     internal static readonly JsonSerializerOptions Json = new(JsonSerializerDefaults.Web);
+    [System.Text.Json.Serialization.JsonIgnore]
     public string Code => "uur1." + Convert.ToBase64String(JsonSerializer.SerializeToUtf8Bytes(this, Json))
         .TrimEnd('=').Replace('+', '-').Replace('/', '_');
     public static PeerInvitation Parse(string code)
