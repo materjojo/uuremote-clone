@@ -25,7 +25,8 @@ public sealed class WindowsVideoPipeline : IDisposable
     {
         FFmpegInit.Initialise(libPath: runtimePath ?? System.IO.Path.Combine(AppContext.BaseDirectory, "ffmpeg"));
 
-        // 优先硬件：D3D11VA（Windows 通用）；失败时 FFmpeg 自动软编兜底
+        // D3D11VA affects decoding only. Hardware encoding is not inferred
+        // from this flag; the normal path currently requests software codecs.
         var hw = preferHardware
             ? AVHWDeviceType.AV_HWDEVICE_TYPE_D3D11VA
             : AVHWDeviceType.AV_HWDEVICE_TYPE_NONE;
@@ -49,19 +50,21 @@ public sealed class WindowsVideoPipeline : IDisposable
     public void DecodeH264(byte[] annexB)
     {
         if (!_initialised) return;
-        // FFmpegVideoEncoder 8.0.12 ignores its requested output format and
-        // returns RGB24. Preserve RawImage.Stride, including row padding.
+        // The FFmpeg wrapper's output format is fixed internally. Respect
+        // RawImage.PixelFormat and Stride instead of the requested format.
         foreach (var frame in _decoder.DecodeVideoFaster(annexB, VideoPixelFormatsEnum.Rgb, VideoCodecsEnum.H264))
         {
             int width = frame.Width, height = frame.Height;
-            if (width <= 0 || height <= 0 || frame.Stride < width * 3) continue;
+            if (width <= 0 || height <= 0 || frame.Stride < width * 3 ||
+                (frame.PixelFormat != VideoPixelFormatsEnum.Rgb && frame.PixelFormat != VideoPixelFormatsEnum.Bgr)) continue;
+            bool isRgb = frame.PixelFormat == VideoPixelFormatsEnum.Rgb;
             var rgb = new byte[checked(frame.Stride * height)];
             System.Runtime.InteropServices.Marshal.Copy(frame.Sample, rgb, 0, rgb.Length);
             var bgra = new byte[checked(width * height * 4)];
             for (int y = 0; y < height; y++) for (int x = 0; x < width; x++) {
                 int source = y * frame.Stride + x * 3, target = (y * width + x) * 4;
-                bgra[target] = rgb[source + 2]; bgra[target + 1] = rgb[source + 1];
-                bgra[target + 2] = rgb[source]; bgra[target + 3] = 255;
+                bgra[target] = rgb[source + (isRgb ? 2 : 0)]; bgra[target + 1] = rgb[source + 1];
+                bgra[target + 2] = rgb[source + (isRgb ? 0 : 2)]; bgra[target + 3] = 255;
             }
             FrameDecoded?.Invoke(bgra, width, height);
         }
