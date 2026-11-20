@@ -1,0 +1,89 @@
+{
+  "subject": {
+    "file": "GameViewer.exe",
+    "sha256": "0e909c0fc654474bbb6b99295f183266153568db3f05b381561cd1edcdb6cf84",
+    "bytes": 78224376
+  },
+  "resource_inventory": "analysis/official/windows-ui-resources.json",
+  "scope": "Exact non-cloud SVG source bytes; PNGs are derived at 2x. No claim of widget/layout parity.",
+  "assets": [
+    {
+      "resource": ":/brand/main_logo.svg",
+      "source": "platforms/windows/Assets/Source/brand.svg",
+      "source_sha256": "a2142f0ea2f4c5b1877cb180bf3feb1e5b0ab7b011c571378d4c49724b507bc9",
+      "rendered": "platforms/windows/Assets/brand.png",
+      "rendered_sha256": "39a56e949ac36c7c898617308f7a11953470ae98b19ab44c672546852e587cb2",
+      "transform": "CairoSVG 2.9.1 svg2png(scale=2)"
+    },
+    {
+      "resource": ":/device/devicelist/my_device.svg",
+      "source": "platforms/windows/Assets/Source/devices.svg",
+      "source_sha256": "3bec1d9ae11ee452740b496230bb7ac407d6932668df8d9be10a10f47d081e60",
+      "rendered": "platforms/windows/Assets/devices.png",
+      "rendered_sha256": "1afc55315011132d552812328ecfd59324b8bdacdf27d5d2e0992c64a845dd23",
+      "transform": "CairoSVG 2.9.1 svg2png(scale=2)"
+    },
+    {
+      "resource": ":/device/devicelist/bottom_tools/file_transfer.svg",
+      "source": "platforms/windows/Assets/Source/files.svg",
+      "source_sha256": "3fb623fecccd436684261281756ba209afe5e32f7d37bdd7477f224de11e71e7",
+      "rendered": "platforms/windows/Assets/files.png",
+      "rendered_sha256": "b913bc3787df8174cdcd34e429577c3414ab47485e9ad37df94a76ea5a8a86ff",
+      "transform": "CairoSVG 2.9.1 svg2png(scale=2)"
+    },
+    {
+      "resource": ":/device/devicelist/bottom_tools/terminal.svg",
+      "source": "platforms/windows/Assets/Source/terminal.svg",
+      "source_sha256": "f0adfa8c15be5c2bce5e796f7d01c52242ffd9fc55e7ce2e20ed6c32372ec5f9",
+      "rendered": "platforms/windows/Assets/terminal.png",
+      "rendered_sha256": "46838424f7769eda8d9494cc60ac0610ee40c395dac371bb43387715bc198d15",
+      "transform": "CairoSVG 2.9.1 svg2png(scale=2)"
+    },
+    {
+      "resource": ":/device/devicelist/setting.svg",
+      "source": "platforms/windows/Assets/Source/settings.svg",
+      "source_sha256": "3c118a91b6ba76586376ace34cb5108b310dea5a9e4e8d9ccefa624451e74cdc",
+      "rendered": "platforms/windows/Assets/settings.png",
+      "rendered_sha256": "6014c0be67a55f824960d31d0232bb6a04489905606d50c85a764a6a55d22185",
+      "transform": "CairoSVG 2.9.1 svg2png(scale=2)"
+    },
+    {
+      "resource": ":/device/devicelist/ios_mac_offline_40.svg",
+      "source": "platforms/windows/Assets/Source/mac.svg",
+      "source_sha256": "887a1edac5e3fe311a82813039a5ce948af95669ea31cd2ce4ee50362bce493b",
+      "rendered": "platforms/windows/Assets/mac.png",
+      "rendered_sha256": "d43d4de651b060ffb8a154972739a174214ef41ceb159f9ef39450c5a22ca391",
+      "transform": "CairoSVG 2.9.1 svg2png(scale=2)"
+    },
+    {
+      "resource": ":/device/devicelist/win_offline_40.svg",
+      "source": "platforms/windows/Assets/Source/windows.svg",
+      "source_sha256": "baaabfba877199d94d88110b0007e844cdcfe8a4cc52b36d633013bbe50ac496",
+      "rendered": "platforms/windows/Assets/windows.png",
+      "rendered_sha256": "2b6b2a0e8124ba08b60374e215fbf1e231c6ae565616c2cda25bffc9eebaa2f9",
+      "transform": "CairoSVG 2.9.1 svg2png(scale=2)"
+    },
+    {
+      "resource": ":/device/devicelist/an_phone_offline_40.svg",
+      "source": "platforms/windows/Assets/Source/android.svg",
+      "source_sha256": "a26bca56400173f49a43780ee1bb7c94ea70ab03e70ac7c0d03a1d8943a0d99e",
+      "rendered": "platforms/windows/Assets/android.png",
+      "rendered_sha256": "82e784d807bf3427c038fb8a41a975951b55cae092a6ae7871bcf2d0498133cd",
+      "transform": "CairoSVG 2.9.1 svg2png(scale=2)"
+    },
+    {
+      "resource": ":/device/devicelist/remote_assist.svg",
+      "source": "platforms/windows/Assets/Source/assist.svg",
+      "source_sha256": "9cab47009d43fe23574b9fab628d64d8ef2eaf4ab1740a1cab493654197185ce",
+      "rendered": "platforms/windows/Assets/assist.png",
+      "rendered_sha256": "21d773f74b333edce21f13a0c3f26f72f59c504981c9cf81f540dd02a6dc157e",
+      "transform": "CairoSVG 2.9.1 svg2png(scale=2)"
+    },
+    {
+      "resource": ":/brand/gameviewer_trans_bg.ico",
+      "output": "platforms/windows/Assets/app.ico",
+      "sha256": "93d19d8d37e6c72bfb88de191231a144ff4d96213fe574ee632c462e077c9c23",
+      "transform": "none; exact resource bytes"
+    }
+  ]
+}

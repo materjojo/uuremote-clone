@@ -3,9 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <SolidColorBrush x:Key="Bg" Color="#121316"/>
-        <SolidColorBrush x:Key="Card" Color="#1C1E22"/>
-        <SolidColorBrush x:Key="Accent" Color="#5CD96B"/>
-        <SolidColorBrush x:Key="Muted" Color="#9AA0A6"/>
+        <SolidColorBrush x:Key="Bg" Color="#F7F8FA"/>
+        <SolidColorBrush x:Key="Card" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="Accent" Color="#3A7BFC"/>
+        <SolidColorBrush x:Key="Muted" Color="#606266"/>
+        <SolidColorBrush x:Key="Text" Color="#040B18"/>
+        <Style x:Key="PrimaryButton" TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="{StaticResource Accent}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="14,7"/>
+        </Style>
     </Application.Resources>
 </Application>

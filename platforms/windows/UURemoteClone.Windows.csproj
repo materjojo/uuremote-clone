@@ -7,6 +7,7 @@
     <Nullable>enable</Nullable>
     <AssemblyName>UURemoteClone</AssemblyName>
     <RootNamespace>UURemoteClone</RootNamespace>
+    <ApplicationIcon>Assets/app.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,6 +23,11 @@
     <None Update="gvpb.dll" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <None Include="..\..\native\official\runtime\windows\streamer.dll" Link="streamer.dll" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <None Include="..\..\native\official\runtime\windows\streamer-config.json" Link="streamer-config.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets/*.png" />
+    <Resource Include="Assets/app.ico" />
   </ItemGroup>
 
   <ItemGroup>

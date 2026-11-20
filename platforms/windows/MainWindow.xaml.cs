@@ -47,7 +47,7 @@ public partial class MainWindow : Window, StreamerSession.IListener, ClipboardSy
         var dialog = new Window { Title = "添加设备", Width = 520, Height = 280, Owner = this,
             WindowStartupLocation = WindowStartupLocation.CenterOwner, Background = (Brush)FindResource("Bg") };
         var panel = new StackPanel { Margin = new Thickness(24) };
-        panel.Children.Add(new TextBlock { Text = "粘贴对方生成的配对码", Foreground = Brushes.White, Margin = new Thickness(0, 0, 0, 12) });
+        panel.Children.Add(new TextBlock { Text = "粘贴对方生成的配对码", Foreground = (Brush)FindResource("Text"), Margin = new Thickness(0, 0, 0, 12) });
         var input = new TextBox { AcceptsReturn = true, Height = 110, TextWrapping = TextWrapping.Wrap };
         panel.Children.Add(input);
         var add = new Button { Content = "添加", Margin = new Thickness(0, 16, 0, 0) };
@@ -246,7 +246,7 @@ public partial class MainWindow : Window, StreamerSession.IListener, ClipboardSy
             if (_hostMode && data.Length > 0 && data[0] == '{') {
                 if (data.Length > 65536) return;
                 using var json = JsonDocument.Parse(data);
-                if (json.RootElement.TryGetProperty("action", out var action) && action.GetString() == "text_input" &&
+                if (json.RootElement.TryGetProperty("action", out var action) && action.ValueKind == JsonValueKind.String && action.GetString() == "text_input" &&
                     json.RootElement.TryGetProperty("content", out var content) && content.ValueKind == JsonValueKind.String)
                     InputInjector.TypeText(content.GetString()!);
                 return;

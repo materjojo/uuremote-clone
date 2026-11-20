@@ -1,0 +1,45 @@
+name: Windows published UI capture
+
+on:
+  workflow_dispatch:
+    inputs:
+      build_run:
+        description: Successful build run containing the Windows application ZIP
+        required: true
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  published-ui:
+    runs-on: windows-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: UURemoteClone-windows-x64
+          run-id: ${{ inputs.build_run }}
+          github-token: ${{ github.token }}
+          path: build/package
+      - name: Run the packaged application's home window
+        env:
+          BUILD_RUN: ${{ inputs.build_run }}
+          GH_TOKEN: ${{ github.token }}
+        shell: pwsh
+        run: |
+          Expand-Archive build/package/UURemoteClone-windows-x64.zip build/app
+          $image = Join-Path $env:GITHUB_WORKSPACE 'build/windows-home.png'
+          $process = Start-Process build/app/UURemoteClone.exe -ArgumentList @('--capture-ui', $image) -PassThru
+          if (!$process.WaitForExit(30000)) { $process.Kill(); throw 'Published UI capture timed out' }
+          if ($process.ExitCode -ne 0 -or !(Test-Path $image)) { throw 'Published UI capture failed' }
+          gh api "repos/$env:GITHUB_REPOSITORY/actions/runs/$env:BUILD_RUN" --jq '{id,head_sha,html_url}' > build/source-run.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Windows-published-home
+          path: |
+            build/windows-home.png
+            build/source-run.json
+          retention-days: 7
+          if-no-files-found: error
