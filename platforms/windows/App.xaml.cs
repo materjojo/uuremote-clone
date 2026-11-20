@@ -16,8 +16,13 @@ public partial class App : Application
         // transport bypass or alternate view hierarchy is used for the image.
         StartupUri = null;
         base.OnStartup(e);
-        var window = new MainWindow();
-        window.Show();
+        DispatcherUnhandledException += (_, error) => {
+            File.WriteAllText(e.Args[1] + ".error.txt", error.Exception.ToString());
+            error.Handled = true; Shutdown(1);
+        };
+        MainWindow window;
+        try { window = new MainWindow(); window.Show(); }
+        catch (Exception error) { File.WriteAllText(e.Args[1] + ".error.txt", error.ToString()); Shutdown(1); return; }
         Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new Action(() => {
             try {
                 window.UpdateLayout();
@@ -30,7 +35,7 @@ public partial class App : Application
                 Directory.CreateDirectory(Path.GetDirectoryName(path)!);
                 using (var output = File.Create(path)) encoder.Save(output);
                 Shutdown(0);
-            } catch { Shutdown(1); }
+            } catch (Exception error) { File.WriteAllText(e.Args[1] + ".error.txt", error.ToString()); Shutdown(1); }
         }));
     }
 }

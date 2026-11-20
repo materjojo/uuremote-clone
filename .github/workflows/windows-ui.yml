@@ -33,13 +33,21 @@ jobs:
           $image = Join-Path $env:GITHUB_WORKSPACE 'build/windows-home.png'
           $process = Start-Process build/app/UURemoteClone.exe -ArgumentList @('--capture-ui', $image) -PassThru
           if (!$process.WaitForExit(30000)) { $process.Kill(); throw 'Published UI capture timed out' }
-          if ($process.ExitCode -ne 0 -or !(Test-Path $image)) { throw 'Published UI capture failed' }
+          $process.Refresh()
+          Write-Host "Published app exit code: $($process.ExitCode); image exists: $(Test-Path $image)"
+          if (Test-Path ($image + '.error.txt')) { Get-Content ($image + '.error.txt') }
+          if (!(Test-Path $image)) {
+            Get-WinEvent -FilterHashtable @{ LogName='Application'; StartTime=(Get-Date).AddMinutes(-3) } -MaxEvents 8 -ErrorAction SilentlyContinue | Format-List ProviderName,Message
+            throw 'Published UI capture failed'
+          }
           gh api "repos/$env:GITHUB_REPOSITORY/actions/runs/$env:BUILD_RUN" --jq '{id,head_sha,html_url}' > build/source-run.json
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: Windows-published-home
           path: |
             build/windows-home.png
             build/source-run.json
+            build/*.error.txt
           retention-days: 7
           if-no-files-found: error
