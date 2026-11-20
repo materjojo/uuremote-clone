@@ -11,11 +11,10 @@ public partial class App : Application
 {
     protected override void OnStartup(StartupEventArgs e)
     {
-        if (e.Args.Length != 2 || e.Args[0] != "--capture-ui") { base.OnStartup(e); return; }
+        base.OnStartup(e);
+        if (e.Args.Length != 2 || e.Args[0] != "--capture-ui") { new MainWindow().Show(); return; }
         // CI runs the published app's actual home window. No fixture devices,
         // transport bypass or alternate view hierarchy is used for the image.
-        StartupUri = null;
-        base.OnStartup(e);
         DispatcherUnhandledException += (_, error) => {
             File.WriteAllText(e.Args[1] + ".error.txt", error.Exception.ToString());
             error.Handled = true; Shutdown(1);
