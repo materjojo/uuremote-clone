@@ -73,7 +73,7 @@ public static class InputInjector
         input.U.mi = new MOUSEINPUT
         {
             dx = x, dy = y, mouseData = data,
-            dwFlags = flags | (flags == MOUSEEVENTF_MOVE ? MOUSEEVENTF_ABSOLUTE : 0),
+            dwFlags = flags | (flags == MOUSEEVENTF_MOVE ? MOUSEEVENTF_ABSOLUTE | 0x4000u : 0),
             time = 0, dwExtraInfo = IntPtr.Zero
         };
         return input;

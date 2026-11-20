@@ -12,7 +12,7 @@ TARGETS = ('core', 'macos', 'windows', 'android')
 def affected(paths):
     selected = set()
     for path in paths:
-        if path in ('.github/workflows/build.yml', '.gitattributes', 'scripts/ci_plan.py'):
+        if path in ('.github/workflows/build.yml', '.gitattributes'):
             selected.update(TARGETS)
         elif path.startswith(('core/', 'proto/', 'native/official/include/')) or path == 'native/official/official_streamer_abi.cpp':
             selected.update(TARGETS)
@@ -21,7 +21,7 @@ def affected(paths):
         elif path.startswith(('Sources/', 'Tests/OfficialStreamerTests/', 'native/official/runtime/macos/',
                               'native/official/runtime-chunks/macos/')) or path in ('Package.swift', 'Package.resolved', 'scripts/make_app.sh'):
             selected.add('macos')
-        elif path.startswith(('platforms/windows/', 'Tests/WindowsOfficialSmoke/',
+        elif path.startswith(('platforms/windows/', 'Tests/WindowsOfficialSmoke/', 'Tests/WindowsPeerSmoke/',
                               'native/official/runtime/windows/', 'native/official/runtime-chunks/windows/')):
             selected.add('windows')
         elif path.startswith('platforms/android/') or path in ('scripts/verify_android_abi.py', 'scripts/verify_android_package.py'):

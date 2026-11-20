@@ -1,22 +1,20 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using SIPSorcery.Net;
+using SIPSorceryMedia.Abstractions;
 
 namespace UURemoteClone;
 
-/// <summary>
-/// Windows 端 WebRTC 会话（与 macOS/Android 同协议）：
-/// 三个官方同名 DataChannel：CONTROL_DATA_CHANNEL / BINARY_DATA_CHANNEL / FILE_DATA_CHANNEL。
-/// 使用 SIPSorcery 纯 C# WebRTC，无需 native 库，协议为标准 RTCPeerConnection + SCTP。
-/// </summary>
+/// <summary>Independent WebRTC transport. Does not claim the proprietary media ABI.</summary>
 public sealed class StreamerSession : IDisposable
 {
     public const string ControlLabel = "CONTROL_DATA_CHANNEL";
     public const string BinaryLabel = "BINARY_DATA_CHANNEL";
     public const string FileLabel = "FILE_DATA_CHANNEL";
-
     public interface IListener
     {
         void OnOffer(string sdp);
@@ -24,140 +22,121 @@ public sealed class StreamerSession : IDisposable
         void OnControl(byte[] data);
         void OnState(RTCPeerConnectionState state);
     }
-
     private readonly IListener _listener;
-    private readonly RTCConfiguration _config;
-    private RTCPeerConnection? _peer;
-    private RTCDataChannel? _control;
-    private RTCDataChannel? _binary;
-    private RTCDataChannel? _file;
+    private readonly RTCPeerConnection _peer;
+    private readonly object _gate = new();
+    private readonly List<RTCIceCandidateInit> _pending = new(), _overlay = new();
+    private readonly CancellationTokenSource _stop = new();
+    private bool _remoteReady, _overlayReleased, _overlayScheduled;
+    private RTCDataChannel? _control, _binary, _file;
+    public event Action<byte[]>? VideoFrame;
+    public event Action<string>? Error;
 
-    public StreamerSession(IListener listener, IEnumerable<string>? iceServers = null)
+    public StreamerSession(IListener listener, bool host = false)
     {
         _listener = listener;
-        var servers = new List<RTCIceServer>();
-        if (iceServers != null)
-        {
-            foreach (var url in iceServers)
-                servers.Add(new RTCIceServer { urls = url });
-        }
-        if (servers.Count == 0)
-            servers.Add(new RTCIceServer { urls = "stun:stun.l.google.com:19302" });
-        _config = new RTCConfiguration { iceServers = servers };
+        _peer = new RTCPeerConnection(new RTCConfiguration {
+            iceServers = new List<RTCIceServer> {
+                new() { urls = "stun:stun.cloudflare.com:3478" },
+                new() { urls = "stun:stun.l.google.com:19302" }
+            },
+            X_ICEIncludeAllInterfaceAddresses = true,
+            X_UseRtpFeedbackProfile = true
+        });
+        var formats = new List<VideoFormat> {
+            new(VideoCodecsEnum.H264, 96, 90000, "level-asymmetry-allowed=1;packetization-mode=1;profile-level-id=42e01f")
+        };
+        _peer.addTrack(new MediaStreamTrack(formats, host ? MediaStreamStatusEnum.SendOnly : MediaStreamStatusEnum.RecvOnly));
+        _peer.OnVideoFrameReceived += (ep, ts, frame, format) => VideoFrame?.Invoke(frame);
+        _peer.onicecandidate += candidate => {
+            if (candidate == null) return;
+            var value = new RTCIceCandidateInit { candidate = candidate.candidate,
+                sdpMid = candidate.sdpMid, sdpMLineIndex = candidate.sdpMLineIndex };
+            bool hold;
+            lock (_gate) {
+                hold = IsOverlay(value.candidate) && !_overlayReleased;
+                if (hold) _overlay.Add(value);
+                if (!_overlayScheduled) { _overlayScheduled = true; _ = ReleaseOverlay(); }
+            }
+            if (!hold) _listener.OnCandidate(value);
+        };
+        _peer.onconnectionstatechange += state => _listener.OnState(state);
+        _peer.ondatachannel += Bind;
     }
 
-    /// <summary>控制端：建 DataChannel 并发 Offer</summary>
+    internal static bool IsOverlay(string candidate)
+    {
+        var fields = candidate.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        if (fields.Length < 5 || !IPAddress.TryParse(fields[4], out var ip)) return false;
+        var bytes = ip.GetAddressBytes();
+        return bytes.Length == 4 ? bytes[0] == 100 && bytes[1] >= 64 && bytes[1] <= 127
+            : ip.ToString().StartsWith("fd7a:115c:a1e0:", StringComparison.OrdinalIgnoreCase);
+    }
+    private async Task ReleaseOverlay()
+    {
+        try {
+            await Task.Delay(8000, _stop.Token);
+            lock (_gate) {
+                _overlayReleased = true;
+                foreach (var candidate in _overlay) _listener.OnCandidate(candidate);
+                _overlay.Clear();
+            }
+        } catch (OperationCanceledException) { }
+    }
+
     public async Task StartAsControllerAsync()
     {
-        var pc = new RTCPeerConnection(_config);
-        _peer = pc;
-
-        pc.onicecandidate += candidate =>
-        {
-            if (candidate != null)
-            {
-                _listener.OnCandidate(new RTCIceCandidateInit
-                {
-                    candidate = candidate.candidate,
-                    sdpMid = candidate.sdpMid,
-                    sdpMLineIndex = candidate.sdpMLineIndex
-                });
-            }
-        };
-
-        pc.onconnectionstatechange += state => _listener.OnState(state);
-
-        pc.ondatachannel += channel => Bind(channel);
-
-        // 官方同名通道：控制可靠有序；二进制/文件可靠
-        _control = await pc.createDataChannel(ControlLabel,
-            new RTCDataChannelInit { ordered = true });
-        _binary = await pc.createDataChannel(BinaryLabel,
-            new RTCDataChannelInit { ordered = true });
-        _file = await pc.createDataChannel(FileLabel,
-            new RTCDataChannelInit { ordered = true });
-        Bind(_control);
-        Bind(_binary);
-        Bind(_file);
-
-        var offer = pc.createOffer();
-        await pc.setLocalDescription(offer);
+        foreach (var label in new[] { ControlLabel, BinaryLabel, FileLabel })
+            Bind(await _peer.createDataChannel(label, new RTCDataChannelInit { ordered = true }));
+        var offer = _peer.createOffer();
+        await _peer.setLocalDescription(offer);
         _listener.OnOffer(offer.sdp);
     }
 
     private void Bind(RTCDataChannel channel)
     {
-        channel.onopen += () => { };
-        channel.onclose += () => { };
-        channel.onmessage += (dc, protocol, data) =>
-        {
-            if (dc.label == ControlLabel && data != null && data.Length > 0)
-                _listener.OnControl(data);
+        channel.onmessage += (dc, protocol, data) => {
+            if (dc.label == ControlLabel && data.Length > 0) _listener.OnControl(data);
         };
-
         if (channel.label == ControlLabel) _control = channel;
         else if (channel.label == BinaryLabel) _binary = channel;
         else if (channel.label == FileLabel) _file = channel;
     }
 
-    /// <summary>被控端：收到 Offer 后应答</summary>
+    private void SetRemote(SdpType type, string sdp)
+    {
+        var result = _peer.setRemoteDescription(new RTCSessionDescriptionInit { type = type, sdp = sdp });
+        if (result != SetDescriptionResultEnum.OK) throw new InvalidOperationException("SDP: " + result);
+        lock (_gate) {
+            _remoteReady = true;
+            foreach (var candidate in _pending) _peer.addIceCandidate(candidate);
+            _pending.Clear();
+        }
+    }
     public async Task<string> HandleOfferAsync(string sdp)
     {
-        var pc = _peer ?? new RTCPeerConnection(_config);
-        _peer = pc;
-        pc.ondatachannel += Bind;
-
-        if (RTCSessionDescriptionInit.TryParse(sdp, out var offer))
-            pc.setRemoteDescription(offer);
-
-        var answer = pc.createAnswer();
-        await pc.setLocalDescription(answer);
+        SetRemote(SdpType.offer, sdp);
+        var answer = _peer.createAnswer();
+        await _peer.setLocalDescription(answer);
         return answer.sdp;
     }
-
-    public void HandleAnswer(string sdp)
-    {
-        if (_peer == null) return;
-        if (RTCSessionDescriptionInit.TryParse(sdp, out var answer))
-            _peer.setRemoteDescription(answer);
-    }
-
+    public void HandleAnswer(string sdp) => SetRemote(SdpType.answer, sdp);
     public void AddCandidate(string candidate, string sdpMid, int sdpMLineIndex)
     {
-        if (_peer == null) return;
-        var init = new RTCIceCandidateInit
-        {
-            candidate = candidate,
-            sdpMid = sdpMid,
-            sdpMLineIndex = (ushort)Math.Max(0, sdpMLineIndex)
-        };
-        _peer.addIceCandidate(init);
+        var value = new RTCIceCandidateInit { candidate = candidate, sdpMid = sdpMid,
+            sdpMLineIndex = (ushort)Math.Max(0, sdpMLineIndex) };
+        lock (_gate) { if (_remoteReady) _peer.addIceCandidate(value); else _pending.Add(value); }
     }
-
-    public void SendControl(byte[] data)
-    {
-        if (_control != null && _control.readyState == RTCDataChannelState.open)
-            _control.send(data);
+    public void SendVideo(byte[] frame) {
+        if (_peer.connectionState == RTCPeerConnectionState.connected) _peer.SendVideo(3000, frame);
     }
-
-    public void SendBinary(byte[] data)
-    {
-        if (_binary != null && _binary.readyState == RTCDataChannelState.open)
-            _binary.send(data);
-    }
-
-    public void SendFile(byte[] data)
-    {
-        if (_file != null && _file.readyState == RTCDataChannelState.open)
-            _file.send(data);
-    }
-
+    public void SendControl(byte[] data) { if (_control?.readyState == RTCDataChannelState.open) _control.send(data); }
+    public void SendBinary(byte[] data) { if (_binary?.readyState == RTCDataChannelState.open) _binary.send(data); }
+    public void SendFile(byte[] data) { if (_file?.readyState == RTCDataChannelState.open) _file.send(data); }
     public void Dispose()
     {
-        _control?.close();
-        _binary?.close();
-        _file?.close();
-        _peer?.close();
-        _peer = null;
+        _stop.Cancel();
+        _control?.close(); _binary?.close(); _file?.close();
+        _peer.close();
     }
 }

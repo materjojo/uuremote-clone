@@ -16,7 +16,7 @@ enum APIError: Error, LocalizedError {
     case server(String)
     var errorDescription: String? {
         switch self {
-        case .http(let code): return "HTTP \\(code)"
+        case .http(let code): return "HTTP \(code)"
         case .server(let message): return message
         }
     }

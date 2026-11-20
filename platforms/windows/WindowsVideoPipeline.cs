@@ -7,8 +7,8 @@ using FFmpeg.AutoGen;
 namespace UURemoteClone;
 
 /// <summary>
-/// Windows 视频编解码管线（H.264，功能等价于官方 streamer.dll 的编码路径）。
-/// 编码：BGRA(GDI 采集) -> FFmpeg H.264（D3D11VA/NVENC 硬件可用时自动启用）
+/// 独立连接路径的视频管线。尚未证明与官方 streamer.dll 编码路径相同。
+/// 编码：BGRA(GDI 采集) -> FFmpeg H.264；硬件可用性需运行验证。
 /// 解码：H.264 Annex-B -> BGRA 帧回调（渲染层显示）
 /// </summary>
 public sealed class WindowsVideoPipeline : IDisposable
@@ -21,9 +21,9 @@ public sealed class WindowsVideoPipeline : IDisposable
     public event Action<byte[]>? FrameEncoded;   // 编码后的 H.264 Annex-B
     public event Action<byte[], int, int>? FrameDecoded; // 解码后的 BGRA + 宽高
 
-    public WindowsVideoPipeline(bool preferHardware = true)
+    public WindowsVideoPipeline(bool preferHardware = true, string? runtimePath = null)
     {
-        FFmpegInit.Initialise();
+        FFmpegInit.Initialise(libPath: runtimePath ?? System.IO.Path.Combine(AppContext.BaseDirectory, "ffmpeg"));
 
         // 优先硬件：D3D11VA（Windows 通用）；失败时 FFmpeg 自动软编兜底
         var hw = preferHardware

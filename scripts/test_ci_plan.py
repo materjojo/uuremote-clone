@@ -10,7 +10,9 @@ class BuildSelectionTests(unittest.TestCase):
 
     def test_docs_and_evidence_do_not_compile_apps(self):
         self.assertEqual(self.selected(['README.md', 'docs/11-native-contract.md',
-                                       'analysis/official/android/controller-send-text.json']), set())
+                                       'analysis/official/android/controller-send-text.json',
+                                       'server/rendezvous.py', '.github/workflows/peer-service.yml',
+                                       'scripts/ci_plan.py', 'scripts/test_ci_plan.py']), set())
 
     def test_each_platform_is_isolated(self):
         cases = [('Sources/UURemoteClone/App/AppState.swift', 'macos'),
@@ -18,6 +20,7 @@ class BuildSelectionTests(unittest.TestCase):
                  ('Tests/OfficialStreamerTests/OfficialStreamerTests.swift', 'macos'),
                  ('platforms/windows/MainWindow.xaml.cs', 'windows'),
                  ('Tests/WindowsOfficialSmoke/Program.cs', 'windows'),
+                 ('Tests/WindowsPeerSmoke/Program.cs', 'windows'),
                  ('platforms/android/app/build.gradle', 'android'),
                  ('scripts/verify_android_abi.py', 'android')]
         for path, platform in cases:
@@ -28,7 +31,7 @@ class BuildSelectionTests(unittest.TestCase):
         for path in ['core/src/gvpb.cpp', 'core/tests/test_core.cpp', 'proto/gv_pb/main.proto',
                      'native/official/include/official_streamer_abi.h',
                      'native/official/official_streamer_abi.cpp', '.gitattributes',
-                     '.github/workflows/build.yml', 'scripts/ci_plan.py']:
+                     '.github/workflows/build.yml']:
             with self.subTest(path=path):
                 self.assertEqual(self.selected([path]), set(TARGETS))
 

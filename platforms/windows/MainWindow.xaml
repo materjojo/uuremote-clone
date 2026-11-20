@@ -30,8 +30,26 @@
 
         <!-- 设备视图 -->
         <DockPanel Grid.Column="1" x:Name="DeviceView" Margin="24">
-            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,18">
-                <TextBlock Text="我的设备" Foreground="White" FontSize="22" FontWeight="SemiBold"/>
+            <StackPanel DockPanel.Dock="Top" Margin="0,0,0,18">
+                <DockPanel Margin="0,0,0,18">
+                    <Button Content="＋ 添加设备" DockPanel.Dock="Right" Click="AddDevice_Click" Padding="12,7"/>
+                    <TextBlock Text="我的设备" Foreground="White" FontSize="22" FontWeight="SemiBold"/>
+                </DockPanel>
+                <Border Background="{StaticResource Card}" CornerRadius="10" Padding="16">
+                    <StackPanel>
+                        <DockPanel>
+                            <Button x:Name="ReceiveButton" Content="开启接收" DockPanel.Dock="Right" Click="Receive_Click" Padding="12,5"/>
+                            <TextBlock Text="接收远程连接" Foreground="White" FontSize="15"/>
+                        </DockPanel>
+                        <TextBox x:Name="ServerBox" Margin="0,12,0,8" ToolTip="自建信令服务根地址，例如 https://signal.example.org 或 http://局域网地址:8080"/>
+                        <DockPanel>
+                            <Button x:Name="CopyCodeButton" Content="复制本机配对码" IsEnabled="False" Click="CopyCode_Click" DockPanel.Dock="Right"/>
+                            <TextBlock x:Name="HostStatus" Text="输入自建服务地址后开启接收，每次连接需本机确认" Foreground="{StaticResource Muted}" FontSize="12" TextWrapping="Wrap"/>
+                        </DockPanel>
+                    </StackPanel>
+                </Border>
+                <TextBlock x:Name="EmptyState" Text="还没有添加设备。请在另一台设备开启接收，再粘贴其配对码添加。"
+                           Foreground="{StaticResource Muted}" FontSize="14" Margin="0,24,0,0" TextWrapping="Wrap"/>
             </StackPanel>
             <TextBlock x:Name="PagePlaceholder" Visibility="Collapsed" Foreground="{StaticResource Muted}"
                        FontSize="14" TextWrapping="Wrap" Margin="0,20,0,0"/>
@@ -48,9 +66,12 @@
                                     <TextBlock Text="{Binding Name}" Foreground="White" FontSize="15"/>
                                     <TextBlock Text="{Binding Platform}" Foreground="{StaticResource Muted}" FontSize="11"/>
                                 </StackPanel>
-                                <Button Grid.Column="1" Content="远程控制" Foreground="{StaticResource Accent}"
-                                        Background="Transparent" BorderThickness="0"
-                                        Click="Connect_Click" Tag="{Binding Id}"/>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                    <Button Content="远程控制" Foreground="{StaticResource Accent}" Background="Transparent"
+                                            BorderThickness="0" Click="Connect_Click" Tag="{Binding Id}"/>
+                                    <Button Content="移除" Foreground="{StaticResource Muted}" Background="Transparent"
+                                            BorderThickness="0" Click="RemoveDevice_Click" Tag="{Binding Id}"/>
+                                </StackPanel>
                             </Grid>
                         </Border>
                     </DataTemplate>

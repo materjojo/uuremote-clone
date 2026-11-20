@@ -18,7 +18,7 @@ final class PeerInvitationTests: XCTestCase {
     }
 
     func testIPv6AndIPv4OverlayDetectionDoesNotMisclassifyNativeAddresses() {
-        func candidate(_ ip: String) -> String { "candidate:1 1 udp 2113937151 \\(ip) 9999 typ host" }
+        func candidate(_ ip: String) -> String { "candidate:1 1 udp 2113937151 \(ip) 9999 typ host" }
         XCTAssertTrue(PeerNetwork.isOverlay(candidate("100.64.0.1")))
         XCTAssertTrue(PeerNetwork.isOverlay(candidate("100.127.255.1")))
         XCTAssertTrue(PeerNetwork.isOverlay(candidate("fd7a:115c:a1e0::1")))
