@@ -45,6 +45,7 @@ class BuildSelectionTests(unittest.TestCase):
         for path in ('scripts/probe_windows_codec_detector.py', 'scripts/test_windows_codec_detector.py',
                      'scripts/probe_windows_streamer_lifecycle.py', 'scripts/probe_windows_managed_engine.py',
                      'scripts/probe_windows_streamer_rooms.py', 'scripts/probe_windows_managed_rooms.py',
+                     'scripts/probe_windows_streamer_control.py',
                      'Tests/WindowsCodecDetector/CMakeLists.txt'):
             self.assertEqual(self.selected([path]), {'windows'})
 

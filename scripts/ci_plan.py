@@ -87,7 +87,8 @@ def affected(paths, read_versions=None):
             selected.add('android')
         elif path in ('scripts/probe_windows_codec_detector.py', 'scripts/test_windows_codec_detector.py',
                       'scripts/probe_windows_streamer_lifecycle.py', 'scripts/probe_windows_managed_engine.py',
-                      'scripts/probe_windows_streamer_rooms.py', 'scripts/probe_windows_managed_rooms.py'):
+                      'scripts/probe_windows_streamer_rooms.py', 'scripts/probe_windows_managed_rooms.py',
+                      'scripts/probe_windows_streamer_control.py'):
             selected.add('windows')
         elif path in ('scripts/restore_official_runtime.py', 'scripts/verify_official_runtime.py', 'scripts/verify_desktop_package.py'):
             selected.update(('macos', 'windows'))

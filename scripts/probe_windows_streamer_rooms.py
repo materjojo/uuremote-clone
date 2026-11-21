@@ -126,6 +126,12 @@ class RoomObservation:
         pointers[7 if self.role == 'controller' else 4] = ctypes.cast(self.callback, ctypes.c_void_p).value
         pointers[12] = ctypes.cast(self.code_callback, ctypes.c_void_p).value
 
+    def on_client_frame(self, frame):
+        """Optional observation hook; the base fixture only retains the frame."""
+
+    def after_room_login(self, table, report):
+        """Optional verified-operation hook before room destruction."""
+
     def room_info(self):
         if self.empty_room_info:
             return {}
@@ -236,6 +242,7 @@ class RoomObservation:
                         frame = {'fin': bool(first & 128), 'reserved_bits': (first >> 4) & 7,
                                  'opcode': first & 15, 'masked': True, 'wire': binary(wire), 'payload': binary(payload)}
                         self.frames.append(frame)
+                        self.on_client_frame(frame)
                         opcode = first & 15
                         if opcode == 1:
                             frame['text'] = payload.decode('utf-8')
@@ -341,6 +348,7 @@ class RoomObservation:
                     report['empty_room_info_rejected'] = self.room_info_rejected.wait(8)
                 else:
                     report['room_login_callbacks_observed'] = self.logged_in.wait(8)
+                    self.after_room_login(table, report)
         finally:
             if report['handle'] > 0:
                 report['destroy_status'] = destroy(report['handle'])
