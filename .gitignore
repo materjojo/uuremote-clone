@@ -5,8 +5,10 @@ build/
 .swiftpm/
 native/official/runtime/macos/libstreamer.dylib
 native/official/runtime/windows/streamer.dll
+native/official/runtime/windows/StreamerCodecDetector.exe
 platforms/android/.gradle/
 platforms/android/app/.cxx/
 platforms/windows/gvpb.dll
 **/bin/
 **/obj/
+__pycache__/

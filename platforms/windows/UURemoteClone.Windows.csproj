@@ -22,6 +22,7 @@
   <ItemGroup>
     <None Update="gvpb.dll" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <None Include="..\..\native\official\runtime\windows\streamer.dll" Link="streamer.dll" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <None Include="..\..\native\official\runtime\windows\StreamerCodecDetector.exe" Link="StreamerCodecDetector.exe" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <None Include="..\..\native\official\runtime\windows\streamer-config.json" Link="streamer-config.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
 

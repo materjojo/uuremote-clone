@@ -20,6 +20,15 @@
       "member": "$_38_/streamer.dll"
     },
     {
+      "platform": "windows",
+      "path": "native/official/runtime/windows/StreamerCodecDetector.exe",
+      "sha256": "4377ce244e2424cf7f598b98fb9f0427711b7ad71bd8d776ea3d7eefdb60693b",
+      "bytes": 3901944,
+      "kind": "codec-detector",
+      "installer_sha256": "44d256737c33ec8ea49c8e0115223dd3a7a94b0cdd760bbaefccba4ea55af4c1",
+      "member": "$_38_/StreamerCodecDetector.exe"
+    },
+    {
       "platform": "macos",
       "path": "native/official/runtime/macos/streamer-config.json",
       "sha256": "c5fe4da866c26085eda6462f1fef7bdf7336e75db2b58d7b7e71d363f4873d9e",

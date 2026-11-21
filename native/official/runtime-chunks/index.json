@@ -204,6 +204,33 @@
           "sha256": "8270b073773866f213a7dfb6600e4beccb65e84cc4123960207dc9399ccff230"
         }
       ]
+    },
+    {
+      "output": "native/official/runtime/windows/StreamerCodecDetector.exe",
+      "bytes": 3901944,
+      "sha256": "4377ce244e2424cf7f598b98fb9f0427711b7ad71bd8d776ea3d7eefdb60693b",
+      "chunks": [
+        {
+          "path": "windows/StreamerCodecDetector.exe.gz.part000",
+          "bytes": 524288,
+          "sha256": "5065e47342bac9afc25d6365e431433ba69ccd5f33e1f6e0bd9089db9066d140"
+        },
+        {
+          "path": "windows/StreamerCodecDetector.exe.gz.part001",
+          "bytes": 524288,
+          "sha256": "ba6846442e4574b627044670bd2f7fba670ec2bed565a97811768ed5003e2957"
+        },
+        {
+          "path": "windows/StreamerCodecDetector.exe.gz.part002",
+          "bytes": 524288,
+          "sha256": "520a674f495f51809636a973de444b8db7cf0c87c4c1cfcef84f2fc40ca71d2f"
+        },
+        {
+          "path": "windows/StreamerCodecDetector.exe.gz.part003",
+          "bytes": 219125,
+          "sha256": "3507f12aba3ad456dab0631dd9fc4e6ce8e9c62c9cf31f9b0e624e3cf07ff65b"
+        }
+      ]
     }
   ]
 }

@@ -155,6 +155,12 @@ jobs:
         run: dotnet run --project Tests/WindowsOfficialSmoke -c Release -- core/build/Release native/official/runtime/windows/streamer.dll
       - name: Publish WPF app with native runtime
         run: dotnet publish platforms/windows/UURemoteClone.Windows.csproj -c Release -r win-x64 --self-contained true -o build/windows
+      - name: Probe packaged original codec detector on the runner adapters
+        run: |
+          python scripts/test_windows_codec_detector.py
+          cmake -S Tests/WindowsCodecDetector -B build/codec-detector
+          cmake --build build/codec-detector --config Release --parallel 2
+          python scripts/probe_windows_codec_detector.py --runtime build/windows --adapter-tool build/codec-detector/Release/codec_adapter_inventory.exe --output build/codec-detector-windows.json
       - name: Verify package and archive
         run: |
           Compress-Archive -Path build/windows/* -DestinationPath build/UURemoteClone-windows-x64.zip
@@ -166,9 +172,12 @@ jobs:
           retention-days: 7
           if-no-files-found: error
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: Native-ABI-windows
-          path: build/native-runtime-windows.json
+          path: |
+            build/native-runtime-windows.json
+            build/codec-detector-windows.json
           retention-days: 7
           if-no-files-found: error
 

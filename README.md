@@ -18,9 +18,9 @@
 | 产物 | 内容 |
 |---|---|
 | UURemoteClone-macos | 保留执行权限的 `.app` ZIP，含原版 dylib 与配置 |
-| UURemoteClone-windows-x64 | 自包含 WPF 应用 ZIP，含 `gvpb.dll`、原版 `streamer.dll` 与配置 |
+| UURemoteClone-windows-x64 | 自包含 WPF 应用 ZIP，含 `gvpb.dll`、原版 `streamer.dll`、`StreamerCodecDetector.exe` 与配置 |
 | UURemoteClone-android-arm64-debug | ARM64 调试 APK，含原版三个 `.so`、配置与共享协议核心 |
-| Native-ABI-* | 对安装包内真实媒体库执行工厂/版本查询的结果及 SHA-256 |
+| Native-ABI-* | 对安装包内真实媒体库执行工厂/版本查询的结果及 SHA-256；Windows 另含原版 detector 的 runner 调用报告 |
 
 本轮已通过的下载与验证：
 

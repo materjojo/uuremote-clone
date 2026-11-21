@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.20)
+project(WindowsCodecDetectorProbe LANGUAGES CXX)
+if(NOT WIN32)
+    message(FATAL_ERROR "This runner-only DXGI inventory requires Windows")
+endif()
+add_executable(codec_adapter_inventory adapter_inventory.cpp)
+target_compile_features(codec_adapter_inventory PRIVATE cxx_std_11)
+target_link_libraries(codec_adapter_inventory PRIVATE dxgi)

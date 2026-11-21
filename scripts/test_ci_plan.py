@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Check dependency boundaries so platform-only fixes cannot rebuild every app."""
+import json
+from pathlib import Path
 import unittest
-from ci_plan import affected, plan, TARGETS
+from ci_plan import affected, plan, shared_file_targets, TARGETS
 
 
 class BuildSelectionTests(unittest.TestCase):
@@ -38,6 +40,49 @@ class BuildSelectionTests(unittest.TestCase):
     def test_runtime_chunks_only_build_their_platform(self):
         for platform in ['macos', 'windows']:
             self.assertEqual(self.selected([f'native/official/runtime-chunks/{platform}/library.part000']), {platform})
+
+    def test_windows_detector_scripts_are_isolated(self):
+        for path in ('scripts/probe_windows_codec_detector.py', 'scripts/test_windows_codec_detector.py'):
+            self.assertEqual(self.selected([path]), {'windows'})
+
+    def test_windows_runtime_manifest_addition_does_not_rebuild_other_platforms(self):
+        for path, files in [
+            ('native/official/manifest.json', [{'platform': 'macos', 'path': 'mac'},
+                                             {'platform': 'windows', 'path': 'dll'}]),
+            ('native/official/runtime-chunks/index.json', [{'output': 'native/official/runtime/macos/libstreamer.dylib'},
+                                                         {'output': 'native/official/runtime/windows/streamer.dll'}])]:
+            old = json.dumps({'encoding': 'unchanged', 'files': files})
+            added = {'platform': 'windows', 'output': 'native/official/runtime/windows/StreamerCodecDetector.exe'}
+            new = json.dumps({'encoding': 'unchanged', 'files': [*files, added]})
+            with self.subTest(path=path):
+                self.assertEqual(shared_file_targets(path, old, new), {'windows'})
+                self.assertEqual(shared_file_targets(path, new, old), {'windows'})
+                changed_header = json.dumps({'encoding': 'changed', 'files': files})
+                self.assertEqual(shared_file_targets(path, old, changed_header), {'macos', 'windows', 'android'})
+                self.assertEqual(shared_file_targets(path, old, '{broken json'), {'macos', 'windows', 'android'})
+
+    def test_windows_workflow_step_does_not_rebuild_other_platforms(self):
+        workflow = (Path(__file__).resolve().parents[1] / '.github/workflows/build.yml').read_text()
+        updated = workflow.replace('      - name: Publish WPF app with native runtime',
+                                   '      - name: Publish Windows app and original detector')
+        self.assertNotEqual(workflow, updated)
+        self.assertEqual(shared_file_targets('.github/workflows/build.yml', workflow, updated), {'windows'})
+        for updated in [workflow.replace('name: build', 'name: changed', 1),
+                        workflow.replace('  plan:', '  unknown-job:', 1),
+                        workflow.replace('  plan:', '  plan:\n    # changed selection logic', 1)]:
+            self.assertEqual(shared_file_targets('.github/workflows/build.yml', workflow, updated), set(TARGETS))
+
+    def test_push_reads_shared_files_from_both_selected_revisions(self):
+        seen = []
+        path = 'native/official/manifest.json'
+        versions = {'before': json.dumps({'files': []}),
+                    'after': json.dumps({'files': [{'platform': 'windows', 'path': 'detector'}]})}
+        def read(revision, name):
+            seen.append((revision, name))
+            return versions[revision]
+        selected, _ = plan({'before': 'before', 'after': 'after'}, 'push', lambda *_: [path], read)
+        self.assertEqual({k for k, v in selected.items() if v}, {'windows'})
+        self.assertEqual(seen, [('before', path), ('after', path)])
 
     def test_multi_platform_change_is_union(self):
         self.assertEqual(self.selected(['platforms/windows/OfficialStreamer.cs', 'platforms/android/app/build.gradle']),
