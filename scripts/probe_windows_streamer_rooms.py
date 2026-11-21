@@ -62,13 +62,15 @@ def binary(data):
 
 
 class RoomObservation:
-    def __init__(self, role):
+    def __init__(self, role, allow_fixture_ca=False):
         self.role = role
+        self.allow_fixture_ca = allow_fixture_ca
         self.states = []
         self.frames = []
         self.server_frames = []
         self.connections = []
         self.received_event = threading.Event()
+        self.untrusted_certificate_rejected = threading.Event()
         self.stop = threading.Event()
         self.callback = ctypes.WINFUNCTYPE(None, ctypes.c_int32, ctypes.c_int32)(
             lambda handle, state: self.states.append({'handle': handle, 'state': state}))
@@ -78,15 +80,14 @@ class RoomObservation:
         openssl = shutil.which('openssl') or r'C:\Program Files\Git\usr\bin\openssl.exe'
         generated = subprocess.run([openssl, 'req', '-x509', '-newkey', 'rsa:2048', '-nodes',
                                     '-keyout', str(key), '-out', str(certificate), '-days', '1',
-                                    '-subj', '/CN=localhost', '-addext', 'subjectAltName=IP:127.0.0.1,DNS:localhost'],
+                                    '-subj', '/CN=localhost', '-addext', 'subjectAltName=IP:127.0.0.1,DNS:localhost',
+                                    '-addext', 'basicConstraints=critical,CA:TRUE'],
                                    capture_output=True, timeout=20)
         if generated.returncode:
             raise RuntimeError('Ephemeral TLS fixture generation failed: ' + generated.stderr.decode('utf-8', errors='replace'))
         self.certificate_pem = certificate.read_text()
         self.tls_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
         self.tls_context.load_cert_chain(str(certificate), str(key))
-        self.previous_certificate_file = os.environ.get('SSL_CERT_FILE')
-        os.environ['SSL_CERT_FILE'] = str(certificate)
         self.listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.listener.bind(('127.0.0.1', 0))
         self.listener.listen(4)
@@ -213,10 +214,50 @@ class RoomObservation:
                             break
             except (OSError, TimeoutError, EOFError, ValueError, KeyError) as error:
                 record['end_reason'] = str(error)
+                if getattr(error, 'reason', None) == 'TLSV1_ALERT_UNKNOWN_CA':
+                    record['untrusted_certificate_rejected'] = True
+                    self.untrusted_certificate_rejected.set()
             finally:
                 record['received_stream'] = binary(bytes(transcript))
 
-    def observe(self, table):
+    def extend_fixture_trust(self, module):
+        """Explicit test instrumentation, never a product CA or verification override.
+
+        Reuse the original root loader's DER parse/add/release sequence. The
+        shared store already exists because a normal TLS attempt was rejected.
+        No code patch, global pointer write or certificate-verification bypass.
+        """
+        if os.name != 'nt' or os.environ.get('GITHUB_ACTIONS') != 'true':
+            raise RuntimeError('Fixture trust instrumentation is restricted to Windows Actions')
+        if digest(pathlib.Path(module._name).read_bytes()) != 'ac351cf4e1d489e0b6e1a3df5cdf8aed96348876f7e2c7fcf7162fe59e1bb1c4':
+            raise RuntimeError('Fixture trust instrumentation requires the original DLL identity')
+        store = ctypes.c_void_p.from_address(module._handle + 0x143f880).value
+        if not store:
+            raise RuntimeError('Original cached certificate store is not initialized')
+        der = ssl.PEM_cert_to_DER_cert(self.certificate_pem)
+        buffer = ctypes.create_string_buffer(der)
+        cursor = ctypes.c_void_p(ctypes.addressof(buffer))
+        parse = ctypes.WINFUNCTYPE(ctypes.c_void_p, ctypes.c_void_p, ctypes.POINTER(ctypes.c_void_p), ctypes.c_int32)(module._handle + 0xd5d110)
+        add = ctypes.WINFUNCTYPE(ctypes.c_int32, ctypes.c_void_p, ctypes.c_void_p)(module._handle + 0xe105d0)
+        release = ctypes.WINFUNCTYPE(None, ctypes.c_void_p)(module._handle + 0xd5d040)
+        certificate = parse(None, ctypes.byref(cursor), len(der))
+        if not certificate:
+            raise RuntimeError('Original certificate DER parser rejected the fixture')
+        try:
+            if cursor.value != ctypes.addressof(buffer) + len(der):
+                raise RuntimeError('Original certificate parser did not consume the full DER')
+            status = add(store, certificate)
+            if status != 1:
+                raise RuntimeError('Original certificate store rejected the fixture CA')
+        finally:
+            release(certificate)
+        return {'kind': 'instrumented addition of exactly the fixture certificate to this child native store',
+                'certificate_der_sha256': digest(der), 'add_status': status,
+                'store_pointer_unchanged': ctypes.c_void_p.from_address(module._handle + 0x143f880).value == store,
+                'rvas': {'cached_store': '0x143f880', 'parse_der': '0xd5d110', 'add_certificate': '0xe105d0', 'release_certificate': '0xd5d040'},
+                'lifetime': 'This isolated child process only; no system trust store or original DLL file is modified.'}
+
+    def observe(self, table, module, report):
         layout = validate_layout()
         token = b'ci-loopback-token'
         encoded_url = self.url.encode('ascii')
@@ -229,14 +270,19 @@ class RoomObservation:
         self.buffers.extend([token_buffer, server_buffer, servers, lengths, config])
         create = ctypes.WINFUNCTYPE(ctypes.c_int32, ctypes.POINTER(RoomConfig))(table[2])
         destroy = ctypes.WINFUNCTYPE(ctypes.c_int32, ctypes.c_int32)(table[3])
-        report = {'server_url': self.url, 'token': token.decode('ascii'), 'config_layout': layout,
+        report.update({'server_url': self.url, 'token': token.decode('ascii'), 'config_layout': layout,
                   'proxy_type': 0, 'report_endpoints': [], 'streamer_config_size': 0,
                   'room_callback_slot': 7 if self.role == 'controller' else 4,
-                  'room_callback_abi': 'void(int32_t handle, int32_t state)'}
+                  'room_callback_abi': 'void(int32_t handle, int32_t state)'})
         report['handle'] = create(ctypes.byref(config))
         try:
             if report['handle'] <= 0:
                 raise RuntimeError('Original room entry did not return a positive handle')
+            if self.allow_fixture_ca:
+                report['baseline_untrusted_certificate_rejected'] = self.untrusted_certificate_rejected.wait(5)
+                if not report['baseline_untrusted_certificate_rejected']:
+                    raise RuntimeError('Expected the ordinary native TLS attempt to reject the fixture CA')
+                report['trust_extension'] = self.extend_fixture_trust(module)
             report['event_frame_observed'] = self.received_event.wait(8)
         finally:
             if report['handle'] > 0:
@@ -249,17 +295,17 @@ class RoomObservation:
         self.thread.join(timeout=2)
         report.update(states=self.states, connections=self.connections, frames=self.frames, server_frames=self.server_frames,
                       listener_stopped=not self.thread.is_alive(), certificate_pem=self.certificate_pem,
-                      tls_fixture='Ephemeral self-signed certificate supplied through this child process SSL_CERT_FILE before loading the DLL. No system trust store changed.')
-        if self.previous_certificate_file is None:
-            os.environ.pop('SSL_CERT_FILE', None)
-        else:
-            os.environ['SSL_CERT_FILE'] = self.previous_certificate_file
+                      tls_fixture='Ephemeral self-signed certificate; explicit child-only native trust instrumentation if enabled.')
         self.certificate_directory.cleanup()
         report['passed'] = (report.get('handle', 0) > 0 and report.get('destroy_status') == 0
                             and any(item.get('namespace_connected') for item in self.connections)
-                            and report.get('event_frame_observed', False) and report['listener_stopped'])
+                            and report.get('event_frame_observed', False) and report['listener_stopped']
+                            and any(state['handle'] == report.get('handle') for state in self.states)
+                            and (not self.allow_fixture_ca or (report.get('baseline_untrusted_certificate_rejected')
+                                 and report.get('trust_extension', {}).get('store_pointer_unchanged'))))
         report['scope'] = 'Original room setup and loopback TLS/WebSocket observation only.'
-        report['limitations'] = ['Fixture replies implement transport OPEN and default-namespace CONNECT only; no business event ACK is supplied.',
+        report['limitations'] = ['The optional fixture CA addition changes this process native trust store and is explicitly instrumented evidence, separate from the ordinary baseline.',
+                                 'Fixture replies implement transport OPEN and default-namespace CONNECT only; no business event ACK is supplied.',
                                  'No authenticated room, real peer or media session is provided.',
                                  'Callback state values are recorded without assuming their business meaning.',
                                  'The caller supplied a loopback URL, synthetic token, empty streamer config, no report server and no proxy.']

@@ -83,7 +83,7 @@ def capability(table):
     return report
 
 
-def child(runtime, workspace, role, output, query_capability=False, query_rooms=False):
+def child(runtime, workspace, role, output, query_capability=False, query_rooms=False, allow_fixture_ca=False):
     manifest = json.loads((ROOT / 'native/official/manifest.json').read_text())
     for item in manifest['files']:
         if item['platform'] == 'windows':
@@ -108,8 +108,7 @@ def child(runtime, workspace, role, output, query_capability=False, query_rooms=
     room_observer = None
     if query_rooms:
         from probe_windows_streamer_rooms import RoomObservation
-        # Set the child-only CA environment before the DLL's static CRT starts.
-        room_observer = RoomObservation(role)
+        room_observer = RoomObservation(role, allow_fixture_ca)
     module = ctypes.WinDLL(str(runtime / 'streamer.dll'), winmode=0x100 | 0x1000)
     factory = getattr(module, 'ExchangeControllerInterface' if role == 'controller' else 'ExchangeControlledInterface')
     factory.argtypes = [ctypes.POINTER(ctypes.c_void_p)]
@@ -135,7 +134,8 @@ def child(runtime, workspace, role, output, query_capability=False, query_rooms=
         if query_rooms:
             report['phase'] = 'room'
             save(output, report)
-            report['room'] = room_observer.observe(table)
+            report['room'] = {}
+            room_observer.observe(table, module, report['room'])
         if query_capability:
             report['phase'] = 'capability'
             save(output, report)
@@ -181,19 +181,23 @@ def main():
     operations = parser.add_mutually_exclusive_group()
     operations.add_argument('--capabilities', action='store_true', help='Also query slot 15 twice after initialization')
     operations.add_argument('--rooms', action='store_true', help='Observe room setup against a loopback WebSocket recorder')
+    parser.add_argument('--room-fixture-ca', action='store_true', help='Explicitly instrument the child native store with the loopback fixture CA after an ordinary rejection')
     args = parser.parse_args()
+    if args.room_fixture_ca and not args.rooms:
+        parser.error('--room-fixture-ca requires --rooms')
     if platform.system() != 'Windows' or os.environ.get('GITHUB_ACTIONS') != 'true':
         parser.error('Original target execution is restricted to Windows GitHub Actions')
     runtime, workspace, output = args.runtime.resolve(), args.workspace.resolve(), args.output.resolve()
     if args.child:
-        return child(runtime, workspace, args.child, output, args.capabilities, args.rooms)
+        return child(runtime, workspace, args.child, output, args.capabilities, args.rooms, args.room_fixture_ca)
     cases = []
     for role in ('controller', 'controlled'):
         child_output = output.with_name('lifecycle-' + role + '.json')
         def command_for(case_workspace, case_output):
             return [sys.executable, str(Path(__file__).resolve()), '--runtime', str(runtime),
                     '--workspace', str(case_workspace), '--output', str(case_output), '--child', role,
-                    *(['--capabilities'] if args.capabilities else []), *(['--rooms'] if args.rooms else [])]
+                    *(['--capabilities'] if args.capabilities else []), *(['--rooms'] if args.rooms else []),
+                    *(['--room-fixture-ca'] if args.room_fixture_ca else [])]
 
         observation = observe(command_for(workspace / role, child_output), runtime, timeout=240 if args.capabilities else 60)
         child_report = json.loads(child_output.read_text(encoding='utf-8')) if child_output.exists() else None
@@ -219,7 +223,7 @@ def main():
                     'scope': 'Debugger-attached diagnostic retry; does not replace the failed ordinary observation.'}
         cases.append(case)
     report = {'source_commit': os.environ.get('GITHUB_SHA'), 'run_id': os.environ.get('GITHUB_RUN_ID'),
-              'platform': platform.platform(), 'observations': cases,
+              'platform': platform.platform(), 'observations': cases, 'room_fixture_ca_instrumentation': args.room_fixture_ca,
               'passed': all(case['passed'] for case in cases),
               'scope': ('Isolated original DLL lifecycle and loopback room/WebSocket observations.' if args.rooms else
                         'Isolated original DLL factory/version/Initialize/Finalize calls, plus slot 15 capability query.'

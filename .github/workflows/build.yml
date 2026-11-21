@@ -168,7 +168,7 @@ jobs:
       - name: Verify production C# engine lifecycle and capability binding
         run: python scripts/probe_windows_managed_engine.py --probe Tests/WindowsOfficialSmoke/bin/Release/net8.0/WindowsOfficialSmoke.dll --runtime build/windows --reference build/streamer-capabilities-windows.json --workspace build/managed-engine-probes --output build/streamer-managed-windows.json
       - name: Observe original room setup against loopback WebSocket recorder
-        run: python scripts/probe_windows_streamer_lifecycle.py --runtime build/windows --workspace build/room-probes --output build/streamer-rooms-windows.json --rooms --debugger build/codec-detector/Release/native_failure_observer.exe
+        run: python scripts/probe_windows_streamer_lifecycle.py --runtime build/windows --workspace build/room-probes --output build/streamer-rooms-windows.json --rooms --room-fixture-ca --debugger build/codec-detector/Release/native_failure_observer.exe
       - name: Verify package and archive
         run: |
           Compress-Archive -Path build/windows/* -DestinationPath build/UURemoteClone-windows-x64.zip
