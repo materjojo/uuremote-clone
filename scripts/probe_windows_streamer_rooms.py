@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 """Runner-only observation of original Windows room setup against loopback.
 
-This listener records a WebSocket upgrade and original client frames. It does
-not invent a signaling response, authenticate a room, or contact a business
-server. Native input layout is specific to the manifest's original x64 DLL.
+This recorder supplies TLS and standard Engine.IO/Socket.IO transport setup,
+then records the original client's events without replying to business requests.
+Native input layout is specific to the manifest's original x64 DLL.
 """
 import base64
 import ctypes
 import hashlib
+import json
+import os
 import pathlib
 import shutil
 import socket
@@ -17,6 +19,7 @@ import subprocess
 import tempfile
 import threading
 import time
+from urllib.parse import parse_qs, urlsplit
 
 from probe_windows_codec_detector import digest
 
@@ -63,8 +66,9 @@ class RoomObservation:
         self.role = role
         self.states = []
         self.frames = []
+        self.server_frames = []
         self.connections = []
-        self.received_frame = threading.Event()
+        self.received_event = threading.Event()
         self.stop = threading.Event()
         self.callback = ctypes.WINFUNCTYPE(None, ctypes.c_int32, ctypes.c_int32)(
             lambda handle, state: self.states.append({'handle': handle, 'state': state}))
@@ -81,6 +85,8 @@ class RoomObservation:
         self.certificate_pem = certificate.read_text()
         self.tls_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
         self.tls_context.load_cert_chain(str(certificate), str(key))
+        self.previous_certificate_file = os.environ.get('SSL_CERT_FILE')
+        os.environ['SSL_CERT_FILE'] = str(certificate)
         self.listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.listener.bind(('127.0.0.1', 0))
         self.listener.listen(4)
@@ -127,7 +133,7 @@ class RoomObservation:
                                 raise EOFError('Native client closed the loopback socket')
                             data.extend(chunk)
                             transcript.extend(chunk)
-                            if len(data) > 256 * 1024:
+                            if len(transcript) > 256 * 1024:
                                 raise ValueError('Loopback input exceeded bound')
 
                     while b'\r\n\r\n' not in data:
@@ -142,8 +148,12 @@ class RoomObservation:
                     lines = request.decode('ascii').split('\r\n')
                     headers = dict((key.strip().lower(), value.strip()) for key, value in
                                    (line.split(':', 1) for line in lines[1:] if ':' in line))
-                    if not lines[0].startswith('GET /ci-room ') or headers.get('upgrade', '').lower() != 'websocket':
+                    if not lines[0].startswith('GET /') or headers.get('upgrade', '').lower() != 'websocket':
                         raise ValueError('Unexpected upgrade request')
+                    query = parse_qs(urlsplit(lines[0].split(' ')[1]).query)
+                    if query.get('EIO') != ['4'] or query.get('transport') != ['websocket']:
+                        raise ValueError('Expected Engine.IO v4 WebSocket transport')
+                    record['engine_io_query'] = query
                     key = headers['sec-websocket-key']
                     if len(base64.b64decode(key, validate=True)) != 16:
                         raise ValueError('Invalid WebSocket client key')
@@ -152,6 +162,21 @@ class RoomObservation:
                     connection.sendall(response)
                     record['response'] = binary(response)
                     record['upgrade_completed'] = True
+
+                    def send_frame(payload, opcode=1):
+                        if len(payload) > 65535:
+                            raise ValueError('Fixture frame exceeded bound')
+                        prefix = bytes([128 | opcode, len(payload)]) if len(payload) < 126 else bytes([128 | opcode, 126]) + struct.pack('!H', len(payload))
+                        wire = prefix + payload
+                        connection.sendall(wire)
+                        self.server_frames.append({'opcode': opcode, 'wire': binary(wire), 'payload': binary(payload)})
+
+                    def send_text(value):
+                        send_frame(value.encode('utf-8'))
+
+                    sid = f'ci-engine-{self.role}-{len(self.connections)}'
+                    send_text('0' + json.dumps({'sid': sid, 'upgrades': [], 'pingInterval': 25000,
+                                               'pingTimeout': 20000, 'maxPayload': 262144}, separators=(',', ':')))
                     while not self.stop.is_set():
                         receive_until(2)
                         first, second = data[0], data[1]
@@ -172,9 +197,19 @@ class RoomObservation:
                         frame = {'fin': bool(first & 128), 'reserved_bits': (first >> 4) & 7,
                                  'opcode': first & 15, 'masked': True, 'wire': binary(wire), 'payload': binary(payload)}
                         self.frames.append(frame)
-                        if first & 15 in (1, 2):
-                            self.received_frame.set()
-                        if first & 15 == 8:
+                        opcode = first & 15
+                        if opcode == 1:
+                            frame['text'] = payload.decode('utf-8')
+                            if frame['fin'] and frame['reserved_bits'] == 0:
+                                if payload == b'40' or payload.startswith(b'40{'):
+                                    send_text('40' + json.dumps({'sid': f'ci-socket-{self.role}'}, separators=(',', ':')))
+                                    record['namespace_connected'] = True
+                                elif record.get('namespace_connected') and payload.startswith((b'42', b'45')):
+                                    self.received_event.set()
+                        elif opcode == 9:
+                            send_frame(payload, 10)
+                        elif opcode == 8:
+                            send_frame(payload, 8)
                             break
             except (OSError, TimeoutError, EOFError, ValueError, KeyError) as error:
                 record['end_reason'] = str(error)
@@ -202,7 +237,7 @@ class RoomObservation:
         try:
             if report['handle'] <= 0:
                 raise RuntimeError('Original room entry did not return a positive handle')
-            report['data_frame_observed'] = self.received_frame.wait(8)
+            report['event_frame_observed'] = self.received_event.wait(8)
         finally:
             if report['handle'] > 0:
                 report['destroy_status'] = destroy(report['handle'])
@@ -212,14 +247,19 @@ class RoomObservation:
         self.stop.set()
         self.listener.close()
         self.thread.join(timeout=2)
-        report.update(states=self.states, connections=self.connections, frames=self.frames,
+        report.update(states=self.states, connections=self.connections, frames=self.frames, server_frames=self.server_frames,
                       listener_stopped=not self.thread.is_alive(), certificate_pem=self.certificate_pem,
-                      tls_fixture='Ephemeral self-signed certificate. No system or application trust store was changed.')
+                      tls_fixture='Ephemeral self-signed certificate supplied through this child process SSL_CERT_FILE before loading the DLL. No system trust store changed.')
+        if self.previous_certificate_file is None:
+            os.environ.pop('SSL_CERT_FILE', None)
+        else:
+            os.environ['SSL_CERT_FILE'] = self.previous_certificate_file
         self.certificate_directory.cleanup()
         report['passed'] = (report.get('handle', 0) > 0 and report.get('destroy_status') == 0
-                            and any(item['upgrade_completed'] for item in self.connections)
-                            and report.get('data_frame_observed', False) and report['listener_stopped'])
+                            and any(item.get('namespace_connected') for item in self.connections)
+                            and report.get('event_frame_observed', False) and report['listener_stopped'])
         report['scope'] = 'Original room setup and loopback TLS/WebSocket observation only.'
-        report['limitations'] = ['No native signaling reply, authenticated room, real peer or media session is provided.',
+        report['limitations'] = ['Fixture replies implement transport OPEN and default-namespace CONNECT only; no business event ACK is supplied.',
+                                 'No authenticated room, real peer or media session is provided.',
                                  'Callback state values are recorded without assuming their business meaning.',
                                  'The caller supplied a loopback URL, synthetic token, empty streamer config, no report server and no proxy.']

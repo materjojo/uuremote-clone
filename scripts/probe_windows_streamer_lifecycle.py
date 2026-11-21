@@ -3,8 +3,9 @@
 
 Windows slot 0's three pointers reach UTF-16 consumers, despite byte-oriented
 length scans in its outer wrapper. Slots/callback lengths are artifact-specific.
-No room, connection, capture or media session is started. Optional slot 15
-queries observe the original DLL's capability reporting after initialization.
+Optional slot 15 queries observe capability reporting after initialization.
+Optional room probes use only a loopback signaling recorder; no real peer,
+capture or media session is started.
 """
 import argparse
 import base64
@@ -104,15 +105,17 @@ def child(runtime, workspace, role, output, query_capability=False, query_rooms=
     os.chdir(workspace)
     # Keep the module, pointer table, callbacks and path buffers alive until the
     # child exits. Never unload a DLL whose global thread cleanup is uncertain.
+    room_observer = None
+    if query_rooms:
+        from probe_windows_streamer_rooms import RoomObservation
+        # Set the child-only CA environment before the DLL's static CRT starts.
+        room_observer = RoomObservation(role)
     module = ctypes.WinDLL(str(runtime / 'streamer.dll'), winmode=0x100 | 0x1000)
     factory = getattr(module, 'ExchangeControllerInterface' if role == 'controller' else 'ExchangeControlledInterface')
     factory.argtypes = [ctypes.POINTER(ctypes.c_void_p)]
     factory.restype = ctypes.POINTER(ctypes.c_void_p)
     callbacks = (ctypes.c_void_p * (18 if role == 'controller' else 16))()
-    room_observer = None
-    if query_rooms:
-        from probe_windows_streamer_rooms import RoomObservation
-        room_observer = RoomObservation(role)
+    if room_observer:
         room_observer.install_callback(callbacks)
     table = factory(callbacks)
     if not table:

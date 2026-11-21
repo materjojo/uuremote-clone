@@ -1,0 +1,354 @@
+{
+  "source_report_sha256": "26b89f49f6bd83fce1cffd30c3fcae6bfda41e294945c166a325cd025322b789",
+  "source_commit": "537c572321da8b53146604fa28b9cce112d11050",
+  "run_id": "44889840845",
+  "passed": false,
+  "scope": "Original room setup reaches the local TLS server; both roles reject its untrusted self-signed certificate with unknown_ca. No application bytes recovered.",
+  "full_report": "/home/ubuntu/uuyc_clone/analysis/ci/44889840845-native/streamer-rooms-windows.json",
+  "observations": [
+    {
+      "role": "controller",
+      "process": {
+        "command": [
+          "C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\python.exe",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\scripts\\probe_windows_streamer_lifecycle.py",
+          "--runtime",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\windows",
+          "--workspace",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\room-probes\\controller",
+          "--output",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\lifecycle-controller.json",
+          "--child",
+          "controller",
+          "--rooms"
+        ],
+        "exit_code": 1,
+        "timed_out": false,
+        "timeout_seconds": 60,
+        "duration_seconds": 9.031,
+        "stdout": "",
+        "stderr": "",
+        "stdout_base64": "",
+        "stderr_base64": "",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "native": {
+        "role": "controller",
+        "query_capability": false,
+        "query_rooms": true,
+        "phase": "complete",
+        "passed": false,
+        "library_sha256": "ac351cf4e1d489e0b6e1a3df5cdf8aed96348876f7e2c7fcf7162fe59e1bb1c4",
+        "config_sha256": "3c9b63db00cfe50ebce90aa8f4a3afc2dd7a3119876e80e15213185d72b8486a",
+        "slot_0_inputs": [
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\room-probes\\controller\\logs",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\room-probes\\controller\\config-\u914d\u7f6e.json",
+          "ci-controller"
+        ],
+        "string_encoding": "UTF-16LE, NUL-terminated",
+        "version_before": {
+          "status": 0,
+          "value": "V4.14.2"
+        },
+        "initialize_status": 0,
+        "room": {
+          "server_url": "wss://127.0.0.1:57625/ci-room",
+          "token": "ci-loopback-token",
+          "config_layout": {
+            "token": "0x0",
+            "token_size": "0x8",
+            "servers": "0x10",
+            "server_sizes": "0x18",
+            "server_count": "0x20",
+            "timeout": "0x24",
+            "reconnect_delay": "0x28",
+            "report_token": "0x30",
+            "report_token_size": "0x38",
+            "report_url": "0x40",
+            "report_url_size": "0x48",
+            "report_server": "0x50",
+            "report_server_size": "0x58",
+            "report_option": "0x5c",
+            "proxy_type": "0x60",
+            "proxy_host": "0x68",
+            "proxy_host_size": "0x70",
+            "proxy_port": "0x74",
+            "proxy_username": "0x78",
+            "proxy_username_size": "0x80",
+            "proxy_password": "0x88",
+            "proxy_password_size": "0x90",
+            "sni_servers": "0x98",
+            "sni_server_sizes": "0xa0",
+            "sni_server_count": "0xa8",
+            "streamer_config": "0xb0",
+            "streamer_config_size": "0xb8"
+          },
+          "proxy_type": 0,
+          "report_endpoints": [],
+          "streamer_config_size": 0,
+          "room_callback_slot": 7,
+          "room_callback_abi": "void(int32_t handle, int32_t state)",
+          "handle": 1,
+          "data_frame_observed": false,
+          "destroy_status": 0,
+          "states": [
+            {
+              "handle": 1,
+              "state": 1
+            },
+            {
+              "handle": 1,
+              "state": 1
+            },
+            {
+              "handle": 1,
+              "state": 1
+            },
+            {
+              "handle": 1,
+              "state": 0
+            },
+            {
+              "handle": 1,
+              "state": 0
+            }
+          ],
+          "connections": [
+            {
+              "peer": [
+                "127.0.0.1",
+                57626
+              ],
+              "upgrade_completed": false,
+              "received_stream_layer": "TLS-decrypted application bytes",
+              "end_reason": "[SSL: TLSV1_ALERT_UNKNOWN_CA] tlsv1 alert unknown ca (_ssl.c:1010)",
+              "received_stream": {
+                "bytes": 0,
+                "base64": "",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            {
+              "peer": [
+                "127.0.0.1",
+                57629
+              ],
+              "upgrade_completed": false,
+              "received_stream_layer": "TLS-decrypted application bytes",
+              "end_reason": "[SSL: TLSV1_ALERT_UNKNOWN_CA] tlsv1 alert unknown ca (_ssl.c:1010)",
+              "received_stream": {
+                "bytes": 0,
+                "base64": "",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            {
+              "peer": [
+                "127.0.0.1",
+                57632
+              ],
+              "upgrade_completed": false,
+              "received_stream_layer": "TLS-decrypted application bytes",
+              "end_reason": "[SSL: TLSV1_ALERT_UNKNOWN_CA] tlsv1 alert unknown ca (_ssl.c:1010)",
+              "received_stream": {
+                "bytes": 0,
+                "base64": "",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            }
+          ],
+          "frames": [],
+          "listener_stopped": true,
+          "certificate_pem": "-----BEGIN CERTIFICATE-----\nMIIDJTCCAg2gAwIBAgIUchIPv5pIUklHTY6/gLdMrDXedAIwDQYJKoZIhvcNAQEL\nBQAwFDESMBAGA1UEAwwJbG9jYWxob3N0MB4XDTI2MTEyMTA5MzIwNloXDTI2MTEy\nMjA5MzIwNlowFDESMBAGA1UEAwwJbG9jYWxob3N0MIIBIjANBgkqhkiG9w0BAQEF\nAAOCAQ8AMIIBCgKCAQEA0tDLbLrhPrO2tkdRV4RrzTZnEJl/CQhT0VbOzS5blLrB\n2bV9nYkEwcEcF/LOwR1VMeUdTb0p5X8qnapd6HaTUmol0wZaa5eutm3LdKvflpBw\nQsmvo2FRXq5GPmCsNVtO9CrPZD+sENncTUYPXBAFByA0cfeWCFuALQeDPkpRlAGA\nqIBpMUL/mu85bGdyHgxNNq4iibDoi540FANcNr+R8Q4fnOLnxHxZXgS47DuMb27K\nHm1xkzZB+a9K0wl02T9Q4zSJ8jTcLF6XgAlo9FxnVHSdL+/1hoM3wXgPBEt6+mDh\nIQXGqD2EorLb7KQ1NLrENW4gzrRWqHIHkb1zCRC74QIDAQABo28wbTAdBgNVHQ4E\nFgQUO9ruf2dNu+zawV1P+ehzGHB5xpgwHwYDVR0jBBgwFoAUO9ruf2dNu+zawV1P\n+ehzGHB5xpgwDwYDVR0TAQH/BAUwAwEB/zAaBgNVHREEEzARhwR/AAABgglsb2Nh\nbGhvc3QwDQYJKoZIhvcNAQELBQADggEBADM9olFKrD+TkPfUAxM2MQyifukYWfN4\n8FhxEH0WtWnvxFlfrs7arx2VaelUQSSfXrX0xwuKSnjfCMolO1JH2ZjrZiLogOG2\n4CsOV/efhC5te1+KWnMYdLMzFLWfhDDoxityTPSmENaEaPIZpE9NqooVYpnPAw5U\ntpYaS5KJHyXNoYTvR8i+1cGE++bOwqwJg6br8vCAqqIzkAoxNhOfNKr4fubDo7af\n33x7Zvb94ooGvelMy2ckjpCb7CSDVh2ThCpio8PZu1x1F+Ej3Xp1jgX0QG/3e/7U\n2FOfhAC3GpvQ4fb/gXPYsZtApwRm4LipWJWWc/bTNjJorglaMWhPWIc=\n-----END CERTIFICATE-----\n",
+          "tls_fixture": "Ephemeral self-signed certificate. No system or application trust store was changed.",
+          "passed": false,
+          "scope": "Original room setup and loopback TLS/WebSocket observation only.",
+          "limitations": [
+            "No native signaling reply, authenticated room, real peer or media session is provided.",
+            "Callback state values are recorded without assuming their business meaning.",
+            "The caller supplied a loopback URL, synthetic token, empty streamer config, no report server and no proxy."
+          ]
+        },
+        "finalize_status": 0,
+        "version_after": {
+          "status": 0,
+          "value": "V4.14.2"
+        },
+        "config_open_validation": "Unknown: SLOG contents are not decoded; zero status alone does not establish config consumption."
+      }
+    },
+    {
+      "role": "controlled",
+      "process": {
+        "command": [
+          "C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\python.exe",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\scripts\\probe_windows_streamer_lifecycle.py",
+          "--runtime",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\windows",
+          "--workspace",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\room-probes\\controlled",
+          "--output",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\lifecycle-controlled.json",
+          "--child",
+          "controlled",
+          "--rooms"
+        ],
+        "exit_code": 1,
+        "timed_out": false,
+        "timeout_seconds": 60,
+        "duration_seconds": 8.219,
+        "stdout": "",
+        "stderr": "",
+        "stdout_base64": "",
+        "stderr_base64": "",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "native": {
+        "role": "controlled",
+        "query_capability": false,
+        "query_rooms": true,
+        "phase": "complete",
+        "passed": false,
+        "library_sha256": "ac351cf4e1d489e0b6e1a3df5cdf8aed96348876f7e2c7fcf7162fe59e1bb1c4",
+        "config_sha256": "3c9b63db00cfe50ebce90aa8f4a3afc2dd7a3119876e80e15213185d72b8486a",
+        "slot_0_inputs": [
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\room-probes\\controlled\\logs",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\room-probes\\controlled\\config-\u914d\u7f6e.json",
+          "ci-controlled"
+        ],
+        "string_encoding": "UTF-16LE, NUL-terminated",
+        "version_before": {
+          "status": 0,
+          "value": "V4.14.2"
+        },
+        "initialize_status": 0,
+        "room": {
+          "server_url": "wss://127.0.0.1:57636/ci-room",
+          "token": "ci-loopback-token",
+          "config_layout": {
+            "token": "0x0",
+            "token_size": "0x8",
+            "servers": "0x10",
+            "server_sizes": "0x18",
+            "server_count": "0x20",
+            "timeout": "0x24",
+            "reconnect_delay": "0x28",
+            "report_token": "0x30",
+            "report_token_size": "0x38",
+            "report_url": "0x40",
+            "report_url_size": "0x48",
+            "report_server": "0x50",
+            "report_server_size": "0x58",
+            "report_option": "0x5c",
+            "proxy_type": "0x60",
+            "proxy_host": "0x68",
+            "proxy_host_size": "0x70",
+            "proxy_port": "0x74",
+            "proxy_username": "0x78",
+            "proxy_username_size": "0x80",
+            "proxy_password": "0x88",
+            "proxy_password_size": "0x90",
+            "sni_servers": "0x98",
+            "sni_server_sizes": "0xa0",
+            "sni_server_count": "0xa8",
+            "streamer_config": "0xb0",
+            "streamer_config_size": "0xb8"
+          },
+          "proxy_type": 0,
+          "report_endpoints": [],
+          "streamer_config_size": 0,
+          "room_callback_slot": 4,
+          "room_callback_abi": "void(int32_t handle, int32_t state)",
+          "handle": 1,
+          "data_frame_observed": false,
+          "destroy_status": 0,
+          "states": [
+            {
+              "handle": 1,
+              "state": 1
+            },
+            {
+              "handle": 1,
+              "state": 1
+            },
+            {
+              "handle": 1,
+              "state": 1
+            },
+            {
+              "handle": 1,
+              "state": 0
+            },
+            {
+              "handle": 1,
+              "state": 0
+            }
+          ],
+          "connections": [
+            {
+              "peer": [
+                "127.0.0.1",
+                57637
+              ],
+              "upgrade_completed": false,
+              "received_stream_layer": "TLS-decrypted application bytes",
+              "end_reason": "[SSL: TLSV1_ALERT_UNKNOWN_CA] tlsv1 alert unknown ca (_ssl.c:1010)",
+              "received_stream": {
+                "bytes": 0,
+                "base64": "",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            {
+              "peer": [
+                "127.0.0.1",
+                57640
+              ],
+              "upgrade_completed": false,
+              "received_stream_layer": "TLS-decrypted application bytes",
+              "end_reason": "[SSL: TLSV1_ALERT_UNKNOWN_CA] tlsv1 alert unknown ca (_ssl.c:1010)",
+              "received_stream": {
+                "bytes": 0,
+                "base64": "",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            {
+              "peer": [
+                "127.0.0.1",
+                57643
+              ],
+              "upgrade_completed": false,
+              "received_stream_layer": "TLS-decrypted application bytes",
+              "end_reason": "[SSL: TLSV1_ALERT_UNKNOWN_CA] tlsv1 alert unknown ca (_ssl.c:1010)",
+              "received_stream": {
+                "bytes": 0,
+                "base64": "",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            }
+          ],
+          "frames": [],
+          "listener_stopped": true,
+          "certificate_pem": "-----BEGIN CERTIFICATE-----\nMIIDJTCCAg2gAwIBAgIUflyIzosu1W/JzI4rJPQ81y1h950wDQYJKoZIhvcNAQEL\nBQAwFDESMBAGA1UEAwwJbG9jYWxob3N0MB4XDTI2MTEyMTA5MzIxNFoXDTI2MTEy\nMjA5MzIxNFowFDESMBAGA1UEAwwJbG9jYWxob3N0MIIBIjANBgkqhkiG9w0BAQEF\nAAOCAQ8AMIIBCgKCAQEAv7Z/zfj68eOex6vcvcaLDvhaapG2tFcCXiPLkszXkcUl\n+uLjhjhih76LyJzNVP89OXa7oSxr2D9ozLuvFTFy7Bvbl5CZUkVgajLYLDKSmHaj\n9AFp/SUGQ5dNS69SogkBElPxWy1NMRqRIttk29Cih7COUg/c9E3bSXPyCkQtyCxz\nb7Wi7F08XzDRl9k7Rkm/EynGNj5PSYYx8HKRA5zXiox9obCeqlD/aXXzgQmEgCTw\n2QAMucIWQODd9EYaIMdpuwCWHLQ+BQf+WghuVFZ7l7udFvuIVR0BonbNCTP0yyP/\nsCa/vi8WfQZwg2idzLsKV50uITRBysZ4UMif9lmc6QIDAQABo28wbTAdBgNVHQ4E\nFgQUZMw21wgPBEROUADiVlEJMQ0J0lIwHwYDVR0jBBgwFoAUZMw21wgPBEROUADi\nVlEJMQ0J0lIwDwYDVR0TAQH/BAUwAwEB/zAaBgNVHREEEzARhwR/AAABgglsb2Nh\nbGhvc3QwDQYJKoZIhvcNAQELBQADggEBABCCJcbYfw8kui5hxGdp/Bw0MgR3jzT1\nuYualHEZi0l/tn6mXMzpjDNOWvOlpdvxqypHoVFiRrp0O1HAveP27S0mJYzbEHbW\nzPc5W8zKSPuieXuGOqyniTiMX1yuy5/V93FhxTZlTvEXb0yscpg3c42rjG+HiMEo\nGFjkJzLUgBkkjzov0OngHCzBLuvHa3TnQtgnwx8PpDxUHMOuQw79IyNKveuqtNuI\nGqoEr/ILEJ40jngrIzPdAWnd9tTJDGhBCaArprvI8bKxCHlxGVWthpWcuzUK4bKf\nDI7fx8vQ9GDa7iyuBr9mU3MWOptqm/OY4x1GA92h85vVlkj2/lXJwMg=\n-----END CERTIFICATE-----\n",
+          "tls_fixture": "Ephemeral self-signed certificate. No system or application trust store was changed.",
+          "passed": false,
+          "scope": "Original room setup and loopback TLS/WebSocket observation only.",
+          "limitations": [
+            "No native signaling reply, authenticated room, real peer or media session is provided.",
+            "Callback state values are recorded without assuming their business meaning.",
+            "The caller supplied a loopback URL, synthetic token, empty streamer config, no report server and no proxy."
+          ]
+        },
+        "finalize_status": 0,
+        "version_after": {
+          "status": 0,
+          "value": "V4.14.2"
+        },
+        "config_open_validation": "Unknown: SLOG contents are not decoded; zero status alone does not establish config consumption."
+      }
+    }
+  ]
+}
