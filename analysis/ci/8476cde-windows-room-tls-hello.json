@@ -1,0 +1,302 @@
+{
+  "source_report_sha256": "4efa2aa19fecee759e37973c44b2900600b67f2e5180bb99ecdd0939b04c594c",
+  "source_commit": "8476cde98dd7419898176ab2a77bf6efeebde6ad",
+  "run_id": "44889250871",
+  "passed": false,
+  "observations": [
+    {
+      "role": "controller",
+      "process": {
+        "command": [
+          "C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\python.exe",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\scripts\\probe_windows_streamer_lifecycle.py",
+          "--runtime",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\windows",
+          "--workspace",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\room-probes\\controller",
+          "--output",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\lifecycle-controller.json",
+          "--child",
+          "controller",
+          "--rooms"
+        ],
+        "exit_code": 1,
+        "timed_out": false,
+        "timeout_seconds": 60,
+        "duration_seconds": 8.172,
+        "stdout": "",
+        "stderr": "",
+        "stdout_base64": "",
+        "stderr_base64": "",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "native": {
+        "role": "controller",
+        "query_capability": false,
+        "query_rooms": true,
+        "phase": "complete",
+        "passed": false,
+        "library_sha256": "ac351cf4e1d489e0b6e1a3df5cdf8aed96348876f7e2c7fcf7162fe59e1bb1c4",
+        "config_sha256": "3c9b63db00cfe50ebce90aa8f4a3afc2dd7a3119876e80e15213185d72b8486a",
+        "slot_0_inputs": [
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\room-probes\\controller\\logs",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\room-probes\\controller\\config-\u914d\u7f6e.json",
+          "ci-controller"
+        ],
+        "string_encoding": "UTF-16LE, NUL-terminated",
+        "version_before": {
+          "status": 0,
+          "value": "V4.14.2"
+        },
+        "initialize_status": 0,
+        "room": {
+          "server_url": "ws://127.0.0.1:59069/ci-room",
+          "token": "ci-loopback-token",
+          "config_layout": {
+            "token": "0x0",
+            "token_size": "0x8",
+            "servers": "0x10",
+            "server_sizes": "0x18",
+            "server_count": "0x20",
+            "timeout": "0x24",
+            "reconnect_delay": "0x28",
+            "report_token": "0x30",
+            "report_token_size": "0x38",
+            "report_url": "0x40",
+            "report_url_size": "0x48",
+            "report_server": "0x50",
+            "report_server_size": "0x58",
+            "report_option": "0x5c",
+            "proxy_type": "0x60",
+            "proxy_host": "0x68",
+            "proxy_host_size": "0x70",
+            "proxy_port": "0x74",
+            "proxy_username": "0x78",
+            "proxy_username_size": "0x80",
+            "proxy_password": "0x88",
+            "proxy_password_size": "0x90",
+            "sni_servers": "0x98",
+            "sni_server_sizes": "0xa0",
+            "sni_server_count": "0xa8",
+            "streamer_config": "0xb0",
+            "streamer_config_size": "0xb8"
+          },
+          "proxy_type": 0,
+          "report_endpoints": [],
+          "streamer_config_size": 0,
+          "room_callback_slot": 7,
+          "room_callback_abi": "void(int32_t handle, int32_t state)",
+          "handle": 1,
+          "data_frame_observed": false,
+          "destroy_status": 0,
+          "states": [
+            {
+              "handle": 1,
+              "state": 1
+            },
+            {
+              "handle": 1,
+              "state": 0
+            },
+            {
+              "handle": 1,
+              "state": 1
+            }
+          ],
+          "connections": [
+            {
+              "peer": [
+                "127.0.0.1",
+                59070
+              ],
+              "upgrade_completed": false,
+              "end_reason": "Native client closed the loopback socket",
+              "received_stream": {
+                "bytes": 517,
+                "base64": "FgMBAgABAAH8AwN6hAvzPuNY6Xi7SNPxbmfqd9bbwhZE9bGCtSHHOTDJYiC39hTic053M/QxlQReIzAW7oQTQM5l2AS41wGYmOXOGAA+EwITAxMBwCzAMACfzKnMqMyqwCvALwCewCTAKABrwCPAJwBnwArAFAA5wAnAEwAzAJ0AnAA9ADwANQAvAP8BAAF1AAsABAMAAQIACgAMAAoAHQAXAB4AGQAYACMAAAAWAAAAFwAAAA0AMAAuBAMFAwYDCAcICAgJCAoICwgECAUIBgQBBQEGAQMDAgMDAQIBAwICAgQCBQIGAgArAAUEAwQDAwAtAAIBAQAzACYAJAAdACCSc/qD6oMbTON8Kqb5yAtZRyU0ODYARlS+226+NdsTMAAVAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+                "sha256": "3cc86875daa94d8d21da6cbee5dfb3f0dc6c84637f9497c452bc92985768e76d"
+              }
+            },
+            {
+              "peer": [
+                "127.0.0.1",
+                59078
+              ],
+              "upgrade_completed": false,
+              "end_reason": "[WinError 10054] An existing connection was forcibly closed by the remote host",
+              "received_stream": {
+                "bytes": 517,
+                "base64": "FgMBAgABAAH8AwO0cs9S+gZpjDPPgxd/bdYr/RQqZIhmjHsKSflIzF46bSDN9QW6mHdcewUS47trMOx+/xq2UuBiahdnBqn7N/EGcQA+EwITAxMBwCzAMACfzKnMqMyqwCvALwCewCTAKABrwCPAJwBnwArAFAA5wAnAEwAzAJ0AnAA9ADwANQAvAP8BAAF1AAsABAMAAQIACgAMAAoAHQAXAB4AGQAYACMAAAAWAAAAFwAAAA0AMAAuBAMFAwYDCAcICAgJCAoICwgECAUIBgQBBQEGAQMDAgMDAQIBAwICAgQCBQIGAgArAAUEAwQDAwAtAAIBAQAzACYAJAAdACAUZUI0Yy6FytpAC/8q3EMeJSIVX8RuPvAT+XRc0qWOEAAVAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+                "sha256": "21c4fe83edd6c5c7bbf39414ef2445156e1d691cef255536e88ac0b33c197986"
+              }
+            }
+          ],
+          "frames": [],
+          "listener_stopped": true,
+          "passed": false,
+          "scope": "Original room setup and first client WebSocket frames to a loopback recorder only.",
+          "limitations": [
+            "No native signaling reply, authenticated room, real peer or media session is provided.",
+            "Callback state values are recorded without assuming their business meaning.",
+            "The caller supplied a loopback URL, synthetic token, empty streamer config, no report server and no proxy."
+          ]
+        },
+        "finalize_status": 0,
+        "version_after": {
+          "status": 0,
+          "value": "V4.14.2"
+        },
+        "config_open_validation": "Unknown: SLOG contents are not decoded; zero status alone does not establish config consumption."
+      }
+    },
+    {
+      "role": "controlled",
+      "process": {
+        "command": [
+          "C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\python.exe",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\scripts\\probe_windows_streamer_lifecycle.py",
+          "--runtime",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\windows",
+          "--workspace",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\room-probes\\controlled",
+          "--output",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\lifecycle-controlled.json",
+          "--child",
+          "controlled",
+          "--rooms"
+        ],
+        "exit_code": 1,
+        "timed_out": false,
+        "timeout_seconds": 60,
+        "duration_seconds": 8.172,
+        "stdout": "",
+        "stderr": "",
+        "stdout_base64": "",
+        "stderr_base64": "",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "native": {
+        "role": "controlled",
+        "query_capability": false,
+        "query_rooms": true,
+        "phase": "complete",
+        "passed": false,
+        "library_sha256": "ac351cf4e1d489e0b6e1a3df5cdf8aed96348876f7e2c7fcf7162fe59e1bb1c4",
+        "config_sha256": "3c9b63db00cfe50ebce90aa8f4a3afc2dd7a3119876e80e15213185d72b8486a",
+        "slot_0_inputs": [
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\room-probes\\controlled\\logs",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\room-probes\\controlled\\config-\u914d\u7f6e.json",
+          "ci-controlled"
+        ],
+        "string_encoding": "UTF-16LE, NUL-terminated",
+        "version_before": {
+          "status": 0,
+          "value": "V4.14.2"
+        },
+        "initialize_status": 0,
+        "room": {
+          "server_url": "ws://127.0.0.1:59079/ci-room",
+          "token": "ci-loopback-token",
+          "config_layout": {
+            "token": "0x0",
+            "token_size": "0x8",
+            "servers": "0x10",
+            "server_sizes": "0x18",
+            "server_count": "0x20",
+            "timeout": "0x24",
+            "reconnect_delay": "0x28",
+            "report_token": "0x30",
+            "report_token_size": "0x38",
+            "report_url": "0x40",
+            "report_url_size": "0x48",
+            "report_server": "0x50",
+            "report_server_size": "0x58",
+            "report_option": "0x5c",
+            "proxy_type": "0x60",
+            "proxy_host": "0x68",
+            "proxy_host_size": "0x70",
+            "proxy_port": "0x74",
+            "proxy_username": "0x78",
+            "proxy_username_size": "0x80",
+            "proxy_password": "0x88",
+            "proxy_password_size": "0x90",
+            "sni_servers": "0x98",
+            "sni_server_sizes": "0xa0",
+            "sni_server_count": "0xa8",
+            "streamer_config": "0xb0",
+            "streamer_config_size": "0xb8"
+          },
+          "proxy_type": 0,
+          "report_endpoints": [],
+          "streamer_config_size": 0,
+          "room_callback_slot": 4,
+          "room_callback_abi": "void(int32_t handle, int32_t state)",
+          "handle": 1,
+          "data_frame_observed": false,
+          "destroy_status": 0,
+          "states": [
+            {
+              "handle": 1,
+              "state": 1
+            },
+            {
+              "handle": 1,
+              "state": 0
+            },
+            {
+              "handle": 1,
+              "state": 1
+            }
+          ],
+          "connections": [
+            {
+              "peer": [
+                "127.0.0.1",
+                59080
+              ],
+              "upgrade_completed": false,
+              "end_reason": "Native client closed the loopback socket",
+              "received_stream": {
+                "bytes": 517,
+                "base64": "FgMBAgABAAH8AwOGw6/NHJChSjpOH2LK2EtLaLPobZEMTLoJgBOM6DLWEyCs18jcHahCjnBSJkUrDQMhbwV1u7eAp/aWDElHBywtVwA+EwITAxMBwCzAMACfzKnMqMyqwCvALwCewCTAKABrwCPAJwBnwArAFAA5wAnAEwAzAJ0AnAA9ADwANQAvAP8BAAF1AAsABAMAAQIACgAMAAoAHQAXAB4AGQAYACMAAAAWAAAAFwAAAA0AMAAuBAMFAwYDCAcICAgJCAoICwgECAUIBgQBBQEGAQMDAgMDAQIBAwICAgQCBQIGAgArAAUEAwQDAwAtAAIBAQAzACYAJAAdACAzKaJaQ6ztZ+W2QUL1xQD7dialC4/dFOMYDQoMy/OQFQAVAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+                "sha256": "d1e80cc3a9a48c57a2ffca7f92df4471d7c650e36545f0b08765bfe51daef2df"
+              }
+            },
+            {
+              "peer": [
+                "127.0.0.1",
+                59093
+              ],
+              "upgrade_completed": false,
+              "end_reason": "[WinError 10054] An existing connection was forcibly closed by the remote host",
+              "received_stream": {
+                "bytes": 517,
+                "base64": "FgMBAgABAAH8AwOXHAzn6S3zcwiV2tv043fT8yup5Bi+AJZbjt8OmgaUVyBmnsNSrpP5jU1B7SEq1WUn5Tg51Ui7J1C3G8fbE/xEVwA+EwITAxMBwCzAMACfzKnMqMyqwCvALwCewCTAKABrwCPAJwBnwArAFAA5wAnAEwAzAJ0AnAA9ADwANQAvAP8BAAF1AAsABAMAAQIACgAMAAoAHQAXAB4AGQAYACMAAAAWAAAAFwAAAA0AMAAuBAMFAwYDCAcICAgJCAoICwgECAUIBgQBBQEGAQMDAgMDAQIBAwICAgQCBQIGAgArAAUEAwQDAwAtAAIBAQAzACYAJAAdACC9DweBGAK0v6VIn7WjRVzV03PBuiFNM/J74k7fDZVRXQAVAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+                "sha256": "dfcd3fcd2ce190e4bbb46088ccdef05098c535b53c730fa1d3ec6f9cdbdb003e"
+              }
+            }
+          ],
+          "frames": [],
+          "listener_stopped": true,
+          "passed": false,
+          "scope": "Original room setup and first client WebSocket frames to a loopback recorder only.",
+          "limitations": [
+            "No native signaling reply, authenticated room, real peer or media session is provided.",
+            "Callback state values are recorded without assuming their business meaning.",
+            "The caller supplied a loopback URL, synthetic token, empty streamer config, no report server and no proxy."
+          ]
+        },
+        "finalize_status": 0,
+        "version_after": {
+          "status": 0,
+          "value": "V4.14.2"
+        },
+        "config_open_validation": "Unknown: SLOG contents are not decoded; zero status alone does not establish config consumption."
+      }
+    }
+  ],
+  "scope": "Room entry, callbacks and TLS ClientHello observed. Plain WebSocket recorder could not complete TLS.",
+  "full_report": "/home/ubuntu/uuyc_clone/analysis/ci/44889250871-native/streamer-rooms-windows.json"
+}

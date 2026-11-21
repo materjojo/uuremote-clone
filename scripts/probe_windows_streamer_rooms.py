@@ -8,8 +8,13 @@ server. Native input layout is specific to the manifest's original x64 DLL.
 import base64
 import ctypes
 import hashlib
+import pathlib
+import shutil
 import socket
+import ssl
 import struct
+import subprocess
+import tempfile
 import threading
 import time
 
@@ -59,17 +64,29 @@ class RoomObservation:
         self.states = []
         self.frames = []
         self.connections = []
-        self.errors = []
         self.received_frame = threading.Event()
         self.stop = threading.Event()
         self.callback = ctypes.WINFUNCTYPE(None, ctypes.c_int32, ctypes.c_int32)(
             lambda handle, state: self.states.append({'handle': handle, 'state': state}))
+        self.certificate_directory = tempfile.TemporaryDirectory(prefix='streamer-loopback-tls-')
+        certificate = pathlib.Path(self.certificate_directory.name) / 'certificate.pem'
+        key = certificate.with_name('private-key.pem')
+        openssl = shutil.which('openssl') or r'C:\Program Files\Git\usr\bin\openssl.exe'
+        generated = subprocess.run([openssl, 'req', '-x509', '-newkey', 'rsa:2048', '-nodes',
+                                    '-keyout', str(key), '-out', str(certificate), '-days', '1',
+                                    '-subj', '/CN=localhost', '-addext', 'subjectAltName=IP:127.0.0.1,DNS:localhost'],
+                                   capture_output=True, timeout=20)
+        if generated.returncode:
+            raise RuntimeError('Ephemeral TLS fixture generation failed: ' + generated.stderr.decode('utf-8', errors='replace'))
+        self.certificate_pem = certificate.read_text()
+        self.tls_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+        self.tls_context.load_cert_chain(str(certificate), str(key))
         self.listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.listener.bind(('127.0.0.1', 0))
         self.listener.listen(4)
         self.listener.settimeout(0.2)
         self.port = self.listener.getsockname()[1]
-        self.url = f'ws://127.0.0.1:{self.port}/ci-room'
+        self.url = f'wss://127.0.0.1:{self.port}/ci-room'
         self.thread = threading.Thread(target=self.serve, daemon=True)
         self.thread.start()
         self.buffers = []  # retain borrowed native inputs through Finalize
@@ -85,11 +102,15 @@ class RoomObservation:
                 continue
             except OSError:
                 break
-            record = {'peer': list(peer), 'upgrade_completed': False}
+            record = {'peer': list(peer), 'upgrade_completed': False,
+                      'received_stream_layer': 'TLS-decrypted application bytes'}
             transcript = bytearray()
             self.connections.append(record)
             try:
-                with connection:
+                connection.settimeout(3)
+                with self.tls_context.wrap_socket(connection, server_side=True) as connection:
+                    record['tls_version'] = connection.version()
+                    record['tls_cipher'] = connection.cipher()
                     connection.settimeout(0.25)
                     data = bytearray()
                     deadline = time.monotonic() + 8
@@ -192,11 +213,13 @@ class RoomObservation:
         self.listener.close()
         self.thread.join(timeout=2)
         report.update(states=self.states, connections=self.connections, frames=self.frames,
-                      listener_stopped=not self.thread.is_alive())
+                      listener_stopped=not self.thread.is_alive(), certificate_pem=self.certificate_pem,
+                      tls_fixture='Ephemeral self-signed certificate. No system or application trust store was changed.')
+        self.certificate_directory.cleanup()
         report['passed'] = (report.get('handle', 0) > 0 and report.get('destroy_status') == 0
                             and any(item['upgrade_completed'] for item in self.connections)
                             and report.get('data_frame_observed', False) and report['listener_stopped'])
-        report['scope'] = 'Original room setup and first client WebSocket frames to a loopback recorder only.'
+        report['scope'] = 'Original room setup and loopback TLS/WebSocket observation only.'
         report['limitations'] = ['No native signaling reply, authenticated room, real peer or media session is provided.',
                                  'Callback state values are recorded without assuming their business meaning.',
                                  'The caller supplied a loopback URL, synthetic token, empty streamer config, no report server and no proxy.']
