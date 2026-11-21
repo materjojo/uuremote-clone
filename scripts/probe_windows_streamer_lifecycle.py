@@ -198,7 +198,7 @@ def main():
                 'workspace_files_after_exit': collect_workspace(workspace / role),
                 'passed': observation['exit_code'] == 0 and not observation['timed_out']
                           and child_report is not None and child_report.get('passed', False)}
-        if not case['passed'] and args.debugger:
+        if args.debugger and (observation['timed_out'] or observation['exit_code'] not in (0, 1)):
             debug_workspace = workspace / (role + '-debug')
             debug_output = output.with_name('lifecycle-' + role + '-debug.json')
             events = output.with_name('lifecycle-' + role + '-debugger.jsonl')

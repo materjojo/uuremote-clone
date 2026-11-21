@@ -86,6 +86,7 @@ class RoomObservation:
             except OSError:
                 break
             record = {'peer': list(peer), 'upgrade_completed': False}
+            transcript = bytearray()
             self.connections.append(record)
             try:
                 with connection:
@@ -104,6 +105,7 @@ class RoomObservation:
                             if not chunk:
                                 raise EOFError('Native client closed the loopback socket')
                             data.extend(chunk)
+                            transcript.extend(chunk)
                             if len(data) > 256 * 1024:
                                 raise ValueError('Loopback input exceeded bound')
 
@@ -155,6 +157,8 @@ class RoomObservation:
                             break
             except (OSError, TimeoutError, EOFError, ValueError, KeyError) as error:
                 record['end_reason'] = str(error)
+            finally:
+                record['received_stream'] = binary(bytes(transcript))
 
     def observe(self, table):
         layout = validate_layout()
