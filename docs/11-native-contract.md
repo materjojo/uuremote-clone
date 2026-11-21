@@ -141,6 +141,16 @@ Windows 两种角色的 slot 0 接收三个直接指针、返回 32 位状态；
 
 [Windows managed smoke](../Tests/WindowsOfficialSmoke/Program.cs) 使用生产类在每个角色的独立进程中核对非 ASCII 配置路径、所有权冲突、阻止旧工厂、重复 capability、与同 runner Python 原始调用逐字节相符、重复 Dispose、关闭后调用拒绝，以及成功关闭后的再次初始化。父脚本记录退出码、超时、最后阶段和二进制日志；编译与运行只在 Actions。[44886678910](https://github.com/materjojo/uuremote-clone/actions/runs/44886678910) 已全部通过，两种角色各完成这些检查，报告见 [e9692dd-windows-managed-engine.json](../analysis/ci/e9692dd-windows-managed-engine.json)。其余平台跳过，本次没有新的 macOS/Android 编译结果。
 
+## Windows 房间入口和回调名称的静态核对
+
+回调工厂内部的 `FUN_180d162d0` / `FUN_180d16c90` 会为缺失回调安装原库自带 fallback，并保留每个回调的名称。因此先前“空 callback”探测只表示调用方传空，不能表示原库保持 null 或已验证真实投递。控制端回调按顺序为 ReceiveMediaTrack、RemoveMediaTrack、FrameChange、ReceiveControlData、ReceiveTextData、ReceiveFileData、ReceiveBinaryData、RoomState、SignalPush、QosStats、NatInfo、PeerConnectionState、ConnectionStateCode、EventReport、DualNegotiateCapability、ReceiveDataChannel、SignalData、SignalHandle；被控端为 ReceiveControlData、ReceiveTextData、ReceiveFileData、ReceiveBinaryData、RoomState、SignalPush、QosStats、CursorChange、CaptureFailed、MuMuData、NewControl、PeerConnectionState、ConnectionStateCode、EventReport、ReceiveDataChannel、SignalHandle。这是 Windows 样本名称与顺序，不外推 macOS/Android 布局。`OnSignalHandle` 来自进程 signal handler（例如 `0x180a35b10`），不能因名称包含 signal 就当作网络信令入口。
+
+两角色的 slot 2 在外层检查 token 指针/长度、signal-server 指针及数量，然后调用 room-config 转换 `FUN_180adf1a0`。该 helper 读取 token `+0/+8`、server 指针数组 `+0x10`、length 数组 `+0x18`、count `+0x20`、timeout `+0x24`、reconnect delay `+0x28`；report token/url/server 的指针和长度位于 `+0x30/+0x38, +0x40/+0x48, +0x50/+0x58`。`+0x60` 是 proxy block（非 Android appData），SNI server arrays/count 在 `+0x98/+0xa0/+0xa8`，streamer_config 指针/长度在 `+0xb0/+0xb8`。调用方的试验结构占 `0xc0` 字节；完整 layout 在 [探测源码](../scripts/probe_windows_streamer_rooms.py)，其偏移对照不等于原始 C++ 类型定义已恢复。字符串长度由有符号 32 位校验，`FUN_180ae0310` 在合法路径复制明确字节数；输入必须存活到 native 不再借用。slot 2 成功创建的是本地 session handle，不能当认证/入房完成。
+
+`OnRoomState` 的控制端/被控端地址分别为全局 `0x18143f218 / 0x18143f180`；汇编调用均在 ECX/EDX 传入 handle/state 两个 32 位值。新的 runner room 探测只安装这一个已核对签名，记录数值而不猜业务状态；所有输入只指向 `ws://127.0.0.1:<ephemeral>/ci-room`、固定合成 token，无 report endpoint、proxy、SNI 或额外 streamer config。记录器执行标准 WebSocket Upgrade，保存 client 的完整有界 wire/payload；不提供房间回复，也不把 handshake 算成认证成功。生产 C# 尚未开放 room 函数。
+
+静态原文保存在 `/home/ubuntu/uuyc_clone/analysis/deep-native/windows-followup/results/267..313`，关键 Evidence：room helper `ev_aa7306cda7db29a8c171a27e9aeaf05fdf3a71b7b4d6c51e2c8eb94e503aacb9`、其汇编 `ev_f80f858f4b18f71f7420848542adf04de78fba6d408b9e72cda9b398db67f49a`；有界字符串转换 `ev_16c1b814969ac9542a0be5bbd3f07aa7c025b83fb2151bcf597dc6cd6d66fe68`；proxy helper `ev_0c6add4b1e433730026cf2b8e18481e58def619e95161d4b700259413de39b8f`。实际运行结果仍需对应 Actions。
+
 ## 后续原生证据边界（2026-11-20）
 
 以下结论只针对保存的原始文件静态 Evidence，不代表 ARM64 原库已经在设备上运行，也不代表 Windows 硬件路径已经在当前机器上选中。

@@ -82,7 +82,7 @@ def capability(table):
     return report
 
 
-def child(runtime, workspace, role, output, query_capability=False):
+def child(runtime, workspace, role, output, query_capability=False, query_rooms=False):
     manifest = json.loads((ROOT / 'native/official/manifest.json').read_text())
     for item in manifest['files']:
         if item['platform'] == 'windows':
@@ -96,7 +96,7 @@ def child(runtime, workspace, role, output, query_capability=False):
     config = workspace / 'config-配置.json'
     shutil.copyfile(runtime / 'streamer-config.json', config)
     inputs = [str(log_directory), str(config), 'ci-' + role]
-    report = {'role': role, 'query_capability': query_capability, 'phase': 'loading', 'passed': False,
+    report = {'role': role, 'query_capability': query_capability, 'query_rooms': query_rooms, 'phase': 'loading', 'passed': False,
               'library_sha256': digest((runtime / 'streamer.dll').read_bytes()),
               'config_sha256': digest(config.read_bytes()),
               'slot_0_inputs': inputs, 'string_encoding': 'UTF-16LE, NUL-terminated'}
@@ -109,6 +109,11 @@ def child(runtime, workspace, role, output, query_capability=False):
     factory.argtypes = [ctypes.POINTER(ctypes.c_void_p)]
     factory.restype = ctypes.POINTER(ctypes.c_void_p)
     callbacks = (ctypes.c_void_p * (18 if role == 'controller' else 16))()
+    room_observer = None
+    if query_rooms:
+        from probe_windows_streamer_rooms import RoomObservation
+        room_observer = RoomObservation(role)
+        room_observer.install_callback(callbacks)
     table = factory(callbacks)
     if not table:
         raise RuntimeError('Factory returned a null table')
@@ -124,6 +129,10 @@ def child(runtime, workspace, role, output, query_capability=False):
         report['initialize_status'] = initialize(*(ctypes.cast(buffer, ctypes.c_void_p) for buffer in buffers))
         if report['initialize_status'] != 0:
             raise RuntimeError('Initialize failed')
+        if query_rooms:
+            report['phase'] = 'room'
+            save(output, report)
+            report['room'] = room_observer.observe(table)
         if query_capability:
             report['phase'] = 'capability'
             save(output, report)
@@ -145,11 +154,14 @@ def child(runtime, workspace, role, output, query_capability=False):
                 report['phase'] = 'failed' if 'error' in report else 'complete'
             except BaseException:
                 report['finalize_error'] = traceback.format_exc()
+    if room_observer:
+        room_observer.finish(report.setdefault('room', {}))
     report['workspace_files'] = collect_workspace(workspace)
     report['config_open_validation'] = 'Unknown: SLOG contents are not decoded; zero status alone does not establish config consumption.'
     report['passed'] = (report.get('initialize_status') == 0 and report.get('finalize_status') == 0
                         and report['phase'] == 'complete'
                         and (not query_capability or report.get('capability_bytes_stable', False))
+                        and (not query_rooms or report['room']['passed'])
                         and report['version_before']['value'] == manifest['streamer_version']
                         and report['version_after']['value'] == manifest['streamer_version'])
     save(output, report)
@@ -163,20 +175,22 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--child', choices=['controller', 'controlled'])
     parser.add_argument('--debugger', type=Path, help='Runner-built native failure observer; invoked only after failure')
-    parser.add_argument('--capabilities', action='store_true', help='Also query slot 15 twice after initialization')
+    operations = parser.add_mutually_exclusive_group()
+    operations.add_argument('--capabilities', action='store_true', help='Also query slot 15 twice after initialization')
+    operations.add_argument('--rooms', action='store_true', help='Observe room setup against a loopback WebSocket recorder')
     args = parser.parse_args()
     if platform.system() != 'Windows' or os.environ.get('GITHUB_ACTIONS') != 'true':
         parser.error('Original target execution is restricted to Windows GitHub Actions')
     runtime, workspace, output = args.runtime.resolve(), args.workspace.resolve(), args.output.resolve()
     if args.child:
-        return child(runtime, workspace, args.child, output, args.capabilities)
+        return child(runtime, workspace, args.child, output, args.capabilities, args.rooms)
     cases = []
     for role in ('controller', 'controlled'):
         child_output = output.with_name('lifecycle-' + role + '.json')
         def command_for(case_workspace, case_output):
             return [sys.executable, str(Path(__file__).resolve()), '--runtime', str(runtime),
                     '--workspace', str(case_workspace), '--output', str(case_output), '--child', role,
-                    *(['--capabilities'] if args.capabilities else [])]
+                    *(['--capabilities'] if args.capabilities else []), *(['--rooms'] if args.rooms else [])]
 
         observation = observe(command_for(workspace / role, child_output), runtime, timeout=240 if args.capabilities else 60)
         child_report = json.loads(child_output.read_text(encoding='utf-8')) if child_output.exists() else None
@@ -204,12 +218,14 @@ def main():
     report = {'source_commit': os.environ.get('GITHUB_SHA'), 'run_id': os.environ.get('GITHUB_RUN_ID'),
               'platform': platform.platform(), 'observations': cases,
               'passed': all(case['passed'] for case in cases),
-              'scope': ('Isolated original DLL factory/version/Initialize/Finalize calls, plus slot 15 capability query.'
+              'scope': ('Isolated original DLL lifecycle and loopback room/WebSocket observations.' if args.rooms else
+                        'Isolated original DLL factory/version/Initialize/Finalize calls, plus slot 15 capability query.'
                         if args.capabilities else 'Isolated original DLL factory/version/Initialize/Finalize calls only.'),
-              'limitations': ['No room, signaling, capture, input or media session is executed.',
+              'limitations': ['No real peer, capture, input or media session is executed.',
                               'Capability bytes describe reported support; no actual encoded/decoded media is verified.',
                               'SLOG binary files are preserved as base64 with SHA-256; contents are not decoded.',
-                              'Native callbacks are null; callback signatures and delivery remain untested.',
+                              ('Room-state callback is observed; other callbacks remain untested.' if args.rooms else
+                               'Native callbacks are null; callback signatures and delivery remain untested.'),
                               'A zero Initialize result alone does not prove config consumption or hardware success.',
                               'The third UTF-16 string is a log filename suffix; complete logging semantics remain under analysis.']}
     save(output, report)
