@@ -43,6 +43,8 @@ class ControlObservation(RoomObservation):
         self.control_frame_index = None
         self.control_message = None
         self.control_payload = None
+        self.control_observation_path = None
+        self.observed_controls = []
         super().__init__(role, allow_fixture_ca, reply_room_info, empty_room_info)
 
     def on_client_frame(self, frame):
@@ -53,11 +55,28 @@ class ControlObservation(RoomObservation):
                 packet = json.loads(data[start:])
                 if isinstance(packet, list) and len(packet) == 2 and packet[0] == 'control':
                     self.control_message = packet[1]
+                    self.control_payload = None
+                    self.control_attachment.clear()
                     self.control_frame_index = len(self.frames) - 1
                     self.control_event.set()
         elif frame['opcode'] == 2 and self.control_frame_index is not None and not self.control_attachment.is_set():
             self.control_payload = data
+            matched = self.control_fields_match()
+            observation = {'frame_index': self.control_frame_index, 'message': self.control_message,
+                           'wire_attachment': binary(data), 'input_fields_match': matched}
+            self.observed_controls.append(observation)
+            if matched and self.control_observation_path is not None:
+                temporary = self.control_observation_path.with_suffix('.tmp')
+                temporary.write_text(json.dumps(observation), encoding='utf-8')
+                temporary.replace(self.control_observation_path)
             self.control_attachment.set()
+
+    def control_fields_match(self):
+        message = self.control_message if isinstance(self.control_message, dict) else {}
+        return (message.get('app_control_id') == APP_CONTROL_ID.decode('ascii')
+                and message.get('geo_timezone') == GEO_TIMEZONE.decode('ascii')
+                and message.get('app_data') == {'_placeholder': True, 'num': 0}
+                and self.control_payload == b'\x04' + APP_DATA)
 
     def after_room_login(self, table, report):
         request = {'slot': 4, 'abi': 'int32_t(int32_t handle, const ConnectInput*)',
@@ -85,16 +104,13 @@ class ControlObservation(RoomObservation):
         # the complete wire payload and verify this exact envelope separately.
         request['observed_binary_message_tag'] = '04'
         request['attachment_body'] = binary(self.control_payload[1:]) if self.control_payload and self.control_payload[:1] == b'\x04' else None
-        message = self.control_message if isinstance(self.control_message, dict) else {}
-        request['input_fields_match'] = (message.get('app_control_id') == APP_CONTROL_ID.decode('ascii')
-                                        and message.get('geo_timezone') == GEO_TIMEZONE.decode('ascii')
-                                        and message.get('app_data') == {'_placeholder': True, 'num': 0}
-                                        and self.control_payload == b'\x04' + APP_DATA)
+        request['input_fields_match'] = self.control_fields_match()
         if request['status'] != 0 or not request['input_fields_match']:
             raise RuntimeError('Original control request did not preserve the three supplied input slices')
 
     def finish(self, report, *, verify_native=True):
         super().finish(report, verify_native=verify_native)
+        report['observed_control_requests'] = self.observed_controls
         request = report.get('control_request', {})
         if verify_native:
             report['passed'] = report['passed'] and request.get('status') == 0 and request.get('input_fields_match', False)

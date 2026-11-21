@@ -32,6 +32,8 @@ internal static class RoomChecks
             throw new ArgumentException("Native room fixture must be TLS IPv4 loopback.");
         string rejection = fixture.RootElement.GetProperty("baseline_rejection_path").GetString()!;
         string certificatePem = fixture.RootElement.GetProperty("certificate_pem").GetString()!;
+        string? controlObservation = fixture.RootElement.GetProperty("control_observation_path").GetString();
+        byte[] appData = Convert.FromBase64String("Y2ktY29udHJvbC1hcHAtZGF0YQD//g==");
         Directory.CreateDirectory(workspace);
         Directory.CreateDirectory(Path.GetDirectoryName(output)!);
         string config = Path.Combine(workspace, "config-配置.json"), logs = Path.Combine(workspace, "logs");
@@ -42,7 +44,7 @@ internal static class RoomChecks
         {
             ["role"] = input[1], ["phase"] = "initialize", ["passed"] = false,
             ["source_commit"] = Environment.GetEnvironmentVariable("GITHUB_SHA"),
-            ["scope"] = "Production C# room binding with explicitly instrumented child-only fixture trust; no control or media.",
+            ["scope"] = "Production C# room binding and controller request with explicitly instrumented child-only fixture trust; no control ACK, peer or media.",
             ["instrumentation"] = "After baseline TLS rejection, add exactly the fixture CA using original DER/store helpers. No production CA override.",
             ["notifications"] = notices
         };
@@ -63,6 +65,28 @@ internal static class RoomChecks
                 Thread.Sleep(20);
             }
             throw new TimeoutException(description);
+        }
+        void RequestAndObserveControl(int handle, OfficialWindowsEngine engine)
+        {
+            if (role == OfficialStreamer.Role.Controlled)
+            {
+                MustThrow<InvalidOperationException>(() => engine.RequestControl(handle, appData, "test"));
+                return;
+            }
+            MustThrow<ArgumentOutOfRangeException>(() => engine.RequestControl(0, appData, "test"));
+            MustThrow<ArgumentException>(() => engine.RequestControl(handle, appData, "bad\0id"));
+            MustThrow<ArgumentException>(() => engine.RequestControl(handle, appData, "test", "bad\0timezone"));
+            MustThrow<ArgumentOutOfRangeException>(() => engine.RequestControl(handle, new byte[1024 * 1024 + 1], "test"));
+            if (controlObservation is null) throw new Exception("No parent control recorder path");
+            if (File.Exists(controlObservation)) File.Delete(controlObservation);
+            engine.RequestControl(handle, appData, "ci-local-control-01", "Etc/UTC");
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
+            WaitFor(() => File.Exists(controlObservation), "Expected original control request wire bytes in parent recorder", engine);
+            using var observed = JsonDocument.Parse(File.ReadAllText(controlObservation));
+            if (!observed.RootElement.GetProperty("input_fields_match").GetBoolean()) throw new Exception("Control input slices changed");
+            report["control_request_" + handle] = observed.RootElement.Clone();
         }
         bool HasCode(int handle, int code) => notices.Any(value => value.Handle == handle
             && value.Kind == OfficialWindowsEngine.RoomNotificationKind.ConnectionCode && value.Value == code);
@@ -92,16 +116,20 @@ internal static class RoomChecks
             if (!notices.Any(value => value.Handle == handle && value.Kind == OfficialWindowsEngine.RoomNotificationKind.RoomState && value.Value == 2))
                 throw new Exception("No matching native room-state callback");
             report["first_login_observed"] = true;
+            RequestAndObserveControl(handle, engine);
             report["phase"] = "close_first_room";
             Save();
             if (!engine.CloseRoom(handle) || engine.CloseRoom(handle))
                 throw new Exception("Room close must execute exactly once");
             report["first_close_idempotent"] = true;
+            if (role == OfficialStreamer.Role.Controller)
+                MustThrow<ArgumentOutOfRangeException>(() => engine.RequestControl(handle, appData, "closed-room"));
             int second = engine.OpenRoom("ci-loopback-token", new[] { server });
             report["second_handle"] = second;
             if (second == handle) throw new Exception("Expected a fresh local room handle");
             WaitFor(() => HasCode(second, 9004), "Expected second native room login", engine);
             report["second_login_observed"] = true;
+            RequestAndObserveControl(second, engine);
             report["phase"] = "dispose_with_owned_room";
             Save();
             engine.Dispose();
@@ -109,13 +137,15 @@ internal static class RoomChecks
             MustThrow<ObjectDisposedException>(() => engine.OpenRoom("test", new[] { server }));
             MustThrow<ObjectDisposedException>(() => engine.CloseRoom(second));
             MustThrow<ObjectDisposedException>(() => engine.DrainRoomNotifications());
+            MustThrow<ObjectDisposedException>(() => engine.RequestControl(second, appData, "disposed"));
             report["dispose_with_owned_room_passed"] = true;
             report["phase"] = "complete";
             report["passed"] = true;
             report["checks"] = new[] { "invalid room inputs rejected before native call", "native callback delegates survive GC",
                 "baseline TLS CA rejection", "explicit child-only fixture trust", "native room login callbacks",
                 "queued notifications retain handle and domain", "close exactly once", "second room login",
-                "Dispose closes owned room", "repeat Dispose", "calls after Dispose rejected" };
+                "Dispose closes owned room", "repeat Dispose", "calls after Dispose rejected",
+                role == OfficialStreamer.Role.Controller ? "control-request binary input and ID/timezone match original wire" : "controller-only control request rejected on controlled role" };
             Console.WriteLine("PASS production original room binding: " + input[1]);
         }
         catch (Exception error)

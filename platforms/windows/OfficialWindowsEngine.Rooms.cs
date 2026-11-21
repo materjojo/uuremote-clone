@@ -18,6 +18,19 @@ public sealed partial class OfficialWindowsEngine
     private delegate int OpenRoomFunction(IntPtr config);
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     private delegate int CloseRoomFunction(int handle);
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    private delegate int RequestControlFunction(int handle, IntPtr config);
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
+    private struct ControlConfig
+    {
+        [FieldOffset(0x00)] public IntPtr AppData;
+        [FieldOffset(0x08)] public int AppDataSize;
+        [FieldOffset(0x10)] public IntPtr AppControlId;
+        [FieldOffset(0x18)] public int AppControlIdSize;
+        [FieldOffset(0x20)] public IntPtr GeoTimezone;
+        [FieldOffset(0x28)] public int GeoTimezoneSize;
+    }
 
     // The native helper reads these fields from a zero-filled 0xc0-byte input.
     // Report/proxy/SNI/streamer-config members stay zero; their public contracts
@@ -42,6 +55,7 @@ public sealed partial class OfficialWindowsEngine
     private Exception? _callbackFailure;
     private OpenRoomFunction _openRoom = null!;
     private CloseRoomFunction _closeRoom = null!;
+    private RequestControlFunction? _requestControl;
 
     private void RecordRoomNotification(int handle, RoomNotificationKind kind, int value)
     {
@@ -71,6 +85,30 @@ public sealed partial class OfficialWindowsEngine
                 throw new InvalidOperationException($"Original room entry returned an invalid or duplicate handle: {handle}");
             _faulted = false;
             return handle;
+        }
+    }
+
+    /// <summary>
+    /// Queues the original controller's control request for an owned room.
+    /// App data is opaque binary, including embedded NUL. The signaling service
+    /// and peer must authorize and complete this request; returning normally
+    /// only means the native entry accepted it for asynchronous processing.
+    /// </summary>
+    public void RequestControl(int handle, ReadOnlySpan<byte> appData, string appControlId, string geoTimezone = "")
+    {
+        lock (CallGate)
+        {
+            RequireActive();
+            if (Role != OfficialStreamer.Role.Controller || _requestControl is null)
+                throw new InvalidOperationException("Only the original controller exposes this control-request ABI.");
+            if (!_openRooms.Contains(handle)) throw new ArgumentOutOfRangeException(nameof(handle), "An owned open room is required.");
+            var inputs = new RoomInputs(appData, appControlId, geoTimezone);
+            try { _roomInputs.Add(inputs); }
+            catch { inputs.Dispose(); throw; }
+            _faulted = true;
+            int status = _requestControl(handle, inputs.Config);
+            if (status != 0) throw new InvalidOperationException($"Original control-request entry failed: {status}");
+            _faulted = false;
         }
     }
 
@@ -126,6 +164,31 @@ public sealed partial class OfficialWindowsEngine
     {
         private readonly List<IntPtr> _allocations = new();
         public IntPtr Config { get; private set; }
+
+        public RoomInputs(ReadOnlySpan<byte> appData, string appControlId, string geoTimezone)
+        {
+            ValidateString(appControlId, nameof(appControlId));
+            ArgumentNullException.ThrowIfNull(geoTimezone);
+            if (geoTimezone.Contains('\0')) throw new ArgumentException("Timezone cannot contain embedded NUL.", nameof(geoTimezone));
+            if (appData.Length > 1024 * 1024) throw new ArgumentOutOfRangeException(nameof(appData));
+            var encoding = new UTF8Encoding(false, true);
+            byte[] id = encoding.GetBytes(appControlId), timezone = encoding.GetBytes(geoTimezone);
+            if (id.Length > 1024) throw new ArgumentException("Control ID exceeds the binding limit.", nameof(appControlId));
+            if (timezone.Length > 256) throw new ArgumentException("Timezone exceeds the binding limit.", nameof(geoTimezone));
+            if (Marshal.SizeOf<ControlConfig>() != 0x30) throw new InvalidOperationException("Unsupported original Windows control input layout.");
+            try
+            {
+                var config = new ControlConfig
+                {
+                    AppData = CopyBytes(appData.ToArray()), AppDataSize = appData.Length,
+                    AppControlId = CopyBytes(id), AppControlIdSize = id.Length,
+                    GeoTimezone = CopyBytes(timezone), GeoTimezoneSize = timezone.Length
+                };
+                Config = Allocate(0x30);
+                Marshal.StructureToPtr(config, Config, false);
+            }
+            catch { Dispose(); throw; }
+        }
 
         public RoomInputs(string token, IReadOnlyList<Uri> servers, int timeout, int reconnectDelay)
         {

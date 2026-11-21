@@ -102,6 +102,7 @@ public sealed partial class OfficialWindowsEngine : IDisposable
                 _finalize = Slot<FinalizeFunction>(1);
                 _openRoom = Slot<OpenRoomFunction>(2);
                 _closeRoom = Slot<CloseRoomFunction>(3);
+                if (role == OfficialStreamer.Role.Controller) _requestControl = Slot<RequestControlFunction>(4);
                 _version = Slot<VersionFunction>(role == OfficialStreamer.Role.Controller ? 17 : 18);
                 _capability = Slot<CapabilityFunction>(15);
                 if (Marshal.SizeOf<CapabilityData>() != 16 || Marshal.OffsetOf<CapabilityData>(nameof(CapabilityData.Size)).ToInt32() != 8)
