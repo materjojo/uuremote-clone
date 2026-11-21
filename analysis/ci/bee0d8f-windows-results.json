@@ -1,0 +1,205 @@
+{
+  "run": {
+    "conclusion": "success",
+    "databaseId": 44881938396,
+    "headSha": "bee0d8fc5629d4f614dab33d4b8ba9712023b353",
+    "jobs": [
+      {
+        "name": "plan",
+        "conclusion": "success",
+        "status": "completed"
+      },
+      {
+        "name": "windows-app",
+        "conclusion": "success",
+        "status": "completed"
+      },
+      {
+        "name": "macos-app",
+        "conclusion": "skipped",
+        "status": "completed"
+      },
+      {
+        "name": "android-app",
+        "conclusion": "skipped",
+        "status": "completed"
+      },
+      {
+        "name": "core",
+        "conclusion": "skipped",
+        "status": "completed"
+      }
+    ],
+    "status": "completed",
+    "url": "https://github.com/materjojo/uuremote-clone/actions/runs/44881938396"
+  },
+  "source_report_sha256": "0962f9aa32d835db1b610bad8264f2d6d11a6bc55d5c182aa6fb604252bd2d62",
+  "source_report": "bee0d8f-windows-detector.json",
+  "reanalysis": "stderr diagnostics were preserved in the original raw report; summaries below extract them using the corrected parser without re-executing the target.",
+  "cli_boundary_cases": 5,
+  "adapters": [
+    {
+      "index": 0,
+      "vendor_id": 5140,
+      "device_id": 140,
+      "adapter_id": "27281",
+      "flags": 0
+    },
+    {
+      "index": 1,
+      "vendor_id": 5140,
+      "device_id": 140,
+      "adapter_id": "27426",
+      "flags": 2
+    }
+  ],
+  "batches": [
+    {
+      "adapter_index": 0,
+      "implementation": 0,
+      "exit_code": 0,
+      "protocol_completed": true,
+      "row_count": 8,
+      "positive_probe_rows": 0,
+      "diagnostic_stdout_lines": 0,
+      "diagnostic_stderr_lines": 0
+    },
+    {
+      "adapter_index": 0,
+      "implementation": 1,
+      "exit_code": 0,
+      "protocol_completed": true,
+      "row_count": 8,
+      "positive_probe_rows": 0,
+      "diagnostic_stdout_lines": 0,
+      "diagnostic_stderr_lines": 0
+    },
+    {
+      "adapter_index": 0,
+      "implementation": 2,
+      "exit_code": 0,
+      "protocol_completed": true,
+      "row_count": 8,
+      "positive_probe_rows": 0,
+      "diagnostic_stdout_lines": 0,
+      "diagnostic_stderr_lines": 0
+    },
+    {
+      "adapter_index": 0,
+      "implementation": 32,
+      "exit_code": 0,
+      "protocol_completed": true,
+      "row_count": 8,
+      "positive_probe_rows": 0,
+      "diagnostic_stdout_lines": 0,
+      "diagnostic_stderr_lines": 38
+    },
+    {
+      "adapter_index": 0,
+      "implementation": 33,
+      "exit_code": 0,
+      "protocol_completed": true,
+      "row_count": 8,
+      "positive_probe_rows": 0,
+      "diagnostic_stdout_lines": 0,
+      "diagnostic_stderr_lines": 38
+    },
+    {
+      "adapter_index": 0,
+      "implementation": 38,
+      "exit_code": 0,
+      "protocol_completed": true,
+      "row_count": 8,
+      "positive_probe_rows": 0,
+      "diagnostic_stdout_lines": 0,
+      "diagnostic_stderr_lines": 38
+    },
+    {
+      "adapter_index": 0,
+      "implementation": 39,
+      "exit_code": 0,
+      "protocol_completed": true,
+      "row_count": 8,
+      "positive_probe_rows": 0,
+      "diagnostic_stdout_lines": 0,
+      "diagnostic_stderr_lines": 38
+    },
+    {
+      "adapter_index": 1,
+      "implementation": 0,
+      "exit_code": 0,
+      "protocol_completed": true,
+      "row_count": 8,
+      "positive_probe_rows": 0,
+      "diagnostic_stdout_lines": 0,
+      "diagnostic_stderr_lines": 0
+    },
+    {
+      "adapter_index": 1,
+      "implementation": 1,
+      "exit_code": 0,
+      "protocol_completed": true,
+      "row_count": 8,
+      "positive_probe_rows": 0,
+      "diagnostic_stdout_lines": 0,
+      "diagnostic_stderr_lines": 0
+    },
+    {
+      "adapter_index": 1,
+      "implementation": 2,
+      "exit_code": 0,
+      "protocol_completed": true,
+      "row_count": 8,
+      "positive_probe_rows": 0,
+      "diagnostic_stdout_lines": 0,
+      "diagnostic_stderr_lines": 0
+    },
+    {
+      "adapter_index": 1,
+      "implementation": 32,
+      "exit_code": 0,
+      "protocol_completed": true,
+      "row_count": 8,
+      "positive_probe_rows": 0,
+      "diagnostic_stdout_lines": 0,
+      "diagnostic_stderr_lines": 38
+    },
+    {
+      "adapter_index": 1,
+      "implementation": 33,
+      "exit_code": 0,
+      "protocol_completed": true,
+      "row_count": 8,
+      "positive_probe_rows": 0,
+      "diagnostic_stdout_lines": 0,
+      "diagnostic_stderr_lines": 38
+    },
+    {
+      "adapter_index": 1,
+      "implementation": 38,
+      "exit_code": 0,
+      "protocol_completed": true,
+      "row_count": 8,
+      "positive_probe_rows": 0,
+      "diagnostic_stdout_lines": 0,
+      "diagnostic_stderr_lines": 38
+    },
+    {
+      "adapter_index": 1,
+      "implementation": 39,
+      "exit_code": 0,
+      "protocol_completed": true,
+      "row_count": 8,
+      "positive_probe_rows": 0,
+      "diagnostic_stdout_lines": 0,
+      "diagnostic_stderr_lines": 38
+    }
+  ],
+  "accepted_rows": 112,
+  "positive_probe_rows": 0,
+  "limitations": [
+    "All returned width/height/flag fields are zero. No hardware success was observed.",
+    "The runner reports Microsoft vendor ID 5140 (0x1414); adapter index 1 has the DXGI software flag.",
+    "Detector invocation does not exercise DLL initialization, cache orchestration, capture, or media sessions."
+  ]
+}

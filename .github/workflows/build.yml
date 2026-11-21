@@ -161,6 +161,8 @@ jobs:
           cmake -S Tests/WindowsCodecDetector -B build/codec-detector
           cmake --build build/codec-detector --config Release --parallel 2
           python scripts/probe_windows_codec_detector.py --runtime build/windows --adapter-tool build/codec-detector/Release/codec_adapter_inventory.exe --output build/codec-detector-windows.json
+      - name: Probe isolated original DLL initialization and shutdown
+        run: python scripts/probe_windows_streamer_lifecycle.py --runtime build/windows --workspace build/lifecycle-probes --output build/streamer-lifecycle-windows.json
       - name: Verify package and archive
         run: |
           Compress-Archive -Path build/windows/* -DestinationPath build/UURemoteClone-windows-x64.zip
@@ -178,6 +180,7 @@ jobs:
           path: |
             build/native-runtime-windows.json
             build/codec-detector-windows.json
+            build/streamer-lifecycle-windows.json
           retention-days: 7
           if-no-files-found: error
 

@@ -29,7 +29,7 @@ def digest(data):
     return hashlib.sha256(data).hexdigest()
 
 
-def summarize_batch(stdout, exit_code, timed_out=False):
+def summarize_batch(stdout, exit_code, timed_out=False, stderr=''):
     """Strict report validation; the native DLL uses its own scanf-based parser."""
     rows, malformed = [], []
     lines = stdout.splitlines()
@@ -52,8 +52,11 @@ def summarize_batch(stdout, exit_code, timed_out=False):
         'protocol_completed': completed,
         'rows': rows,
         'malformed_result_lines': malformed,
-        'batch_errors': [line for line in lines if line.startswith('BATCH_ERROR,')],
-        'diagnostics': [line for line in lines if line.startswith('BATCH_DIAG,')],
+        'batch_errors': [line for line in [*lines, *stderr.splitlines()] if line.startswith('BATCH_ERROR,')],
+        'diagnostics': [line for line in [*lines, *stderr.splitlines()] if line.startswith('BATCH_DIAG,')],
+        'diagnostic_streams': [{'stream': stream, 'line': line}
+                               for stream, text in [('stdout', stdout), ('stderr', stderr)]
+                               for line in text.splitlines() if line.startswith('BATCH_DIAG,')],
         # Discard candidate rows from incomplete/failed batches, like the DLL.
         'accepted_rows': rows if completed else [],
         'positive_probe_rows': [row for row in rows if row['probe_flag'] == 1
@@ -128,7 +131,7 @@ def probe(runtime, adapter_tool):
                               str(adapter['device_id']), adapter['adapter_id']], runtime)
             record.update(kind='adapter-batch', implementation=implementation,
                           implementation_name=label, adapter=adapter)
-            record.update(summarize_batch(record['stdout'], record['exit_code'], record['timed_out']))
+            record.update(summarize_batch(record['stdout'], record['exit_code'], record['timed_out'], record['stderr']))
             # An unavailable backend is a valid observed probe failure; an
             # unexplained loader error/crash or malformed successful batch is not.
             record['passed'] = (record['timed_out'] or record['protocol_completed']

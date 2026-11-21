@@ -42,7 +42,8 @@ class BuildSelectionTests(unittest.TestCase):
             self.assertEqual(self.selected([f'native/official/runtime-chunks/{platform}/library.part000']), {platform})
 
     def test_windows_detector_scripts_are_isolated(self):
-        for path in ('scripts/probe_windows_codec_detector.py', 'scripts/test_windows_codec_detector.py'):
+        for path in ('scripts/probe_windows_codec_detector.py', 'scripts/test_windows_codec_detector.py',
+                     'scripts/probe_windows_streamer_lifecycle.py', 'Tests/WindowsCodecDetector/CMakeLists.txt'):
             self.assertEqual(self.selected([path]), {'windows'})
 
     def test_windows_runtime_manifest_addition_does_not_rebuild_other_platforms(self):

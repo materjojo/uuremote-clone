@@ -20,14 +20,14 @@
 | UURemoteClone-macos | 保留执行权限的 `.app` ZIP，含原版 dylib 与配置 |
 | UURemoteClone-windows-x64 | 自包含 WPF 应用 ZIP，含 `gvpb.dll`、原版 `streamer.dll`、`StreamerCodecDetector.exe` 与配置 |
 | UURemoteClone-android-arm64-debug | ARM64 调试 APK，含原版三个 `.so`、配置与共享协议核心 |
-| Native-ABI-* | 对安装包内真实媒体库执行工厂/版本查询的结果及 SHA-256；Windows 另含原版 detector 的 runner 调用报告 |
+| Native-ABI-* | 对安装包内真实媒体库执行工厂/版本查询的结果及 SHA-256；Windows 另含原版 detector 和隔离 Initialize/Finalize 的 runner 调用报告 |
 
 本轮已通过的下载与验证：
 
 | 平台 | 已构建提交 | 下载 |
 |---|---|---|
 | macOS ARM64 | `eacc0e8` | [应用 ZIP](https://github.com/materjojo/uuremote-clone/actions/runs/44670463306/artifacts/14600510228) |
-| Windows x64 | `c0264f9` | [应用 ZIP](https://github.com/materjojo/uuremote-clone/actions/runs/44670938942/artifacts/14600625981) |
+| Windows x64 | `bee0d8f` | [应用 ZIP](https://github.com/materjojo/uuremote-clone/actions/runs/44881938396/artifacts/14698646313) |
 | Android ARM64 | `eacc0e8` | [调试 APK](https://github.com/materjojo/uuremote-clone/actions/runs/44670463306/artifacts/14600320303) |
 
 产物保留 7 天，过期后手动选择对应平台重建。macOS 包为当前 runner 的架构，未声明 universal 或 notarized；Android 为调试签名，Windows 尚未做安装器/发行签名。上述产物不能视作已通过端到端验收的正式版本。

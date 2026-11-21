@@ -1,0 +1,20 @@
+{
+  "platform": "Windows",
+  "machine": "AMD64",
+  "library_sha256": "ac351cf4e1d489e0b6e1a3df5cdf8aed96348876f7e2c7fcf7162fe59e1bb1c4",
+  "bridge_sha256": "e521e3926ccc187fd290522e70338662eb4d440541e9d8a8f0e01bce05da4389",
+  "protobuf_schema_messages": 179,
+  "observations": [
+    {
+      "role": "controller",
+      "version": "V4.14.2",
+      "native_return": 0
+    },
+    {
+      "role": "controlled",
+      "version": "V4.14.2",
+      "native_return": 0
+    }
+  ],
+  "scope": "factory + bounded version copy only; not media, signaling, UI or interoperability validation"
+}

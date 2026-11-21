@@ -36,6 +36,14 @@ class DetectorReportTests(unittest.TestCase):
         self.assertEqual(report['rows'], [])
         self.assertFalse(report['protocol_completed'])
 
+    def test_decoder_diagnostics_on_stderr_are_retained_with_their_stream(self):
+        report = summarize_batch('RESULT,1,1,8,0,0,0\nBATCH_DONE\n', 0,
+                                 stderr='BATCH_DIAG,decoder=32,stage=init,result=failure\r\n')
+        self.assertTrue(report['protocol_completed'])
+        self.assertEqual(report['diagnostics'], ['BATCH_DIAG,decoder=32,stage=init,result=failure'])
+        self.assertEqual(report['diagnostic_streams'], [
+            {'stream': 'stderr', 'line': 'BATCH_DIAG,decoder=32,stage=init,result=failure'}])
+
     def test_strict_report_validation_rejects_malformed_and_out_of_range_rows(self):
         for line in ['RESULT,1,1,8,1920,1080', 'RESULT,1,1,8,1920,1080,1,extra',
                      'RESULT,1,1,8,2147483648,1080,1', 'RESULT,1,1,8,1920,1080,word']:
