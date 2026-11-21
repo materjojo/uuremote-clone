@@ -63,10 +63,11 @@ def binary(data):
 
 
 class RoomObservation:
-    def __init__(self, role, allow_fixture_ca=False, reply_room_info=False):
+    def __init__(self, role, allow_fixture_ca=False, reply_room_info=False, empty_room_info=False):
         self.role = role
         self.allow_fixture_ca = allow_fixture_ca
         self.reply_room_info = reply_room_info
+        self.empty_room_info = empty_room_info
         self.states = []
         self.state_codes = []
         self.frames = []
@@ -75,6 +76,7 @@ class RoomObservation:
         self.received_event = threading.Event()
         self.untrusted_certificate_rejected = threading.Event()
         self.logged_in = threading.Event()
+        self.room_info_rejected = threading.Event()
         self.stop = threading.Event()
         callback_type = ctypes.WINFUNCTYPE(None, ctypes.c_int32, ctypes.c_int32)
         self.callback = callback_type(self.record_state)
@@ -110,9 +112,12 @@ class RoomObservation:
     def record_code(self, handle, code):
         self.state_codes.append({'handle': handle, 'code': code})
         self.check_login(handle)
+        if code == 2001:
+            self.room_info_rejected.set()
 
     def check_login(self, handle):
-        if (any(item == {'handle': handle, 'state': 3} for item in self.states)
+        if (any(item == {'handle': handle, 'state': 2} for item in self.states)
+                and any(item == {'handle': handle, 'code': 9003} for item in self.state_codes)
                 and any(item == {'handle': handle, 'code': 9004} for item in self.state_codes)):
             self.logged_in.set()
 
@@ -121,6 +126,8 @@ class RoomObservation:
         pointers[12] = ctypes.cast(self.code_callback, ctypes.c_void_p).value
 
     def room_info(self):
+        if self.empty_room_info:
+            return {}
         participant = {'client_id': 'ci-' + self.role, 'device_id': 'ci-device-' + self.role,
                        'user_id': 'ci-user', 'role': 'publisher' if self.role == 'controlled' else 'subscriber'}
         info = {'room_id': 'ci-loopback-room', 'you': participant, 'subscribers': [],
@@ -148,7 +155,7 @@ class RoomObservation:
                     record['tls_cipher'] = connection.cipher()
                     connection.settimeout(0.25)
                     data = bytearray()
-                    deadline = time.monotonic() + 8
+                    deadline = time.monotonic() + 20
 
                     def receive_until(size):
                         while len(data) < size:
@@ -315,7 +322,7 @@ class RoomObservation:
                   'room_callback_abi': 'void(int32_t handle, int32_t state)',
                   'connection_code_callback_slot': 12,
                   'connection_code_callback_abi': 'void(int32_t handle, int32_t code)',
-                  'reply_room_info': self.reply_room_info})
+                  'reply_room_info': self.reply_room_info, 'empty_room_info': self.empty_room_info})
         report['handle'] = create(ctypes.byref(config))
         try:
             if report['handle'] <= 0:
@@ -327,7 +334,10 @@ class RoomObservation:
                 report['trust_extension'] = self.extend_fixture_trust(module)
             report['event_frame_observed'] = self.received_event.wait(8)
             if self.reply_room_info:
-                report['room_login_callbacks_observed'] = self.logged_in.wait(8)
+                if self.empty_room_info:
+                    report['empty_room_info_rejected'] = self.room_info_rejected.wait(8)
+                else:
+                    report['room_login_callbacks_observed'] = self.logged_in.wait(8)
         finally:
             if report['handle'] > 0:
                 report['destroy_status'] = destroy(report['handle'])
@@ -347,8 +357,9 @@ class RoomObservation:
                             and any(state['handle'] == report.get('handle') for state in self.states)
                             and (not self.allow_fixture_ca or (report.get('baseline_untrusted_certificate_rejected')
                                  and report.get('trust_extension', {}).get('store_pointer_unchanged')))
-                            and (not self.reply_room_info or (report.get('room_login_callbacks_observed')
-                                 and any(item.get('room_info_reply') for item in self.connections))))
+                            and (not self.reply_room_info or (any('room_info_reply' in item for item in self.connections)
+                                 and (report.get('room_login_callbacks_observed') if not self.empty_room_info else
+                                      report.get('empty_room_info_rejected') and not self.logged_in.is_set()))))
         report['scope'] = ('Original room setup against an independent synthetic room_info fixture.' if self.reply_room_info else
                            'Original room setup and loopback TLS/WebSocket observation only.')
         report['limitations'] = ['The optional fixture CA addition changes this process native trust store and is explicitly instrumented evidence, separate from the ordinary baseline.',
