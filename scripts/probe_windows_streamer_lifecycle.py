@@ -83,7 +83,7 @@ def capability(table):
     return report
 
 
-def child(runtime, workspace, role, output, query_capability=False, query_rooms=False, allow_fixture_ca=False, reply_room_info=False, empty_room_info=False, request_control=False):
+def child(runtime, workspace, role, output, query_capability=False, query_rooms=False, allow_fixture_ca=False, reply_room_info=False, empty_room_info=False, request_control=False, receive_control=False):
     manifest = json.loads((ROOT / 'native/official/manifest.json').read_text())
     for item in manifest['files']:
         if item['platform'] == 'windows':
@@ -111,6 +111,9 @@ def child(runtime, workspace, role, output, query_capability=False, query_rooms=
         if request_control:
             from probe_windows_streamer_control import ControlObservation
             room_observer = ControlObservation(role, allow_fixture_ca, reply_room_info, empty_room_info)
+        elif receive_control:
+            from probe_windows_streamer_controlled import ControlledObservation
+            room_observer = ControlledObservation(role, allow_fixture_ca, reply_room_info, empty_room_info)
         else:
             room_observer = RoomObservation(role, allow_fixture_ca, reply_room_info, empty_room_info)
     module = ctypes.WinDLL(str(runtime / 'streamer.dll'), winmode=0x100 | 0x1000)
@@ -189,7 +192,10 @@ def main():
     parser.add_argument('--room-info', action='store_true', help='Supply an independent synthetic room_info response and require native login callbacks')
     parser.add_argument('--empty-room-info', action='store_true', help='Negative control: reply with an empty room_info object and require native rejection')
     parser.add_argument('--room-control', action='store_true', help='Controller-only: observe slot 4 control request after native room login; no control ACK or peer is supplied')
+    parser.add_argument('--room-controlled', action='store_true', help='Controlled-only: observe be-controlled consumption and bounded OnNewControl callback copies; no peer or capture')
     args = parser.parse_args()
+    if args.room_controlled and (args.room_control or not args.room_info or args.empty_room_info or args.child == 'controller'):
+        parser.error('--room-controlled requires valid --room-info and only the controlled role')
     if args.room_control and (not args.room_info or args.empty_room_info or args.child == 'controlled'):
         parser.error('--room-control requires valid --room-info and the controller role')
     if args.empty_room_info and not args.room_info:
@@ -200,16 +206,16 @@ def main():
         parser.error('Original target execution is restricted to Windows GitHub Actions')
     runtime, workspace, output = args.runtime.resolve(), args.workspace.resolve(), args.output.resolve()
     if args.child:
-        return child(runtime, workspace, args.child, output, args.capabilities, args.rooms, args.room_fixture_ca, args.room_info, args.empty_room_info, args.room_control)
+        return child(runtime, workspace, args.child, output, args.capabilities, args.rooms, args.room_fixture_ca, args.room_info, args.empty_room_info, args.room_control, args.room_controlled)
     cases = []
-    for role in (('controller',) if args.room_control else ('controller', 'controlled')):
+    for role in (('controller',) if args.room_control else ('controlled',) if args.room_controlled else ('controller', 'controlled')):
         child_output = output.with_name('lifecycle-' + role + '.json')
         def command_for(case_workspace, case_output):
             return [sys.executable, str(Path(__file__).resolve()), '--runtime', str(runtime),
                     '--workspace', str(case_workspace), '--output', str(case_output), '--child', role,
                     *(['--capabilities'] if args.capabilities else []), *(['--rooms'] if args.rooms else []),
                     *(['--room-fixture-ca'] if args.room_fixture_ca else []), *(['--room-info'] if args.room_info else []),
-                    *(['--empty-room-info'] if args.empty_room_info else []), *(['--room-control'] if args.room_control else [])]
+                    *(['--empty-room-info'] if args.empty_room_info else []), *(['--room-control'] if args.room_control else []), *(['--room-controlled'] if args.room_controlled else [])]
 
         observation = observe(command_for(workspace / role, child_output), runtime, timeout=240 if args.capabilities else 60)
         child_report = json.loads(child_output.read_text(encoding='utf-8')) if child_output.exists() else None
@@ -237,7 +243,7 @@ def main():
     report = {'source_commit': os.environ.get('GITHUB_SHA'), 'run_id': os.environ.get('GITHUB_RUN_ID'),
               'platform': platform.platform(), 'observations': cases, 'room_fixture_ca_instrumentation': args.room_fixture_ca,
               'synthetic_room_info_response': args.room_info, 'empty_room_info_negative_control': args.empty_room_info,
-              'controller_control_request': args.room_control,
+              'controller_control_request': args.room_control, 'controlled_be_controlled_event': args.room_controlled,
               'passed': all(case['passed'] for case in cases),
               'scope': ('Isolated original DLL lifecycle and loopback room/WebSocket observations.' if args.rooms else
                         'Isolated original DLL factory/version/Initialize/Finalize calls, plus slot 15 capability query.'

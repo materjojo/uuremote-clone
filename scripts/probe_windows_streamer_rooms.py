@@ -126,6 +126,9 @@ class RoomObservation:
         pointers[7 if self.role == 'controller' else 4] = ctypes.cast(self.callback, ctypes.c_void_p).value
         pointers[12] = ctypes.cast(self.code_callback, ctypes.c_void_p).value
 
+    def on_server_tick(self, send_frame, record):
+        """Optional fixture event injection while waiting for client bytes."""
+
     def on_client_frame(self, frame):
         """Optional observation hook; the base fixture only retains the frame."""
 
@@ -168,6 +171,8 @@ class RoomObservation:
                         while len(data) < size:
                             if self.stop.is_set() or time.monotonic() >= deadline:
                                 raise TimeoutError('Loopback observation ended')
+                            if record.get('namespace_connected'):
+                                self.on_server_tick(send_frame, record)
                             try:
                                 chunk = connection.recv(4096)
                             except socket.timeout:
