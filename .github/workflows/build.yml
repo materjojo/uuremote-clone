@@ -173,6 +173,8 @@ jobs:
         run: python scripts/probe_windows_streamer_lifecycle.py --runtime build/windows --workspace build/roominfo-probes --output build/streamer-roominfo-windows.json --rooms --room-fixture-ca --room-info --debugger build/codec-detector/Release/native_failure_observer.exe
       - name: Verify original native rejection of empty room info
         run: python scripts/probe_windows_streamer_lifecycle.py --runtime build/windows --workspace build/roominfo-empty-probes --output build/streamer-roominfo-empty-windows.json --rooms --room-fixture-ca --room-info --empty-room-info --debugger build/codec-detector/Release/native_failure_observer.exe
+      - name: Verify production C# original room lifecycle and native login callbacks
+        run: python scripts/probe_windows_managed_rooms.py --probe Tests/WindowsOfficialSmoke/bin/Release/net8.0/WindowsOfficialSmoke.dll --runtime build/windows --workspace build/managed-room-probes --output build/streamer-managed-rooms-windows.json
       - name: Verify package and archive
         run: |
           Compress-Archive -Path build/windows/* -DestinationPath build/UURemoteClone-windows-x64.zip
@@ -196,6 +198,7 @@ jobs:
             build/streamer-rooms-windows.json
             build/streamer-roominfo-windows.json
             build/streamer-roominfo-empty-windows.json
+            build/streamer-managed-rooms-windows.json
           retention-days: 7
           if-no-files-found: error
 

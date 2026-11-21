@@ -68,6 +68,7 @@ class RoomObservation:
         self.allow_fixture_ca = allow_fixture_ca
         self.reply_room_info = reply_room_info
         self.empty_room_info = empty_room_info
+        self.baseline_rejection_path = None
         self.states = []
         self.state_codes = []
         self.frames = []
@@ -112,7 +113,7 @@ class RoomObservation:
     def record_code(self, handle, code):
         self.state_codes.append({'handle': handle, 'code': code})
         self.check_login(handle)
-        if code == 2001:
+        if code == 2007:
             self.room_info_rejected.set()
 
     def check_login(self, handle):
@@ -263,6 +264,8 @@ class RoomObservation:
                 if getattr(error, 'reason', None) == 'TLSV1_ALERT_UNKNOWN_CA':
                     record['untrusted_certificate_rejected'] = True
                     self.untrusted_certificate_rejected.set()
+                    if self.baseline_rejection_path is not None:
+                        self.baseline_rejection_path.write_text(json.dumps({'peer': list(peer), 'reason': error.reason}), encoding='utf-8')
             finally:
                 record['received_stream'] = binary(bytes(transcript))
 
@@ -343,7 +346,7 @@ class RoomObservation:
                 report['destroy_status'] = destroy(report['handle'])
         return report
 
-    def finish(self, report):
+    def finish(self, report, *, verify_native=True):
         self.stop.set()
         self.listener.close()
         self.thread.join(timeout=2)
@@ -351,7 +354,8 @@ class RoomObservation:
                       listener_stopped=not self.thread.is_alive(), certificate_pem=self.certificate_pem,
                       tls_fixture='Ephemeral self-signed certificate; explicit child-only native trust instrumentation if enabled.')
         self.certificate_directory.cleanup()
-        report['passed'] = (report.get('handle', 0) > 0 and report.get('destroy_status') == 0
+        if verify_native:
+            report['passed'] = (report.get('handle', 0) > 0 and report.get('destroy_status') == 0
                             and any(item.get('namespace_connected') for item in self.connections)
                             and report.get('event_frame_observed', False) and report['listener_stopped']
                             and any(state['handle'] == report.get('handle') for state in self.states)

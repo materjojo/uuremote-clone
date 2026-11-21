@@ -8,5 +8,6 @@
   <ItemGroup>
     <Compile Include="../../platforms/windows/OfficialStreamer.cs" Link="OfficialStreamer.cs" />
     <Compile Include="../../platforms/windows/OfficialWindowsEngine.cs" Link="OfficialWindowsEngine.cs" />
+    <Compile Include="../../platforms/windows/OfficialWindowsEngine.Rooms.cs" Link="OfficialWindowsEngine.Rooms.cs" />
   </ItemGroup>
 </Project>

@@ -8,11 +8,11 @@ using System.Text.Json;
 namespace UURemoteClone;
 
 /// <summary>
-/// Verified Windows 4.48.1.5606 engine lifecycle and reported codec capabilities.
-/// Owns the process-global original engine exclusively. This does not create a
-/// room or start capture/rendering; capability declarations do not prove GPU use.
+/// Windows 4.48.1.5606 lifecycle, reported capabilities and asynchronous room entry.
+/// Owns the process-global original engine exclusively. A local room handle or
+/// capability declaration does not establish a peer, media operation or GPU use.
 /// </summary>
-public sealed class OfficialWindowsEngine : IDisposable
+public sealed partial class OfficialWindowsEngine : IDisposable
 {
     private const string LibrarySha256 = "ac351cf4e1d489e0b6e1a3df5cdf8aed96348876f7e2c7fcf7162fe59e1bb1c4";
     private const string DetectorSha256 = "4377ce244e2424cf7f598b98fb9f0427711b7ad71bd8d776ea3d7eefdb60693b";
@@ -76,6 +76,8 @@ public sealed class OfficialWindowsEngine : IDisposable
         VerifyIdentity(Path.Combine(Path.GetDirectoryName(dll)!, "StreamerCodecDetector.exe"), DetectorSha256);
         if (!File.Exists(config)) throw new FileNotFoundException("Original engine config not found.", config);
         Role = role;
+        _roomStateCallback = (handle, value) => RecordRoomNotification(handle, RoomNotificationKind.RoomState, value);
+        _connectionCodeCallback = (handle, value) => RecordRoomNotification(handle, RoomNotificationKind.ConnectionCode, value);
         lock (CallGate)
         {
             RequireNoEngine();
@@ -87,6 +89,8 @@ public sealed class OfficialWindowsEngine : IDisposable
                 var factory = Marshal.GetDelegateForFunctionPointer<FactoryFunction>(NativeLibrary.GetExport(_module,
                     role == OfficialStreamer.Role.Controller ? "ExchangeControllerInterface" : "ExchangeControlledInterface"));
                 var callbacks = new IntPtr[role == OfficialStreamer.Role.Controller ? 18 : 16];
+                callbacks[role == OfficialStreamer.Role.Controller ? 7 : 4] = Marshal.GetFunctionPointerForDelegate(_roomStateCallback);
+                callbacks[12] = Marshal.GetFunctionPointerForDelegate(_connectionCodeCallback);
                 var pin = GCHandle.Alloc(callbacks, GCHandleType.Pinned);
                 IntPtr table;
                 try { table = factory(pin.AddrOfPinnedObject()); }
@@ -96,6 +100,8 @@ public sealed class OfficialWindowsEngine : IDisposable
                     Marshal.ReadIntPtr(table, index * IntPtr.Size));
                 var initialize = Slot<InitializeFunction>(0);
                 _finalize = Slot<FinalizeFunction>(1);
+                _openRoom = Slot<OpenRoomFunction>(2);
+                _closeRoom = Slot<CloseRoomFunction>(3);
                 _version = Slot<VersionFunction>(role == OfficialStreamer.Role.Controller ? 17 : 18);
                 _capability = Slot<CapabilityFunction>(15);
                 if (Marshal.SizeOf<CapabilityData>() != 16 || Marshal.OffsetOf<CapabilityData>(nameof(CapabilityData.Size)).ToInt32() != 8)
@@ -192,12 +198,14 @@ public sealed class OfficialWindowsEngine : IDisposable
         {
             if (_disposed) return;
             RequireActive();
+            CloseOwnedRooms();
             // Mark unknown before crossing native code. Exceptions or a nonzero
             // return keep the process owner rooted and block subsequent factories.
             _faulted = true;
             int status = _finalize();
             if (status != 0) throw new InvalidOperationException($"Original engine Finalize failed: {status}");
             _disposed = true;
+            FreeRoomInputs();
             FreeInputs();
             _owner = null;
         }
