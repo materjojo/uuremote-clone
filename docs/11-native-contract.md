@@ -121,9 +121,11 @@ Windows 两种角色的 slot 0 接收三个直接指针、返回 32 位状态；
 
 相关汇编 Evidence：控制端 wrapper `ev_1da724d0ba02af2eed752d756566319aef3620cf9e935b16a2b4e093974b119d`、初始化 `ev_72717ce1cec467fc62a1635747fee87a34015afb0e67fb444bba559853471773`；被控端 wrapper `ev_d7ccd1907429c106f0098a63cb108bede237948d01d0dfab674539791147822a`、初始化 `ev_103afbb7804f376d6fa6f99e3c915c363c0bfd1245d1c6e1c12dcedf5952cac6`；路径消费者 `ev_8e872b10c861226c0b32f14ca693594b1866015fa033d2bd712dd02579183d8d`，logging config `ev_ae0771a3169ac401c47f50c11f8acc825a99dbdfcc66c12abd00117164a749d5`。原文在 `/home/ubuntu/uuyc_clone/analysis/deep-native/windows-followup/results/113..116` 与 `252..257` 文件中，subject 为 manifest 中原版 DLL。
 
-[runner 探测脚本](../scripts/probe_windows_streamer_lifecycle.py) 先核对原文件哈希，在各自子进程中分配正确长度的空 callback 数组，调用工厂、版本、Initialize、Finalize、版本。三个参数使用 NUL 终止 UTF-16 缓冲；第二项是复制原配置的非 ASCII 路径，另外两项是独立 scratch 目录，不把其完整业务语义预先命名。父进程设置 60 秒上限，报告保留 native call 前阶段、退出码、原始输出、状态、工作目录文件身份及日志预览。仅允许 Windows GitHub Actions 执行。生产绑定仍只开放工厂/版本；脚本不创建房间，不调用采集、能力探测、网络或媒体入口。实际结果以对应 Actions artifact 为准，源码增加探测不构成运行通过。
+[runner 探测脚本](../scripts/probe_windows_streamer_lifecycle.py) 先核对原文件哈希，在各自子进程中分配正确长度的空 callback 数组，调用工厂、版本、Initialize、Finalize、版本。三个参数使用 NUL 终止 UTF-16 缓冲；第一项是 scratch log 目录，第二项是复制原配置的非 ASCII 路径，第三项是日志文件 suffix。父进程设置 60 秒上限，报告保留 native call 前阶段、退出码、原始输出、状态、工作目录文件身份及日志预览。仅允许 Windows GitHub Actions 执行。生产绑定仍只开放工厂/版本；脚本不创建房间，不调用采集、能力探测、网络或媒体入口。实际结果以对应 Actions artifact 为准，源码增加探测不构成运行通过。
 
 实际 [Actions 44883311915](https://github.com/materjojo/uuremote-clone/actions/runs/44883311915) 已失败：两角色先成功查询版本，随后均在 Initialize 阶段以 `0xC0000374` 退出，未到达 Finalize。[原始失败报告](../analysis/ci/3969eba-windows-lifecycle.json) 保留输入、哈希和最后阶段；这不是初始化成功证据，尚不能把堆损坏归因到 ABI 或原库前提中的某一项。
+
+`FUN_180d25db0` 的后续追踪已显示：配置 `+0x48` 的第三项会追加到 `connection_log_controller/controlled_<suffix>.slog` 中，不能传完整目录。Evidence `ev_db4cf5655239d172cd16d02a6e7b7305851ede4ef50c00d060ee4479ae64686e`，完整 body 保存在 `266-pseudo-logger-create-sinks.*`。初版探测错误地给第三项传了完整 scratch 目录；现改用 `ci-controller/ci-controlled` suffix。此修正是否解决原生堆损坏，仍需下一次实际运行核对。
 
 失败后的诊断扩展由父进程采集工作目录文件，即使 native 子进程异常退出也保留日志；另在独立 scratch 目录中以 runner 编译的 [native_failure_observer](../Tests/WindowsCodecDetector/native_failure_observer.cpp) 做一次 debugger-attached 重试，记录异常及 module/RVA 栈帧。重试不替代普通失败结果，不写内存、不保存内存 dump、不下载调试符号。它使用 Win32 debug events 和本地 DbgHelp unwind；编译和目标执行仍只在 GitHub Actions。
 

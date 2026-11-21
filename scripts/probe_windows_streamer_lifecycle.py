@@ -32,7 +32,7 @@ def collect_workspace(workspace):
             continue
         data = path.read_bytes()
         item = {'path': str(path.relative_to(workspace)), 'bytes': len(data), 'sha256': digest(data)}
-        if '.log' in path.name.lower() or path.suffix.lower() == '.txt':
+        if '.log' in path.name.lower() or path.suffix.lower() in ('.txt', '.slog'):
             item['text_preview'] = data[:256 * 1024].decode('utf-8', errors='replace')
             item['text_preview_truncated'] = len(data) > 256 * 1024
         files.append(item)
@@ -57,17 +57,16 @@ def child(runtime, workspace, role, output):
             if digest(data) != item['sha256'] or len(data) != item['bytes']:
                 raise RuntimeError('Original runtime identity mismatch')
     workspace.mkdir(parents=True, exist_ok=False)
-    log_directory, diagnostic_directory = workspace / 'logs', workspace / 'diagnostics'
+    log_directory = workspace / 'logs'
     log_directory.mkdir()
-    diagnostic_directory.mkdir()
     # A non-ASCII config path distinguishes UTF-16 from a guessed UTF-8 API.
     config = workspace / 'config-配置.json'
     shutil.copyfile(runtime / 'streamer-config.json', config)
-    paths = [log_directory, config, diagnostic_directory]
+    inputs = [str(log_directory), str(config), 'ci-' + role]
     report = {'role': role, 'phase': 'loading', 'passed': False,
               'library_sha256': digest((runtime / 'streamer.dll').read_bytes()),
               'config_sha256': digest(config.read_bytes()),
-              'slot_0_inputs': [str(path) for path in paths], 'string_encoding': 'UTF-16LE, NUL-terminated'}
+              'slot_0_inputs': inputs, 'string_encoding': 'UTF-16LE, NUL-terminated'}
     save(output, report)
     os.chdir(workspace)
     # Keep the module, pointer table, callbacks and path buffers alive until the
@@ -82,7 +81,7 @@ def child(runtime, workspace, role, output):
         raise RuntimeError('Factory returned a null table')
     initialize = ctypes.WINFUNCTYPE(ctypes.c_int, ctypes.c_void_p, ctypes.c_void_p, ctypes.c_void_p)(table[0])
     finalize = ctypes.WINFUNCTYPE(ctypes.c_int)(table[1])
-    buffers = [ctypes.create_unicode_buffer(str(path)) for path in paths]
+    buffers = [ctypes.create_unicode_buffer(value) for value in inputs]
     if ctypes.sizeof(ctypes.c_wchar) != 2:
         raise RuntimeError('Windows UTF-16 wchar ABI is required')
     try:
@@ -139,13 +138,17 @@ def main():
             debug_output = output.with_name('lifecycle-' + role + '-debug.json')
             events = output.with_name('lifecycle-' + role + '-debugger.jsonl')
             debug_command = [str(args.debugger.resolve()), str(events), *command_for(debug_workspace, debug_output)]
-            debug_process = observe(debug_command, runtime, timeout=120)
-            case['debug_retry'] = {
-                'process': debug_process,
-                'native': json.loads(debug_output.read_text(encoding='utf-8')) if debug_output.exists() else None,
-                'events': [json.loads(line) for line in events.read_text(encoding='utf-8').splitlines()] if events.exists() else [],
-                'workspace_files_after_exit': collect_workspace(debug_workspace),
-                'scope': 'Debugger-attached diagnostic retry; does not replace the failed ordinary observation.'}
+            try:
+                debug_process = observe(debug_command, runtime, timeout=120)
+            except OSError as error:
+                case['debug_retry'] = {'launch_error': str(error)}
+            else:
+                case['debug_retry'] = {
+                    'process': debug_process,
+                    'native': json.loads(debug_output.read_text(encoding='utf-8')) if debug_output.exists() else None,
+                    'events': [json.loads(line) for line in events.read_text(encoding='utf-8').splitlines()] if events.exists() else [],
+                    'workspace_files_after_exit': collect_workspace(debug_workspace),
+                    'scope': 'Debugger-attached diagnostic retry; does not replace the failed ordinary observation.'}
         cases.append(case)
     report = {'source_commit': os.environ.get('GITHUB_SHA'), 'run_id': os.environ.get('GITHUB_RUN_ID'),
               'platform': platform.platform(), 'observations': cases,
@@ -154,7 +157,7 @@ def main():
               'limitations': ['No room, signaling, capture, codecs, input or media session is executed.',
                               'Native callbacks are null; callback signatures and delivery remain untested.',
                               'A zero Initialize result alone does not prove config consumption or hardware success.',
-                              'First and third path roles are caller-selected scratch locations; their full semantics remain under analysis.']}
+                              'The third UTF-16 string is a log filename suffix; complete logging semantics remain under analysis.']}
     save(output, report)
     for case in cases:
         native = case['native'] or {}
