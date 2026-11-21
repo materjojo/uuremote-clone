@@ -79,6 +79,9 @@ public sealed partial class OfficialWindowsEngine : IDisposable
         _roomStateCallback = (handle, value) => RecordRoomNotification(handle, RoomNotificationKind.RoomState, value);
         _connectionCodeCallback = (handle, value) => RecordRoomNotification(handle, RoomNotificationKind.ConnectionCode, value);
         _newControlCallback = RecordNewControl;
+        _binaryDataCallback = RecordBinaryData;
+        _controllerPeerStateCallback = (handle, state, detail) => RecordPeerState(handle, state, detail);
+        _controlledPeerStateCallback = (handle, state) => RecordPeerState(handle, state, null);
         lock (CallGate)
         {
             RequireNoEngine();
@@ -93,6 +96,7 @@ public sealed partial class OfficialWindowsEngine : IDisposable
                 callbacks[role == OfficialStreamer.Role.Controller ? 7 : 4] = Marshal.GetFunctionPointerForDelegate(_roomStateCallback);
                 callbacks[12] = Marshal.GetFunctionPointerForDelegate(_connectionCodeCallback);
                 if (role == OfficialStreamer.Role.Controlled) callbacks[10] = Marshal.GetFunctionPointerForDelegate(_newControlCallback);
+                InstallDataCallbacks(callbacks);
                 var pin = GCHandle.Alloc(callbacks, GCHandleType.Pinned);
                 IntPtr table;
                 try { table = factory(pin.AddrOfPinnedObject()); }
@@ -105,6 +109,7 @@ public sealed partial class OfficialWindowsEngine : IDisposable
                 _openRoom = Slot<OpenRoomFunction>(2);
                 _closeRoom = Slot<CloseRoomFunction>(3);
                 if (role == OfficialStreamer.Role.Controller) _requestControl = Slot<RequestControlFunction>(4);
+                _sendBinary = Slot<SendBinaryFunction>(role == OfficialStreamer.Role.Controller ? 13 : 11);
                 _version = Slot<VersionFunction>(role == OfficialStreamer.Role.Controller ? 17 : 18);
                 _capability = Slot<CapabilityFunction>(15);
                 if (Marshal.SizeOf<CapabilityData>() != 16 || Marshal.OffsetOf<CapabilityData>(nameof(CapabilityData.Size)).ToInt32() != 8)

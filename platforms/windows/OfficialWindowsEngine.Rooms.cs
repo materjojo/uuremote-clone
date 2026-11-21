@@ -223,6 +223,12 @@ public sealed partial class OfficialWindowsEngine
         private readonly List<IntPtr> _allocations = new();
         public IntPtr Config { get; private set; }
 
+        public RoomInputs(ReadOnlySpan<byte> binaryData)
+        {
+            try { Config = CopyBytes(binaryData.ToArray()); }
+            catch { Dispose(); throw; }
+        }
+
         public RoomInputs(ReadOnlySpan<byte> appData, string appControlId, string geoTimezone)
         {
             ValidateString(appControlId, nameof(appControlId));

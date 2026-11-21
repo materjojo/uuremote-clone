@@ -12,6 +12,7 @@ import os
 from pathlib import Path
 import platform
 import queue
+import secrets
 import subprocess
 import sys
 import time
@@ -173,11 +174,15 @@ def main():
     workspace.mkdir(parents=True, exist_ok=False)
     broker, processes, streams, children, fixtures = PairBroker(), {}, {}, {}, {}
     report = {'source_commit': os.environ.get('GITHUB_SHA'), 'run_id': os.environ.get('GITHUB_RUN_ID'),
-              'passed': False, 'scope': 'Two original Windows engines negotiating through an independent loopback recorder.',
+              'passed': False, 'scope': 'Two original Windows engines with independently routed signaling and direct original binary-channel transfer.',
               'instrumentation': 'Each child records baseline unknown_ca before explicitly adding only its fixture CA; no production trust override.',
-              'limitations': ['SDP/ICE signaling observations do not establish actual packet transport, capture, decoding, hardware acceleration or physical peer interoperability.',
-                              'No capture, renderer, input, audio or application-data send operation is called.',
+              'limitations': ['This is one host with two processes and private host candidates; it does not establish physical peer interoperability, public IPv4/IPv6 hole punching, capture, decoding or GPU operation.',
+                              'Only the original opaque binary send and receive channel is exercised; no capture, renderer, input or audio is called.',
                               'Room, device, user and control identities are test fixtures, not a production authorization service.']}
+    payloads = {role: b'ci-native-binary\x00\xff\xfe' + secrets.token_bytes(256) for role in ROLES}
+    negotiation_at = None
+    def received_by_both():
+        return all((workspace / (role + '-received')).exists() for role in ROLES)
     try:
         for role in ROLES:
             endpoint = PairEndpoint(role, broker)
@@ -189,7 +194,11 @@ def main():
             save(settings, {'server_url': endpoint.url, 'certificate_pem': endpoint.certificate_pem,
                             'baseline_rejection_path': str(endpoint.baseline_rejection_path),
                             'ready_path': str(workspace / (role + '-ready')),
-                            'start_path': str(workspace / 'start'), 'stop_path': str(workspace / 'stop')})
+                            'start_path': str(workspace / 'start'), 'stop_path': str(workspace / 'stop'),
+                            'send_path': str(workspace / 'send'),
+                            'received_path': str(workspace / (role + '-received')),
+                            'send_payload_base64': base64.b64encode(payloads[role]).decode('ascii'),
+                            'expected_payload_base64': base64.b64encode(payloads['controlled' if role == 'controller' else 'controller']).decode('ascii')})
             child_output = workspace / (role + '.json')
             stdout, stderr = (role_workspace / 'stdout.txt').open('wb'), (role_workspace / 'stderr.txt').open('wb')
             streams[role] = stdout, stderr
@@ -200,10 +209,16 @@ def main():
         while time.monotonic() < deadline:
             if all((workspace / (role + '-ready')).exists() for role in ROLES) and not (workspace / 'start').exists():
                 (workspace / 'start').write_text('both original logins observed')
-            if broker.negotiation_observed() or broker.errors or any(item.poll() is not None for item in processes.values()):
+            if broker.negotiation_observed() and negotiation_at is None:
+                negotiation_at = time.monotonic()
+            if negotiation_at is not None and time.monotonic() - negotiation_at >= 3 and not (workspace / 'send').exists():
+                (workspace / 'send').write_text('exercise original binary submission after recorded signaling')
+            if (received_by_both() or broker.errors
+                    or any(item.poll() is not None for item in processes.values())):
                 break
             time.sleep(0.05)
         report['negotiation_signaling_observed'] = broker.negotiation_observed()
+        report['bidirectional_binary_observed'] = received_by_both()
     except BaseException:
         report['error'] = traceback.format_exc()
     finally:
@@ -226,14 +241,23 @@ def main():
             fixture.pop('states', None)
             fixture.pop('state_codes', None)
             fixtures[role] = fixture
+        report['binary_bytes_verified'] = len(children) == 2 and all(
+            item.get('managed') and item['managed'].get('peer_binary_received')
+            and len(item['managed'].get('binary_data', [])) == 1
+            and item['managed']['binary_data'][0]['Handle'] == item['managed']['handle']
+            and base64.b64decode(item['managed']['binary_data'][0]['Data'])
+                == payloads['controlled' if role == 'controller' else 'controller']
+            for role, item in children.items())
         report.update(events=broker.events, routes=broker.routes, broker_errors=broker.errors,
                       children=children, fixtures=fixtures, workspace_files=collect_workspace(workspace))
-        report['passed'] = (report.get('negotiation_signaling_observed', False) and not broker.errors
+        report['passed'] = (report.get('negotiation_signaling_observed', False) and report.get('bidirectional_binary_observed', False)
+                             and report['binary_bytes_verified'] and not broker.errors
                              and len(children) == 2 and not report.get('killed_roles')
                              and all(item['exit_code'] == 0 and item['managed'] and item['managed'].get('passed') for item in children.values())
                              and all(item['listener_stopped'] and any(connection.get('untrusted_certificate_rejected') for connection in item['connections']) for item in fixtures.values()))
         save(output, report)
     print(json.dumps({'passed': report['passed'], 'negotiation_signaling_observed': report.get('negotiation_signaling_observed'),
+                      'bidirectional_binary_observed': report.get('bidirectional_binary_observed'),
                       'events': [(item['from'], item['event'], item['message'].get('data', {}).get('type')) for item in broker.events],
                       'broker_errors': broker.errors}))
     return 0 if report['passed'] else 1
