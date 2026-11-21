@@ -6,7 +6,7 @@
 |---|---|---|
 | 三个给定安装包深入分析 | 已保存原包与提取树；继续核对实际 JNI / C ABI | 部分完成 |
 | 官方采集、硬编硬解、加速、通信路径 | 两端原版库工厂/版本及 Swift/C# 绑定已在 runner 验证；Windows 增加通过真实 DLL 字节对照的 Initialize/Finalize/capability 绑定；Android 增加受测生命周期封装；主流程、采集/编解码仍未接通验收 | 未完成 |
-| 原版协议 | Windows descriptor 能证明 schema；信令与业务调用仍需逐条跟踪 | 部分完成 |
+| 原版协议 | Windows descriptor 能证明 schema；原库 room-state 回调、TLS/Socket.IO 与 room_info/guard 请求已有隔离探测证据，使用显式测试 CA 插桩；业务回复与媒体仍需逐条跟踪 | 部分完成 |
 | 三端所有非云设备功能 | 独立配对、同意、RTP 视频和控制已有实现及回环证据，不依赖网易登录；音频、文件、终端和完整输入仍未接通 | 未完成 |
 | 各端 UI 与对应原版一致 | Android、Windows 已复用指定原包非云图片并取得真实克隆首页截图；其余布局仍为重建，缺同条件原版运行对照 | 未完成 |
 | 去除云设备 | 当前应用未提供云设备入口；原版库保留通用代码，不代表已做代码级剥离 | 部分完成 |
@@ -53,6 +53,8 @@
 - 初次 Initialize 把第三个 UTF-16 参数错当路径，两角色以 `0xC0000374` 退出。继续静态追踪确认该项是日志文件 suffix，修正后 `d11ee29` / [44885010956](https://github.com/materjojo/uuremote-clone/actions/runs/44885010956) 两角色 Initialize/Finalize=0。失败报告保留，未声称已经独立证明堆损坏根因。
 - `7db8179` / [44885744775](https://github.com/materjojo/uuremote-clone/actions/runs/44885744775)：原库 slot 15 capability 查询及重复字节相符通过，返回 H264/H265 JSON，H265 宽高均为 0。原库实际生成 SLOG 二进制日志，现保留原始 base64/SHA-256，不把文本搜索无错误解释为配置消费成功。
 - `e9692dd` / [44886678910](https://github.com/materjojo/uuremote-clone/actions/runs/44886678910)：Windows 生产 C# 绑定在角色隔离进程中通过初始化、能力查询、进程独占、阻止其它工厂、重复关闭、关闭后拒绝及再次初始化；返回字节与同 runner Python 原生调用完全相同。[实际报告](../analysis/ci/e9692dd-windows-managed-engine.json)。本轮只选择 Windows，其余平台跳过。绑定仍未接入普通 UI 会话，也未执行实际采集、编码/解码帧、回调投递或互控。
+
+- `576b43b` / [44891638984](https://github.com/materjojo/uuremote-clone/actions/runs/44891638984)：Windows 原库两角色 room entry 返回 handle 1，投递 room-state、连接指定 loopback。普通路径拒绝临时自签名 CA，`SSL_CERT_FILE` 也未改变结果；继续核对内嵌根证书加载后，仅在隔离 Actions 子进程中显式调用原库 parse/add/release helper 添加测试证书。插桩路径完成 TLS 1.3、WebSocket/Socket.IO，发出 `room_info`，被控端还发出有 `GRD1` 附件的 `guard` 事件；Destroy/Finalize=0。[完整报告](../analysis/ci/576b43b-windows-rooms.json) 保留 baseline 拒绝和插桩边界。这不等于默认原库接受测试 CA、业务入房、媒体或普通 UI 集成；生产 C# 未加入该插桩。
 
 ## 边界
 
