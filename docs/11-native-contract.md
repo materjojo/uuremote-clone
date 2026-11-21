@@ -137,7 +137,7 @@ Windows 两种角色的 slot 0 接收三个直接指针、返回 32 位状态；
 
 [Actions 44885744775](https://github.com/materjojo/uuremote-clone/actions/runs/44885744775) 的纯生命周期、slot 15 查询和重复查询均已通过，两角色 Initialize/Finalize 都返回 0。冻结 [原始 capability 报告](../analysis/ci/7db8179-windows-capabilities.json)，保留完整返回字节、哈希和二进制日志。实际 JSON 的 codec key 为 `H264/H265`，每项包含 width、height、fps、chroma_sampling。该 runner 控制端 H264 的两种 chroma 都为 1920×1080，被控端 H264 chroma=1 为 3840×2160、chroma=3 为 0×0；H265 全为 0×0，fps 均为 -1。重复查询字节一致。这是原库报告的 capability，未观察到实际编码/解码输出，也未据此认定物理 GPU 成功。
 
-[OfficialWindowsEngine](../platforms/windows/OfficialWindowsEngine.cs) 将已验证的 Windows-only Initialize/Finalize、版本和 capability 查询加入应用工程。它校验指定 DLL/detector 的 SHA-256、使用 UTF-16 缓冲、限制 filename suffix、在进程内保留单一 engine owner，并与旧的版本检查入口共用工厂调用锁，避免另一个工厂覆盖全局 callbacks。模块固定保留到进程退出；成功 Finalize 后才释放输入和 owner，失败则阻止继续使用未知状态。返回的 DLL-owned 数据立即有界复制、不释放原始指针，按 UTF-8/JSON 验证，不生成“硬编开启”等支持声明。初次验证时 callback 输入为空。后续 [房间绑定](../platforms/windows/OfficialWindowsEngine.Rooms.cs) 增加了已核对的 slot 2/3 与 room-state/connection-code 回调；仍未接入普通 UI 远程会话或采集/媒体。
+[OfficialWindowsEngine](../platforms/windows/OfficialWindowsEngine.cs) 将已验证的 Windows-only Initialize/Finalize、版本和 capability 查询加入应用工程。它校验指定 DLL/detector 的 SHA-256、使用 UTF-16 缓冲、限制 filename suffix、在进程内保留单一 engine owner，并与旧的版本检查入口共用工厂调用锁，避免另一个工厂覆盖全局 callbacks。模块固定保留到进程退出；成功 Finalize 后才释放输入和 owner，失败则阻止继续使用未知状态。返回的 DLL-owned 数据立即有界复制、不释放原始指针，按 UTF-8/JSON 验证，不生成“硬编开启”等支持声明。初次验证时 callback 输入为空。后续 [房间绑定](../platforms/windows/OfficialWindowsEngine.Rooms.cs) 增加了已核对的 slot 2/3 与 room-state/connection-code 回调；本阶段尚未运行采集/媒体。下文另有 `96cd54e` 的原库 HWND 媒体实际证据，普通 UI 仍未接入。
 
 [Windows managed smoke](../Tests/WindowsOfficialSmoke/Program.cs) 使用生产类在每个角色的独立进程中核对非 ASCII 配置路径、所有权冲突、阻止旧工厂、重复 capability、与同 runner Python 原始调用逐字节相符、重复 Dispose、关闭后调用拒绝，以及成功关闭后的再次初始化。父脚本记录退出码、超时、最后阶段和二进制日志；编译与运行只在 Actions。[44886678910](https://github.com/materjojo/uuremote-clone/actions/runs/44886678910) 已全部通过，两种角色各完成这些检查，报告见 [e9692dd-windows-managed-engine.json](../analysis/ci/e9692dd-windows-managed-engine.json)。其余平台跳过，本次没有新的 macOS/Android 编译结果。
 
@@ -215,9 +215,9 @@ controller slot 4 的 wrapper `0x180a2cfb0` 和核心 `0x180a34350` 接收 `int3
 
 此证据建立同一 Windows runner 两进程之间的原库二进制传输；未调用采集、音频、渲染或输入，未提供公网 STUN/TURN，不能验收媒体、物理 GPU、跨设备/跨平台或 IPv4/IPv6 NAT 打洞。测试 CA 和自动授权身份仍只限 runner。源码中的 `SendBinary` / `DrainBinaryData` / `DrainPeerStates` 已编译运行，普通 UI 仍未使用这条原库路径。
 
-## Windows 窗口媒体观察：静态契约与待运行检查
+## Windows 窗口媒体观察：静态契约与 Actions 像素证据
 
-`OfficialWindowsEngine.Media.cs` 仅为已跟踪的 Windows 布局增加窗口视频路径及原始通知；普通 UI 尚未切换，首次 Actions 像素结果仍待验证。新实现不会改变原 DLL、系统信任或 codec detector 结论。
+`OfficialWindowsEngine.Media.cs` 为已跟踪的 Windows 布局增加窗口视频路径及原始通知；`96cd54e` / Actions `44911242801` 的[原库窗口报告](../analysis/ci/96cd54e-windows-native-media.json)已通过，普通 UI 尚未切换。新实现不会改变原 DLL、系统信任或 codec detector 结论。
 
 | 静态入口 / 字段 | 原始证据 |
 |---|---|
@@ -225,11 +225,16 @@ controller slot 4 的 wrapper `0x180a2cfb0` 和核心 `0x180a34350` 接收 `int3
 | fps `+0x00`、quality `+0x04`、track `+0x0c`、capture type `+0x10`、codec `+0x14`、chroma `+0x18`、max scale `+0x1c/+0x20` | 消费链 `0x180f2fde0` 的原生格式串及参数、`ev_33e5d71aaf262be3dbb4e6a171894fcfed735b6fd202395edcbf0fd9913bfcd6`、`ev_76f867d73e9e3a90c06f9846e424fd62a672d4c729501cd7aef88a9354975a54` |
 | type 1 的 `+0x40` 是 HWND；factory window vtable `0x1812412f0` 的 start 为 `0x180baea90` | `ev_b8f512fae03b848785fb45fd8c65e34c3e546f035a014ded7f199d97145f3612`、`ev_5b56eef7e53e231020b1fc292a28751288e9f79a9d77762aa0f47d8e1511ba76`、`ev_d285501923f4242abf68482d44c0e994c3f2f49f8b535f7c8a0726eb99ec3437` |
 | controller slot 6 读取 `0x10` render config：HWND `+0`、track `+8`、option `+0xc`；slot 8 停止 track | `ev_7fd3b39d06053b81ad761dfc4f63ff13b6a51c63a6ab39bc9592d78755323351`、`ev_48752793e80381331161a06edb3a2574dd5c1d06790d74f45a5eb8a3ea72535e`、`ev_4c25e77d2ab4cf8f46bdf4b662b8a4e2236c583ea79ed739f2c673a14f3fa90f` |
-| controller callback 0 三参数 handle/pointer/size，JSON `type/track_id/track_index`；callback 2 六参数，最后指向六个 int 的 viewport | `ev_d98f8227b4f42619a66b0341ed7c471c7fe214352eff2a6aeb7b8499c2895421`、`ev_be0ec06ef536be0f99d366e5681afaf1f52d410fe5ceba9ae304cd83c6194e73` |
+| controller callback 0 三参数 handle/pointer/size，JSON `type/track_id/track_index`；callback 2 六参数，最后指向 viewport 的 24 个借用字节，当前按六个原始 32 位字保留 | `ev_d98f8227b4f42619a66b0341ed7c471c7fe214352eff2a6aeb7b8499c2895421`、`ev_be0ec06ef536be0f99d366e5681afaf1f52d410fe5ceba9ae304cd83c6194e73` |
 
 先前依据 capture-failure xref 读取的 `0x180bab110` 是另一分支，不能称为 window factory 的 start；这里用实际 vtable 修正入口，旧证据完整保留。FrameChange 的四个数值参数与 CaptureFailure 参数仍原样记录，不借 Android 名称推断 Windows 含义。
 
-待运行的 `--media` 在新的两个原库进程中先重复双向 binary，然后 controlled 原库捕获独立 Win32 HWND，controller 根据实际原生 media-track JSON 选择 video track 并启动原 renderer。父进程生成两组运行时随机排列的四色图案，仅给 controlled；controller helper 只绘制灰底。父端必须先看到实际 FrameChange 和四色像素，再分别校验 source/controller 的真实 screen BMP，随后才允许改变 source 图案并重复全部检查。灰图、零 FrameChange、截断/错误 BMP、只有稀疏采样而无两端快照都不能通过。原库借用数据立即复制、delegates 保持强引用，config 保留至 Finalize，窗口在停止媒体及引擎清理后销毁。像素/位图离线测试仅验证证据解析与门槛，并非原生媒体执行或硬件证据。
+已通过的 `--media` 在新的两个原库进程中先重复双向 binary，然后 controlled 原库捕获独立 Win32 HWND，controller 根据实际原生 media-track JSON 选择 video track 并启动原 renderer。父进程生成两组运行时随机排列的四色图案，仅给 controlled；controller helper 只绘制灰底。父端必须先看到实际 FrameChange 和四色像素，再分别校验 source/controller 的真实 screen BMP，随后才允许改变 source 图案并重复全部检查。灰图、零 FrameChange、截断/错误 BMP、只有稀疏采样而无两端快照都不能通过。原库借用数据立即复制、delegates 保持强引用，config 保留至 Finalize，窗口在停止媒体及引擎清理后销毁。像素/位图离线测试仅验证证据解析与门槛，并非原生媒体执行或硬件证据。
+
+本次 controller 实际收到 audio_0 和 video_0..video_4 六个 track，选择 video_0。先观察到灰底与零 FrameChange，约 7.3 秒出现第一个图案，随后实际 source 变化触发第二个图案及第二次 FrameChange；四个 BMP 均为 320×240，回调 handle 1，capture failure 为空。两个 child 退出 0，GC 后 config/回调与显式停止、重复停止、窗口线程 join、Dispose 和既有 binary/room 回归通过。`Viewport` 原始字为 `0,0,1134559232,1131413504,0,0`，按 IEEE754 float32 解释对应 `0,0,320,240,0,0`；这揭示其几何量不是当前 JSON 中的整数十进制坐标。其它三个标量保留 `0/2/140`，未命名为 chroma/bit-depth 或硬件状态。
+
+[原始报告](../analysis/ci/96cd54e-windows-native-media.json)、[同次独立 binary 回归](../analysis/ci/96cd54e-windows-native-binary.json)、[四张无损 RGB PNG 及各 BMP/PNG 哈希、离线全像素差分](../analysis/ci/96cd54e-window-media/evidence.json)已冻结。离线复核每张图全部 76,800 像素均符合对应图案；两张解码图相对实际 source 的最大单通道误差分别 4 和 3。该全像素复核是读取已保留的真实 runner 位图，不是重新执行原库，也不冒充首次 CI 中四点采样断言。原 BMP 保留在 Native-ABI artifact `14709662119`。本次未证明物理 GPU、H265、音频、输入、跨设备或公网打洞。
+
 
 ## 后续原生证据边界（2026-11-20）
 

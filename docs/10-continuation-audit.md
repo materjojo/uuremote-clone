@@ -5,8 +5,8 @@
 | 用户要求 | 当前证据/实现 | 验收状态 |
 |---|---|---|
 | 三个给定安装包深入分析 | 已保存原包与提取树；继续核对实际 JNI / C ABI | 部分完成 |
-| 官方采集、硬编硬解、加速、通信路径 | 两端原版库工厂/版本及 Swift/C# 绑定已在 runner 验证；Windows 增加通过真实 DLL 字节对照的 Initialize/Finalize/capability 及独立 room_info 回调的房间绑定；Android 增加受测生命周期封装；主流程、采集/编解码仍未接通验收 | 未完成 |
-| 原版协议 | Windows descriptor 能证明 schema；原库 room-state 回调、TLS/Socket.IO 与 room_info/guard 请求已有隔离探测证据，使用显式测试 CA 插桩；业务回复与媒体仍需逐条跟踪 | 部分完成 |
+| 官方采集、硬编硬解、加速、通信路径 | 两端原版库工厂/版本及 Swift/C# 绑定已在 runner 验证；Windows 增加通过真实 DLL 字节对照的生命周期/能力和房间绑定，并通过双原库进程的实际 binary 与 HWND 窗口采集/编码/解码/渲染；Android 增加受测生命周期封装；普通 UI 原库主流程、其余平台媒体及真实硬件仍未接通验收 | 未完成 |
+| 原版协议 | Windows descriptor 能证明 schema；原库 room-state、TLS/Socket.IO、真实 control/能力/SDP/ICE 路由和 Windows 二进制/窗口媒体已有隔离运行证据，使用显式测试 CA 插桩；生产授权、完整协议与跨平台仍需逐条跟踪 | 部分完成 |
 | 三端所有非云设备功能 | 独立配对、同意、RTP 视频和控制已有实现及回环证据，不依赖网易登录；音频、文件、终端和完整输入仍未接通 | 未完成 |
 | 各端 UI 与对应原版一致 | Android、Windows 已复用指定原包非云图片并取得真实克隆首页截图；其余布局仍为重建，缺同条件原版运行对照 | 未完成 |
 | 去除云设备 | 当前应用未提供云设备入口；原版库保留通用代码，不代表已做代码级剥离 | 部分完成 |
@@ -66,6 +66,8 @@
 - `0fb368f` / [44903013760](https://github.com/materjojo/uuremote-clone/actions/runs/44903013760)：新 binary 检查失败且[完整报告](../analysis/ci/0fb368f-windows-native-binary-failure.json)保留。实际调用链表明初版错用了 FileData 槽 13/11；现改为原库明确的 BinaryData 槽 12/10，接收断言不变。此失败不能写作 binary/GPU 成功。
 
 - `5c810f8` / [44903995375](https://github.com/materjojo/uuremote-clone/actions/runs/44903995375)：修正 BinaryData 槽后，两个原库进程的[双向随机数据报告](../analysis/ci/5c810f8-windows-native-binary.json)通过。双方实际回调各收到对方 275 字节输入，父端逐字节复核；发送后源数组修改、GC、关闭后拒绝和清理通过。只涉及同 runner 私网 host candidate 和独立本地信令；没有媒体、输入、物理跨端或公网打洞证据。
+
+- `96cd54e` / [44911242801](https://github.com/materjojo/uuremote-clone/actions/runs/44911242801)：原库[窗口采集与渲染报告](../analysis/ci/96cd54e-windows-native-media.json)通过。被控实际 HWND 两次改变四色图案，控制端原 renderer 从灰底变为相应图案，四张 320×240 BMP、FrameChange、显式停止/GC/窗口清理和全部旧回归均通过；[真实截图](../analysis/ci/96cd54e-window-media/evidence.json)与来源哈希保留。普通 UI、H265、实际硬件加速、跨设备与公网打洞仍未由此验收。
 
 ## 边界
 

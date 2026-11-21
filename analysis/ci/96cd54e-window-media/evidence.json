@@ -1,0 +1,102 @@
+{
+  "source_commit": "96cd54e9de5b1c780494ddae9f79f41672dc7e81",
+  "run_id": "44911242801",
+  "native_artifact_id": 14709662119,
+  "report": "../96cd54e-windows-native-media.json",
+  "provenance": "Lossless RGB PNG conversion of retained native BMP snapshots with Pillow 10.2.0; no resizing or image modification. Full-image statistics are offline analysis of retained runner pixels, not a rerun of original code.",
+  "observations": [
+    {
+      "phase": 0,
+      "images": {
+        "controlled": {
+          "png": "controlled-phase-0.png",
+          "png_sha256": "23e81263a7f8b089b4692b7eb894b6726f7c5e7b9c0066e17fa38f9218ee209a",
+          "png_bytes": 597,
+          "source_bmp_sha256": "5af252acea2de569d5ea2ef7f5f544228c0b1d8712cf0b88dcb8ea8d39913825",
+          "pixel_count": 76800,
+          "matching_pattern_pixels": 76800,
+          "fraction": 1.0,
+          "tolerance": 8
+        },
+        "controller": {
+          "png": "controller-phase-0.png",
+          "png_sha256": "5c32f1ea0624ea5a88a2508a8846a1528efbc790dc054cc63e5b471d42acf26d",
+          "png_bytes": 750,
+          "source_bmp_sha256": "27f6fb2b6e04f67162fe2e0ccc787e35323bdbe8d633e9d59661ab33e9ca1418",
+          "pixel_count": 76800,
+          "matching_pattern_pixels": 76800,
+          "fraction": 1.0,
+          "tolerance": 35
+        }
+      },
+      "source_to_rendered_mean_abs_rgb_error": [
+        1.0190234375,
+        0.9772916666666667,
+        1.9401171875
+      ],
+      "source_to_rendered_channel_extrema": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          3
+        ]
+      ]
+    },
+    {
+      "phase": 1,
+      "images": {
+        "controlled": {
+          "png": "controlled-phase-1.png",
+          "png_sha256": "990fb7471ca90b23a01e9baf7510ee4de903ff033a43cf3a1b59444210e29be0",
+          "png_bytes": 599,
+          "source_bmp_sha256": "d1f984e28bd9fccde055ac3f122c2bdd18b2ac2f129024d345c78efffcd8c467",
+          "pixel_count": 76800,
+          "matching_pattern_pixels": 76800,
+          "fraction": 1.0,
+          "tolerance": 8
+        },
+        "controller": {
+          "png": "controller-phase-1.png",
+          "png_sha256": "f15aaa4ba1de5dc9c17797bcbc9fd657a5fbc8b7c24e7db82202a70b5634153d",
+          "png_bytes": 625,
+          "source_bmp_sha256": "e52cd736b3c7664c64bd6da927ea49d5303b9b4046e7c5994a8893ac05b16139",
+          "pixel_count": 76800,
+          "matching_pattern_pixels": 76800,
+          "fraction": 1.0,
+          "tolerance": 35
+        }
+      },
+      "source_to_rendered_mean_abs_rgb_error": [
+        1.2133333333333334,
+        1.0533333333333332,
+        0.9633333333333334
+      ],
+      "source_to_rendered_channel_extrema": [
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    }
+  ],
+  "limitations": [
+    "This is one host with two processes and private host candidates; it does not establish physical peer interoperability or public IPv4/IPv6 hole punching.",
+    "No physical GPU, H265, audio or remote input is verified by this probe.",
+    "Room, device, user and control identities are test fixtures, not a production authorization service."
+  ]
+}

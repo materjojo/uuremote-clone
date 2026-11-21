@@ -62,6 +62,8 @@ Tailscale 必须先由使用者在两端安装、登录并加入可互通网络�
 - Android Actions `44670528149`：x86_64 Android 11 模拟器启动真实 MainActivity，验证空设备列表、三平台配对码、原生 peer 视频/控制、SDP 候选策略与 8 秒回退生命周期，共 5 项通过，并保存首页截图。原版专有 ARM64 `.so` 不参与此模拟器媒体路径。
 - ARM64 APK Actions `44670463306`：应用编译、官方 wrapper 替身测试、237 方法 descriptor / 24 常量对照以及原版三库/配置哈希验证通过。该证据不证明原版 ARM64 native 会话已运行。
 
+后续 Windows 原版专有路径已在 Actions `44911242801` 通过独立本地信令下的两个原库进程、实际双向 binary 和 HWND 窗口采集/编码/解码/渲染；两组 source 图案在 controller 窗口真实呈现，四张位图及[报告和截图来源](../analysis/ci/96cd54e-window-media/evidence.json)保留。该测试尚未接入本页的普通 UI/生产配对服务，fixture 自动授权及测试 CA 不进入生产。它也不建立 H265、物理硬件或跨平台实机结论。
+
 三端候选测试覆盖实际 8 秒 overlay 宽限、重复候选去重、连接后抑制新候选和关闭时中断同一批次余项。完整运行、产物、日志摘录和截图哈希见 [latest-independent-results.json](../analysis/ci/latest-independent-results.json)。截图只证明本次构建实际显示的页面，尚未获得同条件原版运行截图进行像素差分。
 
 ## 资源恢复
