@@ -236,6 +236,14 @@ controller slot 4 的 wrapper `0x180a2cfb0` 和核心 `0x180a34350` 接收 `int3
 [原始报告](../analysis/ci/96cd54e-windows-native-media.json)、[同次独立 binary 回归](../analysis/ci/96cd54e-windows-native-binary.json)、[四张无损 RGB PNG 及各 BMP/PNG 哈希、离线全像素差分](../analysis/ci/96cd54e-window-media/evidence.json)已冻结。离线复核每张图全部 76,800 像素均符合对应图案；两张解码图相对实际 source 的最大单通道误差分别 4 和 3。该全像素复核是读取已保留的真实 runner 位图，不是重新执行原库，也不冒充首次 CI 中四点采样断言。原 BMP 保留在 Native-ABI artifact `14709662119`。本次未证明物理 GPU、H265、音频、输入、跨设备或公网打洞。
 
 
+## Windows 连接统计与全图门槛：待运行扩展
+
+Windows slot 14 的 controller wrapper `0x180a2d330` / controlled `0x180a2dce0` 实际在 EAX 返回初始化 0/1，尽管伪代码错误显示 `void`；证据为 `ev_a84560d749f522529a1b1294944c15495aff608ba6a1513f8547b7177560a51b` / `ev_fb851ce060cf5474752eb304dae08ab6eb7f578454fd9e673e306302b4b51b86`。wrapper 向角色特定 task 提交 handle，最终 `0x180a32ae0` / `0x180a2f150` 调用 `0x180a36890` / `0x180a36bd0`；后者把临时字符串的 pointer/32-bit length 与本地 handle 交给 controller callback 9 / controlled callback 6，随后释放字符串。任务提交 Evidence `ev_e4e21defa16ccce32c819114acac3715f6a53a51ec36ac6b3940a7cfad151ede` / `ev_e09c51b28d5bb9fb145fdfca7fdf3d0721a661b830f02f9e7945840553a38901`，回调 Evidence `ev_e91f9a0e89de1784c9d5ce28eaac07b0f0fc26ccb95f5686546808510dd447be` / `ev_8af58e5ee499b8c11165e357eee37115b87dc1307693055f02bbb5d53dbcf552`。Windows 签名独立核对，未直接套用 Android。
+
+新增 `OfficialWindowsEngine.Stats.cs` 的 `RequestConnectionStats` / `DrainConnectionStats` 只复制原始报告，强引用 delegate、有界 UTF-8 复制、未知/关闭 handle 与 Dispose 后拒绝；返回 0 仅为提交，不当作回调收到或硬件成功。扩展媒体观察在第二组真实图像之后还要求双方新的实际 stats 回调，父端再次核对 JSON bytes/SHA-256 与 child 的 owned callback，再允许任一原库关闭，避免一方关闭时另一方尚在查询。实际 stats schema、编解码实现和加速状态仍待新 Actions 内容验证。
+
+同次扩展还把 `96cd54e` 位图离线复核中的全图检查移入 CI：除四点采样外，每个 320×240 BMP 至少 97% 像素须符合相应四色象限；灰底只改四个采样点也必须失败。新的七项离线证据解析/门槛测试已通过，它们不执行原库；原生扩展结果仍以 Actions 报告为准。
+
 ## 后续原生证据边界（2026-11-20）
 
 以下结论只针对保存的原始文件静态 Evidence，不代表 ARM64 原库已经在设备上运行，也不代表 Windows 硬件路径已经在当前机器上选中。

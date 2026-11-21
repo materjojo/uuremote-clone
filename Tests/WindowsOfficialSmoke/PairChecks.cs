@@ -140,6 +140,8 @@ internal static class PairChecks
             MustThrow<ObjectDisposedException>(() => engine.DrainMediaTracks());
             MustThrow<ObjectDisposedException>(() => engine.DrainFrameChanges());
             MustThrow<ObjectDisposedException>(() => engine.DrainCaptureFailures());
+            MustThrow<ObjectDisposedException>(() => engine.DrainConnectionStats());
+            MustThrow<ObjectDisposedException>(() => engine.RequestConnectionStats(handle));
             report["passed"] = stopped && ready && binarySent && binaryData.Count == 1
                 && (role == OfficialStreamer.Role.Controller ? requested : controls.Count == 1);
             report["phase"] = "complete";

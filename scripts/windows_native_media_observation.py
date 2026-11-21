@@ -44,6 +44,27 @@ def bitmap_quarters(data):
     return {'width': width, 'height': height, 'colors': colors}
 
 
+def bitmap_pattern(data, expected, tolerance):
+    """Check the whole retained client area, including quadrant geometry."""
+    layout = bitmap_quarters(data)
+    width, height = layout['width'], layout['height']
+    signed_height = struct.unpack_from('<i', data, 22)[0]
+    palette = [((color >> 16) & 255, (color >> 8) & 255, color & 255) for color in expected]
+    view, matched = memoryview(data), 0
+    for y in range(height):
+        stored_y = y if signed_height < 0 else height - y - 1
+        row = 54 + stored_y * width * 4
+        for x in range(width):
+            color = palette[(0 if y < height // 2 else 2) + (0 if x < width // 2 else 1)]
+            index = row + x * 4
+            matched += (abs(view[index] - color[0]) <= tolerance
+                        and abs(view[index + 1] - color[1]) <= tolerance
+                        and abs(view[index + 2] - color[2]) <= tolerance)
+    total = width * height
+    return {'pattern_pixels': total, 'matching_pattern_pixels': matched,
+            'pattern_match_fraction': matched / total, 'pattern_tolerance': tolerance}
+
+
 class MediaPixels:
     def __init__(self, workspace, patterns=None):
         self.workspace = Path(workspace)
@@ -62,7 +83,8 @@ class MediaPixels:
         self._matches = {}
         self._snapshots = {}
         self.verified = False
-        self.report = {'source_patterns_colorref': patterns, 'tolerance': 35, 'phase_matches': [],
+        self.report = {'source_patterns_colorref': patterns, 'tolerance': 35,
+                       'minimum_pattern_match_fraction': 0.97, 'phase_matches': [],
                        'snapshots': [], 'pixels_verified': False,
                        'scope': 'Two distinct controlled-window patterns must match controller screen samples and both roles\' actual BMP snapshots.'}
 
@@ -71,12 +93,44 @@ class MediaPixels:
                     'media_phase_path': str(self.workspace / 'media-phase-1'),
                     'media_verified_path': str(self.workspace / 'media-verified'),
                     'snapshot_prefix': str(self.workspace / 'snapshot-'),
-                    'sample_directory': str(self.directory)}
+                    'sample_directory': str(self.directory),
+                    'stats_ready_path': str(self.workspace / (role + '-stats-ready.json'))}
         if role == 'controlled':
             settings['source_patterns'] = self.patterns
         return settings
 
+    @property
+    def complete(self):
+        return self.verified and all((self.workspace / (role + '-stats-ready.json')).exists() for role in ROLES)
+
+    def verify_stats(self, children):
+        try:
+            if not self.complete or set(children) != set(ROLES):
+                raise ValueError('Both post-render original statistics callbacks are required')
+            records = []
+            for role in ROLES:
+                marker = json.loads((self.workspace / (role + '-stats-ready.json')).read_text(encoding='utf-8'))
+                managed = children[role]['managed']
+                raw = marker['Json'].encode('utf-8')
+                if (marker['Handle'] != managed['handle']
+                        or hashlib.sha256(raw).hexdigest() != marker['Sha256']
+                        or not managed['media'].get('post_render_stats_received')
+                        or not any(item['Handle'] == marker['Handle'] and item['Json'] == marker['Json']
+                                   for item in managed['media']['connection_stats'])):
+                    raise ValueError('Original statistics marker did not match owned callback bytes')
+                records.append({'role': role, 'handle': marker['Handle'], 'bytes': len(raw),
+                                'sha256': marker['Sha256'], 'data': json.loads(marker['Json'])})
+            self.report['post_render_stats'] = records
+            self.report['post_render_stats_bytes_verified'] = True
+            return True
+        except (OSError, ValueError, KeyError, TypeError) as error:
+            self.report['stats_validation_error'] = str(error)
+            self.report['post_render_stats_bytes_verified'] = False
+            return False
+
     def observe(self):
+        if self.verified:
+            return
         if not (self.workspace / 'media-start').exists():
             (self.workspace / 'media-start').write_text('both original binary receivers verified; begin media observation')
         fresh = []
@@ -110,10 +164,14 @@ class MediaPixels:
             snapshot = bitmap_quarters(data)
             if (snapshot['width'], snapshot['height']) != (320, 240):
                 raise ValueError('Original window observation changed its client-area size')
-            if not matching_colors(snapshot['colors'], self.patterns[phase], 8 if role == 'controlled' else 35):
+            tolerance = 8 if role == 'controlled' else 35
+            if not matching_colors(snapshot['colors'], self.patterns[phase], tolerance):
                 raise ValueError('Native ' + role + ' screen snapshot did not preserve source phase ' + str(phase))
+            pattern = bitmap_pattern(data, self.patterns[phase], tolerance)
+            if pattern['pattern_match_fraction'] < self.report['minimum_pattern_match_fraction']:
+                raise ValueError('Native ' + role + ' full-image pattern did not preserve source phase ' + str(phase))
             record = {'role': role, 'phase': phase, 'path': str(path.relative_to(self.workspace)),
-                      'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest(), **snapshot}
+                      'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest(), **snapshot, **pattern}
             self._snapshots[key] = record
             self.report['snapshots'].append(record)
         if not all((role, phase) in self._snapshots for role in ROLES):

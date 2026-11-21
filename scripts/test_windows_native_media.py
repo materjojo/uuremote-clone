@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """Offline checks of evidence parsing/gates, not original-media execution."""
+import hashlib
 import json
 from pathlib import Path
 import struct
 import tempfile
 import unittest
-from windows_native_media_observation import MediaPixels, bitmap_quarters, matching_colors
+from windows_native_media_observation import MediaPixels, bitmap_pattern, bitmap_quarters, matching_colors
 
 
 PATTERNS = [[0x2020e0, 0x20e020, 0xe02020, 0x20e0e0],
@@ -37,6 +38,7 @@ class NativeMediaEvidenceTests(unittest.TestCase):
             parsed = bitmap_quarters(bitmap(PATTERNS[0], bottom))
             self.assertEqual((parsed['width'], parsed['height']), (320, 240))
             self.assertEqual(parsed['colors'], PATTERNS[0])
+            self.assertEqual(bitmap_pattern(bitmap(PATTERNS[0], bottom), PATTERNS[0], 8)['pattern_match_fraction'], 1.0)
 
     def test_bitmap_rejects_truncation_wrong_format_and_invalid_color(self):
         image = bitmap(PATTERNS[0])
@@ -78,7 +80,46 @@ class NativeMediaEvidenceTests(unittest.TestCase):
                     self.assertFalse(observer.verified)
             self.assertTrue(observer.verified)
             self.assertEqual(len(observer.report['snapshots']), 4)
+            self.assertTrue(all(record['pattern_pixels'] == 76800 and record['pattern_match_fraction'] == 1.0
+                                for record in observer.report['snapshots']))
             self.assertTrue((Path(directory) / 'media-verified').exists())
+            self.assertFalse(observer.complete)  # Neither process may stop before both actual statistics callbacks.
+
+    def test_sparse_correct_pixels_do_not_replace_whole_rendered_image(self):
+        with tempfile.TemporaryDirectory() as directory:
+            observer = MediaPixels(directory, PATTERNS)
+            sample(observer, 0, PATTERNS[0])
+            observer.observe()
+            invalid = bytearray(bitmap([0x202020] * 4))
+            for index, color in enumerate(PATTERNS[0]):
+                x = 320 * (1 if index % 2 == 0 else 3) // 4
+                y = 240 * (1 if index < 2 else 3) // 4
+                struct.pack_into('<BBBB', invalid, 54 + (y * 320 + x) * 4,
+                                 (color >> 16) & 255, (color >> 8) & 255, color & 255, 0)
+            self.assertEqual(bitmap_quarters(invalid)['colors'], PATTERNS[0])
+            (observer.directory / 'controller-phase-0.bmp').write_bytes(invalid)
+            with self.assertRaisesRegex(ValueError, 'full-image pattern'):
+                observer.observe()
+            self.assertFalse(observer.verified)
+
+    def test_stats_require_callback_bytes_and_their_actual_hash(self):
+        with tempfile.TemporaryDirectory() as directory:
+            observer = MediaPixels(directory, PATTERNS)
+            observer.verified = True  # Isolate the stats gate; pixel gates are exercised above.
+            raw = '{"codec":"offline-parser-fixture"}'
+            marker = {'Handle': 1, 'Json': raw, 'Sha256': hashlib.sha256(raw.encode()).hexdigest()}
+            children = {}
+            for role in ('controller', 'controlled'):
+                (Path(directory) / (role + '-stats-ready.json')).write_text(json.dumps(marker))
+                children[role] = {'managed': {'handle': 1, 'media': {'post_render_stats_received': True, 'connection_stats': []}}}
+            self.assertTrue(observer.complete)
+            self.assertFalse(observer.verify_stats(children))  # A marker alone is not a received callback.
+            for item in children.values():
+                item['managed']['media']['connection_stats'] = [{'Handle': 1, 'Json': raw}]
+            self.assertTrue(observer.verify_stats(children))
+            marker['Sha256'] = '0' * 64
+            (Path(directory) / 'controller-stats-ready.json').write_text(json.dumps(marker))
+            self.assertFalse(observer.verify_stats(children))
 
     def test_wrong_snapshot_rejected_even_after_matching_sparse_samples(self):
         with tempfile.TemporaryDirectory() as directory:

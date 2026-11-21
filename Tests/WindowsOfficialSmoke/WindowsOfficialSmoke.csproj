@@ -11,5 +11,6 @@
     <Compile Include="../../platforms/windows/OfficialWindowsEngine.Rooms.cs" Link="OfficialWindowsEngine.Rooms.cs" />
     <Compile Include="../../platforms/windows/OfficialWindowsEngine.Data.cs" Link="OfficialWindowsEngine.Data.cs" />
     <Compile Include="../../platforms/windows/OfficialWindowsEngine.Media.cs" Link="OfficialWindowsEngine.Media.cs" />
+    <Compile Include="../../platforms/windows/OfficialWindowsEngine.Stats.cs" Link="OfficialWindowsEngine.Stats.cs" />
   </ItemGroup>
 </Project>

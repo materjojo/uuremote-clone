@@ -85,6 +85,7 @@ public sealed partial class OfficialWindowsEngine : IDisposable
         _mediaTrackCallback = RecordMediaTrack;
         _frameChangeCallback = RecordFrameChange;
         _captureFailureCallback = RecordCaptureFailure;
+        _connectionStatsCallback = RecordConnectionStats;
         lock (CallGate)
         {
             RequireNoEngine();
@@ -101,6 +102,7 @@ public sealed partial class OfficialWindowsEngine : IDisposable
                 if (role == OfficialStreamer.Role.Controlled) callbacks[10] = Marshal.GetFunctionPointerForDelegate(_newControlCallback);
                 InstallDataCallbacks(callbacks);
                 InstallMediaCallbacks(callbacks);
+                InstallStatsCallbacks(callbacks);
                 var pin = GCHandle.Alloc(callbacks, GCHandleType.Pinned);
                 IntPtr table;
                 try { table = factory(pin.AddrOfPinnedObject()); }
@@ -128,6 +130,7 @@ public sealed partial class OfficialWindowsEngine : IDisposable
                 }
                 _version = Slot<VersionFunction>(role == OfficialStreamer.Role.Controller ? 17 : 18);
                 _capability = Slot<CapabilityFunction>(15);
+                _requestConnectionStats = Slot<RequestConnectionStatsFunction>(14);
                 if (Marshal.SizeOf<CapabilityData>() != 16 || Marshal.OffsetOf<CapabilityData>(nameof(CapabilityData.Size)).ToInt32() != 8)
                     throw new InvalidOperationException("Unsupported capability output layout.");
                 if (CopyVersion() != "V4.14.2") throw new InvalidOperationException("Unexpected original engine version.");

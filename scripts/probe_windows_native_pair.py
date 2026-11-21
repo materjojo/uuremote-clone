@@ -230,12 +230,10 @@ def main():
             binary_received = received_by_both()
             if binary_received and media:
                 media.observe()
-            done = media.verified if media else binary_received
+            done = media.complete if media else binary_received
             if (done or broker.errors or any(item.poll() is not None for item in processes.values())):
                 break
             time.sleep(0.05)
-        report['negotiation_signaling_observed'] = broker.negotiation_observed()
-        report['bidirectional_binary_observed'] = received_by_both()
     except BaseException:
         report['error'] = traceback.format_exc()
     finally:
@@ -258,6 +256,8 @@ def main():
             fixture.pop('states', None)
             fixture.pop('state_codes', None)
             fixtures[role] = fixture
+        report['negotiation_signaling_observed'] = broker.negotiation_observed()
+        report['bidirectional_binary_observed'] = received_by_both()
         report['binary_bytes_verified'] = len(children) == 2 and all(
             item.get('managed') and item['managed'].get('peer_binary_received')
             and len(item['managed'].get('binary_data', [])) == 1
@@ -265,10 +265,11 @@ def main():
             and base64.b64decode(item['managed']['binary_data'][0]['Data'])
                 == payloads['controlled' if role == 'controller' else 'controller']
             for role, item in children.items())
+        report['media_stats_bytes_verified'] = media.verify_stats(children) if media else None
         report.update(events=broker.events, routes=broker.routes, broker_errors=broker.errors,
                       children=children, fixtures=fixtures, workspace_files=collect_workspace(workspace))
         report['passed'] = (report.get('negotiation_signaling_observed', False) and report.get('bidirectional_binary_observed', False)
-                             and report['binary_bytes_verified'] and (not media or media.verified) and not broker.errors
+                             and report['binary_bytes_verified'] and (not media or (media.complete and report['media_stats_bytes_verified'])) and not broker.errors
                              and len(children) == 2 and not report.get('killed_roles')
                              and all(item['exit_code'] == 0 and item['managed'] and item['managed'].get('passed') for item in children.values())
                              and all(item['listener_stopped'] and any(connection.get('untrusted_certificate_rejected') for connection in item['connections']) for item in fixtures.values()))
@@ -276,6 +277,7 @@ def main():
     print(json.dumps({'passed': report['passed'], 'negotiation_signaling_observed': report.get('negotiation_signaling_observed'),
                       'bidirectional_binary_observed': report.get('bidirectional_binary_observed'),
                       'media_pixels_verified': media.verified if media else None,
+                      'media_stats_bytes_verified': report['media_stats_bytes_verified'],
                       'events': [(item['from'], item['event'], item['message'].get('data', {}).get('type')) for item in broker.events],
                       'broker_errors': broker.errors}))
     return 0 if report['passed'] else 1
