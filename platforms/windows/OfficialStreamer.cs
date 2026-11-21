@@ -36,11 +36,15 @@ public sealed class OfficialStreamer : IDisposable
 
     public OfficialStreamer(string? path = null, Role role = Role.Controller)
     {
-        var error = new byte[1024];
-        var value = Open(Path.GetFullPath(path ?? Path.Combine(AppContext.BaseDirectory, "streamer.dll")),
-            (int)role, error, (nuint)error.Length);
-        if (value == IntPtr.Zero) throw new InvalidOperationException(Utf8(error));
-        _handle = new LibraryHandle(value);
+        lock (OfficialWindowsEngine.CallGate)
+        {
+            OfficialWindowsEngine.RequireNoEngine();
+            var error = new byte[1024];
+            var value = Open(Path.GetFullPath(path ?? Path.Combine(AppContext.BaseDirectory, "streamer.dll")),
+                (int)role, error, (nuint)error.Length);
+            if (value == IntPtr.Zero) throw new InvalidOperationException(Utf8(error));
+            _handle = new LibraryHandle(value);
+        }
     }
 
     public string Version

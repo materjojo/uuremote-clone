@@ -24,7 +24,7 @@
 
 当前开放的版本入口原型是 `int (*)(const char **bytes, uint32_t *size)`。输出指向库拥有的内存，调用方只复制，不释放。静态代码返回的字符串是 `V4.14.2`（媒体核心版本，非应用 4.48.1）。桌面测试需实际加载原库再核对返回值。
 
-[共享检查层](../native/official/official_streamer_abi.cpp) 只做加载、角色选择、空 callback 工厂和版本查询。按**各平台实际长度**分配回调元素；不把额外的 Windows 槽解释成“终止符”，也不据此共享回调成员定义。它不初始化媒体引擎、不创建房间、不进行采集或网络连接。工厂改写全局回调，因此当前检查接口不能与活动媒体会话并行使用。
+生产 [共享检查层](../native/official/official_streamer_abi.cpp) 仍只做加载、角色选择、空 callback 工厂和版本查询。按**各平台实际长度**分配回调元素；不把额外的 Windows 槽解释成“终止符”，也不据此共享回调成员定义。它不初始化媒体引擎、不创建房间、不进行采集或网络连接。工厂改写全局回调，因此当前检查接口不能与活动媒体会话并行使用。
 
 尚未恢复的会话/轨道/采集/渲染/ICE 参数和对象生命周期仍不对外猜测性开放。现有应用的实验性 WebRTC/编码路径不因此成为官方核心路径。
 
@@ -121,7 +121,7 @@ Windows 两种角色的 slot 0 接收三个直接指针、返回 32 位状态；
 
 相关汇编 Evidence：控制端 wrapper `ev_1da724d0ba02af2eed752d756566319aef3620cf9e935b16a2b4e093974b119d`、初始化 `ev_72717ce1cec467fc62a1635747fee87a34015afb0e67fb444bba559853471773`；被控端 wrapper `ev_d7ccd1907429c106f0098a63cb108bede237948d01d0dfab674539791147822a`、初始化 `ev_103afbb7804f376d6fa6f99e3c915c363c0bfd1245d1c6e1c12dcedf5952cac6`；路径消费者 `ev_8e872b10c861226c0b32f14ca693594b1866015fa033d2bd712dd02579183d8d`，logging config `ev_ae0771a3169ac401c47f50c11f8acc825a99dbdfcc66c12abd00117164a749d5`。原文在 `/home/ubuntu/uuyc_clone/analysis/deep-native/windows-followup/results/113..116` 与 `252..257` 文件中，subject 为 manifest 中原版 DLL。
 
-[runner 探测脚本](../scripts/probe_windows_streamer_lifecycle.py) 先核对原文件哈希，在各自子进程中分配正确长度的空 callback 数组，调用工厂、版本、Initialize、Finalize、版本。三个参数使用 NUL 终止 UTF-16 缓冲；第一项是 scratch log 目录，第二项是复制原配置的非 ASCII 路径，第三项是日志文件 suffix。父进程设置 60 秒上限，报告保留 native call 前阶段、退出码、原始输出、状态、工作目录文件身份及日志预览。仅允许 Windows GitHub Actions 执行。生产绑定仍只开放工厂/版本；脚本不创建房间，不调用采集、能力探测、网络或媒体入口。实际结果以对应 Actions artifact 为准，源码增加探测不构成运行通过。
+[runner 探测脚本](../scripts/probe_windows_streamer_lifecycle.py) 先核对原文件哈希，在各自子进程中分配正确长度的空 callback 数组，调用工厂、版本、Initialize、Finalize、版本。三个参数使用 NUL 终止 UTF-16 缓冲；第一项是 scratch log 目录，第二项是复制原配置的非 ASCII 路径，第三项是日志文件 suffix。父进程设置 60 秒上限，报告保留 native call 前阶段、退出码、原始输出、状态、工作目录文件身份及日志预览。仅允许 Windows GitHub Actions 执行。生产共享 C ABI 和 macOS 绑定仍只开放工厂/版本；Windows 独立绑定的扩展见下文。脚本不创建房间，不调用采集、能力探测、网络或媒体入口。实际结果以对应 Actions artifact 为准，源码增加探测不构成运行通过。
 
 实际 [Actions 44883311915](https://github.com/materjojo/uuremote-clone/actions/runs/44883311915) 已失败：两角色先成功查询版本，随后均在 Initialize 阶段以 `0xC0000374` 退出，未到达 Finalize。[原始失败报告](../analysis/ci/3969eba-windows-lifecycle.json) 保留输入、哈希和最后阶段；这不是初始化成功证据，尚不能把堆损坏归因到 ABI 或原库前提中的某一项。
 
@@ -132,6 +132,14 @@ Windows 两种角色的 slot 0 接收三个直接指针、返回 32 位状态；
 能力查询的 Windows slot 15 使用单个输出参数，写 data pointer 到 `+0x00`、32 位长度到 `+0x08`，返回 32 位状态。控制端 `0x180a2d3b0` 和被控端 `0x180a2dd60` 的 Evidence 分别保存在 `258-asm-get-decode-capability` 和 `259-asm-get-encode-capability`。首次调用有 CRT 静态初始化保护，内部 `0x180a328e0` / `0x180a2eda0` 在未初始化时会固定空结果，因此必须先 Initialize，不能提前查询。新增 runner 探测以各自子进程 Initialize → capability query → repeat → Finalize，立即复制有界 DLL-owned 数据，保存 bytes/base64/SHA-256 及可解析的 UTF-8/JSON，不假设返回字段 schema，不以输出支持声明证明实际媒体编解码。原有纯生命周期探测仍单独保留。
 
 失败后的诊断扩展由父进程采集工作目录文件，即使 native 子进程异常退出也保留日志；另在独立 scratch 目录中以 runner 编译的 [native_failure_observer](../Tests/WindowsCodecDetector/native_failure_observer.cpp) 做一次 debugger-attached 重试，记录异常及 module/RVA 栈帧。重试不替代普通失败结果，不写内存、不保存内存 dump、不下载调试符号。它使用 Win32 debug events 和本地 DbgHelp unwind；编译和目标执行仍只在 GitHub Actions。
+
+## Windows 能力返回与 C# 引擎绑定
+
+[Actions 44885744775](https://github.com/materjojo/uuremote-clone/actions/runs/44885744775) 的纯生命周期、slot 15 查询和重复查询均已通过，两角色 Initialize/Finalize 都返回 0。冻结 [原始 capability 报告](../analysis/ci/7db8179-windows-capabilities.json)，保留完整返回字节、哈希和二进制日志。实际 JSON 的 codec key 为 `H264/H265`，每项包含 width、height、fps、chroma_sampling。该 runner 控制端 H264 的两种 chroma 都为 1920×1080，被控端 H264 chroma=1 为 3840×2160、chroma=3 为 0×0；H265 全为 0×0，fps 均为 -1。重复查询字节一致。这是原库报告的 capability，未观察到实际编码/解码输出，也未据此认定物理 GPU 成功。
+
+[OfficialWindowsEngine](../platforms/windows/OfficialWindowsEngine.cs) 将已验证的 Windows-only Initialize/Finalize、版本和 capability 查询加入应用工程。它校验指定 DLL/detector 的 SHA-256、使用 UTF-16 缓冲、限制 filename suffix、在进程内保留单一 engine owner，并与旧的版本检查入口共用工厂调用锁，避免另一个工厂覆盖全局 callbacks。模块固定保留到进程退出；成功 Finalize 后才释放输入和 owner，失败则阻止继续使用未知状态。返回的 DLL-owned 数据立即有界复制、不释放原始指针，按 UTF-8/JSON 验证，不生成“硬编开启”等支持声明。callback 仍为空，此层尚未接入普通远程会话或采集/网络入口。
+
+[Windows managed smoke](../Tests/WindowsOfficialSmoke/Program.cs) 使用生产类在每个角色的独立进程中核对非 ASCII 配置路径、所有权冲突、阻止旧工厂、重复 capability、与同 runner Python 原始调用逐字节相符、重复 Dispose、关闭后调用拒绝，以及成功关闭后的再次初始化。父脚本记录退出码、超时、最后阶段和二进制日志；编译与运行只在 Actions，是否通过以新运行结果为准。
 
 ## 后续原生证据边界（2026-11-20）
 
