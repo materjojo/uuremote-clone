@@ -78,6 +78,7 @@ public sealed partial class OfficialWindowsEngine : IDisposable
         Role = role;
         _roomStateCallback = (handle, value) => RecordRoomNotification(handle, RoomNotificationKind.RoomState, value);
         _connectionCodeCallback = (handle, value) => RecordRoomNotification(handle, RoomNotificationKind.ConnectionCode, value);
+        _newControlCallback = RecordNewControl;
         lock (CallGate)
         {
             RequireNoEngine();
@@ -91,6 +92,7 @@ public sealed partial class OfficialWindowsEngine : IDisposable
                 var callbacks = new IntPtr[role == OfficialStreamer.Role.Controller ? 18 : 16];
                 callbacks[role == OfficialStreamer.Role.Controller ? 7 : 4] = Marshal.GetFunctionPointerForDelegate(_roomStateCallback);
                 callbacks[12] = Marshal.GetFunctionPointerForDelegate(_connectionCodeCallback);
+                if (role == OfficialStreamer.Role.Controlled) callbacks[10] = Marshal.GetFunctionPointerForDelegate(_newControlCallback);
                 var pin = GCHandle.Alloc(callbacks, GCHandleType.Pinned);
                 IntPtr table;
                 try { table = factory(pin.AddrOfPinnedObject()); }

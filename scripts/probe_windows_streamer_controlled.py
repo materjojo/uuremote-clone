@@ -31,6 +31,7 @@ class ControlledObservation(RoomObservation):
         self.new_controls = []
         self.callback_errors = []
         self.injected = None
+        self.controlled_request_path = None
         self.new_control_callback = ctypes.WINFUNCTYPE(None, ctypes.c_int32, ctypes.c_void_p)(self.record_new_control)
         original = json.loads((ROOT / 'analysis/ci/29a9ea7-windows-control.json').read_text())
         self.original_message = original['observations'][0]['native']['room']['control_request']['message']
@@ -65,6 +66,8 @@ class ControlledObservation(RoomObservation):
             self.new_control_observed.set()
 
     def on_server_tick(self, send_frame, record):
+        if self.controlled_request_path is not None and self.controlled_request_path.exists():
+            self.inject_requested.set()
         if self.inject_requested.is_set() and not self.inject_sent.is_set():
             message = {**self.original_message, 'code': 0, 'client_id': 'ci-controller',
                        'ice_id': 'ci-original-control-ice', 'controller_platform': 3, 'iceServers': []}

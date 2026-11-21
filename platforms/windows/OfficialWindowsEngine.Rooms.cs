@@ -11,6 +11,21 @@ public sealed partial class OfficialWindowsEngine
 {
     public enum RoomNotificationKind { RoomState, ConnectionCode }
     public readonly record struct RoomNotification(int Handle, RoomNotificationKind Kind, int Value);
+    public sealed record NewControlNotification(int Handle, string ControlId, byte[] AppData, string NegotiationJson);
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    private delegate void NewControlCallback(int handle, IntPtr data);
+
+    [StructLayout(LayoutKind.Explicit, Size = 0x30)]
+    private struct NewControlData
+    {
+        [FieldOffset(0x00)] public IntPtr ControlId;
+        [FieldOffset(0x08)] public int ControlIdSize;
+        [FieldOffset(0x10)] public IntPtr AppData;
+        [FieldOffset(0x18)] public int AppDataSize;
+        [FieldOffset(0x20)] public IntPtr Negotiation;
+        [FieldOffset(0x28)] public int NegotiationSize;
+    }
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     private delegate void RoomCallback(int handle, int value);
@@ -48,6 +63,8 @@ public sealed partial class OfficialWindowsEngine
     }
 
     private readonly ConcurrentQueue<RoomNotification> _roomNotifications = new();
+    private readonly ConcurrentQueue<NewControlNotification> _newControls = new();
+    private readonly NewControlCallback _newControlCallback;
     private readonly HashSet<int> _openRooms = new();
     private readonly List<RoomInputs> _roomInputs = new();
     private readonly RoomCallback _roomStateCallback;
@@ -63,6 +80,47 @@ public sealed partial class OfficialWindowsEngine
         // Never acquire that gate or invoke application handlers on this thread.
         try { _roomNotifications.Enqueue(new RoomNotification(handle, kind, value)); }
         catch (Exception error) { Interlocked.CompareExchange(ref _callbackFailure, error, null); }
+    }
+
+    private void RecordNewControl(int handle, IntPtr data)
+    {
+        try
+        {
+            if (data == IntPtr.Zero) throw new InvalidOperationException("Original new-control callback has no payload.");
+            var input = Marshal.PtrToStructure<NewControlData>(data);
+            byte[] CopySlice(IntPtr pointer, int size)
+            {
+                if (size < 0) throw new InvalidOperationException("Original new-control slice has a negative length.");
+                return size == 0 ? Array.Empty<byte>() : Copy(pointer, checked((uint)size), 1024 * 1024);
+            }
+            // The three pointers are borrowed for this callback only. Copy all
+            // bytes before returning to native code; no foreground lock here.
+            var encoding = new UTF8Encoding(false, true);
+            string id = encoding.GetString(CopySlice(input.ControlId, input.ControlIdSize));
+            byte[] appData = CopySlice(input.AppData, input.AppDataSize);
+            string negotiation = encoding.GetString(CopySlice(input.Negotiation, input.NegotiationSize));
+            _newControls.Enqueue(new NewControlNotification(handle, id, appData, negotiation));
+        }
+        catch (Exception error) { Interlocked.CompareExchange(ref _callbackFailure, error, null); }
+    }
+
+    /// <summary>
+    /// Copies queued controlled-role OnNewControl payloads. This notification
+    /// alone does not establish authorization, peer connectivity or media.
+    /// Capability negotiation is returned as original UTF-8 JSON text.
+    /// </summary>
+    public NewControlNotification[] DrainNewControls()
+    {
+        lock (CallGate)
+        {
+            RequireActive();
+            if (Volatile.Read(ref _callbackFailure) is Exception error)
+                throw new InvalidOperationException("An original native callback could not be recorded.", error);
+            var result = new List<NewControlNotification>();
+            int count = _newControls.Count;
+            while (count-- > 0 && _newControls.TryDequeue(out var value)) result.Add(value);
+            return result.ToArray();
+        }
     }
 
     /// <summary>
