@@ -58,6 +58,8 @@
 
 - `2fb1d6a` / [44894436889](https://github.com/materjojo/uuremote-clone/actions/runs/44894436889)：生产 C# 房间入口、关闭和排队回调已在两角色通过真实原库检查，包含 GC、handle 1 显式关闭、handle 2 再次登录、Dispose 自动关闭与关闭后拒绝。[生产报告](../analysis/ci/2fb1d6a-windows-managed-rooms.json)。独立 room_info 的[有效](../analysis/ci/2fb1d6a-windows-roominfo.json)/[空对象](../analysis/ci/2fb1d6a-windows-roominfo-empty.json)对照分别收到原库 9004/2007；room-state 与 connection-code 是不同域。TLS fixture 仍使用明确的子进程 CA 插桩，生产绑定不含插桩。只构建 Windows，其余跳过；完整对端与媒体仍未接通。
 
+- `58bdfee` / [44897758496](https://github.com/materjojo/uuremote-clone/actions/runs/44897758496)：controller 的生产 `RequestControl` 在两个真实原库本地房间发送了字段与输入完全匹配的 control 请求，二进制 app data 包括 NUL/0xff/0xfe；父端保存实际 message/envelope，强制 GC、输入预先拒绝和 controlled 角色隔离均通过。[完整报告](../analysis/ci/58bdfee-windows-managed-rooms-control.json)。slot 4 是 controller 特定 ABI，controlled 同槽是 capture 功能。该 fixture 不提供 control ACK、同意或真实 peer，9005/原库生成的 capability JSON 仍不是控制/媒体成功。
+
 ## 边界
 
 Ghidra 对 macOS 13MB dylib 的默认自动分析在 330 秒触发 provider_timeout，未产生完整伪代码。保留此覆盖缺口；使用有文件哈希和地址的 ARM64 静态反汇编核对工厂/版本函数，不把它称作完整反编译。当前 Linux 主机不能运行 macOS/Windows UI，原包没有提供登录凭据、真实会话流量和物理采集设备，CI 冒烟测试也不能证明端到端或逐像素一致。

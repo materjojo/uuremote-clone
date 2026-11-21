@@ -27,14 +27,14 @@
 | 平台 | 已构建提交 | 下载 |
 |---|---|---|
 | macOS ARM64 | `eacc0e8` | [应用 ZIP](https://github.com/materjojo/uuremote-clone/actions/runs/44670463306/artifacts/14600510228) |
-| Windows x64 | `2fb1d6a` | [应用 ZIP](https://github.com/materjojo/uuremote-clone/actions/runs/44894436889/artifacts/14702439833) |
+| Windows x64 | `58bdfee` | [应用 ZIP](https://github.com/materjojo/uuremote-clone/actions/runs/44897758496/artifacts/14704038742) |
 | Android ARM64 | `eacc0e8` | [调试 APK](https://github.com/materjojo/uuremote-clone/actions/runs/44670463306/artifacts/14600320303) |
 
 产物保留 7 天，过期后手动选择对应平台重建。macOS 包为当前 runner 的架构，未声明 universal 或 notarized；Android 为调试签名，Windows 尚未做安装器/发行签名。上述产物不能视作已通过端到端验收的正式版本。
 
 ## 验证范围
 
-已在 Actions 通过共享 C++ Release 测试（断言明确启用）、桌面真实库的 C ABI 冒烟测试、Swift / C# 调用检查、Android JVM 生命周期测试、编译后 JNI 原型比较和 APK/桌面 ZIP 内原版文件哈希比较。两端真实桌面库的控制端和被控端均返回 `V4.14.2`。初期原版 ABI 运行和产物记录见 [public-build-results.json](analysis/ci/public-build-results.json)。独立路径的新运行中 macOS 10 项 Swift 测试、Android 5 项模拟器测试以及 Windows H.264/控制和候选生命周期检查通过，包括实际 8 秒 overlay 宽限与关闭中断。Windows 发布包真实首页和 Android 空首页的 [截图](analysis/ci/screenshots/) 与 [机器记录](analysis/ci/latest-independent-results.json) 已保存。Windows 原版 C# 引擎生命周期及 capability 绑定的 [实际报告](analysis/ci/e9692dd-windows-managed-engine.json) 已保存；两角色关闭后重启和同 runner 直接 DLL 字节对照通过，H265 的报告宽高为 0，尚无实际媒体/GPU 成功证据。Windows 原库 [房间传输探测](analysis/ci/576b43b-windows-rooms.json) 已记录回调、TLS/Socket.IO 和 room_info/guard 请求，依赖隔离子进程的显式测试 CA 插桩，后续[生产房间绑定报告](analysis/ci/2fb1d6a-windows-managed-rooms.json)已通过独立合成 room_info 回复、登录回调、GC 与关闭检查，[有效/空回复对照](docs/11-native-contract.md)分别收到 9004/2007。测试 CA 插桩不包含在生产类中；尚未建立真实原库对端或接入普通 UI。Android 原版 native 真机执行、完整原版引擎会话、物理混合互控、硬编硬解路径以及逐页面/逐像素 UI 尚未完成验证。
+已在 Actions 通过共享 C++ Release 测试（断言明确启用）、桌面真实库的 C ABI 冒烟测试、Swift / C# 调用检查、Android JVM 生命周期测试、编译后 JNI 原型比较和 APK/桌面 ZIP 内原版文件哈希比较。两端真实桌面库的控制端和被控端均返回 `V4.14.2`。初期原版 ABI 运行和产物记录见 [public-build-results.json](analysis/ci/public-build-results.json)。独立路径的新运行中 macOS 10 项 Swift 测试、Android 5 项模拟器测试以及 Windows H.264/控制和候选生命周期检查通过，包括实际 8 秒 overlay 宽限与关闭中断。Windows 发布包真实首页和 Android 空首页的 [截图](analysis/ci/screenshots/) 与 [机器记录](analysis/ci/latest-independent-results.json) 已保存。Windows 原版 C# 引擎生命周期及 capability 绑定的 [实际报告](analysis/ci/e9692dd-windows-managed-engine.json) 已保存；两角色关闭后重启和同 runner 直接 DLL 字节对照通过，H265 的报告宽高为 0，尚无实际媒体/GPU 成功证据。Windows 原库 [房间传输探测](analysis/ci/576b43b-windows-rooms.json) 已记录回调、TLS/Socket.IO 和 room_info/guard 请求，依赖隔离子进程的显式测试 CA 插桩，后续[生产房间绑定报告](analysis/ci/2fb1d6a-windows-managed-rooms.json)已通过独立合成 room_info 回复、登录回调、GC 与关闭检查，[有效/空回复对照](docs/11-native-contract.md)分别收到 9004/2007。后续 [C# control 请求报告](analysis/ci/58bdfee-windows-managed-rooms-control.json)通过两个本地房间的二进制输入与原库实际 wire 字节核对，但没有 control ACK/对端/媒体。测试 CA 插桩不包含在生产类中；尚未建立真实原库对端或接入普通 UI。Android 原版 native 真机执行、完整原版引擎会话、物理混合互控、硬编硬解路径以及逐页面/逐像素 UI 尚未完成验证。
 
 之前的私有仓库运行 [Actions 44643846778](https://github.com/materjojo/uuremote-clone/actions/runs/44643846778) 因计费限制，在 runner 启动前被拒绝。现已按用户要求转为公开仓库，使用免费的标准托管 runner。工作流按变更路径选择平台，文档不触发编译，支持手动选择单个平台；构建结果仍以对应 Actions 运行和产物为准。详见 [CI 管理](docs/12-ci.md)。
 

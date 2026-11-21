@@ -169,6 +169,24 @@ Windows 两种角色的 slot 0 接收三个直接指针、返回 32 位状态；
 
 静态原文保存在 `/home/ubuntu/uuyc_clone/analysis/deep-native/windows-followup/results/267..313`，关键 Evidence：room helper `ev_aa7306cda7db29a8c171a27e9aeaf05fdf3a71b7b4d6c51e2c8eb94e503aacb9`、其汇编 `ev_f80f858f4b18f71f7420848542adf04de78fba6d408b9e72cda9b398db67f49a`；有界字符串转换 `ev_16c1b814969ac9542a0be5bbd3f07aa7c025b83fb2151bcf597dc6cd6d66fe68`；proxy helper `ev_0c6add4b1e433730026cf2b8e18481e58def619e95161d4b700259413de39b8f`。
 
+## Windows controller control 请求与 C# 绑定
+
+controller slot 4 的 wrapper `0x180a2cfb0` 和核心 `0x180a34350` 接收 `int32_t handle`、输入指针，返回 int32。该输入为三个 pointer/int32 length 字段，x64 size=0x30；核心按长度复制后排队处理，不能套用 controlled 同槽的 capture API。
+
+| 输入 | pointer / length 偏移 | 原库发送中的用途 |
+|---|---|---|
+| 二进制 app data | 0x00 / 0x08 | `control.app_data` 二进制附件 |
+| app control ID | 0x10 / 0x18 | `control.app_control_id` 与 streamer_data 内的 control_id |
+| timezone | 0x20 / 0x28 | `control.geo_timezone` |
+
+静态跟踪经过 `FUN_180a3f830` → `FUN_180f08ea0` → `FUN_180b184a0` → `FUN_180f3f980` → `FUN_180b90710` → `FUN_180f5f780`。序列化 helper `FUN_180b2d410` 写入 `app_control_id`、二进制 `app_data`、字符串 `streamer_data`、`geo_exit_ip`、`geo_timezone`。正常二进制构造器 `FUN_180bba670` 先写入单字节 `0x04`，再追加原始字节；不能把这个实际 envelope 忽略，也不能假定较早直接以 GRD1 开头的 guard 附件也有该 tag。核心 assembly Evidence `ev_15d3b1e4f8f925959534e076e8c85e4f8b6ca0d8c16188d0fd63e8a2d5f660b5`，serializer `ev_d0ce2604eab351699d19d90b63507464178a2de816ea397309d3c3f08a52e168`，binary helper `ev_9e71fa3b000ea912a5287796ecfa905ca8d2c842934f7334b1288dc17d252644`；完整原文位于 windows-followup/results `365..393`。
+
+[Actions 44896874607](https://github.com/materjojo/uuremote-clone/actions/runs/44896874607) / `29a9ea7` 已通过直接 Python 调用的[完整报告](../analysis/ci/29a9ea7-windows-control.json)：先观察普通 TLS 拒绝并显式加入 fixture CA，原库有效 room_info 登录后 slot 4 返回 0，发出 `451-2["control",…]` 和单独 23 字节 WebSocket 二进制帧，内容严格等于 `0x04` 加 22 字节输入（含 NUL、0xff、0xfe）。`app_control_id`、`geo_timezone` 与输入一致；streamer_data 是原库生成的 JSON，包含该 control ID、display_info 与 codec capability 声明。connection-code 从 9004 进入 9005，无 control ACK 的这轮随后有 2014；本地房间关闭/Finalize=0。先前因把附件当作裸 app data 的[失败报告](../analysis/ci/2206c30-windows-control-envelope-failure.json)保留，不把修正断言写成协议已完全兼容。
+
+生产 [RequestControl](../platforms/windows/OfficialWindowsEngine.Rooms.cs) 要求 controller 和当前 engine 持有的房间。调用者提供 opaque binary app data、control ID、可选 timezone；有边界的 UTF-8 ID/timezone 和二进制拷贝保留至 Finalize，异步回调仍使用原通知队列。该 API 不解释或伪造 ConnectOptions、同意、ICE、采集或媒体成功。测试工程继续单独持有 fixture trust 插桩。
+
+[Actions 44897758496](https://github.com/materjojo/uuremote-clone/actions/runs/44897758496) / `58bdfee` 通过了[编译后的生产 API 检查](../analysis/ci/58bdfee-windows-managed-rooms-control.json)：controller 在 handle 1 和 2 各发送一次请求，父端实际记录到同样的 control 字段和二进制 bytes，强制 GC 后正常；非法 ID/timezone、超长 app data、未知/已关闭房间、关闭后调用均提前拒绝；controlled 拒绝使用 controller 专属入口。两角色其余生命周期/能力/room_info 正负对照、包内身份检查亦通过。请求有实际原库 wire 证据，但还没有真实 controlled 对端、服务端授权/同意、control ACK、offer/answer/ICE 或媒体。
+
 ## 后续原生证据边界（2026-11-20）
 
 以下结论只针对保存的原始文件静态 Evidence，不代表 ARM64 原库已经在设备上运行，也不代表 Windows 硬件路径已经在当前机器上选中。
