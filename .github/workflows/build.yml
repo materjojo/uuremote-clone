@@ -163,6 +163,8 @@ jobs:
           python scripts/probe_windows_codec_detector.py --runtime build/windows --adapter-tool build/codec-detector/Release/codec_adapter_inventory.exe --output build/codec-detector-windows.json
       - name: Probe isolated original DLL initialization and shutdown
         run: python scripts/probe_windows_streamer_lifecycle.py --runtime build/windows --workspace build/lifecycle-probes --output build/streamer-lifecycle-windows.json --debugger build/codec-detector/Release/native_failure_observer.exe
+      - name: Observe original DLL codec capability outputs
+        run: python scripts/probe_windows_streamer_lifecycle.py --runtime build/windows --workspace build/capability-probes --output build/streamer-capabilities-windows.json --capabilities --debugger build/codec-detector/Release/native_failure_observer.exe
       - name: Verify package and archive
         run: |
           Compress-Archive -Path build/windows/* -DestinationPath build/UURemoteClone-windows-x64.zip
@@ -181,6 +183,7 @@ jobs:
             build/native-runtime-windows.json
             build/codec-detector-windows.json
             build/streamer-lifecycle-windows.json
+            build/streamer-capabilities-windows.json
           retention-days: 7
           if-no-files-found: error
 

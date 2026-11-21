@@ -125,7 +125,11 @@ Windows 两种角色的 slot 0 接收三个直接指针、返回 32 位状态；
 
 实际 [Actions 44883311915](https://github.com/materjojo/uuremote-clone/actions/runs/44883311915) 已失败：两角色先成功查询版本，随后均在 Initialize 阶段以 `0xC0000374` 退出，未到达 Finalize。[原始失败报告](../analysis/ci/3969eba-windows-lifecycle.json) 保留输入、哈希和最后阶段；这不是初始化成功证据，尚不能把堆损坏归因到 ABI 或原库前提中的某一项。
 
-`FUN_180d25db0` 的后续追踪已显示：配置 `+0x48` 的第三项会追加到 `connection_log_controller/controlled_<suffix>.slog` 中，不能传完整目录。Evidence `ev_db4cf5655239d172cd16d02a6e7b7305851ede4ef50c00d060ee4479ae64686e`，完整 body 保存在 `266-pseudo-logger-create-sinks.*`。初版探测错误地给第三项传了完整 scratch 目录；现改用 `ci-controller/ci-controlled` suffix。此修正是否解决原生堆损坏，仍需下一次实际运行核对。
+`FUN_180d25db0` 的后续追踪已显示：配置 `+0x48` 的第三项会追加到 `connection_log_controller/controlled_<suffix>.slog` 中，不能传完整目录。Evidence `ev_db4cf5655239d172cd16d02a6e7b7305851ede4ef50c00d060ee4479ae64686e`，完整 body 保存在 `266-pseudo-logger-create-sinks.*`。初版探测错误地给第三项传了完整 scratch 目录；现改用 `ci-controller/ci-controlled` suffix。此修正后的 [Actions 44885010956](https://github.com/materjojo/uuremote-clone/actions/runs/44885010956) 已通过：两种角色的 Initialize/Finalize 都返回 0，前后版本为 V4.14.2，生成的日志文件名包含 `ci-controller/ci-controlled` suffix。[原始报告](../analysis/ci/d11ee29-windows-lifecycle.json)。这建立了该参数组合可运行的证据，尚未独立证明先前堆损坏的确切根因。
+
+日志实际为带 `SLOG\\r\\n\\x1a\\n` magic 的二进制容器。初次通过报告的 UTF-8 preview 不能解释这些内容，`config_open_failure_seen=false` 也不能证明配置读取正确。新报告改为保存原始 base64/哈希并明确 config consumption 仍未知，避免把不可读二进制中的负向文本搜索当成功检查。
+
+能力查询的 Windows slot 15 使用单个输出参数，写 data pointer 到 `+0x00`、32 位长度到 `+0x08`，返回 32 位状态。控制端 `0x180a2d3b0` 和被控端 `0x180a2dd60` 的 Evidence 分别保存在 `258-asm-get-decode-capability` 和 `259-asm-get-encode-capability`。首次调用有 CRT 静态初始化保护，内部 `0x180a328e0` / `0x180a2eda0` 在未初始化时会固定空结果，因此必须先 Initialize，不能提前查询。新增 runner 探测以各自子进程 Initialize → capability query → repeat → Finalize，立即复制有界 DLL-owned 数据，保存 bytes/base64/SHA-256 及可解析的 UTF-8/JSON，不假设返回字段 schema，不以输出支持声明证明实际媒体编解码。原有纯生命周期探测仍单独保留。
 
 失败后的诊断扩展由父进程采集工作目录文件，即使 native 子进程异常退出也保留日志；另在独立 scratch 目录中以 runner 编译的 [native_failure_observer](../Tests/WindowsCodecDetector/native_failure_observer.cpp) 做一次 debugger-attached 重试，记录异常及 module/RVA 栈帧。重试不替代普通失败结果，不写内存、不保存内存 dump、不下载调试符号。它使用 Win32 debug events 和本地 DbgHelp unwind；编译和目标执行仍只在 GitHub Actions。
 
