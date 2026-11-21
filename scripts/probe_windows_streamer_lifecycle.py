@@ -25,6 +25,20 @@ def save(path, report):
     temporary.replace(path)
 
 
+def collect_workspace(workspace):
+    files = []
+    for path in sorted(workspace.rglob('*')):
+        if not path.is_file():
+            continue
+        data = path.read_bytes()
+        item = {'path': str(path.relative_to(workspace)), 'bytes': len(data), 'sha256': digest(data)}
+        if '.log' in path.name.lower() or path.suffix.lower() == '.txt':
+            item['text_preview'] = data[:256 * 1024].decode('utf-8', errors='replace')
+            item['text_preview_truncated'] = len(data) > 256 * 1024
+        files.append(item)
+    return files
+
+
 def version(table, role):
     function = ctypes.WINFUNCTYPE(ctypes.c_int, ctypes.POINTER(ctypes.c_void_p),
                                  ctypes.POINTER(ctypes.c_uint32))(table[17 if role == 'controller' else 18])
@@ -83,16 +97,7 @@ def child(runtime, workspace, role, output):
         report['phase'] = 'complete'
     except BaseException:
         report['error'] = traceback.format_exc()
-    report['workspace_files'] = []
-    for path in sorted(workspace.rglob('*')):
-        if not path.is_file():
-            continue
-        data = path.read_bytes()
-        item = {'path': str(path.relative_to(workspace)), 'bytes': len(data), 'sha256': digest(data)}
-        if path.suffix.lower() in ('.log', '.txt'):
-            item['text_preview'] = data[:256 * 1024].decode('utf-8', errors='replace')
-            item['text_preview_truncated'] = len(data) > 256 * 1024
-        report['workspace_files'].append(item)
+    report['workspace_files'] = collect_workspace(workspace)
     report['config_open_failure_seen'] = any('failed to open json config' in item.get('text_preview', '')
                                             for item in report['workspace_files'])
     report['passed'] = (report.get('initialize_status') == 0 and report.get('finalize_status') == 0
@@ -109,6 +114,7 @@ def main():
     parser.add_argument('--workspace', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--child', choices=['controller', 'controlled'])
+    parser.add_argument('--debugger', type=Path, help='Runner-built native failure observer; invoked only after failure')
     args = parser.parse_args()
     if platform.system() != 'Windows' or os.environ.get('GITHUB_ACTIONS') != 'true':
         parser.error('Original target execution is restricted to Windows GitHub Actions')
@@ -118,13 +124,29 @@ def main():
     cases = []
     for role in ('controller', 'controlled'):
         child_output = output.with_name('lifecycle-' + role + '.json')
-        observation = observe([sys.executable, str(Path(__file__).resolve()), '--runtime', str(runtime),
-                               '--workspace', str(workspace / role), '--output', str(child_output),
-                               '--child', role], runtime, timeout=60)
+        def command_for(case_workspace, case_output):
+            return [sys.executable, str(Path(__file__).resolve()), '--runtime', str(runtime),
+                    '--workspace', str(case_workspace), '--output', str(case_output), '--child', role]
+
+        observation = observe(command_for(workspace / role, child_output), runtime, timeout=60)
         child_report = json.loads(child_output.read_text(encoding='utf-8')) if child_output.exists() else None
-        cases.append({'role': role, 'process': observation, 'native': child_report,
-                      'passed': observation['exit_code'] == 0 and not observation['timed_out']
-                                and child_report is not None and child_report.get('passed', False)})
+        case = {'role': role, 'process': observation, 'native': child_report,
+                'workspace_files_after_exit': collect_workspace(workspace / role),
+                'passed': observation['exit_code'] == 0 and not observation['timed_out']
+                          and child_report is not None and child_report.get('passed', False)}
+        if not case['passed'] and args.debugger:
+            debug_workspace = workspace / (role + '-debug')
+            debug_output = output.with_name('lifecycle-' + role + '-debug.json')
+            events = output.with_name('lifecycle-' + role + '-debugger.jsonl')
+            debug_command = [str(args.debugger.resolve()), str(events), *command_for(debug_workspace, debug_output)]
+            debug_process = observe(debug_command, runtime, timeout=120)
+            case['debug_retry'] = {
+                'process': debug_process,
+                'native': json.loads(debug_output.read_text(encoding='utf-8')) if debug_output.exists() else None,
+                'events': [json.loads(line) for line in events.read_text(encoding='utf-8').splitlines()] if events.exists() else [],
+                'workspace_files_after_exit': collect_workspace(debug_workspace),
+                'scope': 'Debugger-attached diagnostic retry; does not replace the failed ordinary observation.'}
+        cases.append(case)
     report = {'source_commit': os.environ.get('GITHUB_SHA'), 'run_id': os.environ.get('GITHUB_RUN_ID'),
               'platform': platform.platform(), 'observations': cases,
               'passed': all(case['passed'] for case in cases),

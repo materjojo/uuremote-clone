@@ -123,6 +123,10 @@ Windows 两种角色的 slot 0 接收三个直接指针、返回 32 位状态；
 
 [runner 探测脚本](../scripts/probe_windows_streamer_lifecycle.py) 先核对原文件哈希，在各自子进程中分配正确长度的空 callback 数组，调用工厂、版本、Initialize、Finalize、版本。三个参数使用 NUL 终止 UTF-16 缓冲；第二项是复制原配置的非 ASCII 路径，另外两项是独立 scratch 目录，不把其完整业务语义预先命名。父进程设置 60 秒上限，报告保留 native call 前阶段、退出码、原始输出、状态、工作目录文件身份及日志预览。仅允许 Windows GitHub Actions 执行。生产绑定仍只开放工厂/版本；脚本不创建房间，不调用采集、能力探测、网络或媒体入口。实际结果以对应 Actions artifact 为准，源码增加探测不构成运行通过。
 
+实际 [Actions 44883311915](https://github.com/materjojo/uuremote-clone/actions/runs/44883311915) 已失败：两角色先成功查询版本，随后均在 Initialize 阶段以 `0xC0000374` 退出，未到达 Finalize。[原始失败报告](../analysis/ci/3969eba-windows-lifecycle.json) 保留输入、哈希和最后阶段；这不是初始化成功证据，尚不能把堆损坏归因到 ABI 或原库前提中的某一项。
+
+失败后的诊断扩展由父进程采集工作目录文件，即使 native 子进程异常退出也保留日志；另在独立 scratch 目录中以 runner 编译的 [native_failure_observer](../Tests/WindowsCodecDetector/native_failure_observer.cpp) 做一次 debugger-attached 重试，记录异常及 module/RVA 栈帧。重试不替代普通失败结果，不写内存、不保存内存 dump、不下载调试符号。它使用 Win32 debug events 和本地 DbgHelp unwind；编译和目标执行仍只在 GitHub Actions。
+
 ## 后续原生证据边界（2026-11-20）
 
 以下结论只针对保存的原始文件静态 Evidence，不代表 ARM64 原库已经在设备上运行，也不代表 Windows 硬件路径已经在当前机器上选中。

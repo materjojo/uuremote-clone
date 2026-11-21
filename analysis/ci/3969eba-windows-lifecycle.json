@@ -1,0 +1,105 @@
+{
+  "source_commit": "3969eba94c49d3fb8b6f08f1618d5ccd15674157",
+  "run_id": "44883311915",
+  "platform": "Windows-2025Server-10.0.26100-SP0",
+  "observations": [
+    {
+      "role": "controller",
+      "process": {
+        "command": [
+          "C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\python.exe",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\scripts\\probe_windows_streamer_lifecycle.py",
+          "--runtime",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\windows",
+          "--workspace",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\lifecycle-probes\\controller",
+          "--output",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\lifecycle-controller.json",
+          "--child",
+          "controller"
+        ],
+        "exit_code": 3221226356,
+        "timed_out": false,
+        "timeout_seconds": 60,
+        "duration_seconds": 0.438,
+        "stdout": "",
+        "stderr": "",
+        "stdout_base64": "",
+        "stderr_base64": "",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "native": {
+        "role": "controller",
+        "phase": "initialize",
+        "passed": false,
+        "library_sha256": "ac351cf4e1d489e0b6e1a3df5cdf8aed96348876f7e2c7fcf7162fe59e1bb1c4",
+        "config_sha256": "3c9b63db00cfe50ebce90aa8f4a3afc2dd7a3119876e80e15213185d72b8486a",
+        "slot_0_inputs": [
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\lifecycle-probes\\controller\\logs",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\lifecycle-probes\\controller\\config-\u914d\u7f6e.json",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\lifecycle-probes\\controller\\diagnostics"
+        ],
+        "string_encoding": "UTF-16LE, NUL-terminated",
+        "version_before": {
+          "status": 0,
+          "value": "V4.14.2"
+        }
+      },
+      "passed": false
+    },
+    {
+      "role": "controlled",
+      "process": {
+        "command": [
+          "C:\\hostedtoolcache\\windows\\Python\\3.12.10\\x64\\python.exe",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\scripts\\probe_windows_streamer_lifecycle.py",
+          "--runtime",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\windows",
+          "--workspace",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\lifecycle-probes\\controlled",
+          "--output",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\lifecycle-controlled.json",
+          "--child",
+          "controlled"
+        ],
+        "exit_code": 3221226356,
+        "timed_out": false,
+        "timeout_seconds": 60,
+        "duration_seconds": 0.218,
+        "stdout": "",
+        "stderr": "",
+        "stdout_base64": "",
+        "stderr_base64": "",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "native": {
+        "role": "controlled",
+        "phase": "initialize",
+        "passed": false,
+        "library_sha256": "ac351cf4e1d489e0b6e1a3df5cdf8aed96348876f7e2c7fcf7162fe59e1bb1c4",
+        "config_sha256": "3c9b63db00cfe50ebce90aa8f4a3afc2dd7a3119876e80e15213185d72b8486a",
+        "slot_0_inputs": [
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\lifecycle-probes\\controlled\\logs",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\lifecycle-probes\\controlled\\config-\u914d\u7f6e.json",
+          "D:\\a\\uuremote-clone\\uuremote-clone\\build\\lifecycle-probes\\controlled\\diagnostics"
+        ],
+        "string_encoding": "UTF-16LE, NUL-terminated",
+        "version_before": {
+          "status": 0,
+          "value": "V4.14.2"
+        }
+      },
+      "passed": false
+    }
+  ],
+  "passed": false,
+  "scope": "Isolated original DLL factory/version/Initialize/Finalize calls only.",
+  "limitations": [
+    "No room, signaling, capture, codecs, input or media session is executed.",
+    "Native callbacks are null; callback signatures and delivery remain untested.",
+    "A zero Initialize result alone does not prove config consumption or hardware success.",
+    "First and third path roles are caller-selected scratch locations; their full semantics remain under analysis."
+  ]
+}
