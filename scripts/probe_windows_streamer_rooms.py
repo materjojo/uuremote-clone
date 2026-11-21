@@ -165,7 +165,7 @@ class RoomObservation:
                     record['tls_cipher'] = connection.cipher()
                     connection.settimeout(0.25)
                     data = bytearray()
-                    deadline = time.monotonic() + 20
+                    deadline = time.monotonic() + getattr(self, 'connection_lifetime', 20)
 
                     def receive_until(size):
                         while len(data) < size:

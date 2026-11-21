@@ -4,6 +4,12 @@ using System.Text.Json;
 using System.Security.Cryptography;
 using UURemoteClone;
 
+if (args.Length == 6 && args[0] == "--pair")
+{
+    PairChecks.Run(args);
+    return;
+}
+
 if (args.Length == 6 && args[0] == "--room")
 {
     RoomChecks.Run(args);

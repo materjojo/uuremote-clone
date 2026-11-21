@@ -181,7 +181,7 @@ internal static class RoomChecks
         finally { Save(); }
     }
 
-    private static object ExtendFixtureTrust(string dll, string certificatePem)
+    internal static object ExtendFixtureTrust(string dll, string certificatePem)
     {
         const string expected = "ac351cf4e1d489e0b6e1a3df5cdf8aed96348876f7e2c7fcf7162fe59e1bb1c4";
         if (Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(dll))).ToLowerInvariant() != expected)
