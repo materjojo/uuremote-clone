@@ -139,7 +139,7 @@ Windows 两种角色的 slot 0 接收三个直接指针、返回 32 位状态；
 
 [OfficialWindowsEngine](../platforms/windows/OfficialWindowsEngine.cs) 将已验证的 Windows-only Initialize/Finalize、版本和 capability 查询加入应用工程。它校验指定 DLL/detector 的 SHA-256、使用 UTF-16 缓冲、限制 filename suffix、在进程内保留单一 engine owner，并与旧的版本检查入口共用工厂调用锁，避免另一个工厂覆盖全局 callbacks。模块固定保留到进程退出；成功 Finalize 后才释放输入和 owner，失败则阻止继续使用未知状态。返回的 DLL-owned 数据立即有界复制、不释放原始指针，按 UTF-8/JSON 验证，不生成“硬编开启”等支持声明。callback 仍为空，此层尚未接入普通远程会话或采集/网络入口。
 
-[Windows managed smoke](../Tests/WindowsOfficialSmoke/Program.cs) 使用生产类在每个角色的独立进程中核对非 ASCII 配置路径、所有权冲突、阻止旧工厂、重复 capability、与同 runner Python 原始调用逐字节相符、重复 Dispose、关闭后调用拒绝，以及成功关闭后的再次初始化。父脚本记录退出码、超时、最后阶段和二进制日志；编译与运行只在 Actions，是否通过以新运行结果为准。
+[Windows managed smoke](../Tests/WindowsOfficialSmoke/Program.cs) 使用生产类在每个角色的独立进程中核对非 ASCII 配置路径、所有权冲突、阻止旧工厂、重复 capability、与同 runner Python 原始调用逐字节相符、重复 Dispose、关闭后调用拒绝，以及成功关闭后的再次初始化。父脚本记录退出码、超时、最后阶段和二进制日志；编译与运行只在 Actions。[44886678910](https://github.com/materjojo/uuremote-clone/actions/runs/44886678910) 已全部通过，两种角色各完成这些检查，报告见 [e9692dd-windows-managed-engine.json](../analysis/ci/e9692dd-windows-managed-engine.json)。其余平台跳过，本次没有新的 macOS/Android 编译结果。
 
 ## 后续原生证据边界（2026-11-20）
 

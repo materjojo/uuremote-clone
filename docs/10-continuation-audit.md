@@ -5,7 +5,7 @@
 | 用户要求 | 当前证据/实现 | 验收状态 |
 |---|---|---|
 | 三个给定安装包深入分析 | 已保存原包与提取树；继续核对实际 JNI / C ABI | 部分完成 |
-| 官方采集、硬编硬解、加速、通信路径 | 两端原版库工厂/版本及 Swift/C# 绑定已在 runner 验证；Android 增加受测生命周期封装；主流程、采集/编解码仍未接通验收 | 未完成 |
+| 官方采集、硬编硬解、加速、通信路径 | 两端原版库工厂/版本及 Swift/C# 绑定已在 runner 验证；Windows 增加通过真实 DLL 字节对照的 Initialize/Finalize/capability 绑定；Android 增加受测生命周期封装；主流程、采集/编解码仍未接通验收 | 未完成 |
 | 原版协议 | Windows descriptor 能证明 schema；信令与业务调用仍需逐条跟踪 | 部分完成 |
 | 三端所有非云设备功能 | 独立配对、同意、RTP 视频和控制已有实现及回环证据，不依赖网易登录；音频、文件、终端和完整输入仍未接通 | 未完成 |
 | 各端 UI 与对应原版一致 | Android、Windows 已复用指定原包非云图片并取得真实克隆首页截图；其余布局仍为重建，缺同条件原版运行对照 | 未完成 |
@@ -46,6 +46,13 @@
 公开后的 [Actions 44648328290](https://github.com/materjojo/uuremote-clone/actions/runs/44648328290)（`2f65722`）已经实际运行：Linux Release 测试、macOS 应用/Swift 3 项测试、macOS C ABI 及 Windows C ABI 通过；Windows 托管绑定编译和 Android 检查脚本暴露上述缺陷。该轮产出 macOS ARM64 ZIP 与 native 报告。
 
 修正后的 [Actions 44649504313](https://github.com/materjojo/uuremote-clone/actions/runs/44649504313)（`2903d80`）全部应运行 job 通过：plan、Windows、Android；Linux 与 macOS 因输入未变跳过。Windows 两角色 C ABI 和 C# 绑定均取得 `V4.14.2`，并产出自包含 ZIP。Android 执行 `testDebugUnitTest`、通过 22 类的 237 个方法 descriptor / 24 个常量检查及 APK 内原版文件身份检查，产出 ARM64 debug APK。两端桌面 ZIP 都通过原库/config 完整哈希检查，macOS 同时检查执行权限。见 [机器记录](../analysis/ci/public-build-results.json)、[macOS 原生报告](../analysis/ci/2f65722-macos-native.json)、[Windows 原生报告](../analysis/ci/2903d80-windows-native.json)。本地未编译或启动这些应用。
+
+## Windows 原库生命周期与能力的进一步结果
+
+- `bee0d8f` / [44881938396](https://github.com/materjojo/uuremote-clone/actions/runs/44881938396)：补入相邻原版 `StreamerCodecDetector.exe`，发布包身份检查和 14 次 detector batch 通过，但 112 条 RESULT 的 width/height/flag 均为 0。软件/微软虚拟 adapter 结果不能验收物理 GPU。
+- 初次 Initialize 把第三个 UTF-16 参数错当路径，两角色以 `0xC0000374` 退出。继续静态追踪确认该项是日志文件 suffix，修正后 `d11ee29` / [44885010956](https://github.com/materjojo/uuremote-clone/actions/runs/44885010956) 两角色 Initialize/Finalize=0。失败报告保留，未声称已经独立证明堆损坏根因。
+- `7db8179` / [44885744775](https://github.com/materjojo/uuremote-clone/actions/runs/44885744775)：原库 slot 15 capability 查询及重复字节相符通过，返回 H264/H265 JSON，H265 宽高均为 0。原库实际生成 SLOG 二进制日志，现保留原始 base64/SHA-256，不把文本搜索无错误解释为配置消费成功。
+- `e9692dd` / [44886678910](https://github.com/materjojo/uuremote-clone/actions/runs/44886678910)：Windows 生产 C# 绑定在角色隔离进程中通过初始化、能力查询、进程独占、阻止其它工厂、重复关闭、关闭后拒绝及再次初始化；返回字节与同 runner Python 原生调用完全相同。[实际报告](../analysis/ci/e9692dd-windows-managed-engine.json)。本轮只选择 Windows，其余平台跳过。绑定仍未接入普通 UI 会话，也未执行实际采集、编码/解码帧、回调投递或互控。
 
 ## 边界
 
