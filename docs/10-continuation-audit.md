@@ -60,6 +60,8 @@
 
 - `58bdfee` / [44897758496](https://github.com/materjojo/uuremote-clone/actions/runs/44897758496)：controller 的生产 `RequestControl` 在两个真实原库本地房间发送了字段与输入完全匹配的 control 请求，二进制 app data 包括 NUL/0xff/0xfe；父端保存实际 message/envelope，强制 GC、输入预先拒绝和 controlled 角色隔离均通过。[完整报告](../analysis/ci/58bdfee-windows-managed-rooms-control.json)。slot 4 是 controller 特定 ABI，controlled 同槽是 capture 功能。该 fixture 不提供 control ACK、同意或真实 peer，9005/原库生成的 capability JSON 仍不是控制/媒体成功。
 
+- `9e93448` / [44899602774](https://github.com/materjojo/uuremote-clone/actions/runs/44899602774)：controlled slot 10 OnNewControl 的生产队列已通过真实原库运行，包含 GC、回调返回前有界复制、22 字节 binary app data、control ID、原库生成的 1127 字节协商 JSON、一次性 drain 和关闭后拒绝。[报告](../analysis/ci/9e93448-windows-managed-controlled.json)。父端注入的是合成 be-controlled，未调用 capture，9007/9008 和 JSON result=0 不能当作真实 peer 或媒体成功。
+
 ## 边界
 
 Ghidra 对 macOS 13MB dylib 的默认自动分析在 330 秒触发 provider_timeout，未产生完整伪代码。保留此覆盖缺口；使用有文件哈希和地址的 ARM64 静态反汇编核对工厂/版本函数，不把它称作完整反编译。当前 Linux 主机不能运行 macOS/Windows UI，原包没有提供登录凭据、真实会话流量和物理采集设备，CI 冒烟测试也不能证明端到端或逐像素一致。

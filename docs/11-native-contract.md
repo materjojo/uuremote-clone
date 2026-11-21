@@ -187,6 +187,16 @@ controller slot 4 的 wrapper `0x180a2cfb0` 和核心 `0x180a34350` 接收 `int3
 
 [Actions 44897758496](https://github.com/materjojo/uuremote-clone/actions/runs/44897758496) / `58bdfee` 通过了[编译后的生产 API 检查](../analysis/ci/58bdfee-windows-managed-rooms-control.json)：controller 在 handle 1 和 2 各发送一次请求，父端实际记录到同样的 control 字段和二进制 bytes，强制 GC 后正常；非法 ID/timezone、超长 app data、未知/已关闭房间、关闭后调用均提前拒绝；controlled 拒绝使用 controller 专属入口。两角色其余生命周期/能力/room_info 正负对照、包内身份检查亦通过。请求有实际原库 wire 证据，但还没有真实 controlled 对端、服务端授权/同意、control ACK、offer/answer/ICE 或媒体。
 
+## Windows controlled be-controlled 与 OnNewControl
+
+`FUN_180f2b230` 注册 `be-controlled`、offer/candidate 等事件；be-controlled thunk `0x180af3ef0` → `0x180f27e60` 用 `FUN_180b27c10` 读取 control-result 字段，再经 `0x180ae3000` 进入 `0x180f2bf80`。后者为当前 room 建立本地 ICE 对象、执行 capability 协商，并在 `0x180f2d904` 调用 controlled callback slot 10（`0x18143f1b0`）。汇编传参为 `void(int32_t handle, const ThreeSlices*)`；结构为 0x30 字节，三个 borrowed pointer/int32 length 对位于 `0/8`、`0x10/0x18`、`0x20/0x28`。第一段 control ID、第二段 opaque app data、第三段由 `FUN_180aecad0` 生成的协商 JSON；callback 返回后不应继续借用这些地址。它与 controller slot 4 的三段输入只有形状相同，第三段语义不同。
+
+[Actions 44898923318](https://github.com/materjojo/uuremote-clone/actions/runs/44898923318) / `4956f9f` 的[原库报告](../analysis/ci/4956f9f-windows-controlled-event.json)在原库登录后注入独立合成 `be-controlled`（streamer_data 取自已冻结的真实 controller 请求），收到一次匹配 handle、control ID 和全部 22 字节 app data 的回调。第三段为原库生成的 1127 字节 JSON，含 `remote_display_info`、`local_display_info`、`frame_quality_capability`；该 run 的 H264/chroma=1/8-bit 项 `max_frame_quality=2/result=0`，其它项仍带负 result。原库还发出 `forward_setting`/`device_capability`，connection-code 记录到 9008、9007。这些只是本地事件处理、能力协商和通知，不是实际编解码、ICE 数据路径或媒体成功。
+
+生产 `DrainNewControls` 将三段数据在 native 回调返回前做有界拷贝，保留强引用委托且不获取前台 CallGate、不执行应用 handler。ID/协商文本按严格 UTF-8 解码，app data 保留二进制；未知状态/回调异常沿用保守失败处理。仅 controlled 工厂安装 slot 10，controller 对应槽不复用。测试 CA helper 仍只存在于测试工程。
+
+[Actions 44899602774](https://github.com/materjojo/uuremote-clone/actions/runs/44899602774) / `9e93448` 通过[生产 C# 回调检查](../analysis/ci/9e93448-windows-managed-controlled.json)：父端在原库登录并强制 GC 后注入事件，编译后的 child 在回调外读取队列，handle/control ID/app data 保持一致，1127 字节协商文本解析为上述三组原始字段；再次 drain 为空，Dispose 后调用拒绝。原有 controller 两房间请求、双方生命周期/capability、room_info 正负对照也通过。没有调用 capture/renderer 入口，没有真实对端 SDP/ICE；普通 UI 尚未消费该通知。
+
 ## 后续原生证据边界（2026-11-20）
 
 以下结论只针对保存的原始文件静态 Evidence，不代表 ARM64 原库已经在设备上运行，也不代表 Windows 硬件路径已经在当前机器上选中。
