@@ -197,6 +197,20 @@ controller slot 4 的 wrapper `0x180a2cfb0` 和核心 `0x180a34350` 接收 `int3
 
 [Actions 44899602774](https://github.com/materjojo/uuremote-clone/actions/runs/44899602774) / `9e93448` 通过[生产 C# 回调检查](../analysis/ci/9e93448-windows-managed-controlled.json)：父端在原库登录并强制 GC 后注入事件，编译后的 child 在回调外读取队列，handle/control ID/app data 保持一致，1127 字节协商文本解析为上述三组原始字段；再次 drain 为空，Dispose 后调用拒绝。原有 controller 两房间请求、双方生命周期/capability、room_info 正负对照也通过。没有调用 capture/renderer 入口，没有真实对端 SDP/ICE；普通 UI 尚未消费该通知。
 
+## Windows 两个原库进程与独立信令协商
+
+[e8503b7 / Actions 44900334672](https://github.com/materjojo/uuremote-clone/actions/runs/44900334672) 的[完整报告](../analysis/ci/e8503b7-windows-native-pair.json)同时启动 controller/controlled 两个生产绑定进程，各自持有一份原库全局状态。独立 loopback 记录器把 controller 实际发出的 control（包括二进制附件和原始 streamer_data）转成 controlled 的 be-controlled。收到 controlled 实际生成的 `forward_setting.data.device_capability` 后，以该能力构成 controller 原请求的 Socket.IO ACK `43<id>["success",{…}]`；测试 client/ice/control 身份由记录器分配。它是自动允许的测试夹具，不是生产授权服务或用户同意。
+
+双方实际生成并消费 `soac` 的 offer/answer/candidate。外层 `client_id` 在发送时是目标，转发时替换成来源；`data` 内有 `app_control_id`、`ice_id`、`type`，SDP 分支使用 `sdp`，candidate 分支使用 `candidate`/`sdpMid`/`sdpMLineIndex`。该轮没有声明 peer gzip 能力，实际 SDP 是文本；不能据此宣称 gzip 分支已验证。双方产生同一 runner 私网接口上的 UDP host candidate，没有提供 STUN/TURN 或执行网易业务请求。两个 child 退出 0、关闭/Finalize 成功，原有单端回归也通过。
+
+该报告在看到 offer、answer 和双方 candidate 后结束，未发送应用数据，也没有实际采集、渲染、编解码或物理 GPU 观察；不能仅凭其 9009/901x 等通知验收数据路径。每个 child 仍先记录普通 TLS unknown_ca，随后显式使用测试 helper 加入该端 fixture CA；生产引擎没有信任覆盖功能。普通 UI、外网 IPv4/IPv6 打洞、物理跨端互通仍未接入。
+
+## Windows binary/peer-state 绑定与失败保留
+
+`SendBinaryData` 的 Windows controller slot **12**（wrapper `0x180a2d290` → `0x180a33070` → `0x180a513a0` → `0x180a5cf00` → `0x180a5fa60`）与 controlled slot **10**（`0x180a2dbb0` → `0x180a2f6e0` → `0x180a50b00` → `0x180a5c780` → `0x180a5fc00`）为 `int32_t(handle, const void*, int32_t size)`。两入口在异步提交前检查 `<0x80000` 并复制原始字节到自有缓冲。callback controller slot 6 / controlled slot 3 由 thunk 传入 `void(handle, const void*, uint32_t size)`；生产绑定在回调返回前复制，强引用委托，handler 留在消费队列的一方。controller peer-state slot 11 有 handle/state/detail 三个 int32，controlled 同槽只有 handle/state；实现保留原始数值，不从其它平台套用状态枚举。
+
+`0fb368f` / [44903013760](https://github.com/materjojo/uuremote-clone/actions/runs/44903013760) 的[失败报告](../analysis/ci/0fb368f-windows-native-binary-failure.json)保留两进程实际状态和随机输入：编译、已有单端测试和信令协商通过，但未收到 binary callback，数据验收失败。该提交误把 controller 13 / controlled 11 作为 binary 入口；后续追踪到两者均进入 `SendFileData`（`0x180a5e110` / `0x180a5e670`），修正为上面的 12 / 10。原失败中的 `binary_sent=true` 仅表示当时错误绑定返回了 0，不是 binary 已发送或送达。后续验证必须仍逐字节比较实际接收回调，不能改成仅检查状态码。
+
 ## 后续原生证据边界（2026-11-20）
 
 以下结论只针对保存的原始文件静态 Evidence，不代表 ARM64 原库已经在设备上运行，也不代表 Windows 硬件路径已经在当前机器上选中。

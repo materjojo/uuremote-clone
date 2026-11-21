@@ -62,6 +62,9 @@
 
 - `9e93448` / [44899602774](https://github.com/materjojo/uuremote-clone/actions/runs/44899602774)：controlled slot 10 OnNewControl 的生产队列已通过真实原库运行，包含 GC、回调返回前有界复制、22 字节 binary app data、control ID、原库生成的 1127 字节协商 JSON、一次性 drain 和关闭后拒绝。[报告](../analysis/ci/9e93448-windows-managed-controlled.json)。父端注入的是合成 be-controlled，未调用 capture，9007/9008 和 JSON result=0 不能当作真实 peer 或媒体成功。
 
+- `e8503b7` / [44900334672](https://github.com/materjojo/uuremote-clone/actions/runs/44900334672)：两个独立原库进程通过独立记录器路由真实 control、controlled 能力回复、offer/answer 和双方 host candidate，[报告](../analysis/ci/e8503b7-windows-native-pair.json)已冻结；没有 STUN/TURN、网易业务请求、capture 或媒体，信令完成不能替代真实数据接收。测试身份/自动允许和显式 CA 插桩仍非生产服务。
+- `0fb368f` / [44903013760](https://github.com/materjojo/uuremote-clone/actions/runs/44903013760)：新 binary 检查失败且[完整报告](../analysis/ci/0fb368f-windows-native-binary-failure.json)保留。实际调用链表明初版错用了 FileData 槽 13/11；现改为原库明确的 BinaryData 槽 12/10，接收断言不变。此失败不能写作 binary/GPU 成功。
+
 ## 边界
 
 Ghidra 对 macOS 13MB dylib 的默认自动分析在 330 秒触发 provider_timeout，未产生完整伪代码。保留此覆盖缺口；使用有文件哈希和地址的 ARM64 静态反汇编核对工厂/版本函数，不把它称作完整反编译。当前 Linux 主机不能运行 macOS/Windows UI，原包没有提供登录凭据、真实会话流量和物理采集设备，CI 冒烟测试也不能证明端到端或逐像素一致。

@@ -109,7 +109,9 @@ public sealed partial class OfficialWindowsEngine : IDisposable
                 _openRoom = Slot<OpenRoomFunction>(2);
                 _closeRoom = Slot<CloseRoomFunction>(3);
                 if (role == OfficialStreamer.Role.Controller) _requestControl = Slot<RequestControlFunction>(4);
-                _sendBinary = Slot<SendBinaryFunction>(role == OfficialStreamer.Role.Controller ? 13 : 11);
+                // Slot 13/11 dispatch SendFileData; binary is the preceding entry.
+                // Original tasks 0x180a5fa60 / 0x180a5fc00 identify SendBinaryData.
+                _sendBinary = Slot<SendBinaryFunction>(role == OfficialStreamer.Role.Controller ? 12 : 10);
                 _version = Slot<VersionFunction>(role == OfficialStreamer.Role.Controller ? 17 : 18);
                 _capability = Slot<CapabilityFunction>(15);
                 if (Marshal.SizeOf<CapabilityData>() != 16 || Marshal.OffsetOf<CapabilityData>(nameof(CapabilityData.Size)).ToInt32() != 8)
