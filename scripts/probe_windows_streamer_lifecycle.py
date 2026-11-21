@@ -83,7 +83,7 @@ def capability(table):
     return report
 
 
-def child(runtime, workspace, role, output, query_capability=False, query_rooms=False, allow_fixture_ca=False):
+def child(runtime, workspace, role, output, query_capability=False, query_rooms=False, allow_fixture_ca=False, reply_room_info=False):
     manifest = json.loads((ROOT / 'native/official/manifest.json').read_text())
     for item in manifest['files']:
         if item['platform'] == 'windows':
@@ -108,7 +108,7 @@ def child(runtime, workspace, role, output, query_capability=False, query_rooms=
     room_observer = None
     if query_rooms:
         from probe_windows_streamer_rooms import RoomObservation
-        room_observer = RoomObservation(role, allow_fixture_ca)
+        room_observer = RoomObservation(role, allow_fixture_ca, reply_room_info)
     module = ctypes.WinDLL(str(runtime / 'streamer.dll'), winmode=0x100 | 0x1000)
     factory = getattr(module, 'ExchangeControllerInterface' if role == 'controller' else 'ExchangeControlledInterface')
     factory.argtypes = [ctypes.POINTER(ctypes.c_void_p)]
@@ -182,14 +182,15 @@ def main():
     operations.add_argument('--capabilities', action='store_true', help='Also query slot 15 twice after initialization')
     operations.add_argument('--rooms', action='store_true', help='Observe room setup against a loopback WebSocket recorder')
     parser.add_argument('--room-fixture-ca', action='store_true', help='Explicitly instrument the child native store with the loopback fixture CA after an ordinary rejection')
+    parser.add_argument('--room-info', action='store_true', help='Supply an independent synthetic room_info response and require native login callbacks')
     args = parser.parse_args()
-    if args.room_fixture_ca and not args.rooms:
-        parser.error('--room-fixture-ca requires --rooms')
+    if (args.room_fixture_ca or args.room_info) and not args.rooms:
+        parser.error('--room-fixture-ca and --room-info require --rooms')
     if platform.system() != 'Windows' or os.environ.get('GITHUB_ACTIONS') != 'true':
         parser.error('Original target execution is restricted to Windows GitHub Actions')
     runtime, workspace, output = args.runtime.resolve(), args.workspace.resolve(), args.output.resolve()
     if args.child:
-        return child(runtime, workspace, args.child, output, args.capabilities, args.rooms, args.room_fixture_ca)
+        return child(runtime, workspace, args.child, output, args.capabilities, args.rooms, args.room_fixture_ca, args.room_info)
     cases = []
     for role in ('controller', 'controlled'):
         child_output = output.with_name('lifecycle-' + role + '.json')
@@ -197,7 +198,7 @@ def main():
             return [sys.executable, str(Path(__file__).resolve()), '--runtime', str(runtime),
                     '--workspace', str(case_workspace), '--output', str(case_output), '--child', role,
                     *(['--capabilities'] if args.capabilities else []), *(['--rooms'] if args.rooms else []),
-                    *(['--room-fixture-ca'] if args.room_fixture_ca else [])]
+                    *(['--room-fixture-ca'] if args.room_fixture_ca else []), *(['--room-info'] if args.room_info else [])]
 
         observation = observe(command_for(workspace / role, child_output), runtime, timeout=240 if args.capabilities else 60)
         child_report = json.loads(child_output.read_text(encoding='utf-8')) if child_output.exists() else None
@@ -224,6 +225,7 @@ def main():
         cases.append(case)
     report = {'source_commit': os.environ.get('GITHUB_SHA'), 'run_id': os.environ.get('GITHUB_RUN_ID'),
               'platform': platform.platform(), 'observations': cases, 'room_fixture_ca_instrumentation': args.room_fixture_ca,
+              'synthetic_room_info_response': args.room_info,
               'passed': all(case['passed'] for case in cases),
               'scope': ('Isolated original DLL lifecycle and loopback room/WebSocket observations.' if args.rooms else
                         'Isolated original DLL factory/version/Initialize/Finalize calls, plus slot 15 capability query.'
@@ -231,7 +233,7 @@ def main():
               'limitations': ['No real peer, capture, input or media session is executed.',
                               'Capability bytes describe reported support; no actual encoded/decoded media is verified.',
                               'SLOG binary files are preserved as base64 with SHA-256; contents are not decoded.',
-                              ('Room-state callback is observed; other callbacks remain untested.' if args.rooms else
+                              ('Room-state and connection-code callbacks are observed; other callbacks remain untested.' if args.rooms else
                                'Native callbacks are null; callback signatures and delivery remain untested.'),
                               'A zero Initialize result alone does not prove config consumption or hardware success.',
                               'The third UTF-16 string is a log filename suffix; complete logging semantics remain under analysis.']}

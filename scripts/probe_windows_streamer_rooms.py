@@ -2,8 +2,9 @@
 """Runner-only observation of original Windows room setup against loopback.
 
 This recorder supplies TLS and standard Engine.IO/Socket.IO transport setup,
-then records the original client's events without replying to business requests.
-Native input layout is specific to the manifest's original x64 DLL.
+then records the original client's events. An explicit option also supplies a
+synthetic room_info response and requires native login callbacks. Native input
+layout is specific to the manifest's original x64 DLL.
 """
 import base64
 import ctypes
@@ -62,18 +63,22 @@ def binary(data):
 
 
 class RoomObservation:
-    def __init__(self, role, allow_fixture_ca=False):
+    def __init__(self, role, allow_fixture_ca=False, reply_room_info=False):
         self.role = role
         self.allow_fixture_ca = allow_fixture_ca
+        self.reply_room_info = reply_room_info
         self.states = []
+        self.state_codes = []
         self.frames = []
         self.server_frames = []
         self.connections = []
         self.received_event = threading.Event()
         self.untrusted_certificate_rejected = threading.Event()
+        self.logged_in = threading.Event()
         self.stop = threading.Event()
-        self.callback = ctypes.WINFUNCTYPE(None, ctypes.c_int32, ctypes.c_int32)(
-            lambda handle, state: self.states.append({'handle': handle, 'state': state}))
+        callback_type = ctypes.WINFUNCTYPE(None, ctypes.c_int32, ctypes.c_int32)
+        self.callback = callback_type(self.record_state)
+        self.code_callback = callback_type(self.record_code)
         self.certificate_directory = tempfile.TemporaryDirectory(prefix='streamer-loopback-tls-')
         certificate = pathlib.Path(self.certificate_directory.name) / 'certificate.pem'
         key = certificate.with_name('private-key.pem')
@@ -98,8 +103,31 @@ class RoomObservation:
         self.thread.start()
         self.buffers = []  # retain borrowed native inputs through Finalize
 
+    def record_state(self, handle, state):
+        self.states.append({'handle': handle, 'state': state})
+        self.check_login(handle)
+
+    def record_code(self, handle, code):
+        self.state_codes.append({'handle': handle, 'code': code})
+        self.check_login(handle)
+
+    def check_login(self, handle):
+        if (any(item == {'handle': handle, 'state': 3} for item in self.states)
+                and any(item == {'handle': handle, 'code': 9004} for item in self.state_codes)):
+            self.logged_in.set()
+
     def install_callback(self, pointers):
         pointers[7 if self.role == 'controller' else 4] = ctypes.cast(self.callback, ctypes.c_void_p).value
+        pointers[12] = ctypes.cast(self.code_callback, ctypes.c_void_p).value
+
+    def room_info(self):
+        participant = {'client_id': 'ci-' + self.role, 'device_id': 'ci-device-' + self.role,
+                       'user_id': 'ci-user', 'role': 'publisher' if self.role == 'controlled' else 'subscriber'}
+        info = {'room_id': 'ci-loopback-room', 'you': participant, 'subscribers': [],
+                'iceServers': [], 'reconnect_buffer': 0}
+        if self.role == 'controlled':
+            info['publisher'] = participant.copy()
+        return info
 
     def serve(self):
         while not self.stop.is_set():
@@ -155,6 +183,8 @@ class RoomObservation:
                     if query.get('EIO') != ['4'] or query.get('transport') != ['websocket']:
                         raise ValueError('Expected Engine.IO v4 WebSocket transport')
                     record['engine_io_query'] = query
+                    if headers.get('x-nrd-auth') != 'ci-loopback-token':
+                        raise ValueError('Expected the isolated fixture token')
                     key = headers['sec-websocket-key']
                     if len(base64.b64decode(key, validate=True)) != 16:
                         raise ValueError('Invalid WebSocket client key')
@@ -207,6 +237,15 @@ class RoomObservation:
                                     record['namespace_connected'] = True
                                 elif record.get('namespace_connected') and payload.startswith((b'42', b'45')):
                                     self.received_event.set()
+                                    if self.reply_room_info and payload.startswith(b'42'):
+                                        packet = payload[2:].decode('utf-8')
+                                        offset = packet.find('[')
+                                        if offset >= 0:
+                                            acknowledgement, event = packet[:offset], json.loads(packet[offset:])
+                                            if event == ['room_info'] and acknowledgement.isdecimal():
+                                                info = self.room_info()
+                                                send_text('43' + acknowledgement + json.dumps([info], separators=(',', ':')))
+                                                record['room_info_reply'] = info
                         elif opcode == 9:
                             send_frame(payload, 10)
                         elif opcode == 8:
@@ -273,7 +312,10 @@ class RoomObservation:
         report.update({'server_url': self.url, 'token': token.decode('ascii'), 'config_layout': layout,
                   'proxy_type': 0, 'report_endpoints': [], 'streamer_config_size': 0,
                   'room_callback_slot': 7 if self.role == 'controller' else 4,
-                  'room_callback_abi': 'void(int32_t handle, int32_t state)'})
+                  'room_callback_abi': 'void(int32_t handle, int32_t state)',
+                  'connection_code_callback_slot': 12,
+                  'connection_code_callback_abi': 'void(int32_t handle, int32_t code)',
+                  'reply_room_info': self.reply_room_info})
         report['handle'] = create(ctypes.byref(config))
         try:
             if report['handle'] <= 0:
@@ -284,6 +326,8 @@ class RoomObservation:
                     raise RuntimeError('Expected the ordinary native TLS attempt to reject the fixture CA')
                 report['trust_extension'] = self.extend_fixture_trust(module)
             report['event_frame_observed'] = self.received_event.wait(8)
+            if self.reply_room_info:
+                report['room_login_callbacks_observed'] = self.logged_in.wait(8)
         finally:
             if report['handle'] > 0:
                 report['destroy_status'] = destroy(report['handle'])
@@ -293,7 +337,7 @@ class RoomObservation:
         self.stop.set()
         self.listener.close()
         self.thread.join(timeout=2)
-        report.update(states=self.states, connections=self.connections, frames=self.frames, server_frames=self.server_frames,
+        report.update(states=self.states, state_codes=self.state_codes, connections=self.connections, frames=self.frames, server_frames=self.server_frames,
                       listener_stopped=not self.thread.is_alive(), certificate_pem=self.certificate_pem,
                       tls_fixture='Ephemeral self-signed certificate; explicit child-only native trust instrumentation if enabled.')
         self.certificate_directory.cleanup()
@@ -302,10 +346,14 @@ class RoomObservation:
                             and report.get('event_frame_observed', False) and report['listener_stopped']
                             and any(state['handle'] == report.get('handle') for state in self.states)
                             and (not self.allow_fixture_ca or (report.get('baseline_untrusted_certificate_rejected')
-                                 and report.get('trust_extension', {}).get('store_pointer_unchanged'))))
-        report['scope'] = 'Original room setup and loopback TLS/WebSocket observation only.'
+                                 and report.get('trust_extension', {}).get('store_pointer_unchanged')))
+                            and (not self.reply_room_info or (report.get('room_login_callbacks_observed')
+                                 and any(item.get('room_info_reply') for item in self.connections))))
+        report['scope'] = ('Original room setup against an independent synthetic room_info fixture.' if self.reply_room_info else
+                           'Original room setup and loopback TLS/WebSocket observation only.')
         report['limitations'] = ['The optional fixture CA addition changes this process native trust store and is explicitly instrumented evidence, separate from the ordinary baseline.',
-                                 'Fixture replies implement transport OPEN and default-namespace CONNECT only; no business event ACK is supplied.',
-                                 'No authenticated room, real peer or media session is provided.',
+                                 ('The room_info response contains synthetic local room/participant data; no other business ACK is supplied.' if self.reply_room_info else
+                                  'Fixture replies implement transport OPEN and default-namespace CONNECT only; no business event ACK is supplied.'),
+                                 'No real peer, control or media session is provided.',
                                  'Callback state values are recorded without assuming their business meaning.',
                                  'The caller supplied a loopback URL, synthetic token, empty streamer config, no report server and no proxy.']
