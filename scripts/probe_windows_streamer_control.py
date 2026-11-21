@@ -80,11 +80,16 @@ class ControlObservation(RoomObservation):
         request['frame_index'] = self.control_frame_index
         request['message'] = self.control_message
         request['attachment'] = binary(self.control_payload) if self.control_payload is not None else None
+        # The original normal Socket.IO control path adds an observed 0x04
+        # binary message tag. Its raw guard path did not add that tag. Preserve
+        # the complete wire payload and verify this exact envelope separately.
+        request['observed_binary_message_tag'] = '04'
+        request['attachment_body'] = binary(self.control_payload[1:]) if self.control_payload and self.control_payload[:1] == b'\x04' else None
         message = self.control_message if isinstance(self.control_message, dict) else {}
         request['input_fields_match'] = (message.get('app_control_id') == APP_CONTROL_ID.decode('ascii')
                                         and message.get('geo_timezone') == GEO_TIMEZONE.decode('ascii')
                                         and message.get('app_data') == {'_placeholder': True, 'num': 0}
-                                        and self.control_payload == APP_DATA)
+                                        and self.control_payload == b'\x04' + APP_DATA)
         if request['status'] != 0 or not request['input_fields_match']:
             raise RuntimeError('Original control request did not preserve the three supplied input slices')
 
