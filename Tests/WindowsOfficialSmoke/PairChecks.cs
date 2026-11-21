@@ -19,6 +19,7 @@ internal static class PairChecks
         string output = Path.GetFullPath(input[4]);
         using var fixture = JsonDocument.Parse(File.ReadAllText(input[5]));
         string Setting(string name) => fixture.RootElement.GetProperty(name).GetString()!;
+        bool mediaMode = fixture.RootElement.TryGetProperty("media", out var mediaFlag) && mediaFlag.GetBoolean();
         var server = new Uri(Setting("server_url"));
         if (server.Scheme != "wss" || server.Host != "127.0.0.1")
             throw new ArgumentException("Pair recorder requires TLS loopback.");
@@ -40,7 +41,9 @@ internal static class PairChecks
             ["send_payload_base64"] = Convert.ToBase64String(payload),
             ["expected_payload_base64"] = Convert.ToBase64String(expectedPayload),
             ["source_commit"] = Environment.GetEnvironmentVariable("GITHUB_SHA"),
-            ["scope"] = "Two original engines with independent local signaling and opaque binary transfer; no capture or media."
+            ["scope"] = mediaMode
+                ? "Original binary-channel delivery and original capture/encode/decode/render observation with runner-owned windows."
+                : "Two original engines with independent local signaling and opaque binary transfer; no capture or media."
         };
         void Save()
         {
@@ -59,15 +62,18 @@ internal static class PairChecks
         Save();
         try
         {
+            using var media = mediaMode ? new NativeMediaObservation(input[1], fixture.RootElement) : null;
+            if (media is not null) report["media"] = media.Report;
             using var engine = new OfficialWindowsEngine(role, Path.Combine(workspace, "logs"), config,
                 "native-pair-" + input[1], dll);
             int handle = engine.OpenRoom("ci-loopback-token", new[] { server });
             report["handle"] = handle;
+            media?.Validate(engine, handle);
             MustThrow<ArgumentException>(() => engine.SendBinary(int.MaxValue, new byte[] { 1 }));
             MustThrow<ArgumentOutOfRangeException>(() => engine.SendBinary(handle, Array.Empty<byte>()));
             MustThrow<ArgumentOutOfRangeException>(() => engine.SendBinary(handle, new byte[512 * 1024]));
             bool trusted = false, ready = false, requested = false, stopped = false, binarySent = false;
-            DateTime deadline = DateTime.UtcNow.AddSeconds(60);
+            DateTime deadline = DateTime.UtcNow.AddSeconds(mediaMode ? 90 : 60);
             while (DateTime.UtcNow < deadline)
             {
                 notices.AddRange(engine.DrainRoomNotifications());
@@ -116,7 +122,8 @@ internal static class PairChecks
                 report["peer_binary_received"] = received;
                 if (received && !File.Exists(Setting("received_path")))
                     File.WriteAllText(Setting("received_path"), "original binary callback matched peer nonce");
-                report["phase"] = ready ? "binary_observation" : "room_login";
+                media?.Tick(engine, handle, Save);
+                report["phase"] = ready ? (mediaMode ? "media_observation" : "binary_observation") : "room_login";
                 Save();
                 if (File.Exists(Setting("stop_path"))) { stopped = true; break; }
                 Thread.Sleep(50);
@@ -124,16 +131,21 @@ internal static class PairChecks
             report["observation_stopped_by_parent"] = stopped;
             report["phase"] = "dispose";
             Save();
+            media?.Complete(engine, handle);
             engine.Dispose();
+            media?.Dispose();
             MustThrow<ObjectDisposedException>(() => engine.SendBinary(handle, new byte[] { 1 }));
             MustThrow<ObjectDisposedException>(() => engine.DrainBinaryData());
             MustThrow<ObjectDisposedException>(() => engine.DrainPeerStates());
+            MustThrow<ObjectDisposedException>(() => engine.DrainMediaTracks());
+            MustThrow<ObjectDisposedException>(() => engine.DrainFrameChanges());
+            MustThrow<ObjectDisposedException>(() => engine.DrainCaptureFailures());
             report["passed"] = stopped && ready && binarySent && binaryData.Count == 1
                 && (role == OfficialStreamer.Role.Controller ? requested : controls.Count == 1);
             report["phase"] = "complete";
             if (!(bool)report["passed"]!) throw new Exception("Original pair observation did not complete");
         }
-        catch (Exception error) { report["error"] = error.ToString(); throw; }
+        catch (Exception error) { report["passed"] = false; report["error"] = error.ToString(); throw; }
         finally { Save(); }
     }
 }

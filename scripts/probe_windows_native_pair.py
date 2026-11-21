@@ -2,7 +2,8 @@
 """Actions-only two-process original Windows negotiation observation.
 
 A bounded independent TLS/Engine.IO/Socket.IO recorder routes actual engine
-requests. No NetEase service, STUN/TURN service, capture or media is supplied.
+requests. No NetEase or STUN/TURN service is supplied. --media additionally
+observes original capture/encode/decode/render operations on runner-owned windows.
 Both children use the production managed engine and explicit test-only CA trust.
 """
 import argparse
@@ -20,6 +21,7 @@ import traceback
 
 from probe_windows_streamer_lifecycle import collect_workspace, save
 from probe_windows_streamer_rooms import RoomObservation
+from windows_native_media_observation import MediaPixels
 
 
 ROLES = ('controller', 'controlled')
@@ -167,6 +169,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for option in ('probe', 'runtime', 'workspace', 'output'):
         parser.add_argument('--' + option, type=Path, required=True)
+    parser.add_argument('--media', action='store_true', help='Also observe original native window media and parent pixel checks')
     args = parser.parse_args()
     if platform.system() != 'Windows' or os.environ.get('GITHUB_ACTIONS') != 'true':
         parser.error('Original pair execution requires Windows GitHub Actions')
@@ -176,9 +179,15 @@ def main():
     report = {'source_commit': os.environ.get('GITHUB_SHA'), 'run_id': os.environ.get('GITHUB_RUN_ID'),
               'passed': False, 'scope': 'Two original Windows engines with independently routed signaling and direct original binary-channel transfer.',
               'instrumentation': 'Each child records baseline unknown_ca before explicitly adding only its fixture CA; no production trust override.',
-              'limitations': ['This is one host with two processes and private host candidates; it does not establish physical peer interoperability, public IPv4/IPv6 hole punching, capture, decoding or GPU operation.',
-                              'Only the original opaque binary send and receive channel is exercised; no capture, renderer, input or audio is called.',
+              'limitations': ['This is one host with two processes and private host candidates; it does not establish physical peer interoperability or public IPv4/IPv6 hole punching.',
+                              'No physical GPU, H265, audio or remote input is verified by this probe.',
                               'Room, device, user and control identities are test fixtures, not a production authorization service.']}
+    media = MediaPixels(workspace) if args.media else None
+    if media:
+        report['scope'] = 'Original binary delivery plus original window capture and rendering with independent pixel and snapshot checks.'
+        report['media'] = media.report
+    else:
+        report['limitations'].append('No capture, renderer, input or audio operation is called in binary-only mode.')
     payloads = {role: b'ci-native-binary\x00\xff\xfe' + secrets.token_bytes(256) for role in ROLES}
     negotiation_at = None
     def received_by_both():
@@ -187,25 +196,30 @@ def main():
         for role in ROLES:
             endpoint = PairEndpoint(role, broker)
             broker.endpoints[role] = endpoint
+            if media:
+                endpoint.connection_lifetime = 120
             role_workspace = workspace / role
             role_workspace.mkdir()
             endpoint.baseline_rejection_path = role_workspace / 'baseline-rejection.json'
             settings = role_workspace / 'fixture.json'
-            save(settings, {'server_url': endpoint.url, 'certificate_pem': endpoint.certificate_pem,
-                            'baseline_rejection_path': str(endpoint.baseline_rejection_path),
-                            'ready_path': str(workspace / (role + '-ready')),
-                            'start_path': str(workspace / 'start'), 'stop_path': str(workspace / 'stop'),
-                            'send_path': str(workspace / 'send'),
-                            'received_path': str(workspace / (role + '-received')),
-                            'send_payload_base64': base64.b64encode(payloads[role]).decode('ascii'),
-                            'expected_payload_base64': base64.b64encode(payloads['controlled' if role == 'controller' else 'controller']).decode('ascii')})
+            settings_values = {'server_url': endpoint.url, 'certificate_pem': endpoint.certificate_pem,
+                               'baseline_rejection_path': str(endpoint.baseline_rejection_path),
+                               'ready_path': str(workspace / (role + '-ready')),
+                               'start_path': str(workspace / 'start'), 'stop_path': str(workspace / 'stop'),
+                               'send_path': str(workspace / 'send'),
+                               'received_path': str(workspace / (role + '-received')),
+                               'send_payload_base64': base64.b64encode(payloads[role]).decode('ascii'),
+                               'expected_payload_base64': base64.b64encode(payloads['controlled' if role == 'controller' else 'controller']).decode('ascii')}
+            if media:
+                settings_values.update(media.settings(role))
+            save(settings, settings_values)
             child_output = workspace / (role + '.json')
             stdout, stderr = (role_workspace / 'stdout.txt').open('wb'), (role_workspace / 'stderr.txt').open('wb')
             streams[role] = stdout, stderr
             processes[role] = subprocess.Popen(['dotnet', str(probe), '--pair', role, str(runtime),
                                                 str(role_workspace), str(child_output), str(settings)],
                                                cwd=runtime, stdout=stdout, stderr=stderr)
-        deadline = time.monotonic() + 65
+        deadline = time.monotonic() + (95 if media else 65)
         while time.monotonic() < deadline:
             if all((workspace / (role + '-ready')).exists() for role in ROLES) and not (workspace / 'start').exists():
                 (workspace / 'start').write_text('both original logins observed')
@@ -213,8 +227,11 @@ def main():
                 negotiation_at = time.monotonic()
             if negotiation_at is not None and time.monotonic() - negotiation_at >= 3 and not (workspace / 'send').exists():
                 (workspace / 'send').write_text('exercise original binary submission after recorded signaling')
-            if (received_by_both() or broker.errors
-                    or any(item.poll() is not None for item in processes.values())):
+            binary_received = received_by_both()
+            if binary_received and media:
+                media.observe()
+            done = media.verified if media else binary_received
+            if (done or broker.errors or any(item.poll() is not None for item in processes.values())):
                 break
             time.sleep(0.05)
         report['negotiation_signaling_observed'] = broker.negotiation_observed()
@@ -251,13 +268,14 @@ def main():
         report.update(events=broker.events, routes=broker.routes, broker_errors=broker.errors,
                       children=children, fixtures=fixtures, workspace_files=collect_workspace(workspace))
         report['passed'] = (report.get('negotiation_signaling_observed', False) and report.get('bidirectional_binary_observed', False)
-                             and report['binary_bytes_verified'] and not broker.errors
+                             and report['binary_bytes_verified'] and (not media or media.verified) and not broker.errors
                              and len(children) == 2 and not report.get('killed_roles')
                              and all(item['exit_code'] == 0 and item['managed'] and item['managed'].get('passed') for item in children.values())
                              and all(item['listener_stopped'] and any(connection.get('untrusted_certificate_rejected') for connection in item['connections']) for item in fixtures.values()))
         save(output, report)
     print(json.dumps({'passed': report['passed'], 'negotiation_signaling_observed': report.get('negotiation_signaling_observed'),
                       'bidirectional_binary_observed': report.get('bidirectional_binary_observed'),
+                      'media_pixels_verified': media.verified if media else None,
                       'events': [(item['from'], item['event'], item['message'].get('data', {}).get('type')) for item in broker.events],
                       'broker_errors': broker.errors}))
     return 0 if report['passed'] else 1

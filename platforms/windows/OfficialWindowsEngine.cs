@@ -82,6 +82,9 @@ public sealed partial class OfficialWindowsEngine : IDisposable
         _binaryDataCallback = RecordBinaryData;
         _controllerPeerStateCallback = (handle, state, detail) => RecordPeerState(handle, state, detail);
         _controlledPeerStateCallback = (handle, state) => RecordPeerState(handle, state, null);
+        _mediaTrackCallback = RecordMediaTrack;
+        _frameChangeCallback = RecordFrameChange;
+        _captureFailureCallback = RecordCaptureFailure;
         lock (CallGate)
         {
             RequireNoEngine();
@@ -97,6 +100,7 @@ public sealed partial class OfficialWindowsEngine : IDisposable
                 callbacks[12] = Marshal.GetFunctionPointerForDelegate(_connectionCodeCallback);
                 if (role == OfficialStreamer.Role.Controlled) callbacks[10] = Marshal.GetFunctionPointerForDelegate(_newControlCallback);
                 InstallDataCallbacks(callbacks);
+                InstallMediaCallbacks(callbacks);
                 var pin = GCHandle.Alloc(callbacks, GCHandleType.Pinned);
                 IntPtr table;
                 try { table = factory(pin.AddrOfPinnedObject()); }
@@ -112,6 +116,16 @@ public sealed partial class OfficialWindowsEngine : IDisposable
                 // Slot 13/11 dispatch SendFileData; binary is the preceding entry.
                 // Original tasks 0x180a5fa60 / 0x180a5fc00 identify SendBinaryData.
                 _sendBinary = Slot<SendBinaryFunction>(role == OfficialStreamer.Role.Controller ? 12 : 10);
+                if (role == OfficialStreamer.Role.Controlled)
+                {
+                    _startVideoCapture = Slot<StartVideoFunction>(4);
+                    _stopVideoCapture = Slot<StopVideoFunction>(6);
+                }
+                else
+                {
+                    _startVideoRender = Slot<StartVideoFunction>(6);
+                    _stopVideoRender = Slot<StopVideoFunction>(8);
+                }
                 _version = Slot<VersionFunction>(role == OfficialStreamer.Role.Controller ? 17 : 18);
                 _capability = Slot<CapabilityFunction>(15);
                 if (Marshal.SizeOf<CapabilityData>() != 16 || Marshal.OffsetOf<CapabilityData>(nameof(CapabilityData.Size)).ToInt32() != 8)

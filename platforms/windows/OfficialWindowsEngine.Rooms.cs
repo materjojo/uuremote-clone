@@ -177,6 +177,7 @@ public sealed partial class OfficialWindowsEngine
         {
             RequireActive();
             if (!_openRooms.Contains(handle)) return false;
+            CloseRoomMedia(handle);
             _faulted = true;
             int status = _closeRoom(handle);
             if (status != 0)
@@ -218,7 +219,7 @@ public sealed partial class OfficialWindowsEngine
         _roomInputs.Clear();
     }
 
-    private sealed class RoomInputs : IDisposable
+    private sealed partial class RoomInputs : IDisposable
     {
         private readonly List<IntPtr> _allocations = new();
         public IntPtr Config { get; private set; }

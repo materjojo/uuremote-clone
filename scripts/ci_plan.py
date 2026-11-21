@@ -89,7 +89,8 @@ def affected(paths, read_versions=None):
                       'scripts/probe_windows_streamer_lifecycle.py', 'scripts/probe_windows_managed_engine.py',
                       'scripts/probe_windows_streamer_rooms.py', 'scripts/probe_windows_managed_rooms.py',
                       'scripts/probe_windows_streamer_control.py', 'scripts/probe_windows_streamer_controlled.py',
-                      'scripts/probe_windows_native_pair.py', 'scripts/test_windows_native_pair.py'):
+                      'scripts/probe_windows_native_pair.py', 'scripts/test_windows_native_pair.py',
+                      'scripts/windows_native_media_observation.py', 'scripts/test_windows_native_media.py'):
             selected.add('windows')
         elif path in ('scripts/restore_official_runtime.py', 'scripts/verify_official_runtime.py', 'scripts/verify_desktop_package.py'):
             selected.update(('macos', 'windows'))

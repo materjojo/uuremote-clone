@@ -215,6 +215,22 @@ controller slot 4 的 wrapper `0x180a2cfb0` 和核心 `0x180a34350` 接收 `int3
 
 此证据建立同一 Windows runner 两进程之间的原库二进制传输；未调用采集、音频、渲染或输入，未提供公网 STUN/TURN，不能验收媒体、物理 GPU、跨设备/跨平台或 IPv4/IPv6 NAT 打洞。测试 CA 和自动授权身份仍只限 runner。源码中的 `SendBinary` / `DrainBinaryData` / `DrainPeerStates` 已编译运行，普通 UI 仍未使用这条原库路径。
 
+## Windows 窗口媒体观察：静态契约与待运行检查
+
+`OfficialWindowsEngine.Media.cs` 仅为已跟踪的 Windows 布局增加窗口视频路径及原始通知；普通 UI 尚未切换，首次 Actions 像素结果仍待验证。新实现不会改变原 DLL、系统信任或 codec detector 结论。
+
+| 静态入口 / 字段 | 原始证据 |
+|---|---|
+| controlled slot 4 `0x180a2da10` → `0x180a309c0`，复制 `0x68` 字节；slot 6 `0x180a2da90` 停止指定 track | `ev_bb840eb077e45b71548c92eea0fbf43365c9dac87db0e987a272dc1b5e0aebf4`，`ev_a6fc90c410cdc264c30f4920f55523c265ad2b636e321b0eed5e2b35ff1518a3` |
+| fps `+0x00`、quality `+0x04`、track `+0x0c`、capture type `+0x10`、codec `+0x14`、chroma `+0x18`、max scale `+0x1c/+0x20` | 消费链 `0x180f2fde0` 的原生格式串及参数、`ev_33e5d71aaf262be3dbb4e6a171894fcfed735b6fd202395edcbf0fd9913bfcd6`、`ev_76f867d73e9e3a90c06f9846e424fd62a672d4c729501cd7aef88a9354975a54` |
+| type 1 的 `+0x40` 是 HWND；factory window vtable `0x1812412f0` 的 start 为 `0x180baea90` | `ev_b8f512fae03b848785fb45fd8c65e34c3e546f035a014ded7f199d97145f3612`、`ev_5b56eef7e53e231020b1fc292a28751288e9f79a9d77762aa0f47d8e1511ba76`、`ev_d285501923f4242abf68482d44c0e994c3f2f49f8b535f7c8a0726eb99ec3437` |
+| controller slot 6 读取 `0x10` render config：HWND `+0`、track `+8`、option `+0xc`；slot 8 停止 track | `ev_7fd3b39d06053b81ad761dfc4f63ff13b6a51c63a6ab39bc9592d78755323351`、`ev_48752793e80381331161a06edb3a2574dd5c1d06790d74f45a5eb8a3ea72535e`、`ev_4c25e77d2ab4cf8f46bdf4b662b8a4e2236c583ea79ed739f2c673a14f3fa90f` |
+| controller callback 0 三参数 handle/pointer/size，JSON `type/track_id/track_index`；callback 2 六参数，最后指向六个 int 的 viewport | `ev_d98f8227b4f42619a66b0341ed7c471c7fe214352eff2a6aeb7b8499c2895421`、`ev_be0ec06ef536be0f99d366e5681afaf1f52d410fe5ceba9ae304cd83c6194e73` |
+
+先前依据 capture-failure xref 读取的 `0x180bab110` 是另一分支，不能称为 window factory 的 start；这里用实际 vtable 修正入口，旧证据完整保留。FrameChange 的四个数值参数与 CaptureFailure 参数仍原样记录，不借 Android 名称推断 Windows 含义。
+
+待运行的 `--media` 在新的两个原库进程中先重复双向 binary，然后 controlled 原库捕获独立 Win32 HWND，controller 根据实际原生 media-track JSON 选择 video track 并启动原 renderer。父进程生成两组运行时随机排列的四色图案，仅给 controlled；controller helper 只绘制灰底。父端必须先看到实际 FrameChange 和四色像素，再分别校验 source/controller 的真实 screen BMP，随后才允许改变 source 图案并重复全部检查。灰图、零 FrameChange、截断/错误 BMP、只有稀疏采样而无两端快照都不能通过。原库借用数据立即复制、delegates 保持强引用，config 保留至 Finalize，窗口在停止媒体及引擎清理后销毁。像素/位图离线测试仅验证证据解析与门槛，并非原生媒体执行或硬件证据。
+
 ## 后续原生证据边界（2026-11-20）
 
 以下结论只针对保存的原始文件静态 Evidence，不代表 ARM64 原库已经在设备上运行，也不代表 Windows 硬件路径已经在当前机器上选中。

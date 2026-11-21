@@ -47,6 +47,7 @@ class BuildSelectionTests(unittest.TestCase):
                      'scripts/probe_windows_streamer_rooms.py', 'scripts/probe_windows_managed_rooms.py',
                      'scripts/probe_windows_streamer_control.py', 'scripts/probe_windows_streamer_controlled.py',
                      'scripts/probe_windows_native_pair.py', 'scripts/test_windows_native_pair.py',
+                     'scripts/windows_native_media_observation.py', 'scripts/test_windows_native_media.py',
                      'Tests/WindowsCodecDetector/CMakeLists.txt'):
             self.assertEqual(self.selected([path]), {'windows'})
 

@@ -183,6 +183,10 @@ jobs:
         run: |
           python scripts/test_windows_native_pair.py
           python scripts/probe_windows_native_pair.py --probe Tests/WindowsOfficialSmoke/bin/Release/net8.0/WindowsOfficialSmoke.dll --runtime build/windows --workspace build/native-pair-probes --output build/streamer-native-pair-windows.json
+      - name: Observe original window capture and renderer output pixels
+        run: |
+          python scripts/test_windows_native_media.py
+          python scripts/probe_windows_native_pair.py --probe Tests/WindowsOfficialSmoke/bin/Release/net8.0/WindowsOfficialSmoke.dll --runtime build/windows --workspace build/native-media-probes --output build/streamer-native-media-windows.json --media
       - name: Verify package and archive
         run: |
           Compress-Archive -Path build/windows/* -DestinationPath build/UURemoteClone-windows-x64.zip
@@ -210,6 +214,8 @@ jobs:
             build/streamer-control-windows.json
             build/streamer-controlled-windows.json
             build/streamer-native-pair-windows.json
+            build/streamer-native-media-windows.json
+            build/native-media-probes/media-samples/*.bmp
           retention-days: 7
           if-no-files-found: error
 
