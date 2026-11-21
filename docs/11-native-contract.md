@@ -211,6 +211,10 @@ controller slot 4 的 wrapper `0x180a2cfb0` 和核心 `0x180a34350` 接收 `int3
 
 `0fb368f` / [44903013760](https://github.com/materjojo/uuremote-clone/actions/runs/44903013760) 的[失败报告](../analysis/ci/0fb368f-windows-native-binary-failure.json)保留两进程实际状态和随机输入：编译、已有单端测试和信令协商通过，但未收到 binary callback，数据验收失败。该提交误把 controller 13 / controlled 11 作为 binary 入口；后续追踪到两者均进入 `SendFileData`（`0x180a5e110` / `0x180a5e670`），修正为上面的 12 / 10。原失败中的 `binary_sent=true` 仅表示当时错误绑定返回了 0，不是 binary 已发送或送达。后续验证必须仍逐字节比较实际接收回调，不能改成仅检查状态码。
 
+[5c810f8 / Actions 44903995375](https://github.com/materjojo/uuremote-clone/actions/runs/44903995375) 在相同接收断言下通过了[双原库 binary 检查](../analysis/ci/5c810f8-windows-native-binary.json)。父端分别生成带 NUL/0xff/0xfe 的 275 字节随机数据，两个 child 在原库协商后各发送一次；发送返回后修改源数组并强制 GC。controller 的实际 OnReceiveBinaryData 与 controlled 的回调分别完整等于对方的输入，父端再次比对原始 bytes；再次 drain、关闭后拒绝、显式 Dispose 和原有回归均通过，两个进程退出 0。数据由原库通道实际送达，记录器只路由信令，没有把随机数据作为接收事件注入。报告保留 controller 的 handle/state/detail 与 controlled 的 handle/state 通知，未把未知整数命名为标准状态枚举。
+
+此证据建立同一 Windows runner 两进程之间的原库二进制传输；未调用采集、音频、渲染或输入，未提供公网 STUN/TURN，不能验收媒体、物理 GPU、跨设备/跨平台或 IPv4/IPv6 NAT 打洞。测试 CA 和自动授权身份仍只限 runner。源码中的 `SendBinary` / `DrainBinaryData` / `DrainPeerStates` 已编译运行，普通 UI 仍未使用这条原库路径。
+
 ## 后续原生证据边界（2026-11-20）
 
 以下结论只针对保存的原始文件静态 Evidence，不代表 ARM64 原库已经在设备上运行，也不代表 Windows 硬件路径已经在当前机器上选中。
